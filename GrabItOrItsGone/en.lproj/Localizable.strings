@@ -1,0 +1,30 @@
+/* 
+  Localizeable.strings
+  GrabIt
+
+  Created by Peter Sypek on 23.06.17.
+  Copyright © 2017 Peter Sypek. All rights reserved.
+ ENGLISH
+*/
+btn_SignUp_String = "Sign Up";
+btn_Login_String = "Login";
+txt_Login_Email_Placeholder_String = "e-mail";
+txt_Login_Password_Placeholder_String = "password";
+txt_Register_Fullname_Placeholder_String = "fullname";
+btn_PasswordForgotten_Title_String = "password forgotten?";
+Validation_Error_Message_String = "An error occured during validation. Please check that your input values are correct.";
+btn_Guest_String = "Guest";
+FirebaseUserAuthenticationErrorMessage_TitleString = "Error during authentication!";
+FirebaseUserAuthenticationErrorMessage_MessageString = "Please check your internet connection, email und password input!";
+FirebaseUserLoginErrorAlert_TitleString = "Login Error!";
+FirebaseUserLoginErrorAlert_MessageString = "Login service reports an error. Please check your internet connection. Is your password and email correct?";
+FirebaseUserLogoutErrorAlert_TitleString = "Logout Error!";
+FirebaseUserLogoutErrorAlert_MessageString = "The logout service reports an error. Please check your internet connection.";
+EmailValidationErrorAlert_TitleString = "Validation Error";
+EmailValidationErrorAlert_MessageString = "An error occured during email validation. Is your email input correct?";
+PasswordValidationErrorAlert_TitleString = "Validation Error";
+PasswordValidationErrorAlert_MessageString = "An error occured during password validation. The password needs to be at least six charachters";
+FirebaseResetPasswordErrorAlert_TitleString = "Password Reset Error";
+FirebaseResetPasswordErrorAlert_MessageString = "The service reports an Error. Is your email imput correct? Check your internet connection.";
+FirebaseThirdPartyLoginErrorAlert_TitleString = "Login Error!";
+FirebaseThirdPartyLoginErrorAlert_MessageString = "Login service reports an error. Please check your internet connection.";
