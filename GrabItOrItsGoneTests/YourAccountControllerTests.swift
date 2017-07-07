@@ -1,16 +1,15 @@
 //
 //  YourAccountControllerTests.swift
-//  GrabIt
+//  GrabItOrItsGone
 //
-//  Created by Peter Sypek on 06.07.17.
+//  Created by Peter Sypek on 07.07.17.
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
 import XCTest
-@testable import GrabIt
+@testable import GrabItOrItsGone
 
-class YourAccountControllerTests: XCTestCase {
-    var storyboard:UIStoryboard!
+class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     var sut:YourAccountController!
     
     override func setUp() {
@@ -32,6 +31,13 @@ class YourAccountControllerTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testPerformanceExample() {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
     }
     
 }

@@ -1,8 +1,8 @@
 //
-//  GrabItTests.swift
-//  GrabItTests
+//  LogInSignUpControllerTests.swift
+//  GrabItOrItsGone
 //
-//  Created by Peter Sypek on 23.06.17.
+//  Created by Peter Sypek on 07.07.17.
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
@@ -47,31 +47,31 @@ class LogInSignUpControllerTests: XCTestCase {
         XCTAssertNotNil(sut!.btn_SignUp, "btn_SignUp should exist!")
     }
     func test_btn_SignUp_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SignUp, actionName: "btn_SignUp_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SignUp, actionName: "btn_SignUp_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_btn_Login_Exists(){
         XCTAssertNotNil(sut!.btn_Login, "btn_Login should exist!")
     }
     func test_btn_Login_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_Login, actionName: "btn_Login_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_Login, actionName: "btn_Login_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_btn_Guest_Exist(){
         XCTAssertNotNil(sut!.btn_Guest, "LoginSignUpController should contain btn_Guest for guest login")
     }
     func test_btn_Guest_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_Guest, actionName: "btn_Guest_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_Guest, actionName: "btn_Guest_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_btn_CustomFacebookLogin_Exists(){
-    XCTAssertNotNil(sut!.btn_CustomFacebookLogin, "btn_CustomFacebookLogin should exist")
+        XCTAssertNotNil(sut!.btn_CustomFacebookLogin, "btn_CustomFacebookLogin should exist")
     }
     func test_btn_CustomFacebookLogin_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_CustomFacebookLogin, actionName: "btn_FacebookLogin_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_CustomFacebookLogin, actionName: "btn_FacebookLogin_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_btn_CustomGoogleLogin_Exists(){
-    XCTAssertNotNil(sut!.btn_CustomGoogleLogin, "btn_CustomGoogleLogin should exist")
+        XCTAssertNotNil(sut!.btn_CustomGoogleLogin, "btn_CustomGoogleLogin should exist")
     }
     func test_btn_CustomGoogleLogin_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_CustomGoogleLogin, actionName: "btn_CustomGoogleLogin_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_CustomGoogleLogin, actionName: "btn_CustomGoogleLogin_Pressed", event: .touchUpInside, controller: sut! ))
     }
     
     //MARK: - LoginView
@@ -103,7 +103,7 @@ class LogInSignUpControllerTests: XCTestCase {
         XCTAssertNotNil(sut!.btn_PasswordForgotten, "btn_PasswordForgotten should exist")
     }
     func test_btn_PasswordForgotten_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_PasswordForgotten, actionName: "btn_PasswordForgotten_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_PasswordForgotten, actionName: "btn_PasswordForgotten_Pressed", event: .touchUpInside, controller: sut! ))
     }
     
     //MARK: - RegisterPopUp
@@ -114,7 +114,7 @@ class LogInSignUpControllerTests: XCTestCase {
         XCTAssertNotNil(sut!.btn_SignUp_PopUp, "btn_SignUp_PopUp should exist")
     }
     func test_btn_SignUp_PopUp_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SignUp_PopUp, actionName: "btn_SignUp_PopUp_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SignUp_PopUp, actionName: "btn_SignUp_PopUp_Pressed", event: .touchUpInside, controller: sut! ))
     }
     
     

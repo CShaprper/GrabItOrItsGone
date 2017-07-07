@@ -1,8 +1,8 @@
 //
 //  MainControllerTests.swift
-//  GrabIt
+//  GrabItOrItsGone
 //
-//  Created by Peter Sypek on 26.06.17.
+//  Created by Peter Sypek on 07.07.17.
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ class MainControllerTests: XCTestCase {
     //var firebaseUser:UserAuthentication!
     
     override func setUp() {
-        super.setUp()        
+        super.setUp()
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
         sut = storyboard.instantiateViewController(withIdentifier: "MainController") as! MainController
@@ -35,7 +35,7 @@ class MainControllerTests: XCTestCase {
     }
     
     func test_CardView_Outlet_Exists(){
-     XCTAssertNotNil(sut!.CardView, "MainController shoul contain a CardView outlet")
+        XCTAssertNotNil(sut!.CardView, "MainController shoul contain a CardView outlet")
     }
     
     func test_CardViewBackgroundImageView_Outlet_Exists(){
@@ -57,7 +57,7 @@ class MainControllerTests: XCTestCase {
     func test_btn_Menu_Outlet_Exists(){
         XCTAssertNotNil(sut!.btn_Menu, "MainController should contain a label outlet for ProductSubtitle")
     }
-   func test_btn_Menu_hasTarget_Action(){
+    func test_btn_Menu_hasTarget_Action(){
         XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_Menu, actionName: "btn_Menu_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_TopBackGroundView_Exist(){
@@ -70,28 +70,28 @@ class MainControllerTests: XCTestCase {
         XCTAssertNotNil(sut!.btn_ProductInformation, "btn_ProductInformation should exist to show product informations")
     }
     func test_btn_ProductInformation_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_ProductInformation, actionName: "btn_ProductInformation_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_ProductInformation, actionName: "btn_ProductInformation_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_ProductInformationSheet_Exists(){
-    XCTAssertNotNil(sut!.ProductInformationSheet, "ProductInformationSheet should exist to hold an textview with product informations")
+        XCTAssertNotNil(sut!.ProductInformationSheet, "ProductInformationSheet should exist to hold an textview with product informations")
     }
     func test_ProductInformationTextView_Exists(){
-    XCTAssertNotNil(sut!.ProductInformationTextView, "ProductInformationTextView should exist for product informations")
+        XCTAssertNotNil(sut!.ProductInformationTextView, "ProductInformationTextView should exist for product informations")
     }
     func test_lbl_OldPrice_Exists(){
         XCTAssertNotNil(sut!.lbl_OldPrice, "lbl_OldPrice should exist to show old price of product")
     }
     func test_OldPriceBlurryView_Exists(){
-    XCTAssertNotNil(sut!.OldPriceBlurryView, "OldPriceBlurryView should exist to hold old prodcut price")
+        XCTAssertNotNil(sut!.OldPriceBlurryView, "OldPriceBlurryView should exist to hold old prodcut price")
     }
     func test_OldPriceBlurryViewBottomConstraint_Exists(){
-    XCTAssertNotNil(sut!.OldPriceBlurryViewBottomConstraint, "OldPriceBlurryViewBottomConstraint should exist to set OldPrice position from Bottom")
+        XCTAssertNotNil(sut!.OldPriceBlurryViewBottomConstraint, "OldPriceBlurryViewBottomConstraint should exist to set OldPrice position from Bottom")
     }
     func test_lbl_NewPrice_Exists(){
-    XCTAssertNotNil(sut!.lbl_NewPrice, "lbl_NewPrice should exist to show new price")
+        XCTAssertNotNil(sut!.lbl_NewPrice, "lbl_NewPrice should exist to show new price")
     }
     func test_NewPriceBlurryView_Exists(){
-    XCTAssertNotNil(sut!.NewPriceBlurryView, "NewPriceBlurryView should exist to hold new price label")
+        XCTAssertNotNil(sut!.NewPriceBlurryView, "NewPriceBlurryView should exist to hold new price label")
     }
     
     //MARK: - Button action test helper

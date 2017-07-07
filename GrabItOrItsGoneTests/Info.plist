@@ -15,15 +15,8 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Lobster-Regular.ttf</string>
-		<string>MarckScript-Regular.ttf</string>
-		<string>SonsieOne-Regular.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
-	</array>
 </dict>
 </plist>
