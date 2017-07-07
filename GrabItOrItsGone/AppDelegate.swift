@@ -15,7 +15,7 @@ import GoogleToolboxForMac
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var style:eUIStyles?
     var window: UIWindow?
@@ -25,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         // Override point for customization after application launch.
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
-        Messaging.messaging().delegate = self as? MessagingDelegate
-        Messaging.messaging().shouldEstablishDirectChannel = true
         
         // Use Facebook SDK for Login with facebook
          FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -78,8 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        Messaging.messaging().setAPNSToken(deviceToken, type: .prod)
-        Messaging.messaging().setAPNSToken(deviceToken, type: .sandbox)
         // Print it to console
         print("APNs device token: \(deviceTokenString)")
         
@@ -99,13 +95,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print(remoteMessage)
-        Messaging.messaging().appDidReceiveMessage(remoteMessage.appData)
+        print(remoteMessage.appData)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // Print notification payload data
-        Messaging.messaging().appDidReceiveMessage(userInfo)
         print("Push notification received: \(userInfo)") 
     }
 
