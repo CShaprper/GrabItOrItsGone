@@ -45,6 +45,8 @@ class MainController: UIViewController {
     var products:[ProductCard] = []
     var facade:GrabItFacade!
     
+    
+    //MARK: - ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
         //Create Dummy Products
@@ -56,8 +58,6 @@ class MainController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(SegueToLogInController), name: NSNotification.Name.SegueToLogInController, object: nil)
     }
-    
-    //MARK: - ViewController functions
     override func viewDidAppear(_ animated: Bool) {
         style.AddToViewsForStyling(views: [MainBackgroundImage])
     }
@@ -84,7 +84,7 @@ class MainController: UIViewController {
         let isSignedInAsGuest = UserDefaults.standard.bool(forKey: "isLoggedInAsGuest")
         let isSignedInWithGoogle = UserDefaults.standard.bool(forKey: "isLoggedInWithGoogle")
         if isSignedInAsGuest || isLoggedInWithFacebook || isSignedInWithGoogle{
-           SegueToLogInController(notification: Notification(name: NSNotification.Name.SegueToLogInController))
+            SegueToLogInController(notification: Notification(name: NSNotification.Name.SegueToLogInController))
         }
         facade.LogoutFirebaseUser()
     }
@@ -192,26 +192,44 @@ class MainController: UIViewController {
         FavoritesStarImage.alpha = 0
     }
     
-    
     func btn_Menu_Pressed(sender: DesignableUIButton) -> Void {
         if isMenuOut
         {
-            HideMenu()
+            HideMenu(closure: {})
         }
         else
         {
             if isProductInformationSheetVisible{
                 HideInformationSheet()
             }
-            ShowMenu()
+            ShowMenu(closure: {})
         }
     }
-    private func HideMenu(){
+    
+    func btn_MenuAccount_Pressed(sender: UIButton) -> Void {
+        if isMenuOut
+        {
+            HideMenu(closure: {} )
+        } else {
+            PerformSegueToYourAccountController()
+        }
+    }
+    func PerformSegueToYourAccountController() -> Void {
+        performSegue(withIdentifier: "SegueToYourAccountController", sender: nil)
+    }
+    
+    func btn_MenuNews_Pressed(sender: UIButton) -> Void {
+        
+    }
+    
+    private func HideMenu(closure: @escaping () -> Void){
         isMenuOut = false
         UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.TopBackGroundView.transform = .identity
             self.TopBackGroundView.alpha = 1
-        }, completion: nil)
+        }, completion: {(true) in
+            self.PerformSegueToYourAccountController()
+        })
         
         UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuNews.transform = CGAffineTransform(translationX: self.btn_MenuNews.frame.size.width + 100, y: 0)
@@ -227,11 +245,11 @@ class MainController: UIViewController {
         
         UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuAccount.transform = CGAffineTransform(translationX: self.btn_MenuAccount.frame.size.width + 100, y: 0)
-        }, completion: nil)
-        
-        
+        }, completion: {(true) in
+            closure()
+        })
     }
-    private func ShowMenu(){
+    private func ShowMenu(closure: @escaping () -> Void){
         isMenuOut = true
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.TopBackGroundView.transform = CGAffineTransform(translationX: -self.view.frame.width * 0.6, y: 0).scaledBy(x: 0.8, y: 0.7)
@@ -257,10 +275,11 @@ class MainController: UIViewController {
     
     func btn_ProductInformation_Pressed(sender: UIButton) -> Void {
         if !isProductInformationSheetVisible{
-            if isMenuOut{
-                HideMenu()
+            if isMenuOut
+            {
+                HideMenu(closure: {})
             }
-            ShowInformationSheet()
+                ShowInformationSheet()
         } else {
             HideInformationSheet()
         }
@@ -330,6 +349,8 @@ class MainController: UIViewController {
         //Wire targets to Buttons
         btn_Menu.addTarget(self, action: #selector(btn_Menu_Pressed), for: .touchUpInside)
         btn_ProductInformation.addTarget(self, action: #selector(btn_ProductInformation_Pressed), for: .touchUpInside)
+        btn_MenuAccount.addTarget(self, action: #selector(btn_MenuAccount_Pressed), for: .touchUpInside)
+        btn_MenuNews.addTarget(self, action: #selector(btn_MenuNews_Pressed), for: .touchUpInside)
         
         //Transform UIControls to initial position
         FavoritesStarImage.transform = CGAffineTransform(translationX: 0, y: FavoritesStarImage.frame.size.height * 0.4)

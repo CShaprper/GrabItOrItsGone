@@ -492,12 +492,9 @@
                                         <rect key="frame" x="170" y="260" width="100" height="50"/>
                                         <state key="normal" title="Button"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE7-O4-E3l" userLabel="btn Menu Account">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE7-O4-E3l" userLabel="btn Your Account">
                                         <rect key="frame" x="170" y="340" width="100" height="50"/>
                                         <state key="normal" title="Dein Account"/>
-                                        <connections>
-                                            <segue destination="TMg-M4-kEa" kind="show" identifier="SegueToYourAccountController" id="QzV-jA-EMa"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -730,6 +727,7 @@
                             <constraint firstItem="ihu-PI-29C" firstAttribute="centerY" secondItem="COe-OI-qCU" secondAttribute="centerY" id="z8C-pM-PUh"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="CardBackgrounImageView" destination="win-cN-GUg" id="bA6-Yo-Idg"/>
                         <outlet property="CardView" destination="JOh-uq-b4u" id="tfg-Tr-dK1"/>
@@ -744,7 +742,7 @@
                         <outlet property="ProductInformationTextView" destination="QB2-fu-Ly6" id="5Qt-Yx-a9s"/>
                         <outlet property="TopBackGroundView" destination="s1y-sa-vtg" id="Wcu-ja-faH"/>
                         <outlet property="btn_Menu" destination="i49-Yc-cDv" id="Ub6-Qp-OMM"/>
-                        <outlet property="btn_MenuAccount" destination="BE7-O4-E3l" id="ZO4-Ki-j4P"/>
+                        <outlet property="btn_MenuAccount" destination="BE7-O4-E3l" id="TgU-SE-K6i"/>
                         <outlet property="btn_MenuFavourites" destination="SFt-Vw-Jds" id="QJT-oF-HFJ"/>
                         <outlet property="btn_MenuGutscheine" destination="lxS-Dd-mTW" id="uby-MC-KcX"/>
                         <outlet property="btn_MenuNews" destination="3As-cC-ph3" id="bbA-n1-RCE"/>
@@ -753,6 +751,8 @@
                         <outlet property="lbl_OldPrice" destination="6jt-Dm-y9Z" id="0Xy-ft-PcP"/>
                         <outlet property="lbl_ProductSubtitle" destination="IAf-jz-NY1" id="aU3-KX-Pdc"/>
                         <outlet property="lbl_ProductTitle" destination="YCH-a5-TYk" id="J7P-wu-xWq"/>
+                        <segue destination="TMg-M4-kEa" kind="show" identifier="SegueToYourAccountController" id="dHN-ll-aYy"/>
+                        <segue destination="ZD6-Gp-VvF" kind="show" identifier="SegueToNewsController" id="J6b-ET-wor"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCc-xT-hvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -763,6 +763,51 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1773.75" y="32.5"/>
+        </scene>
+        <!--News Controller-->
+        <scene sceneID="z1B-Aw-9aL">
+            <objects>
+                <viewController storyboardIdentifier="NewsController" id="ZD6-Gp-VvF" customClass="NewsController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DI6-9S-tv1"/>
+                        <viewControllerLayoutGuide type="bottom" id="smT-Dd-LzA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sBG-OB-oHU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0IN-3e-qUz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ml-7L-Iq2">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ZD6-Gp-VvF" id="5n3-zb-PDJ"/>
+                                    <outlet property="delegate" destination="ZD6-Gp-VvF" id="bwO-Qu-PeU"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0IN-3e-qUz" firstAttribute="top" secondItem="sBG-OB-oHU" secondAttribute="top" id="KBg-Sa-FQP"/>
+                            <constraint firstItem="smT-Dd-LzA" firstAttribute="top" secondItem="5ml-7L-Iq2" secondAttribute="bottom" id="KDC-fg-EO7"/>
+                            <constraint firstItem="0IN-3e-qUz" firstAttribute="leading" secondItem="sBG-OB-oHU" secondAttribute="leading" id="Sqv-9L-MXK"/>
+                            <constraint firstAttribute="trailing" secondItem="0IN-3e-qUz" secondAttribute="trailing" id="gr6-LQ-woR"/>
+                            <constraint firstItem="5ml-7L-Iq2" firstAttribute="leading" secondItem="sBG-OB-oHU" secondAttribute="leading" id="qkZ-1i-TnO"/>
+                            <constraint firstItem="smT-Dd-LzA" firstAttribute="top" secondItem="0IN-3e-qUz" secondAttribute="bottom" id="vQz-Iw-htm"/>
+                            <constraint firstAttribute="trailing" secondItem="5ml-7L-Iq2" secondAttribute="trailing" id="we8-Sg-E4j"/>
+                            <constraint firstItem="5ml-7L-Iq2" firstAttribute="top" secondItem="DI6-9S-tv1" secondAttribute="bottom" id="x2k-Nf-pPQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="BackgroundImage" destination="0IN-3e-qUz" id="nLL-fk-gbR"/>
+                        <outlet property="NewsTableView" destination="5ml-7L-Iq2" id="eKg-LT-8q4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F3i-Ng-TzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2598.75" y="-565"/>
         </scene>
         <!--Your Account Controller-->
         <scene sceneID="WRv-Jj-25u">
@@ -775,12 +820,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ecx-20-279">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatureBG" translatesAutoresizingMaskIntoConstraints="NO" id="rSm-Re-CSQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="L5i-lx-G5v" firstAttribute="top" secondItem="rSm-Re-CSQ" secondAttribute="bottom" id="19R-so-Bbc"/>
+                            <constraint firstItem="rSm-Re-CSQ" firstAttribute="leading" secondItem="Ecx-20-279" secondAttribute="leading" id="Lwr-Pg-aq2"/>
+                            <constraint firstAttribute="trailing" secondItem="rSm-Re-CSQ" secondAttribute="trailing" id="aYk-SE-3TS"/>
+                            <constraint firstItem="rSm-Re-CSQ" firstAttribute="top" secondItem="Ecx-20-279" secondAttribute="top" id="iPa-aE-Ky6"/>
+                        </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <connections>
+                        <outlet property="BackgroundImage" destination="rSm-Re-CSQ" id="lUx-S5-pOj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQ4-0a-hfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2599" y="511"/>
+            <point key="canvasLocation" x="2598.75" y="510"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xse-od-QJ6">

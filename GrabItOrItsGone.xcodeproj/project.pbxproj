@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2CC4E58505059283F2553C2C /* Pods_GrabItOrItsGoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77078DE18944AEEBCDCBB2A5 /* Pods_GrabItOrItsGoneTests.framework */; };
+		6739BF7A82D0592EEF004F16 /* Pods_GrabItOrItsGoneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D611C5C58697CA1FEC5C3B /* Pods_GrabItOrItsGoneUITests.framework */; };
 		9281BF0A3991895CCF2834BE /* Pods_GrabItOrItsGone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15A09F65E756D61A098E205 /* Pods_GrabItOrItsGone.framework */; };
 		CF034FEC1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF034FEB1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift */; };
 		CF034FF81F08FF8000D8F03D /* IValidateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF034FF71F08FF8000D8F03D /* IValidateable.swift */; };
@@ -25,6 +26,8 @@
 		CF3D627F1EFD72C30051706A /* MarckScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF3D627E1EFD72C30051706A /* MarckScript-Regular.ttf */; };
 		CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62831EFD77050051706A /* LocalizationStringsUIView_extension.swift */; };
 		CF3E97031F01698F001C1C9B /* ProductCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3E97021F01698F001C1C9B /* ProductCards.swift */; };
+		CF4766AB1F1002D70045F22B /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4766AA1F1002D70045F22B /* NewsController.swift */; };
+		CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */; };
 		CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */; };
 		CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62621EFD4EBC0051706A /* NotificatioName_extension.swift */; };
 		CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62651EFD501B0051706A /* UIViewAnimationExtension.swift */; };
@@ -42,6 +45,7 @@
 		CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */; };
 		CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */; };
 		CF477BBA1F0FF0C300DA1EE1 /* MainControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */; };
+		CF477BC21F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BC11F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift */; };
 		CF4B64761EFE4CD400C2FBD3 /* DesignableTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64751EFE4CD400C2FBD3 /* DesignableTextfield.swift */; };
 		CF4B64791EFE4CE800C2FBD3 /* DesingableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64781EFE4CE800C2FBD3 /* DesingableUIView.swift */; };
 		CF4B647C1EFE523F00C2FBD3 /* DesignableUIEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */; };
@@ -63,6 +67,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		CF477BA11F0FEE2F00DA1EE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF3D621E1EFD4B4F0051706A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF3D62251EFD4B4F0051706A;
+			remoteInfo = GrabItOrItsGone;
+		};
+		CF477BC41F0FF14800DA1EE1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CF3D621E1EFD4B4F0051706A /* Project object */;
 			proxyType = 1;
@@ -100,12 +111,17 @@
 		CF3D62821EFD76C20051706A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		CF3D62831EFD77050051706A /* LocalizationStringsUIView_extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationStringsUIView_extension.swift; sourceTree = "<group>"; };
 		CF3E97021F01698F001C1C9B /* ProductCards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCards.swift; sourceTree = "<group>"; };
+		CF4766AA1F1002D70045F22B /* NewsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
+		CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsControllerTests.swift; sourceTree = "<group>"; };
 		CF477B9C1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrabItOrItsGoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF477BA01F0FEE2F00DA1EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalisationStringsTests.swift; sourceTree = "<group>"; };
 		CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountControllerTests.swift; sourceTree = "<group>"; };
 		CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInSignUpControllerTests.swift; sourceTree = "<group>"; };
 		CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainControllerTests.swift; sourceTree = "<group>"; };
+		CF477BBF1F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrabItOrItsGoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF477BC11F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabItOrItsGoneUITests.swift; sourceTree = "<group>"; };
+		CF477BC31F0FF14800DA1EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF4B64751EFE4CD400C2FBD3 /* DesignableTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextfield.swift; sourceTree = "<group>"; };
 		CF4B64781EFE4CE800C2FBD3 /* DesingableUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesingableUIView.swift; sourceTree = "<group>"; };
 		CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableUIEffectView.swift; sourceTree = "<group>"; };
@@ -145,6 +161,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CF477BBC1F0FF14800DA1EE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6739BF7A82D0592EEF004F16 /* Pods_GrabItOrItsGoneUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -166,6 +190,7 @@
 			children = (
 				CF3D62281EFD4B4F0051706A /* GrabItOrItsGone */,
 				CF477B9D1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests */,
+				CF477BC01F0FF14800DA1EE1 /* GrabItOrItsGoneUITests */,
 				CF3D62271EFD4B4F0051706A /* Products */,
 				7B79DB3CFC88BE779A0477DD /* Pods */,
 				D9EC10993D48FD207C51F56E /* Frameworks */,
@@ -177,6 +202,7 @@
 			children = (
 				CF3D62261EFD4B4F0051706A /* GrabItOrItsGone.app */,
 				CF477B9C1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests.xctest */,
+				CF477BBF1F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -203,6 +229,7 @@
 				CF3D622B1EFD4B4F0051706A /* LogInSignUpController.swift */,
 				CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */,
 				CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */,
+				CF4766AA1F1002D70045F22B /* NewsController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -263,11 +290,21 @@
 			children = (
 				CF477BA01F0FEE2F00DA1EE1 /* Info.plist */,
 				CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */,
-				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
 				CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */,
 				CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */,
+				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
+				CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */,
 			);
 			path = GrabItOrItsGoneTests;
+			sourceTree = "<group>";
+		};
+		CF477BC01F0FF14800DA1EE1 /* GrabItOrItsGoneUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CF477BC11F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift */,
+				CF477BC31F0FF14800DA1EE1 /* Info.plist */,
+			);
+			path = GrabItOrItsGoneUITests;
 			sourceTree = "<group>";
 		};
 		CFB232921F07C2E100346879 /* Protocols */ = {
@@ -336,6 +373,27 @@
 			productReference = CF477B9C1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CF477BBE1F0FF14800DA1EE1 /* GrabItOrItsGoneUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF477BC61F0FF14800DA1EE1 /* Build configuration list for PBXNativeTarget "GrabItOrItsGoneUITests" */;
+			buildPhases = (
+				36EA2C532E6F2104B8C9D37E /* [CP] Check Pods Manifest.lock */,
+				CF477BBB1F0FF14800DA1EE1 /* Sources */,
+				CF477BBC1F0FF14800DA1EE1 /* Frameworks */,
+				CF477BBD1F0FF14800DA1EE1 /* Resources */,
+				EB0FD5AB7FBEB661B7522E41 /* [CP] Embed Pods Frameworks */,
+				6212CA81F6343820DEA93F90 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF477BC51F0FF14800DA1EE1 /* PBXTargetDependency */,
+			);
+			name = GrabItOrItsGoneUITests;
+			productName = GrabItOrItsGoneUITests;
+			productReference = CF477BBF1F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -368,6 +426,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = CF3D62251EFD4B4F0051706A;
 					};
+					CF477BBE1F0FF14800DA1EE1 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CF3D62251EFD4B4F0051706A;
+					};
 				};
 			};
 			buildConfigurationList = CF3D62211EFD4B4F0051706A /* Build configuration list for PBXProject "GrabItOrItsGone" */;
@@ -386,6 +449,7 @@
 			targets = (
 				CF3D62251EFD4B4F0051706A /* GrabItOrItsGone */,
 				CF477B9B1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests */,
+				CF477BBE1F0FF14800DA1EE1 /* GrabItOrItsGoneUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -415,6 +479,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CF477BBD1F0FF14800DA1EE1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -431,6 +502,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		36EA2C532E6F2104B8C9D37E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6212CA81F6343820DEA93F90 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrabItOrItsGoneUITests/Pods-GrabItOrItsGoneUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7A108E4D63C90D2E232ADF65 /* [CP] Copy Pods Resources */ = {
@@ -508,6 +609,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrabItOrItsGone/Pods-GrabItOrItsGone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EB0FD5AB7FBEB661B7522E41 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrabItOrItsGoneUITests/Pods-GrabItOrItsGoneUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -515,6 +631,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF4766AB1F1002D70045F22B /* NewsController.swift in Sources */,
 				CF4B64791EFE4CE800C2FBD3 /* DesingableUIView.swift in Sources */,
 				CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */,
 				CFB232A01F07D4F900346879 /* IAlertMessage.swift in Sources */,
@@ -559,9 +676,18 @@
 				CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */,
 				CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */,
 				CF477BBA1F0FF0C300DA1EE1 /* MainControllerTests.swift in Sources */,
+				CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */,
 				CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */,
 				CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */,
 				CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF477BBB1F0FF14800DA1EE1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF477BC21F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +698,11 @@
 			isa = PBXTargetDependency;
 			target = CF3D62251EFD4B4F0051706A /* GrabItOrItsGone */;
 			targetProxy = CF477BA11F0FEE2F00DA1EE1 /* PBXContainerItemProxy */;
+		};
+		CF477BC51F0FF14800DA1EE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF3D62251EFD4B4F0051706A /* GrabItOrItsGone */;
+			targetProxy = CF477BC41F0FF14800DA1EE1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -775,6 +906,34 @@
 			};
 			name = Release;
 		};
+		CF477BC71F0FF14800DA1EE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFEA617BF9440413FD9E2FBB /* Pods-GrabItOrItsGoneUITests.debug.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 9QCPT3JHZE;
+				INFOPLIST_FILE = GrabItOrItsGoneUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = petersypek.com.GrabItOrItsGoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GrabItOrItsGone;
+			};
+			name = Debug;
+		};
+		CF477BC81F0FF14800DA1EE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7055A591F223F3A02D642D4 /* Pods-GrabItOrItsGoneUITests.release.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 9QCPT3JHZE;
+				INFOPLIST_FILE = GrabItOrItsGoneUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = petersypek.com.GrabItOrItsGoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GrabItOrItsGone;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -801,6 +960,15 @@
 			buildConfigurations = (
 				CF477BA41F0FEE2F00DA1EE1 /* Debug */,
 				CF477BA51F0FEE2F00DA1EE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF477BC61F0FF14800DA1EE1 /* Build configuration list for PBXNativeTarget "GrabItOrItsGoneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF477BC71F0FF14800DA1EE1 /* Debug */,
+				CF477BC81F0FF14800DA1EE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

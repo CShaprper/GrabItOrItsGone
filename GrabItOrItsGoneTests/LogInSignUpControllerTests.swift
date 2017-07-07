@@ -117,6 +117,18 @@ class LogInSignUpControllerTests: XCTestCase {
         XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SignUp_PopUp, actionName: "btn_SignUp_PopUp_Pressed", event: .touchUpInside, controller: sut! ))
     }
     
+    //MARK: Segues
+    func test_SegueToMainController_IdentifierExists() {
+        let identifiers = segues(ofViewController: sut!)
+        XCTAssertTrue(identifiers.contains("SegueToMainController"))
+    }
+    
+    
+    // Mark: - Segues Helper Methods
+    func segues(ofViewController viewController: UIViewController) -> [String] {
+        let identifiers = (viewController.value(forKey: "storyboardSegueTemplates") as? [AnyObject])?.flatMap({ $0.value(forKey: "identifier") as? String }) ?? []
+        return identifiers
+    }
     
     //MARK: - Button action test helper
     func checkActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{

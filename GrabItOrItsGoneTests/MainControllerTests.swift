@@ -93,6 +93,33 @@ class MainControllerTests: XCTestCase {
     func test_NewPriceBlurryView_Exists(){
         XCTAssertNotNil(sut!.NewPriceBlurryView, "NewPriceBlurryView should exist to hold new price label")
     }
+    func test_btn_MenuAccount_Exists(){
+    XCTAssertNotNil(sut!.btn_MenuAccount, "btn_MenuAccount should exist")
+    }
+    func test_btn_MenuAccount_Pressed_isWired_ToAction(){
+    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuAccount, actionName: "btn_MenuAccount_Pressed", event: .touchUpInside, controller: sut! ))
+    }
+    func test_btn_MenuNews_Exists(){
+    XCTAssertNotNil(sut!.btn_MenuNews, "btn_MenuNews should exist")
+    }
+    func test_btn_MenuNews_isWired_ToAction(){
+    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuNews, actionName: "btn_MenuNews_Pressed", event: .touchUpInside, controller: sut! ))
+    }    
+    func test_SegueToYourAccount_IdentifierExists() {
+        let identifiers = segues(ofViewController: sut!)
+        XCTAssertTrue(identifiers.contains("SegueToYourAccountController"))
+    }
+    func test_SegueToNewsController_IdentifierExists() {
+        let identifiers = segues(ofViewController: sut!)
+        XCTAssertTrue(identifiers.contains("SegueToNewsController"))
+    }
+    
+    
+    // Mark: - Segues Helper Methods
+    func segues(ofViewController viewController: UIViewController) -> [String] {
+        let identifiers = (viewController.value(forKey: "storyboardSegueTemplates") as? [AnyObject])?.flatMap({ $0.value(forKey: "identifier") as? String }) ?? []
+        return identifiers
+    }
     
     //MARK: - Button action test helper
     func checkActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{
