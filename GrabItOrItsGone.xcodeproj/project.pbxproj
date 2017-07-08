@@ -63,6 +63,10 @@
 		CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */; };
 		CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */; };
 		CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */; };
+		CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
+		CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
+		CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
+		CFF173BF1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +144,8 @@
 		CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountController.swift; sourceTree = "<group>"; };
 		CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleHelper.swift; sourceTree = "<group>"; };
 		CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFirebaseDataDelegate.swift; sourceTree = "<group>"; };
+		CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		CFF6E02A1F0D89CC00664B35 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D15A09F65E756D61A098E205 /* Pods_GrabItOrItsGone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrabItOrItsGone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -217,6 +223,7 @@
 				CF3D62611EFD4E9C0051706A /* Helper */,
 				CFB232921F07C2E100346879 /* Protocols */,
 				CF3D62581EFD4C9F0051706A /* Controller */,
+				CFF173BC1F10EBCD00BA4F9B /* TablewViewCells */,
 				CF3D625A1EFD4CDA0051706A /* Model */,
 				CF3D62591EFD4CAD0051706A /* View */,
 			);
@@ -315,8 +322,17 @@
 				CFB2329F1F07D4F900346879 /* IAlertMessage.swift */,
 				CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */,
 				CF034FF71F08FF8000D8F03D /* IValidateable.swift */,
+				CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		CFF173BC1F10EBCD00BA4F9B /* TablewViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */,
+			);
+			name = TablewViewCells;
 			sourceTree = "<group>";
 		};
 		D9EC10993D48FD207C51F56E /* Frameworks */ = {
@@ -635,6 +651,7 @@
 				CF4B64791EFE4CE800C2FBD3 /* DesingableUIView.swift in Sources */,
 				CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */,
 				CFB232A01F07D4F900346879 /* IAlertMessage.swift in Sources */,
+				CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
 				CF3D62631EFD4EBC0051706A /* NotificatioName_extension.swift in Sources */,
 				CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */,
@@ -649,6 +666,7 @@
 				CF3D622C1EFD4B4F0051706A /* LogInSignUpController.swift in Sources */,
 				CF034FF81F08FF8000D8F03D /* IValidateable.swift in Sources */,
 				CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */,
+				CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
 				CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */,
 				CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */,
 				CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */,
@@ -664,6 +682,7 @@
 			files = (
 				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
 				CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */,
+				CFF173BF1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
 				CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */,
 				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
@@ -680,6 +699,7 @@
 				CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */,
 				CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */,
 				CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */,
+				CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

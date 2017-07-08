@@ -218,8 +218,8 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate {
             
             let ref = Database.database().reference(fromURL: firebaseURL)
             let usersReference = ref.child("users").child(uid)
-            let values = ["name": user!.displayName, "email": user!.email]
-            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            let values = (["name": user!.displayName, "email": user!.email])
+            usersReference.updateChildValues(values , withCompletionBlock: { (err, ref) in
                 if err != nil{
                     print(err!.localizedDescription)
                     return

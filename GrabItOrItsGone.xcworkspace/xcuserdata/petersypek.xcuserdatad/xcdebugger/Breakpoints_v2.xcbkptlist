@@ -317,5 +317,117 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GrabItOrItsGoneTests/MainControllerTests.swift"
+            timestampString = "521200982.757003"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "checkActionForOutlet(outlet:actionName:event:controller:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GrabItOrItsGone/NewsController.swift"
+            timestampString = "521205288.735627"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "ReadFirebaseNewsSection()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GrabItOrItsGone.NewsController.ReadFirebaseNewsSection () -&gt; ()"
+                  moduleName = "GrabItOrItsGone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/NewsController.swift"
+                  timestampString = "521205300.253829"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GrabItOrItsGone.NewsController.(ReadFirebaseNewsSection () -&gt; ()).(closure #1)"
+                  moduleName = "GrabItOrItsGone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/NewsController.swift"
+                  timestampString = "521205300.255954"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GrabItOrItsGone/NewsController.swift"
+            timestampString = "521211767.112801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "ReadFirebaseNewsSection()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GrabItOrItsGone.NewsController.(ReadFirebaseNewsSection () -&gt; ()).(closure #1)"
+                  moduleName = "GrabItOrItsGone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/NewsController.swift"
+                  timestampString = "521210379.269284"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1299">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GrabItOrItsGone.NewsController.(ReadFirebaseNewsSection () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "GrabItOrItsGone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/NewsController.swift"
+                  timestampString = "521210379.271544"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

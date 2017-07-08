@@ -99,15 +99,15 @@ class MainControllerTests: XCTestCase {
     func test_btn_MenuAccount_Pressed_isWired_ToAction(){
     XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuAccount, actionName: "btn_MenuAccount_Pressed", event: .touchUpInside, controller: sut! ))
     }
+    func test_SegueToYourAccount_IdentifierExists() {
+        let identifiers = segues(ofViewController: sut!)
+        XCTAssertTrue(identifiers.contains("SegueToYourAccountController"))
+    }
     func test_btn_MenuNews_Exists(){
     XCTAssertNotNil(sut!.btn_MenuNews, "btn_MenuNews should exist")
     }
     func test_btn_MenuNews_isWired_ToAction(){
     XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuNews, actionName: "btn_MenuNews_Pressed", event: .touchUpInside, controller: sut! ))
-    }    
-    func test_SegueToYourAccount_IdentifierExists() {
-        let identifiers = segues(ofViewController: sut!)
-        XCTAssertTrue(identifiers.contains("SegueToYourAccountController"))
     }
     func test_SegueToNewsController_IdentifierExists() {
         let identifiers = segues(ofViewController: sut!)

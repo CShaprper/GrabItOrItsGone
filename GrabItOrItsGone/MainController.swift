@@ -209,7 +209,7 @@ class MainController: UIViewController {
     func btn_MenuAccount_Pressed(sender: UIButton) -> Void {
         if isMenuOut
         {
-            HideMenu(closure: {} )
+            HideMenu(closure: PerformSegueToYourAccountController )
         } else {
             PerformSegueToYourAccountController()
         }
@@ -219,7 +219,14 @@ class MainController: UIViewController {
     }
     
     func btn_MenuNews_Pressed(sender: UIButton) -> Void {
-        
+        if isMenuOut{
+            HideMenu(closure: PerformSegueToNewsConroller )
+        } else {
+            PerformSegueToNewsConroller()
+        }
+    }
+    func PerformSegueToNewsConroller()->Void{
+        performSegue(withIdentifier: "SegueToNewsController", sender: nil)
     }
     
     private func HideMenu(closure: @escaping () -> Void){
@@ -228,7 +235,7 @@ class MainController: UIViewController {
             self.TopBackGroundView.transform = .identity
             self.TopBackGroundView.alpha = 1
         }, completion: {(true) in
-            self.PerformSegueToYourAccountController()
+            //self.PerformSegueToYourAccountController()
         })
         
         UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
@@ -279,7 +286,7 @@ class MainController: UIViewController {
             {
                 HideMenu(closure: {})
             }
-                ShowInformationSheet()
+            ShowInformationSheet()
         } else {
             HideInformationSheet()
         }

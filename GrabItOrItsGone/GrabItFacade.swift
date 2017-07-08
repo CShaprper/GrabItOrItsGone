@@ -14,10 +14,11 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
     //MARK: Members
     private var presentingController:UIViewController!
     private var firebaseClient:FirebaseClient!
-    //private var emailValidationService:EmailValidationService!
+    //MARK: NewsController Members 
+    
     var validationService:IValidateable!
-    private var alertService:IAlertMessage!
     var activityAnitmationDelegate: IActivityAnimationDelegate?
+    private var alertService:IAlertMessage!
     
     
     //Constructor
