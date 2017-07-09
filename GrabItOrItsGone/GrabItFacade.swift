@@ -36,14 +36,14 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
     
     func CreateNewFirebaseUser(email: String, password: String) -> Void {
         SetValidationService(validationservice: EmailValidationService())
-        if validationService.Validate(validationString: email) == false
+        if validationService.Validate!(validationString: email) == false
         {
             ShowAlertMessage(title: presentingController.view.EmailValidationErrorAlert_TitleString, message: presentingController.view.EmailValidationErrorAlert_MessageString)
             return
         }
         
         SetValidationService(validationservice: PasswordValidationService())
-        if validationService.Validate(validationString: password) == false
+        if validationService.Validate!(validationString: password) == false
         {
             ShowAlertMessage(title: presentingController.view.PasswordValidationErrorAlert_TitleString, message: presentingController.view.PasswordValidationErrorAlert_MessageString)
             return
@@ -54,14 +54,14 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
     
     func LoginFirebaseUser(email: String, password: String) -> Void{
         SetValidationService(validationservice: EmailValidationService())
-        if validationService.Validate(validationString: email) == false
+        if validationService.Validate!(validationString: email) == false
         {
             ShowAlertMessage(title: presentingController.view.EmailValidationErrorAlert_TitleString, message: presentingController.view.EmailValidationErrorAlert_MessageString)
             return
         }
         
         SetValidationService(validationservice: PasswordValidationService())
-        if validationService.Validate(validationString: password) == false
+        if validationService.Validate!(validationString: password) == false
         {
             ShowAlertMessage(title: presentingController.view.PasswordValidationErrorAlert_TitleString, message: presentingController.view.PasswordValidationErrorAlert_MessageString)
             return
@@ -83,7 +83,7 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
     
     func ResetUserPassword(email: String){
         SetValidationService(validationservice: EmailValidationService())
-        if !validationService.Validate(validationString: email){
+        if !validationService.Validate!(validationString: email){
             return
         }
         firebaseClient.ResetUserPassword(email: email)
@@ -96,12 +96,12 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
     //MARK: IAuthenticableDelegate implementation
     func StartActivityAnimation() {
         if activityAnitmationDelegate != nil{
-            activityAnitmationDelegate!.StartActivityAnimation()
+            activityAnitmationDelegate!.StartActivityAnimation!()
         }
     }
     func StopActivityAnimation() {
         if activityAnitmationDelegate != nil{
-            activityAnitmationDelegate!.StopActivityAnimation()
+            activityAnitmationDelegate!.StopActivityAnimation!()
         }
     }
     

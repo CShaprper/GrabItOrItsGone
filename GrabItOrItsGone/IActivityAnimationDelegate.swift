@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol IActivityAnimationDelegate {
-    func StartActivityAnimation() -> Void
-    func StopActivityAnimation() -> Void
+@objc protocol IActivityAnimationDelegate {
+    @objc optional func StartActivityAnimation() -> Void
+    @objc optional func StopActivityAnimation() -> Void
 }

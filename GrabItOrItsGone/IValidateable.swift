@@ -7,6 +7,6 @@
 //
 
 import Foundation
-protocol IValidateable {
-   func Validate(validationString: String) -> Bool
+@objc protocol IValidateable {
+   @objc optional func Validate(validationString: String) -> Bool
 }

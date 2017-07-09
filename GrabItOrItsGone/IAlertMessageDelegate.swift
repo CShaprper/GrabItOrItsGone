@@ -7,6 +7,6 @@
 //
 
 import Foundation
-protocol IAlertMessageDelegate {
-    func ShowAlertMessage(title: String, message: String)->Void
+@objc protocol IAlertMessageDelegate {
+    @objc optional func ShowAlertMessage(title: String, message: String)->Void
 }

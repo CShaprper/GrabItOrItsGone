@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol IAlertMessage {
-    /*var Title:String { get set }
-    var Message:String  { get set }
-    var PresentingController:UIViewController  { get }
-    init(title:String, message:String, presentingController: UIViewController)*/
-    func ShowAlert(presentingController: UIViewController)    
+@objc protocol IAlertMessage { 
+    @objc optional func ShowAlert(presentingController: UIViewController)
 }

@@ -10,7 +10,9 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
     @IBOutlet var lbl_Title: UILabel!
-    @IBOutlet var lbl_Message: UILabel!
+    @IBOutlet var messageTextView: UITextView!
+    @IBOutlet var messageTextViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var lbl_MessageDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,8 +26,15 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     
-    func ConfigureCell(title: String, message: String) -> Void {
+    func ConfigureCell(title: String, message: String, date: String) -> Void {
         lbl_Title.text = title
-        lbl_Message.text = message
+        lbl_MessageDate.text = date
+        messageTextView.text = message
+        
+        let size = messageTextView.sizeThatFits(CGSize(width: messageTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
+        if size.height != messageTextViewHeightConstraint.constant && size.height > messageTextView.frame.size.height{
+            messageTextViewHeightConstraint.constant = size.height
+            messageTextView.setContentOffset(CGPoint.zero, animated: false)
+        }
     }
 }

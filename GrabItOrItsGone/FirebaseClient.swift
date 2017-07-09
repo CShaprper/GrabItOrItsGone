@@ -25,18 +25,18 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate {
     }
     func ShowAlertMessage(title: String, message: String)->Void{
         if alertMessageDelegate != nil{
-            alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
+            alertMessageDelegate!.ShowAlertMessage!(title: title, message: message)
         }
     }
     
     func StartActivityAnimation() {
         if activityAnimationDelegate != nil{
-            activityAnimationDelegate!.StartActivityAnimation()
+            activityAnimationDelegate!.StartActivityAnimation!()
         }
     }
     func StopActivityAnimation() {
         if activityAnimationDelegate != nil{
-            activityAnimationDelegate!.StopActivityAnimation()
+            activityAnimationDelegate!.StopActivityAnimation!()
         }
     }
     

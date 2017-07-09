@@ -181,33 +181,33 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     func txt_Login_Email_TextChanged(sender: DesignableTextField) -> Void {
         facade.SetValidationService(validationservice: EmailValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate(validationString: sender.text!)
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
     }
     
     func txt_Login_Password_TextChanged(sender: DesignableTextField) -> Void{
         facade.SetValidationService(validationservice: PasswordValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate(validationString: sender.text!)
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
     }
     
     func txt_Register_Email_TextChanged(sender: DesignableTextField) -> Void {
         facade.SetValidationService(validationservice: EmailValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate(validationString: sender.text!)
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
     }
     
     func txt_Register_Password_TextChanged(sender:DesignableTextField) -> Void {
         facade.SetValidationService(validationservice: PasswordValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate(validationString: sender.text!)
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
     }
     private func ConfigureDesignableTextfieldDuringInput(sender:DesignableTextField, validationType: eValidationType)->Void{
         switch validationType {
         case .email:
             facade.SetValidationService(validationservice: EmailValidationService())
-            sender.RightImageVisibility = !facade.validationService!.Validate(validationString: sender.text!)
-            if facade.validationService!.Validate(validationString: sender.text!) == false{
+            sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+            if facade.validationService!.Validate!(validationString: sender.text!) == false{
                 sender.rightView?.shake()
             }
             if sender.text!.isEmpty{
@@ -215,8 +215,8 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
             }
         case .password:
             facade.SetValidationService(validationservice: PasswordValidationService())
-            sender.RightImageVisibility = !facade.validationService!.Validate(validationString: sender.text!)
-            if facade.validationService!.Validate(validationString: sender.text!) == false{
+            sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+            if facade.validationService!.Validate!(validationString: sender.text!) == false{
                 sender.rightView?.shake()
             }
             if sender.text!.isEmpty{

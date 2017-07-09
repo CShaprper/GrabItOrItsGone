@@ -13,6 +13,7 @@ import FirebaseAuth
 class News:NSObject {
     var title:String?
     var message:String?
+    var date:String?
     /*var Image:UIImage?
     var URL:String?*/
 }
@@ -32,6 +33,8 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         NewsTableView.delegate = self
         NewsTableView.dataSource = self as UITableViewDataSource
+        NewsTableView.rowHeight = UITableViewAutomaticDimension
+        NewsTableView.estimatedRowHeight = 180
         
         ref = Database.database().reference()
         
@@ -54,6 +57,16 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let dict = snapshot.value as? [String:AnyObject]{
                 print(dict)
                 let news = News()
+                
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "de_DE")
+                formatter.dateFormat = "d.M.yyyy"
+                let date = dict["date"] as? String
+                if date != nil{
+                    let newDate = formatter.date(from: date!)
+                    formatter.dateFormat = "d. MMMM yyyy"
+                    news.date = formatter.string(from: newDate!)
+                }
                 news.title = dict["title"] as? String
                 news.message = dict["message"] as? String
                 print(news.title!)
@@ -75,7 +88,10 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell") as! NewsTableViewCell
-        cell.ConfigureCell(title: newsArray![indexPath.row].title!, message: newsArray![indexPath.row].message!)
+        cell.ConfigureCell(title: newsArray![indexPath.row].title!, message: newsArray![indexPath.row].message!, date: newsArray![indexPath.row].date!)
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80
         return cell
     }
 }

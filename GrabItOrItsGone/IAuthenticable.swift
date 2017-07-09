@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol IAuthenticalbe {
-    var firebaseURL:String { get }
-    func CreateNewAutenticableUser(email: String, password: String) -> Void
-    func LoginAuthenticableUser(email: String, password: String) -> Void
-    func LogoutAuthenticableUser() -> Void
+@objc protocol IAuthenticalbe {
+    @objc optional var firebaseURL:String { get }
+    @objc optional func CreateNewAutenticableUser(email: String, password: String) -> Void
+    @objc optional func LoginAuthenticableUser(email: String, password: String) -> Void
+    @objc optional func LogoutAuthenticableUser() -> Void
 }
