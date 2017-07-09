@@ -28,3 +28,5 @@ FirebaseResetPasswordErrorAlert_TitleString = "Password Reset Error";
 FirebaseResetPasswordErrorAlert_MessageString = "The service reports an Error. Is your email imput correct? Check your internet connection.";
 FirebaseThirdPartyLoginErrorAlert_TitleString = "Login Error!";
 FirebaseThirdPartyLoginErrorAlert_MessageString = "Login service reports an error. Please check your internet connection.";
+DelegatenotSetError_Title = "Delegate Error";
+DelegatenotSetError_Message  = "You forgot to Set the a delegate";

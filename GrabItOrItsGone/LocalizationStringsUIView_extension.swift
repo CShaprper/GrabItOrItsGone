@@ -119,4 +119,14 @@ extension UIView{
             return NSLocalizedString("FirebaseThirdPartyLoginErrorAlert_TitleString", comment: "")
         }
     }
+    var DelegatenotSetError_Title: String{
+        get {
+            return NSLocalizedString("DelegatenotSetError_Title", comment: "")
+        }
+    }
+    var DelegatenotSetError_Message: String{
+        get {
+            return NSLocalizedString("DelegatenotSetError_Message", comment: "")
+        }
+    }
 }

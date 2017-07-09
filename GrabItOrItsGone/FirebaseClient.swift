@@ -13,16 +13,21 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate {
+class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataReceivedDelegate {
     private var presentingViewController:UIViewController!
     private var alert:IAlertMessage?
+    private var ref:DatabaseReference!
+    private var refhandle:UInt!
     let firebaseURL:String = "https://grabitoritsgone.firebaseio.com/"
     var alertMessageDelegate:IAlertMessageDelegate?
     var activityAnimationDelegate: IActivityAnimationDelegate?
+    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
     var isCalled:Bool = false
     
     init() {
+        ref = Database.database().reference()
     }
+    
     func ShowAlertMessage(title: String, message: String)->Void{
         if alertMessageDelegate != nil{
             alertMessageDelegate!.ShowAlertMessage!(title: title, message: message)
@@ -106,7 +111,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate {
                     self.ShowAlertMessage(title:"FirebaseThirdPartyLoginErrorAlert_TitleString".localized, message: "FirebaseThirdPartyLoginErrorAlert_MessageString".localized)
                     return
                 }
-            }            
+            }
             UserDefaults.standard.set(true, forKey: "isLoggedInWithGoogle")
             print("User logged in with Google")
             self.StopActivityAnimation()
@@ -202,12 +207,47 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate {
                     self.isCalled = true
                 }
             } else {
-                    FBSDKLoginManager().logOut()
-                    print("State listener detected user loged out")
-                    UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
-                    NotificationCenter.default.post(name: NSNotification.Name.SegueToLogInController, object: nil)
+                FBSDKLoginManager().logOut()
+                print("State listener detected user loged out")
+                UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
+                NotificationCenter.default.post(name: NSNotification.Name.SegueToLogInController, object: nil)
             }
         }
+    }
+    
+    
+    var newsArray = [News]()
+    func ReadFirebaseNewsSection() -> Void{
+        ref.child("news").observe(.childAdded, with: { (snapshot) in
+            if let dict = snapshot.value as? [String:AnyObject]{
+                print(dict)
+                let news = News()
+                
+                //Format Date
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "de_DE")
+                formatter.dateFormat = "d.M.yyyy"
+                let date = dict["date"] as? String
+                if date != nil{
+                    let newDate = formatter.date(from: date!)
+                    formatter.dateFormat = "d. MMMM yyyy"
+                    news.date = formatter.string(from: newDate!)
+                }
+                //Set News properties
+                news.title = dict["title"] as? String
+                news.message = dict["message"] as? String
+                print(news.title!)
+                print(news.message!)
+                self.newsArray.append(news)
+                
+                DispatchQueue.main.async {
+                    if self.firebaseDataReceivedDelegate != nil{
+                        self.firebaseDataReceivedDelegate!.FirebaseDataReceived!()
+                    }
+                }
+                
+            }
+        })
     }
     
     private func SaveNewUserWithUIDtoFirebase(user: User?, firebaseURL: String){

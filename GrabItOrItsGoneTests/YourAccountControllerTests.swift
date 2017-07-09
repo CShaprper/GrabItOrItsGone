@@ -23,5 +23,7 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_BackgroundImage_Exists(){
     XCTAssertNotNil(sut!.BackgroundImage, "BackgroundImage should exist for BG Image")
     }
-    
+    func test_BackgroundBlurryView_Exists(){
+    XCTAssertNotNil(sut!.BackgroundBlurryView, "BackgroundBlurryView should exist")
+    }
 }

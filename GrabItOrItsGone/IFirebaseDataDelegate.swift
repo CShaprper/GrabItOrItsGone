@@ -8,6 +8,6 @@
 
 import Foundation
 
-@objc protocol IFirebaseDataDelegate {
-    @objc optional func FirebaseDataReceived(dictionary: [String:AnyObject])
+@objc protocol IFirebaseDataReceivedDelegate {
+    @objc optional func FirebaseDataReceived() -> Void
 }

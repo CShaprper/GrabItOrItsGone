@@ -785,7 +785,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="135" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ml-7L-Iq2">
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="135" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ml-7L-Iq2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -794,7 +794,7 @@
                                                     <rect key="frame" x="0.0" y="28" width="320" height="135"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cs-yt-bQl" id="2Sc-Rh-hC0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="134.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlM-WJ-lTw">
@@ -901,17 +901,30 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NatureBG" translatesAutoresizingMaskIntoConstraints="NO" id="rSm-Re-CSQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-D3-Xjy">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9PL-Qd-lJD">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="L5i-lx-G5v" firstAttribute="top" secondItem="rSm-Re-CSQ" secondAttribute="bottom" id="19R-so-Bbc"/>
+                            <constraint firstItem="1cf-D3-Xjy" firstAttribute="top" secondItem="Xkj-dQ-2Z3" secondAttribute="bottom" id="1Jr-7w-Wkx"/>
                             <constraint firstItem="rSm-Re-CSQ" firstAttribute="leading" secondItem="Ecx-20-279" secondAttribute="leading" id="Lwr-Pg-aq2"/>
                             <constraint firstAttribute="trailing" secondItem="rSm-Re-CSQ" secondAttribute="trailing" id="aYk-SE-3TS"/>
                             <constraint firstItem="rSm-Re-CSQ" firstAttribute="top" secondItem="Ecx-20-279" secondAttribute="top" id="iPa-aE-Ky6"/>
+                            <constraint firstAttribute="bottom" secondItem="1cf-D3-Xjy" secondAttribute="bottom" id="kju-PC-Xgh"/>
+                            <constraint firstAttribute="trailing" secondItem="1cf-D3-Xjy" secondAttribute="trailing" id="uqA-lf-F0v"/>
+                            <constraint firstItem="1cf-D3-Xjy" firstAttribute="leading" secondItem="Ecx-20-279" secondAttribute="leading" id="xd5-6w-rMy"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
+                        <outlet property="BackgroundBlurryView" destination="1cf-D3-Xjy" id="yML-hz-m1Z"/>
                         <outlet property="BackgroundImage" destination="rSm-Re-CSQ" id="lUx-S5-pOj"/>
                     </connections>
                 </viewController>

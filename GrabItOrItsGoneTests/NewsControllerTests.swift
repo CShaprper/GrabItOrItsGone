@@ -35,6 +35,7 @@ class NewsControllerTests: XCTestCase {
     XCTAssertNotNil(sut!.NewsTableView, "NewsTableView should exist to show News")
     }
     func test_NewsArray_Exists(){
-    XCTAssertNotNil(sut!.NewsArray, "NewsArray should exist as datasource for Tableview")
+    XCTAssertNotNil(sut!.facade!.newsArray, "NewsArray should exist as datasource for Tableview")
     }
+    
 }

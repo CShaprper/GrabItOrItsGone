@@ -10,40 +10,26 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class News:NSObject {
-    var title:String?
-    var message:String?
-    var date:String?
-    /*var Image:UIImage?
-    var URL:String?*/
-}
-
-class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseDataReceivedDelegate {
     //MARK:- Outlets
     @IBOutlet var BackgroundImage: UIImageView!
     @IBOutlet var NewsTableView: UITableView!
     
     //MARK: Members
     var facade:GrabItFacade?
-    var newsArray:[News]?
-    var refhandle:UInt!
-    private var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NewsTableView.delegate = self
-        NewsTableView.dataSource = self as UITableViewDataSource
-        NewsTableView.rowHeight = UITableViewAutomaticDimension
-        NewsTableView.estimatedRowHeight = 180
+        // Setup Views 
+        SetUpViews()
         
-        ref = Database.database().reference()
-        
+        //Init facade
         facade = GrabItFacade(presentingController: self)
-        newsArray = []
+        facade!.firebaseDataReceivedDelegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ReadFirebaseNewsSection()
+        facade!.ReadFirebaseNewsSection()
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,47 +37,31 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    func ReadFirebaseNewsSection() -> Void {
-        // let userid = Auth.auth().currentUser!.uid as String
-       refhandle = ref.child("news").observe(.childAdded, with: { (snapshot) in
-            if let dict = snapshot.value as? [String:AnyObject]{
-                print(dict)
-                let news = News()
-                
-                let formatter = DateFormatter()
-                formatter.locale = Locale(identifier: "de_DE")
-                formatter.dateFormat = "d.M.yyyy"
-                let date = dict["date"] as? String
-                if date != nil{
-                    let newDate = formatter.date(from: date!)
-                    formatter.dateFormat = "d. MMMM yyyy"
-                    news.date = formatter.string(from: newDate!)
-                }
-                news.title = dict["title"] as? String
-                news.message = dict["message"] as? String
-                print(news.title!)
-                print(news.message!)
-                self.newsArray!.append(news)
-                
-                DispatchQueue.main.async {
-                    self.NewsTableView.reloadData()
-                }
-            }
-       })
+    //MARK: - IFirebaseDataReceivedDelegate implementation
+    func FirebaseDataReceived() {
+        self.NewsTableView.reloadData()
     }
     
     //MARK: - Tableview Setup
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsArray!.count
+        return facade!.newsArray.count
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell") as! NewsTableViewCell
-        cell.ConfigureCell(title: newsArray![indexPath.row].title!, message: newsArray![indexPath.row].message!, date: newsArray![indexPath.row].date!)
+        cell.ConfigureCell(title: facade!.newsArray![indexPath.row].title!, message: facade!.newsArray![indexPath.row].message!, date: facade!.newsArray[indexPath.row].date!)
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
         return cell
+    }
+    
+    //MARK: - Setup Views
+    func SetUpViews() -> Void {
+        NewsTableView.delegate = self
+        NewsTableView.dataSource = self as UITableViewDataSource
+        NewsTableView.rowHeight = UITableViewAutomaticDimension
+        NewsTableView.estimatedRowHeight = 180
     }
 }

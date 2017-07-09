@@ -52,6 +52,11 @@
 		CF4B647F1EFE60B800C2FBD3 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647E1EFE60B800C2FBD3 /* DesignableButton.swift */; };
 		CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */; };
 		CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */; };
+		CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */; };
+		CFAE1D4A1F126C0300165E9D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D491F126C0300165E9D /* News.swift */; };
+		CFAE1D4F1F127C1100165E9D /* Adress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D4E1F127C1100165E9D /* Adress.swift */; };
+		CFAE1D501F127C1100165E9D /* Adress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D4E1F127C1100165E9D /* Adress.swift */; };
+		CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */; };
 		CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */; };
 		CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */; };
 		CFB2328D1F07C28D00346879 /* GrabItFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328C1F07C28D00346879 /* GrabItFacade.swift */; };
@@ -134,6 +139,10 @@
 		CF6C79261F0FBA2A00A681F4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF87467C1F0EB60600855607 /* GrabItOrItsGone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GrabItOrItsGone.entitlements; path = ../GrabItOrItsGone.entitlements; sourceTree = "<group>"; };
 		CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CFAE1D0A1F1268EA00165E9D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CFAE1D491F126C0300165E9D /* News.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		CFAE1D4E1F127C1100165E9D /* Adress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adress.swift; sourceTree = "<group>"; };
+		CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidationTests.swift; sourceTree = "<group>"; };
 		CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlertMessageDelegate.swift; sourceTree = "<group>"; };
 		CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringExtension.swift; sourceTree = "<group>"; };
 		CFB2328C1F07C28D00346879 /* GrabItFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabItFacade.swift; sourceTree = "<group>"; };
@@ -195,6 +204,7 @@
 		CF3D621D1EFD4B4F0051706A = {
 			isa = PBXGroup;
 			children = (
+				CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */,
 				CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */,
 				CF3D62281EFD4B4F0051706A /* GrabItOrItsGone */,
 				CF477B9D1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests */,
@@ -264,6 +274,8 @@
 				CF3E97021F01698F001C1C9B /* ProductCards.swift */,
 				CFB232B01F080B8900346879 /* PasswordValidationService.swift */,
 				CFB232AA1F0804B300346879 /* EmailValidationService.swift */,
+				CFAE1D491F126C0300165E9D /* News.swift */,
+				CFAE1D4E1F127C1100165E9D /* Adress.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -303,6 +315,7 @@
 				CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */,
 				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
 				CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */,
+				CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */,
 			);
 			path = GrabItOrItsGoneTests;
 			sourceTree = "<group>";
@@ -667,13 +680,16 @@
 				CF3E97031F01698F001C1C9B /* ProductCards.swift in Sources */,
 				CF3D622C1EFD4B4F0051706A /* LogInSignUpController.swift in Sources */,
 				CF034FF81F08FF8000D8F03D /* IValidateable.swift in Sources */,
+				CFAE1D4F1F127C1100165E9D /* Adress.swift in Sources */,
 				CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */,
 				CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
+				CFAE1D4A1F126C0300165E9D /* News.swift in Sources */,
 				CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */,
 				CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */,
 				CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */,
 				CF3D62661EFD501B0051706A /* UIViewAnimationExtension.swift in Sources */,
 				CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */,
+				CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */,
 				CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,6 +701,7 @@
 				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
 				CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */,
 				CFF173BF1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
+				CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
 				CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */,
 				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
@@ -699,6 +716,7 @@
 				CF477BBA1F0FF0C300DA1EE1 /* MainControllerTests.swift in Sources */,
 				CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */,
 				CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */,
+				CFAE1D501F127C1100165E9D /* Adress.swift in Sources */,
 				CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */,
 				CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */,
 				CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
@@ -996,6 +1014,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CFAE1D0A1F1268EA00165E9D /* Model.xcdatamodel */,
+			);
+			currentVersion = CFAE1D0A1F1268EA00165E9D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CF3D621E1EFD4B4F0051706A /* Project object */;
 }

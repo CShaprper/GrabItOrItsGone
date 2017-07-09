@@ -10,27 +10,31 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 
-class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
+class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebaseDataReceivedDelegate{
     //MARK: Members
     private var presentingController:UIViewController!
     private var firebaseClient:FirebaseClient!
-    //MARK: NewsController Members 
     
+    //MARK: NewsController Members
     var validationService:IValidateable!
     var activityAnitmationDelegate: IActivityAnimationDelegate?
+    var newsArray:[News]!
+    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
     private var alertService:IAlertMessage!
     
     
     //Constructor
     init(presentingController: UIViewController) {
+        self.newsArray = []
         self.firebaseClient = FirebaseClient()
         self.presentingController = presentingController
         self.firebaseClient.alertMessageDelegate = self
         self.firebaseClient.activityAnimationDelegate = self
+        self.firebaseClient.firebaseDataReceivedDelegate = self
     }
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         presentingController.present(alert, animated: true, completion: nil)
     }
     
@@ -48,7 +52,7 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
             ShowAlertMessage(title: presentingController.view.PasswordValidationErrorAlert_TitleString, message: presentingController.view.PasswordValidationErrorAlert_MessageString)
             return
         }
-
+        
         firebaseClient.CreateNewAutenticableUser(email: email, password: password)
     }
     
@@ -112,5 +116,17 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate{
     
     func SetAlertMessageService(alertMessageService:IAlertMessage){
         self.alertService = alertMessageService
+    }
+    
+    //MARK: - IFirebaseDataReceivedDelegate implementation
+    func ReadFirebaseNewsSection() -> Void {
+        firebaseClient.ReadFirebaseNewsSection()
+    }
+    
+    func FirebaseDataReceived() -> Void {
+        if firebaseDataReceivedDelegate != nil{
+            newsArray = firebaseClient.newsArray
+            firebaseDataReceivedDelegate!.FirebaseDataReceived!()
+        }
     }
 }

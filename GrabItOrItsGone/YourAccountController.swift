@@ -11,6 +11,7 @@ import UIKit
 class YourAccountController: UIViewController {
     //MARK: - Outlets
     @IBOutlet var BackgroundImage: UIImageView!
+    @IBOutlet var BackgroundBlurryView: UIVisualEffectView!
     
 
     override func viewDidLoad() {
