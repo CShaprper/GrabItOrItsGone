@@ -6,9 +6,10 @@
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import CoreData
 
 class Address: NSManagedObject {
-    
+ 
 }

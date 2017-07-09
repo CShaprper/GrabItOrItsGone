@@ -235,7 +235,6 @@
 				CF3D62611EFD4E9C0051706A /* Helper */,
 				CFB232921F07C2E100346879 /* Protocols */,
 				CF3D62581EFD4C9F0051706A /* Controller */,
-				CFF173BC1F10EBCD00BA4F9B /* TablewViewCells */,
 				CF3D625A1EFD4CDA0051706A /* Model */,
 				CF3D62591EFD4CAD0051706A /* View */,
 			);
@@ -245,6 +244,7 @@
 		CF3D62581EFD4C9F0051706A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CFF173BC1F10EBCD00BA4F9B /* TablewViewCells */,
 				CF3D622B1EFD4B4F0051706A /* LogInSignUpController.swift */,
 				CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */,
 				CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */,

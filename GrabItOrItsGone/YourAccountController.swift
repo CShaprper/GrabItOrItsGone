@@ -13,6 +13,8 @@ class YourAccountController: UIViewController {
     @IBOutlet var BackgroundImage: UIImageView!
     @IBOutlet var BackgroundBlurryView: UIVisualEffectView!
     
+    //MARK: -Members
+    let appDel = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,8 @@ class YourAccountController: UIViewController {
     }
     
     func SetUpViews() -> Void {
+        
+        var a = Address(context: appDel.persistentContainer.viewContext)
         
     }
 
