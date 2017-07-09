@@ -102,7 +102,7 @@
                                     <constraint firstItem="7Ya-Oo-hew" firstAttribute="height" secondItem="Lq4-3p-a8n" secondAttribute="height" id="htd-W3-17F"/>
                                 </constraints>
                             </stackView>
-                            <visualEffectView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3TU-Wz-Vra" userLabel="PopUpBlurrScreen">
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3TU-Wz-Vra" userLabel="PopUpBlurrScreen">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rzz-bM-tAc">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -456,7 +456,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1031.25" y="32.5"/>
+            <point key="canvasLocation" x="1028" y="33"/>
         </scene>
         <!--Main Controller-->
         <scene sceneID="TjS-q8-sek">
@@ -762,7 +762,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1773.75" y="32.5"/>
+            <point key="canvasLocation" x="1759" y="33"/>
         </scene>
         <!--News Controller-->
         <scene sceneID="z1B-Aw-9aL">
@@ -884,12 +884,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3i-Ng-TzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2598.75" y="-565"/>
+            <point key="canvasLocation" x="2614" y="-501"/>
         </scene>
-        <!--Your Account Controller-->
+        <!--Your Account-->
         <scene sceneID="WRv-Jj-25u">
             <objects>
-                <viewController storyboardIdentifier="YourAccountController" id="TMg-M4-kEa" customClass="YourAccountController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="YourAccountController" title="Your Account" id="TMg-M4-kEa" customClass="YourAccountController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xkj-dQ-2Z3"/>
                         <viewControllerLayoutGuide type="bottom" id="L5i-lx-G5v"/>
@@ -906,6 +906,55 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9PL-Qd-lJD">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYz-FH-fSf" userLabel="Manage Adress Container">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address-book-icon" translatesAutoresizingMaskIntoConstraints="NO" id="akm-sr-Oki">
+                                                    <rect key="frame" x="20" y="10" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="8jL-fd-rMQ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJd-hk-iUW">
+                                                    <rect key="frame" x="90" y="25.5" width="180" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-Ir-Lhi">
+                                                    <rect key="frame" x="280" y="25.5" width="20" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="Hae-8b-SFQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="80" id="DLk-0f-FL1"/>
+                                                <constraint firstItem="2Wo-Ir-Lhi" firstAttribute="leading" secondItem="BJd-hk-iUW" secondAttribute="trailing" constant="10" id="EQ5-yG-OhX"/>
+                                                <constraint firstItem="2Wo-Ir-Lhi" firstAttribute="centerY" secondItem="KYz-FH-fSf" secondAttribute="centerY" id="FhZ-ab-fl2"/>
+                                                <constraint firstAttribute="bottom" secondItem="akm-sr-Oki" secondAttribute="bottom" constant="10" id="GUx-Hj-PnR"/>
+                                                <constraint firstItem="2Wo-Ir-Lhi" firstAttribute="height" secondItem="BJd-hk-iUW" secondAttribute="height" id="PCR-JN-KYc"/>
+                                                <constraint firstItem="akm-sr-Oki" firstAttribute="leading" secondItem="KYz-FH-fSf" secondAttribute="leading" constant="20" id="XA2-Wb-a3c"/>
+                                                <constraint firstItem="BJd-hk-iUW" firstAttribute="centerY" secondItem="KYz-FH-fSf" secondAttribute="centerY" id="aBe-vn-Zzl"/>
+                                                <constraint firstAttribute="trailing" secondItem="2Wo-Ir-Lhi" secondAttribute="trailing" constant="20" id="gFc-wf-sTE"/>
+                                                <constraint firstItem="BJd-hk-iUW" firstAttribute="leading" secondItem="akm-sr-Oki" secondAttribute="trailing" constant="10" id="r2f-yc-62O"/>
+                                            </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="7UU-kw-AcM" appends="YES" id="xIK-xj-7WL"/>
+                                            </connections>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="KYz-FH-fSf" firstAttribute="leading" secondItem="9PL-Qd-lJD" secondAttribute="leading" id="2cN-AR-1VZ"/>
+                                        <constraint firstItem="KYz-FH-fSf" firstAttribute="top" secondItem="9PL-Qd-lJD" secondAttribute="top" id="UWK-d4-cdI"/>
+                                        <constraint firstAttribute="trailing" secondItem="KYz-FH-fSf" secondAttribute="trailing" id="fJJ-RQ-RZh"/>
+                                    </constraints>
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
@@ -926,11 +975,35 @@
                     <connections>
                         <outlet property="BackgroundBlurryView" destination="1cf-D3-Xjy" id="yML-hz-m1Z"/>
                         <outlet property="BackgroundImage" destination="rSm-Re-CSQ" id="lUx-S5-pOj"/>
+                        <outlet property="ManageAdressContainer" destination="KYz-FH-fSf" id="m0p-4A-gGc"/>
+                        <outlet property="ManageAdressImageView" destination="akm-sr-Oki" id="inY-28-tef"/>
+                        <outlet property="lbl_ManageAddressArrow" destination="2Wo-Ir-Lhi" id="0fh-4D-TN7"/>
+                        <outlet property="lbl_manageAddress" destination="BJd-hk-iUW" id="G4H-rb-M78"/>
+                        <segue destination="3cK-bX-emi" kind="show" identifier="SegueToManageAddressController" id="Tlz-nG-iWT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQ4-0a-hfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7UU-kw-AcM"/>
             </objects>
-            <point key="canvasLocation" x="2598.75" y="510"/>
+            <point key="canvasLocation" x="2600.625" y="490"/>
+        </scene>
+        <!--Manage Adress Controller-->
+        <scene sceneID="knY-rU-3Oc">
+            <objects>
+                <viewController id="3cK-bX-emi" customClass="ManageAdressController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MiC-eA-di4"/>
+                        <viewControllerLayoutGuide type="bottom" id="rfT-Gx-35c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dX0-PP-yCE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PYL-1i-AFP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3324" y="490"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xse-od-QJ6">
@@ -964,6 +1037,7 @@
         <image name="NatureBG" width="600" height="700"/>
         <image name="Product_Cream" width="667" height="667"/>
         <image name="Star" width="150" height="150"/>
+        <image name="address-book-icon" width="60" height="60"/>
         <image name="facebook-icon" width="100" height="100"/>
         <image name="key-icon" width="50" height="50"/>
         <image name="user-icon" width="50" height="50"/>

@@ -152,4 +152,16 @@ class LocalisationStringsTests: XCTestCase {
     func test_FirebaseThirdPartyLoginErrorAlert_MessageString_isLocalized(){
         XCTAssertTrue(sut!.view.FirebaseThirdPartyLoginErrorAlert_MessageString != "FirebaseThirdPartyLoginErrorAlert_MessageString", "FirebaseThirdPartyLoginErrorAlert_MessageString is not localized in strings file!")
     }
+    func test_YourAccount_Controller_TitleString_Exist(){
+    XCTAssertNotNil(sut!.view.YourAccount_Controller_TitleString, "YourAccount_Controller_TitleString should exist for localisation")
+    }
+    func test_YourAccount_Controller_TitleString_isLocalized(){
+    XCTAssertTrue(sut!.view.YourAccount_Controller_TitleString != "YourAccount_Controller_TitleString", "YourAccount_Controller_TitleString is not localized in strings file!")
+    }
+    func test_lbl_manageAddress_String_Exist(){
+    XCTAssertNotNil(sut!.view.lbl_manageAddress_String, "lbl_manageAddress_String should exist for localisation")
+    }
+    func test_lbl_manageAddress_String_isLocalized(){
+    XCTAssertTrue(sut!.view.lbl_manageAddress_String != "lbl_manageAddress_String", "lbl_manageAddress_String is not localized in strings file!")
+    }
 }

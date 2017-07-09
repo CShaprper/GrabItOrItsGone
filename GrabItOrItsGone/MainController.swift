@@ -326,7 +326,7 @@ class MainController: UIViewController {
         self.navigationItem.leftBarButtonItem = newBackButton
         
         //Main Backgroundimage
-        MainBackgroundImage.image = UIImage(named: "NatureBG")
+        MainBackgroundImage.image = UIImage(named: "NatureBG")         
         
         //Card view
         CardView.center = view.center

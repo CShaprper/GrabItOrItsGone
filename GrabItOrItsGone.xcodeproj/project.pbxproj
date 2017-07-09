@@ -68,6 +68,8 @@
 		CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */; };
 		CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */; };
 		CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */; };
+		CFCBFE5F1F12C73E002F9E1C /* ManageAdressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */; };
+		CFCBFE601F12C73E002F9E1C /* ManageAdressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */; };
 		CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
@@ -154,6 +156,7 @@
 		CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountController.swift; sourceTree = "<group>"; };
 		CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleHelper.swift; sourceTree = "<group>"; };
 		CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAdressController.swift; sourceTree = "<group>"; };
 		CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFirebaseDataDelegate.swift; sourceTree = "<group>"; };
 		CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		CFF6E02A1F0D89CC00664B35 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -249,6 +252,7 @@
 				CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */,
 				CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */,
 				CF4766AA1F1002D70045F22B /* NewsController.swift */,
+				CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -670,6 +674,7 @@
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
 				CF3D62631EFD4EBC0051706A /* NotificatioName_extension.swift in Sources */,
 				CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */,
+				CFCBFE5F1F12C73E002F9E1C /* ManageAdressController.swift in Sources */,
 				CF034FEC1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift in Sources */,
 				CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */,
 				CF4B647F1EFE60B800C2FBD3 /* DesignableButton.swift in Sources */,
@@ -710,6 +715,7 @@
 				CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */,
 				CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */,
 				CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */,
+				CFCBFE601F12C73E002F9E1C /* ManageAdressController.swift in Sources */,
 				CF477BAC1F0FEF6400DA1EE1 /* DesignableUIEffectView.swift in Sources */,
 				CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */,
 				CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */,

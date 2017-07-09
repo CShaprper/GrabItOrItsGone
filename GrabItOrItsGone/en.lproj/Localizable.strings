@@ -30,3 +30,5 @@ FirebaseThirdPartyLoginErrorAlert_TitleString = "Login Error!";
 FirebaseThirdPartyLoginErrorAlert_MessageString = "Login service reports an error. Please check your internet connection.";
 DelegatenotSetError_Title = "Delegate Error";
 DelegatenotSetError_Message  = "You forgot to Set the adelegate";
+YourAccount_Controller_TitleString = "Your Account";
+lbl_manageAddress_String = "Manage address";

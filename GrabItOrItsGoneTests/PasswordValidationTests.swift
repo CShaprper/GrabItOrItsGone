@@ -22,7 +22,13 @@ class PasswordValidationTests: XCTestCase {
         validation = nil
     }
     
-    func test_Validation_Passe_When_PassWord_hasSixCharacters() {
-        XCTAssertTrue(validation.Validate(validationString: "123456"))
+    func test_Validation_Passes_When_PassWord_hasSixCharacters() {
+        XCTAssertTrue(validation.Validate(validationString: "123456"), "Validation should pass when validated string is six characters ore more")
+    }
+    func test_Validation_Failes_When_PassWord_hasLessThanSixCharacters(){
+        XCTAssertFalse(validation.Validate(validationString: "12345"), "Validation should fail when valideted string is below six characters")
+    }
+    func test_Validation_Failes_When_PassWord_hasLessThanFiveCharacters(){
+        XCTAssertFalse(validation.Validate(validationString: "1234"), "Validation should fail when valideted string is below five characters")
     }
 }

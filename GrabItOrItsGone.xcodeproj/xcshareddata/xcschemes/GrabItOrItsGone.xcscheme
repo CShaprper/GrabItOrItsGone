@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF3D62441EFD4B4F0051706A"
+               BlueprintIdentifier = "CF477BBE1F0FF14800DA1EE1"
                BuildableName = "GrabItOrItsGoneUITests.xctest"
                BlueprintName = "GrabItOrItsGoneUITests"
                ReferencedContainer = "container:GrabItOrItsGone.xcodeproj">

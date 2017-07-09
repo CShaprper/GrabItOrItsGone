@@ -68,12 +68,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     override func viewDidLoad() {
         super.viewDidLoad()
         facade = GrabItFacade(presentingController: self)
-        facade.activityAnitmationDelegate = self
-        
-        // Facebook SDK login permissions
-        //btn_FacebookLogin.delegate = self
-        //btn_FacebookLogin.readPermissions = ["public_profile", "email"]
-        
+        facade.activityAnitmationDelegate = self         
         
         //Setup Views
         PopUpBlurrScreenView.alpha = 0
