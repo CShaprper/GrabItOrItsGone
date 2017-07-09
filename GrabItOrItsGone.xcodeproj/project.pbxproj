@@ -51,7 +51,7 @@
 		CF4B647C1EFE523F00C2FBD3 /* DesignableUIEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */; };
 		CF4B647F1EFE60B800C2FBD3 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647E1EFE60B800C2FBD3 /* DesignableButton.swift */; };
 		CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */; };
-		CF6C79271F0FBA2A00A681F4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6C79261F0FBA2A00A681F4 /* Info.plist */; };
+		CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */; };
 		CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */; };
 		CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */; };
 		CFB2328D1F07C28D00346879 /* GrabItFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328C1F07C28D00346879 /* GrabItFacade.swift */; };
@@ -133,6 +133,7 @@
 		CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF6C79261F0FBA2A00A681F4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF87467C1F0EB60600855607 /* GrabItOrItsGone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GrabItOrItsGone.entitlements; path = ../GrabItOrItsGone.entitlements; sourceTree = "<group>"; };
+		CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlertMessageDelegate.swift; sourceTree = "<group>"; };
 		CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringExtension.swift; sourceTree = "<group>"; };
 		CFB2328C1F07C28D00346879 /* GrabItFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabItFacade.swift; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 		CF3D621D1EFD4B4F0051706A = {
 			isa = PBXGroup;
 			children = (
+				CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */,
 				CF3D62281EFD4B4F0051706A /* GrabItOrItsGone */,
 				CF477B9D1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests */,
 				CF477BC01F0FF14800DA1EE1 /* GrabItOrItsGoneUITests */,
@@ -476,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF3D627C1EFD72540051706A /* Lobster-Regular.ttf in Resources */,
+				CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */,
 				CF3D62761EFD672B0051706A /* SonsieOne-Regular.ttf in Resources */,
 				CF3D626F1EFD655C0051706A /* Localizable.strings in Resources */,
 				CF3D62791EFD67680051706A /* OpenSans-Regular.ttf in Resources */,
@@ -483,7 +486,6 @@
 				CF3D62341EFD4B4F0051706A /* LaunchScreen.storyboard in Resources */,
 				CF3D62311EFD4B4F0051706A /* Assets.xcassets in Resources */,
 				CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */,
-				CF6C79271F0FBA2A00A681F4 /* Info.plist in Resources */,
 				CF3D622F1EFD4B4F0051706A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

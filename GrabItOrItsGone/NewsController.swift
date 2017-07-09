@@ -11,17 +11,10 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class News:NSObject {
-    var Title:String?
-    var Message:String?
-    var Image:UIImage?
-    var URL:String?
-    init(title: String, message: String, image: UIImage, url: String) {
-        Title = title
-        Message = message
-        Image = image
-        URL = url
-    }
-    override init(){}
+    var title:String?
+    var message:String?
+    /*var Image:UIImage?
+    var URL:String?*/
 }
 
 class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -32,8 +25,9 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: Members
     var facade:GrabItFacade?
     var newsArray:[News]?
+    var refhandle:UInt!
     private var ref: DatabaseReference!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NewsTableView.delegate = self
@@ -41,34 +35,36 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         ref = Database.database().reference()
         
-       facade = GrabItFacade(presentingController: self)
+        facade = GrabItFacade(presentingController: self)
         newsArray = []
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ReadFirebaseNewsSection()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-        func ReadFirebaseNewsSection() -> Void {
-            // let userid = Auth.auth().currentUser!.uid as String
-        ref.child("news").child("messages").observe(.value, with: { (snapshot) in
-            let dict = snapshot.value as? [String:AnyObject]
-            print(dict)
-            DispatchQueue.main.async {
+    func ReadFirebaseNewsSection() -> Void {
+        // let userid = Auth.auth().currentUser!.uid as String
+       refhandle = ref.child("news").observe(.childAdded, with: { (snapshot) in
+            if let dict = snapshot.value as? [String:AnyObject]{
+                print(dict)
                 let news = News()
-                //print(snapshot.value(forKey: "users"))
-                news.Title  = dict!["title"] as! String
-                news.Message = dict!["message"] as! String
+                news.title = dict["title"] as? String
+                news.message = dict["message"] as? String
+                print(news.title!)
+                print(news.message!)
                 self.newsArray!.append(news)
-                self.NewsTableView.reloadData()
+                
+                DispatchQueue.main.async {
+                    self.NewsTableView.reloadData()
+                }
             }
-
-        })
+       })
     }
     
     //MARK: - Tableview Setup
@@ -79,7 +75,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell") as! NewsTableViewCell
-        cell.ConfigureCell(title: newsArray![indexPath.row].Title!, message: newsArray![indexPath.row].Message!)
+        cell.ConfigureCell(title: newsArray![indexPath.row].title!, message: newsArray![indexPath.row].message!)
         return cell
     }
 }

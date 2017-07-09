@@ -30,33 +30,41 @@ public class UIStyleHelper{
     }
     
     func ChangeStyle(uiStyle:eUIStyles){
-        for view in styleViews{
-            if let v = view as? UIView{
-                v.backgroundColor = GetBackGroundColor(uiStyle: uiStyle)
-            }
-            if let v = view as? UITextField{
-                v.backgroundColor = GetTextPresenterColor(uiStyle: uiStyle)
-            }
-            if let v = view as? UITextView{
+        for view in styleViews
+        {
+            if let v = view as? UITextView
+            {
                 v.backgroundColor = GetTextPresenterColor(uiStyle: uiStyle)
                 v.textColor = GetFontColor(uiStyle: uiStyle)
             }
-            if let v = view as? UIButton{
+            else if let v = view as? UITextField
+            {
+                v.backgroundColor = GetTextPresenterColor(uiStyle: uiStyle)
+            }
+            else if let v = view as? UIButton
+            {
                 v.backgroundColor = GetButtonColor(uiStyle: uiStyle)
                 v.setTitleColor(GetFontColor(uiStyle: uiStyle), for: .normal)
                 v.layer.borderColor = GetBorderColor(uiStyle: uiStyle).cgColor
             }
-            if let v = view as? UILabel{
+            else if let v = view as? UILabel
+            {
                 v.textColor = GetFontColor(uiStyle: uiStyle)
                 v.backgroundColor = UIColor.clear
             }
-            if let v = view as? UISegmentedControl{
+            else if let v = view as? UISegmentedControl
+            {
                 v.tintColor = GetFontColor(uiStyle: uiStyle)
                 v.backgroundColor = UIColor.clear
             }
-            if let v = view as? UIImageView{
+            else if let v = view as? UIImageView
+            {
                 v.image = ChangeBackgroundImage(uiStyle: uiStyle)
                 v.backgroundColor = UIColor.clear
+            }
+            else
+            {
+                view.backgroundColor = GetBackGroundColor(uiStyle: uiStyle)
             }
         }
     }
