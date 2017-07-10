@@ -121,7 +121,7 @@ extension UIView{
     }
     var YourAccount_Controller_TitleString: String{
         get {
-            return NSLocalizedString("=YourAccount_Controller_TitleString", comment: "")
+            return NSLocalizedString("YourAccount_Controller_TitleString", comment: "")
         }
     }
     var lbl_manageAddress_String: String{
@@ -132,6 +132,11 @@ extension UIView{
     var NewsController_TitleString: String{
         get {
             return NSLocalizedString("NewsController_TitleString", comment: "")
+        }
+    }
+    var ManageAddressController_TitleString: String{
+        get {
+            return NSLocalizedString("ManageAddressController_TitleString", comment: "")
         }
     }
 }

@@ -51,6 +51,9 @@
 		CF4B647C1EFE523F00C2FBD3 /* DesignableUIEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */; };
 		CF4B647F1EFE60B800C2FBD3 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647E1EFE60B800C2FBD3 /* DesignableButton.swift */; };
 		CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */; };
+		CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */; };
+		CF721F401F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */; };
+		CF721F421F13F97D00B52C8D /* ManageAddressControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */; };
 		CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */; };
 		CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */; };
 		CFAE1D4A1F126C0300165E9D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D491F126C0300165E9D /* News.swift */; };
@@ -69,7 +72,6 @@
 		CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */; };
 		CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */; };
 		CFCBFE5F1F12C73E002F9E1C /* ManageAdressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */; };
-		CFCBFE601F12C73E002F9E1C /* ManageAdressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */; };
 		CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
@@ -139,6 +141,8 @@
 		CF4B647E1EFE60B800C2FBD3 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF6C79261F0FBA2A00A681F4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
+		CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressControllerTests.swift; sourceTree = "<group>"; };
 		CF87467C1F0EB60600855607 /* GrabItOrItsGone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GrabItOrItsGone.entitlements; path = ../GrabItOrItsGone.entitlements; sourceTree = "<group>"; };
 		CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CFAE1D0A1F1268EA00165E9D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -317,9 +321,10 @@
 				CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */,
 				CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */,
 				CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */,
-				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
 				CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */,
 				CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */,
+				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
+				CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */,
 			);
 			path = GrabItOrItsGoneTests;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */,
+				CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */,
 			);
 			name = TablewViewCells;
 			sourceTree = "<group>";
@@ -695,6 +701,7 @@
 				CF3D62661EFD501B0051706A /* UIViewAnimationExtension.swift in Sources */,
 				CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */,
 				CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */,
+				CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */,
 				CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,11 +718,12 @@
 				CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */,
 				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
 				CF477BAD1F0FEF6400DA1EE1 /* DesignableButton.swift in Sources */,
+				CF721F421F13F97D00B52C8D /* ManageAddressControllerTests.swift in Sources */,
 				CF477BB21F0FEF6900DA1EE1 /* IAlertMessage.swift in Sources */,
 				CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */,
 				CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */,
+				CF721F401F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */,
 				CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */,
-				CFCBFE601F12C73E002F9E1C /* ManageAdressController.swift in Sources */,
 				CF477BAC1F0FEF6400DA1EE1 /* DesignableUIEffectView.swift in Sources */,
 				CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */,
 				CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */,

@@ -164,4 +164,10 @@ class LocalisationStringsTests: XCTestCase {
     func test_lbl_manageAddress_String_isLocalized(){
     XCTAssertTrue(sut!.view.lbl_manageAddress_String != "lbl_manageAddress_String", "lbl_manageAddress_String is not localized in strings file!")
     }
+    func test_ManageAddressController_TitleString_Exist(){
+    XCTAssertNotNil(sut!.view.ManageAddressController_TitleString, "ManageAddressController_TitleString should exist for localisation")
+    }
+    func test_ManageAddressController_TitleString_isLocalized(){
+    XCTAssertTrue(sut!.view.ManageAddressController_TitleString != "ManageAddressController_TitleString", "ManageAddressController_TitleString is not localized in strings file!")
+    }
 }

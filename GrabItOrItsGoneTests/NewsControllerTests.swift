@@ -37,5 +37,10 @@ class NewsControllerTests: XCTestCase {
     func test_NewsArray_Exists(){
     XCTAssertNotNil(sut!.facade!.newsArray, "NewsArray should exist as datasource for Tableview")
     }
-    
+    func test_NewsTableViewDataSource_isSet() {
+        XCTAssertNotNil(sut!.NewsTableView.dataSource, "NewsTableView.dataSource not set")
+    }
+    func test_NewsTableViewDelegate_isSet() {
+        XCTAssertNotNil(sut!.NewsTableView.delegate, "NewsTableView.delegate not set")
+    }
 }

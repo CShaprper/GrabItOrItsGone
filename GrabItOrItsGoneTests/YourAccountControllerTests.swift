@@ -41,8 +41,14 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_lbl_ManageAddressArrow_Exists(){
         XCTAssertNotNil(sut!.lbl_ManageAddressArrow, "lbl_ManageAddressArrow should exist")
     }
+    func test_lbl_ManageAddressArrow_isSetToGlobalTint(){
+        XCTAssertEqual(sut!.lbl_ManageAddressArrow.textColor, sut!.view.tintColor, "lbl_ManageAddressArrow should be in global tintColor")
+    }
     func test_lbl_manageAddress_isLocalized() {
         XCTAssertEqual(sut!.lbl_manageAddress.text, sut!.view.lbl_manageAddress_String, "lbl_manageAddress should be localized")
+    }
+    func test_lbl_manageAddress_isSetToGlobalTintColor(){
+        XCTAssertEqual(sut!.lbl_manageAddress.textColor, sut!.view.tintColor, "lbl_manageAddress should be in global tintColor")
     }
     func test_SegueToManageAddressController_IdentifierExists() {
         let identifiers = segues(ofViewController: sut!)
