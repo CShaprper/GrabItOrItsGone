@@ -10,13 +10,13 @@ import XCTest
 @testable import GrabItOrItsGone
 
 class ManageAddressControllerTests: XCTestCase {
-    var sut:ManageAdressesController!
+    var sut:ManageAdressController!
     
     override func setUp() {
         super.setUp()
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-        sut = storyboard.instantiateViewController(withIdentifier: "ManageAdressController") as! ManageAdressesController
+        sut = storyboard.instantiateViewController(withIdentifier: "ManageAdressController") as! ManageAdressController
         
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(navigationController.view)
