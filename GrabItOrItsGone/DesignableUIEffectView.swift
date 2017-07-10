@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 public class DesignableUIEffectView: UIVisualEffectView{
     
     
