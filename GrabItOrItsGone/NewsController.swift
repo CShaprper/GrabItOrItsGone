@@ -30,6 +30,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         facade!.ReadFirebaseNewsSection()
+        self.navigationItem.title = view.NewsController_TitleString
     }
     
     override func didReceiveMemoryWarning() {

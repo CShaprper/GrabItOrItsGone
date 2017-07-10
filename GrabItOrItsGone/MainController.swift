@@ -63,8 +63,8 @@ class MainController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.black
-        self.navigationController?.navigationBar.isOpaque  = true
+        self.navigationController?.navigationBar.barStyle = .blackTranslucent        
+        self.navigationController?.navigationBar.isOpaque  = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -129,4 +129,9 @@ extension UIView{
             return NSLocalizedString("lbl_manageAddress_String", comment: "")
         }
     }
+    var NewsController_TitleString: String{
+        get {
+            return NSLocalizedString("NewsController_TitleString", comment: "")
+        }
+    }
 }

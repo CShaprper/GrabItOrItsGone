@@ -910,7 +910,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYz-FH-fSf" userLabel="Manage Adress Container">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address-book-icon" translatesAutoresizingMaskIntoConstraints="NO" id="akm-sr-Oki">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addressbook-icon" translatesAutoresizingMaskIntoConstraints="NO" id="akm-sr-Oki">
                                                     <rect key="frame" x="20" y="10" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="8jL-fd-rMQ"/>
@@ -1037,7 +1037,7 @@
         <image name="NatureBG" width="600" height="700"/>
         <image name="Product_Cream" width="667" height="667"/>
         <image name="Star" width="150" height="150"/>
-        <image name="address-book-icon" width="60" height="60"/>
+        <image name="addressbook-icon" width="60" height="60"/>
         <image name="facebook-icon" width="100" height="100"/>
         <image name="key-icon" width="50" height="50"/>
         <image name="user-icon" width="50" height="50"/>

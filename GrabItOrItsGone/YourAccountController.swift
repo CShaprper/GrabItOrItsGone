@@ -33,8 +33,11 @@ class YourAccountController: UIViewController {
     }
     
     func SetUpViews() -> Void {
-        self.navigationItem.title = view.YourAccount_Controller_TitleString
+        self.navigationController?.navigationItem.title = view.YourAccount_Controller_TitleString
+        self.navigationController?.navigationItem.titleView?.tintColor = self.view.tintColor
         lbl_manageAddress.text = view.lbl_manageAddress_String
+        lbl_manageAddress.textColor = self.view.tintColor
+        lbl_ManageAddressArrow.textColor = UIColor.white
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(ManageAdressContainer_Touched))
         ManageAdressContainer.addGestureRecognizer(gesture)

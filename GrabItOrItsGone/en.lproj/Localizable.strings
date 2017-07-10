@@ -32,3 +32,4 @@ DelegatenotSetError_Title = "Delegate Error";
 DelegatenotSetError_Message  = "You forgot to Set the adelegate";
 YourAccount_Controller_TitleString = "Your Account";
 lbl_manageAddress_String = "Manage address";
+NewsController_TitleString = "News";
