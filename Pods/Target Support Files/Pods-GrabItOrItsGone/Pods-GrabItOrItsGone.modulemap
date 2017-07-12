@@ -1,0 +1,6 @@
+framework module Pods_GrabItOrItsGone {
+  umbrella header "Pods-GrabItOrItsGone-umbrella.h"
+
+  export *
+  module * { export * }
+}
