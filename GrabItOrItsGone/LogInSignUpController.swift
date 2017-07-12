@@ -69,13 +69,13 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     override func viewDidLoad() {
         super.viewDidLoad()
         facade = GrabItFacade(presentingController: self)
-        facade.activityAnitmationDelegate = self         
+        facade.activityAnitmationDelegate = self
         
         //Setup Views
         SetUpViews()
         
         //Notification Observers
-        NotificationCenter.default.addObserver(self, selector: #selector(SegueToMainController), name: NSNotification.Name.SegueToMainController, object: nil)
+        AddNotificationListeners()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -105,6 +105,27 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         style.RemoveViewsForStyling(views: [RegisterPopUpBackground, RegisterPopUpLogoBackground, btn_Register_popUp, btn_Guest, lbl_Subtitle, lbl_GrabIt_Header, btn_Login, btn_SignUp, LogInSignUpBGImage, LoginPopUpBackground, LoginPopUpLogoBackground, btn_LogIn_PopUp, txt_Register_Email, txt_Login_Password, txt_Login_Email, txt_Register_Password])
     }
     
+    func AddNotificationListeners() -> Void {
+        NotificationCenter.default.addObserver(self, selector: #selector(SegueToMainController), name: NSNotification.Name.SegueToMainController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+    }
+    
+    //MARK: Actions from Notification listeners
+    func KeyboardWillShow(notification: Notification) -> Void{
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+           RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
+            LoginPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
+        }
+        
+    }
+    func KeyboardWillHide(notification: Notification) -> Void{
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
+            LoginPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
+        }
+        
+    }
     
     //MARK: - GoogleSign In Button Delegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {

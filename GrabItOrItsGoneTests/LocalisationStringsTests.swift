@@ -170,4 +170,16 @@ class LocalisationStringsTests: XCTestCase {
     func test_ManageAddressController_TitleString_isLocalized(){
     XCTAssertTrue(sut!.view.ManageAddressController_TitleString != "ManageAddressController_TitleString", "ManageAddressController_TitleString is not localized in strings file!")
     }
+    func test_SaveAddressError_TitleString_Exist(){
+    XCTAssertNotNil(sut!.view.SaveAddressError_TitleString, "SaveAddressError_TitleString should exist for localisation")
+    }
+    func test_SaveAddressError_TitleString_isLocalized(){
+    XCTAssertTrue(sut!.view.SaveAddressError_TitleString != "SaveAddressError_TitleString", "SaveAddressError_TitleString is not localized in strings file!")
+    }
+    func test_SaveAddressError_MessageString_Exist(){
+    XCTAssertNotNil(sut!.view.SaveAddressError_MessageString, "SaveAddressError_MessageString should exist for localisation")
+    }
+    func test_SaveAddressError_MessageString_isLocalized(){
+    XCTAssertTrue(sut!.view.SaveAddressError_MessageString != "SaveAddressError_MessageString", "SaveAddressError_MessageString is not localized in strings file!")
+    }
 }

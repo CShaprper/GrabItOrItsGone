@@ -133,7 +133,8 @@ class LogInSignUpControllerTests: XCTestCase {
     //MARK: - Button action test helper
     func checkActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{
         if let unwrappedButton = outlet {
-            if let actions: [String] = unwrappedButton.actions(forTarget: controller, forControlEvent: event)! as [String] {
+            if unwrappedButton.actions(forTarget: controller, forControlEvent: event) != nil {
+                let actions = unwrappedButton.actions(forTarget: controller, forControlEvent: event)!
                 let myActionName:String = actionName.appending("WithSender:")
                 return actions.contains(myActionName)
             }

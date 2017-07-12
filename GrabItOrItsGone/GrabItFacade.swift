@@ -13,7 +13,7 @@ import GoogleSignIn
 class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebaseDataReceivedDelegate{
     //MARK: Members
     private var presentingController:UIViewController!
-    private var firebaseClient:FirebaseClient!
+    var firebaseClient:FirebaseClient!
     
     //MARK: NewsController Members
     var validationService:IValidateable!
@@ -97,18 +97,6 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebase
         firebaseClient.AddUserStateListener()
     }
     
-    //MARK: IAuthenticableDelegate implementation
-    func StartActivityAnimation() {
-        if activityAnitmationDelegate != nil{
-            activityAnitmationDelegate!.StartActivityAnimation!()
-        }
-    }
-    func StopActivityAnimation() {
-        if activityAnitmationDelegate != nil{
-            activityAnitmationDelegate!.StopActivityAnimation!()
-        }
-    }
-    
     //MARK: - Helper Methods
     func SetValidationService(validationservice: IValidateable){
         self.validationService = validationservice
@@ -127,6 +115,18 @@ class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebase
         if firebaseDataReceivedDelegate != nil{
             newsArray = firebaseClient.newsArray
             firebaseDataReceivedDelegate!.FirebaseDataReceived!()
+        }
+    }
+    
+    //MARK: - IActivityAnimationDelegate implementation
+    func StartActivityAnimation() {
+        if activityAnitmationDelegate != nil{
+            activityAnitmationDelegate!.StartActivityAnimation!()
+        }
+    }
+    func StopActivityAnimation() {
+        if activityAnitmationDelegate != nil{
+            activityAnitmationDelegate!.StopActivityAnimation!()
         }
     }
 }

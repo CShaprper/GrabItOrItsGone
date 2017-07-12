@@ -139,4 +139,14 @@ extension UIView{
             return NSLocalizedString("ManageAddressController_TitleString", comment: "")
         }
     }
+    var SaveAddressError_TitleString: String{
+        get {
+            return NSLocalizedString("SaveAddressError_TitleString", comment: "")
+        }
+    }
+    var SaveAddressError_MessageString: String{
+        get {
+            return NSLocalizedString("SaveAddressError_MessageString", comment: "")
+        }
+    }
 }
