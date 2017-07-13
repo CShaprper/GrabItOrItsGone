@@ -10,9 +10,7 @@ import UIKit
 import CoreData
 
 
-public class Address: NSManagedObject, IAlertMessageDelegate {
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var alertMessageDelegate:IAlertMessageDelegate?
+public class Address: NSManagedObject {
     static let EntityName = "Address"
 
     static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->Address{
@@ -21,20 +19,17 @@ public class Address: NSManagedObject, IAlertMessageDelegate {
         return obj
     }
     
-    func SaveAddress(address:Address) -> Void {
+   static func SaveAddress(address:Address, context:NSManagedObjectContext) -> Void {
         do{
             try context.save()
             print("successfully saved \(address)")
         }
         catch let error as NSError{
             print(error.localizedDescription)
-            if alertMessageDelegate != nil {
-                alertMessageDelegate!.ShowAlertMessage!(title: "SaveAddressError_TitleString".localized, message: "SaveAddressError_MessageString".localized)
-            }
-        }
+    }
     }
     
-   func FetchAdresses() -> [Address] {
+  static func FetchAdresses(context:NSManagedObjectContext) -> [Address] {
         do{
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Address.EntityName)
             let fetchResults = try context.fetch(fetchRequest) as? [Address]
@@ -44,9 +39,6 @@ public class Address: NSManagedObject, IAlertMessageDelegate {
         }
         catch let error as NSError{
             print(error.localizedDescription)
-            if alertMessageDelegate != nil {
-                alertMessageDelegate!.ShowAlertMessage!(title: "FetchAddressError_TitleString".localized, message: "FetchAddressError_MessageString".localized)
-            }
         }
         return []
     }

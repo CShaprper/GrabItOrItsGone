@@ -24,12 +24,11 @@ class ManageAddressFacade {
     }
     
     func SaveAddress() -> Void {
-        address.SaveAddress(address: address)
+        Address.SaveAddress(address: address, context: context)
     }
     
     func FetchAdresses()->Void{
-        address = Address.InsertIntoManagedObjectContext(context: context)
-       addresses = address.FetchAdresses()
+        addresses = Address.FetchAdresses(context: context)
     }
 
 }
