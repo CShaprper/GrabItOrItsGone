@@ -59,11 +59,20 @@ class ManageAddressControllerTests: XCTestCase {
     func test_AddressTypeSegmentedControl_Exists(){
         XCTAssertNotNil(sut!.AddressTypeSegmentedControl, "AddressTypeSegmentedControl should exist")
     }
-    func test_txt_Fullname_Exists(){
-        XCTAssertNotNil(sut!.txt_Fullname, "txt_Fullname should exist")
+   /* func test_AddressTypeSegmentedControl_isWired_ToAction(){
+        XCTAssertTrue(checkSegmentedControlActionForOutlet(outlet: sut!.AddressTypeSegmentedControl, actionName: "AddressTypeSegmentedControl_Switched", event: .valueChanged, controller: sut! ))
+    }*/
+    func test_txt_Firstname_Exists(){
+        XCTAssertNotNil(sut!.txt_Firstname, "txt_Firstname should exist")
     }
-    func test_txt_FullnameDelegate_isSet() {
-        XCTAssertNotNil(sut!.txt_Fullname.delegate, "txt_Fullname.delegate not set")
+    func test_txt_FirstnameDelegate_isSet() {
+        XCTAssertNotNil(sut!.txt_Firstname.delegate, "txt_Firstname.delegate not set")
+    }
+    func test_txt_Lastname_Exists(){
+        XCTAssertNotNil(sut!.txt_Lastname, "txt_Lastname should exist")
+    }
+    func test_txt_LastnameDelegate_isSet() {
+        XCTAssertNotNil(sut!.txt_Lastname.delegate, "txt_Lastname.delegate not set")
     }
     func test_txt_Address_Exists(){
         XCTAssertNotNil(sut!.txt_Address, "txt_Address should exist")
@@ -86,12 +95,24 @@ class ManageAddressControllerTests: XCTestCase {
     func test_btn_SaveAddress_Exists(){
         XCTAssertNotNil(sut!.btn_SaveAddress, "btn_SaveAddress should exist")
     }
-   /* func test_btn_SaveAddress_isWired_ToAction(){
-        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SaveAddress, actionName: "btn_SaveAddress_Pressed", event: .touchUpInside, controller: sut! ))
-    }*/
+    /* func test_btn_SaveAddress_isWired_ToAction(){
+     XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SaveAddress, actionName: "btn_SaveAddress_Pressed", event: .touchUpInside, controller: sut! ))
+     }*/
     
     //MARK: - Button action test helper
-    func checkActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{
+    func checkButtonActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{
+        if let unwrappedButton = outlet {
+            if unwrappedButton.actions(forTarget: controller, forControlEvent: event) != nil {
+                let actions = unwrappedButton.actions(forTarget: controller, forControlEvent: event)!
+                let myActionName:String = actionName.appending("WithSender:")
+                return actions.contains(myActionName)
+            }
+        }
+        return false
+    }
+    
+    //MARK: - Button action test helper
+    func checkSegmentedControlActionForOutlet(outlet: UISegmentedControl?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{
         if let unwrappedButton = outlet {
             if unwrappedButton.actions(forTarget: controller, forControlEvent: event) != nil {
                 let actions = unwrappedButton.actions(forTarget: controller, forControlEvent: event)!

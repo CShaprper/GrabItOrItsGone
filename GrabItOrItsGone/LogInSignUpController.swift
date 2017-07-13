@@ -48,7 +48,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     
     //MARK: Members
-    var facade:GrabItFacade!
+    var facade:LoginSignUpFacade!
     let style = UIStyleHelper()
     let appDel = UIApplication.shared.delegate as! AppDelegate
     
@@ -68,7 +68,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     //MARK: - ViewController Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        facade = GrabItFacade(presentingController: self)
+        facade = LoginSignUpFacade(presentingController: self)
         facade.activityAnitmationDelegate = self
         
         //Setup Views

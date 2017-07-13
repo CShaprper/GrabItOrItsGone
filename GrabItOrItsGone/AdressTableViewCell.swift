@@ -10,7 +10,6 @@ import UIKit
 
 class AdressTableViewCell: UITableViewCell {
     //MARK: - Outlets
-    @IBOutlet var lbl_AddressType: UILabel!
     @IBOutlet var lbl_AddressTypeValue: UILabel!
     @IBOutlet var lbl_Fullname: UILabel!
     @IBOutlet var lbl_FullnameValue: UILabel!
@@ -31,6 +30,18 @@ class AdressTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func ConfigureCell(address:Address) -> Void {
+        if address.isDeliveryAddress{
+        lbl_AddressTypeValue.text = "AddressTypeShipment".localized
+        } else {
+            lbl_AddressTypeValue.text = "AddressTypeInvoice".localized
+        }
+        
+    lbl_Fullname.text = "\(String(describing: address.firstname!)) \(String(describing: address.lastname!))"
+        lbl_Zipcode.text = address.zipnumber!
+        lbl_Address.text = "\(String(describing: address.streetname!)) \(String(describing: address.houseneumber!))"
     }
 
 }

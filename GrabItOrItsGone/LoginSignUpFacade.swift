@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 
-class GrabItFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebaseDataReceivedDelegate{
+class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebaseDataReceivedDelegate{
     //MARK: Members
     private var presentingController:UIViewController!
     var firebaseClient:FirebaseClient!

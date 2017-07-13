@@ -43,7 +43,7 @@ class MainController: UIViewController {
     var isProductInformationSheetVisible:Bool = false
     let productCard:ProductCard = ProductCard()
     var products:[ProductCard] = []
-    var facade:GrabItFacade!
+    var facade:LoginSignUpFacade!
     
     
     //MARK: - ViewController functions
@@ -51,7 +51,7 @@ class MainController: UIViewController {
         super.viewDidLoad()
         //Create Dummy Products
         products = productCard.CreateDummyProducts()
-        facade = GrabItFacade(presentingController: self)
+        facade = LoginSignUpFacade(presentingController: self)
         
         //Setup Views
         SetupMainControllerViews()

@@ -19,25 +19,31 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var AddessPopUpBackground: UIView!
     @IBOutlet var AddressPopUpRoundView: DesignableUIView!
     @IBOutlet var AddressTypeSegmentedControl: UISegmentedControl!
-    @IBOutlet var txt_Fullname: UITextField!
+    @IBOutlet var txt_Firstname: UITextField!
+    @IBOutlet var txt_Lastname: UITextField!
     @IBOutlet var txt_Address: UITextField!
+    @IBOutlet var txt_Housenumber: UITextField!
     @IBOutlet var txt_City: UITextField!
     @IBOutlet var txt_Zipcode: UITextField!
     @IBOutlet var btn_SaveAddress: DesignableUIButton!
     
     //MARK: - Members
     var blurryView:UIVisualEffectView!
+    var facade:ManageAddressFacade!
     let appDel = UIApplication.shared.delegate as! AppDelegate
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        facade = ManageAddressFacade()
         
         //SetUp Views
         SetUpViews()
         
         //Add Notification Listeners
         AddNotificationListeners()
+        
+        facade.FetchAdresses()  
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,12 +62,32 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         txt_City.delegate = self
         txt_Address.delegate = self
         txt_Zipcode.delegate = self
-        txt_Fullname.delegate = self
+        txt_Firstname.delegate = self
+        txt_Lastname.delegate = self
+        txt_Housenumber.delegate = self
         txt_City.textColor = self.view.tintColor
         txt_Address.textColor = self.view.tintColor
         txt_Zipcode.textColor = self.view.tintColor
-        txt_Fullname.textColor = self.view.tintColor
+        txt_Firstname.textColor = self.view.tintColor
+        txt_Lastname.textColor = self.view.tintColor
+        txt_Housenumber.textColor = self.view.tintColor
+        txt_Firstname.placeholder = view.AddressPopUpFirstname_PlaceholderString
+        txt_Lastname.placeholder = view.AddressPopUpLastname_PlaceholderString
+        txt_Address.placeholder = view.AddressPopUpAddress_PlaceholderString
+        txt_Housenumber.placeholder = view.AddressPopUpHousenumber_PlaceholderString
+        txt_Zipcode.placeholder = view.AddressPopUpZipcode_PlaceholderString
+        txt_City.placeholder = view.AddressPopUpCity_PlaceholderString
+        
+        //Textfield Events
+        txt_Firstname.addTarget(self, action: #selector(txt_Firstname_TextChanged), for: .editingChanged)
+        txt_Lastname.addTarget(self, action: #selector(txt_Lastname_TextChanged), for: .editingChanged)
+        txt_Address.addTarget(self, action: #selector(txt_Address_TextChanged), for: .editingChanged)
+        txt_Housenumber.addTarget(self, action: #selector(txt_Housenumber_TextChanged), for: .editingChanged)
+        txt_Zipcode.addTarget(self, action: #selector(txt_Zipcode_TextChanged), for: .editingChanged)
+        txt_City.addTarget(self, action: #selector(txt_City_TextChanged), for: .editingChanged)
+        
         btn_SaveAddress.addTarget(self, action: #selector(btn_SaveAddress_Pressed), for: .touchUpInside)
+        AddressTypeSegmentedControl.addTarget(self, action: #selector(AddressTypeSegmentedControl_Switched), for: .valueChanged)
         
         let addAddressButton = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.plain, target: self, action:#selector(btn_AddAddress_Pressed))
         self.navigationItem.rightBarButtonItem = addAddressButton
@@ -69,11 +95,11 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     
     func btn_AddAddress_Pressed(sender: UIButton) -> Void {
         ShowAddAddressPopUp()
-        
     }
     
     func ShowAddAddressPopUp()->Void{
         if !self.view.subviews.contains(AddAddressPopUp){
+            facade.CreateNewAddressToInsert()
             ShowBlurryView()
             view.addSubview(AddAddressPopUp)
             AddAddressPopUp.frame.size.height = 0.5 * view.frame.size.height
@@ -109,7 +135,6 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             AddAddressPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
         }
-        
     }
     func KeyboardWillHide(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -123,8 +148,16 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         HideBlurrView()
         HideAddAddressPopUp()
     }
+    func AddressTypeSegmentedControl_Switched(sender: UISegmentedControl) -> Void {
+        if sender.selectedSegmentIndex == 0{
+            facade.address.isDeliveryAddress = true
+        } else {
+            facade.address.isDeliveryAddress = false
+        }
+    }
     func btn_SaveAddress_Pressed(sender: DesignableUIButton) -> Void {
-        
+        facade.SaveAddress()
+        AddressTableView.reloadData()
     }
     
     //MARK: - UITextFieldDelegate
@@ -132,16 +165,36 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         self.view.endEditing(true)
         return true
     }
-    
+    func txt_Firstname_TextChanged(sender: UITextField) -> Void {
+        facade.address.firstname = sender.text!
+    }
+    func txt_Lastname_TextChanged(sender: UITextField) -> Void {
+        facade.address.lastname = sender.text!
+    }
+    func txt_Address_TextChanged(sender: UITextField) -> Void {
+        facade.address.streetname = sender.text!
+    }
+    func txt_Housenumber_TextChanged(sender: UITextField) -> Void {
+        facade.address.houseneumber = sender.text!
+    }
+    func txt_Zipcode_TextChanged(sender: UITextField) -> Void {
+        facade.address.zipnumber = sender.text!
+    }
+    func txt_City_TextChanged(sender: UITextField) -> Void {
+        facade.address.city = sender.text!
+    }
     
     //MARK: - TableView SetUp
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        print("Adresses in CoreData \(facade.addresses.count)")
+        return facade.addresses.count
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "AdressTableViewCell") as! AdressTableViewCell
+        myCell.ConfigureCell(address: facade.addresses[indexPath.row])
         
-        return UITableViewCell()
+        return myCell
     }
 }

@@ -149,4 +149,34 @@ extension UIView{
             return NSLocalizedString("SaveAddressError_MessageString", comment: "")
         }
     }
+    var AddressPopUpFirstname_PlaceholderString: String{
+        get {
+            return NSLocalizedString("AddressPopUpFirstname_PlaceholderString", comment: "")
+        }
+    }
+    var AddressPopUpLastname_PlaceholderString: String{
+        get {
+            return NSLocalizedString("AddressPopUpLastname_PlaceholderString", comment: "")
+        }
+    }
+    var AddressPopUpAddress_PlaceholderString: String{
+        get {
+            return NSLocalizedString("AddressPopUpAddress_PlaceholderString", comment: "")
+        }
+    }
+    var AddressPopUpHousenumber_PlaceholderString: String{
+        get {
+            return NSLocalizedString("AddressPopUpHousenumber_PlaceholderString", comment: "")
+        }
+    }
+    var AddressPopUpZipcode_PlaceholderString: String{
+        get {
+            return NSLocalizedString("AddressPopUpZipcode_PlaceholderString", comment: "")
+        }
+    }
+    var AddressPopUpCity_PlaceholderString: String{
+        get {
+            return NSLocalizedString("AddressPopUpCity_PlaceholderString", comment: "")
+        }
+    }
 }

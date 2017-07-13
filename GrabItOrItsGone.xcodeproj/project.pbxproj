@@ -48,22 +48,22 @@
 		CF477BC21F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BC11F0FF14800DA1EE1 /* GrabItOrItsGoneUITests.swift */; };
 		CF4A3C5F1F16A73600F3345D /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A3C5D1F16A73600F3345D /* Address+CoreDataClass.swift */; };
 		CF4A3C611F16A73600F3345D /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A3C5E1F16A73600F3345D /* Address+CoreDataProperties.swift */; };
-		CF4A3C641F16AD0100F3345D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A3C631F16AD0100F3345D /* DatabaseManager.swift */; };
 		CF4B64761EFE4CD400C2FBD3 /* DesignableTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64751EFE4CD400C2FBD3 /* DesignableTextfield.swift */; };
 		CF4B64791EFE4CE800C2FBD3 /* DesingableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64781EFE4CE800C2FBD3 /* DesingableUIView.swift */; };
 		CF4B647C1EFE523F00C2FBD3 /* DesignableUIEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */; };
 		CF4B647F1EFE60B800C2FBD3 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647E1EFE60B800C2FBD3 /* DesignableButton.swift */; };
 		CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */; };
 		CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */; };
-		CF721F401F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */; };
 		CF721F421F13F97D00B52C8D /* ManageAddressControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */; };
+		CFACAD041F175D5D0066D666 /* ManageAddressFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */; };
+		CFACAD081F1764CC0066D666 /* NewsControllerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */; };
 		CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */; };
 		CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */; };
 		CFAE1D4A1F126C0300165E9D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D491F126C0300165E9D /* News.swift */; };
 		CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */; };
 		CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */; };
 		CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */; };
-		CFB2328D1F07C28D00346879 /* GrabItFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328C1F07C28D00346879 /* GrabItFacade.swift */; };
+		CFB2328D1F07C28D00346879 /* LoginSignUpFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */; };
 		CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328F1F07C2D700346879 /* IAuthenticable.swift */; };
 		CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232931F07C41E00346879 /* FirebaseClient.swift */; };
 		CFB232A01F07D4F900346879 /* IAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2329F1F07D4F900346879 /* IAlertMessage.swift */; };
@@ -76,7 +76,6 @@
 		CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
-		CFF173BF1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,7 +137,6 @@
 		CF477BC31F0FF14800DA1EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF4A3C5D1F16A73600F3345D /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CF4A3C5E1F16A73600F3345D /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF4A3C631F16AD0100F3345D /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		CF4B64751EFE4CD400C2FBD3 /* DesignableTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextfield.swift; sourceTree = "<group>"; };
 		CF4B64781EFE4CE800C2FBD3 /* DesingableUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesingableUIView.swift; sourceTree = "<group>"; };
 		CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableUIEffectView.swift; sourceTree = "<group>"; };
@@ -148,13 +146,15 @@
 		CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
 		CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressControllerTests.swift; sourceTree = "<group>"; };
 		CF87467C1F0EB60600855607 /* GrabItOrItsGone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GrabItOrItsGone.entitlements; path = ../GrabItOrItsGone.entitlements; sourceTree = "<group>"; };
+		CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressFacade.swift; sourceTree = "<group>"; };
+		CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsControllerFacade.swift; sourceTree = "<group>"; };
 		CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CFAE1D0A1F1268EA00165E9D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CFAE1D491F126C0300165E9D /* News.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidationTests.swift; sourceTree = "<group>"; };
 		CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlertMessageDelegate.swift; sourceTree = "<group>"; };
 		CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringExtension.swift; sourceTree = "<group>"; };
-		CFB2328C1F07C28D00346879 /* GrabItFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabItFacade.swift; sourceTree = "<group>"; };
+		CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpFacade.swift; sourceTree = "<group>"; };
 		CFB2328F1F07C2D700346879 /* IAuthenticable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAuthenticable.swift; sourceTree = "<group>"; };
 		CFB232931F07C41E00346879 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		CFB2329F1F07D4F900346879 /* IAlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlertMessage.swift; sourceTree = "<group>"; };
@@ -214,7 +214,6 @@
 		CF3D621D1EFD4B4F0051706A = {
 			isa = PBXGroup;
 			children = (
-				CF4A3C5D1F16A73600F3345D /* Address+CoreDataClass.swift */,
 				CF4A3C5E1F16A73600F3345D /* Address+CoreDataProperties.swift */,
 				CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */,
 				CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */,
@@ -282,13 +281,13 @@
 		CF3D625A1EFD4CDA0051706A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CFB2328C1F07C28D00346879 /* GrabItFacade.swift */,
+				CFACAD061F175DEE0066D666 /* Facade */,
+				CFACAD021F1755F80066D666 /* CoreDataModel */,
 				CFB232931F07C41E00346879 /* FirebaseClient.swift */,
 				CF3E97021F01698F001C1C9B /* ProductCards.swift */,
 				CFB232B01F080B8900346879 /* PasswordValidationService.swift */,
 				CFB232AA1F0804B300346879 /* EmailValidationService.swift */,
 				CFAE1D491F126C0300165E9D /* News.swift */,
-				CF4A3C631F16AD0100F3345D /* DatabaseManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -341,6 +340,25 @@
 				CF477BC31F0FF14800DA1EE1 /* Info.plist */,
 			);
 			path = GrabItOrItsGoneUITests;
+			sourceTree = "<group>";
+		};
+		CFACAD021F1755F80066D666 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				CF4A3C5D1F16A73600F3345D /* Address+CoreDataClass.swift */,
+			);
+			name = CoreDataModel;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		CFACAD061F175DEE0066D666 /* Facade */ = {
+			isa = PBXGroup;
+			children = (
+				CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */,
+				CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */,
+				CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */,
+			);
+			name = Facade;
 			sourceTree = "<group>";
 		};
 		CFB232921F07C2E100346879 /* Protocols */ = {
@@ -683,6 +701,7 @@
 				CFB232A01F07D4F900346879 /* IAlertMessage.swift in Sources */,
 				CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
+				CFACAD081F1764CC0066D666 /* NewsControllerFacade.swift in Sources */,
 				CF4A3C5F1F16A73600F3345D /* Address+CoreDataClass.swift in Sources */,
 				CF3D62631EFD4EBC0051706A /* NotificatioName_extension.swift in Sources */,
 				CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */,
@@ -692,7 +711,7 @@
 				CF4B647F1EFE60B800C2FBD3 /* DesignableButton.swift in Sources */,
 				CF4B64761EFE4CD400C2FBD3 /* DesignableTextfield.swift in Sources */,
 				CFB232B11F080B8900346879 /* PasswordValidationService.swift in Sources */,
-				CFB2328D1F07C28D00346879 /* GrabItFacade.swift in Sources */,
+				CFB2328D1F07C28D00346879 /* LoginSignUpFacade.swift in Sources */,
 				CF4B647C1EFE523F00C2FBD3 /* DesignableUIEffectView.swift in Sources */,
 				CF3E97031F01698F001C1C9B /* ProductCards.swift in Sources */,
 				CF3D622C1EFD4B4F0051706A /* LogInSignUpController.swift in Sources */,
@@ -700,6 +719,7 @@
 				CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */,
 				CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
 				CFAE1D4A1F126C0300165E9D /* News.swift in Sources */,
+				CFACAD041F175D5D0066D666 /* ManageAddressFacade.swift in Sources */,
 				CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */,
 				CF4A3C611F16A73600F3345D /* Address+CoreDataProperties.swift in Sources */,
 				CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */,
@@ -708,7 +728,6 @@
 				CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */,
 				CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */,
 				CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */,
-				CF4A3C641F16AD0100F3345D /* DatabaseManager.swift in Sources */,
 				CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,7 +738,6 @@
 			files = (
 				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
 				CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */,
-				CFF173BF1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
 				CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
 				CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */,
@@ -729,7 +747,6 @@
 				CF477BB21F0FEF6900DA1EE1 /* IAlertMessage.swift in Sources */,
 				CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */,
 				CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */,
-				CF721F401F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */,
 				CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */,
 				CF477BAC1F0FEF6400DA1EE1 /* DesignableUIEffectView.swift in Sources */,
 				CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */,

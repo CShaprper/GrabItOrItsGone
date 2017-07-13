@@ -16,7 +16,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var NewsTableView: UITableView!
     
     //MARK: Members
-    var facade:GrabItFacade?
+    var facade:LoginSignUpFacade?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SetUpViews()
         
         //Init facade
-        facade = GrabItFacade(presentingController: self)
+        facade = LoginSignUpFacade(presentingController: self)
         facade!.firebaseDataReceivedDelegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
