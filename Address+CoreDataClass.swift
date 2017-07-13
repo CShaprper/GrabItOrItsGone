@@ -12,24 +12,25 @@ import CoreData
 
 public class Address: NSManagedObject {
     static let EntityName = "Address"
-
+    
     static func InsertIntoManagedObjectContext(context:NSManagedObjectContext)->Address{
         let obj = (NSEntityDescription.insertNewObject(forEntityName: Address.EntityName, into: context)) as! Address
         print("\(Address.EntityName) Entity object created in NSManagedObjectContext")
         return obj
     }
     
-   static func SaveAddress(address:Address, context:NSManagedObjectContext) -> Void {
-        do{
+    static func SaveAddress(address:Address, context:NSManagedObjectContext) -> Void {
+        do{ 
+            print(address)
             try context.save()
             print("successfully saved \(address)")
         }
         catch let error as NSError{
             print(error.localizedDescription)
-    }
+        }
     }
     
-  static func FetchAdresses(context:NSManagedObjectContext) -> [Address] {
+    static func FetchAdresses(context:NSManagedObjectContext) -> [Address] {
         do{
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Address.EntityName)
             let fetchResults = try context.fetch(fetchRequest) as? [Address]
@@ -41,5 +42,15 @@ public class Address: NSManagedObject {
             print(error.localizedDescription)
         }
         return []
+    }
+    
+    static func DeleteAddress(address:Address, context:NSManagedObjectContext)->Void{
+        context.delete(address)
+        do {
+            try context.save()
+            print("Deleted \(address) from CoreData")
+        } catch let error as NSError  {
+            print("Could delete \(address) from CoreData \(error), \(error.userInfo)")
+        }
     }
 }

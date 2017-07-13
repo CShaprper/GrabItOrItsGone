@@ -25,10 +25,14 @@ class ManageAddressFacade {
     
     func SaveAddress() -> Void {
         Address.SaveAddress(address: address, context: context)
+        addresses.append(address)
     }
     
     func FetchAdresses()->Void{
         addresses = Address.FetchAdresses(context: context)
     }
 
+    func DeleteAddress(address: Address){
+        Address.DeleteAddress(address: address, context: context)
+    }
 }

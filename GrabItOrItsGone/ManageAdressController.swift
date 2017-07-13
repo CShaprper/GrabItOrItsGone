@@ -77,7 +77,10 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         txt_Housenumber.placeholder = view.AddressPopUpHousenumber_PlaceholderString
         txt_Zipcode.placeholder = view.AddressPopUpZipcode_PlaceholderString
         txt_City.placeholder = view.AddressPopUpCity_PlaceholderString
-        
+        AddressTypeSegmentedControl.setTitle(view.AddressTypeShipment, forSegmentAt: 0)
+        AddressTypeSegmentedControl.setTitle(view.AddressTypeInvoice, forSegmentAt: 1)
+        AddressTypeSegmentedControl.selectedSegmentIndex = -1
+        self.navigationItem.title = view.ManageAddressController_TitleString
         //Textfield Events
         txt_Firstname.addTarget(self, action: #selector(txt_Firstname_TextChanged), for: .editingChanged)
         txt_Lastname.addTarget(self, action: #selector(txt_Lastname_TextChanged), for: .editingChanged)
@@ -157,6 +160,7 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     }
     func btn_SaveAddress_Pressed(sender: DesignableUIButton) -> Void {
         facade.SaveAddress()
+        HideAddAddressPopUp()
         AddressTableView.reloadData()
     }
     
@@ -187,14 +191,28 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - TableView SetUp
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Adresses in CoreData \(facade.addresses.count)")
         return facade.addresses.count
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "AdressTableViewCell") as! AdressTableViewCell
-        myCell.ConfigureCell(address: facade.addresses[indexPath.row])
-        
+        myCell.ConfigureCell(address: facade.addresses[indexPath.row])        
         return myCell
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            facade.DeleteAddress(address: facade.addresses[indexPath.row])
+            facade.addresses.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+        if editingStyle == .insert {
+            
+        }
     }
 }

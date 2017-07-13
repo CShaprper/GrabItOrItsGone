@@ -11,13 +11,9 @@ import UIKit
 class AdressTableViewCell: UITableViewCell {
     //MARK: - Outlets
     @IBOutlet var lbl_AddressTypeValue: UILabel!
-    @IBOutlet var lbl_Fullname: UILabel!
     @IBOutlet var lbl_FullnameValue: UILabel!
-    @IBOutlet var lbl_Address: UILabel!
     @IBOutlet var lbl_AddressValue: UILabel!
-    @IBOutlet var lbl_City: UILabel!
     @IBOutlet var lbl_CityValue: UILabel!
-    @IBOutlet var lbl_Zipcode: UILabel!
     @IBOutlet var lbl_ZipcodeValue: UILabel!
     
     
@@ -39,9 +35,10 @@ class AdressTableViewCell: UITableViewCell {
             lbl_AddressTypeValue.text = "AddressTypeInvoice".localized
         }
         
-    lbl_Fullname.text = "\(String(describing: address.firstname!)) \(String(describing: address.lastname!))"
-        lbl_Zipcode.text = address.zipnumber!
-        lbl_Address.text = "\(String(describing: address.streetname!)) \(String(describing: address.houseneumber!))"
+    lbl_FullnameValue.text = "\(String(describing: address.firstname!)) \(String(describing: address.lastname!))"
+        lbl_ZipcodeValue.text = address.zipnumber!
+        lbl_AddressValue.text = "\(String(describing: address.streetname!)) \(String(describing: address.houseneumber!))"
+        lbl_CityValue.text = address.city!
     }
 
 }

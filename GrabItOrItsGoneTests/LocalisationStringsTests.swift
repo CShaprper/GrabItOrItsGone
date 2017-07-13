@@ -182,4 +182,16 @@ class LocalisationStringsTests: XCTestCase {
     func test_SaveAddressError_MessageString_isLocalized(){
     XCTAssertTrue(sut!.view.SaveAddressError_MessageString != "SaveAddressError_MessageString", "SaveAddressError_MessageString is not localized in strings file!")
     }
+    func test_AddressTypeShipment_Exist(){
+    XCTAssertNotNil(sut!.view.AddressTypeShipment, "AddressTypeShipment should exist for localisation")
+    }
+    func test_AddressTypeShipment_isLocalized(){
+    XCTAssertTrue(sut!.view.AddressTypeShipment != "AddressTypeShipment", "AddressTypeShipment is not localized in strings file!")
+    }
+    func test_AddressTypeInvoice_Exist(){
+    XCTAssertNotNil(sut!.view.AddressTypeInvoice, "AddressTypeInvoice should exist for localisation")
+    }
+    func test_AddressTypeInvoice_isLocalized(){
+    XCTAssertTrue(sut!.view.AddressTypeInvoice != "AddressTypeInvoice", "AddressTypeInvoice is not localized in strings file!")
+    }
 }

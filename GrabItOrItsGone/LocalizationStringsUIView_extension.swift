@@ -179,4 +179,14 @@ extension UIView{
             return NSLocalizedString("AddressPopUpCity_PlaceholderString", comment: "")
         }
     }
+    var AddressTypeShipment: String{
+        get {
+            return NSLocalizedString("AddressTypeShipment", comment: "")
+        }
+    }
+    var AddressTypeInvoice: String{
+        get {
+            return NSLocalizedString("AddressTypeInvoice", comment: "")
+        }
+    }
 }
