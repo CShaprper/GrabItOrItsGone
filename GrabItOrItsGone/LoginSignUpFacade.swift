@@ -18,19 +18,14 @@ class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFir
     //MARK: NewsController Members
     var validationService:IValidateable!
     var activityAnitmationDelegate: IActivityAnimationDelegate?
-    var newsArray:[News]!
-    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
-    private var alertService:IAlertMessage!
     
     
     //Constructor
     init(presentingController: UIViewController) {
-        self.newsArray = []
         self.firebaseClient = FirebaseClient()
         self.presentingController = presentingController
         self.firebaseClient.alertMessageDelegate = self
         self.firebaseClient.activityAnimationDelegate = self
-        self.firebaseClient.firebaseDataReceivedDelegate = self
     }
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -100,22 +95,6 @@ class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFir
     //MARK: - Helper Methods
     func SetValidationService(validationservice: IValidateable){
         self.validationService = validationservice
-    }
-    
-    func SetAlertMessageService(alertMessageService:IAlertMessage){
-        self.alertService = alertMessageService
-    }
-    
-    //MARK: - IFirebaseDataReceivedDelegate implementation
-    func ReadFirebaseNewsSection() -> Void {
-        firebaseClient.ReadFirebaseNewsSection()
-    }
-    
-    func FirebaseDataReceived() -> Void {
-        if firebaseDataReceivedDelegate != nil{
-            newsArray = firebaseClient.newsArray
-            firebaseDataReceivedDelegate!.FirebaseDataReceived!()
-        }
     }
     
     //MARK: - IActivityAnimationDelegate implementation

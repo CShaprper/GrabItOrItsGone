@@ -190,7 +190,7 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - TableView SetUp
     @available(iOS 2.0, *)
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 
         return facade.addresses.count
     }
     @available(iOS 2.0, *)
@@ -210,9 +210,6 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
             facade.DeleteAddress(address: facade.addresses[indexPath.row])
             facade.addresses.remove(at: indexPath.row)
             tableView.reloadData()
-        }
-        if editingStyle == .insert {
-            
         }
     }
 }

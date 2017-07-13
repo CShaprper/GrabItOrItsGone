@@ -36,7 +36,7 @@ class YourAccountController: UIViewController {
         self.navigationItem.title = view.YourAccount_Controller_TitleString
         lbl_manageAddress.text = view.lbl_manageAddress_String
         lbl_manageAddress.textColor = self.view.tintColor
-        lbl_ManageAddressArrow.textColor = self.view.tintColor
+        lbl_ManageAddressArrow.textColor = self.view.tintColor 
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(ManageAdressContainer_Touched))
         ManageAdressContainer.addGestureRecognizer(gesture)

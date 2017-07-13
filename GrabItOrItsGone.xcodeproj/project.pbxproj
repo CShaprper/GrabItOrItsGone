@@ -55,6 +55,9 @@
 		CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */; };
 		CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */; };
 		CF721F421F13F97D00B52C8D /* ManageAddressControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */; };
+		CF96D7771F17DBE3003B5C2B /* MainControllerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF96D7761F17DBE3003B5C2B /* MainControllerFacade.swift */; };
+		CF96D77A1F17E364003B5C2B /* swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = CF96D7791F17E364003B5C2B /* swoosh.wav */; };
+		CF96D77C1F17E9A5003B5C2B /* yeah.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CF96D77B1F17E9A5003B5C2B /* yeah.m4a */; };
 		CFACAD041F175D5D0066D666 /* ManageAddressFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */; };
 		CFACAD081F1764CC0066D666 /* NewsControllerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */; };
 		CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */; };
@@ -146,6 +149,9 @@
 		CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
 		CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressControllerTests.swift; sourceTree = "<group>"; };
 		CF87467C1F0EB60600855607 /* GrabItOrItsGone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = GrabItOrItsGone.entitlements; path = ../GrabItOrItsGone.entitlements; sourceTree = "<group>"; };
+		CF96D7761F17DBE3003B5C2B /* MainControllerFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainControllerFacade.swift; sourceTree = "<group>"; };
+		CF96D7791F17E364003B5C2B /* swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = swoosh.wav; sourceTree = "<group>"; };
+		CF96D77B1F17E9A5003B5C2B /* yeah.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = yeah.m4a; sourceTree = "<group>"; };
 		CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressFacade.swift; sourceTree = "<group>"; };
 		CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsControllerFacade.swift; sourceTree = "<group>"; };
 		CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -268,6 +274,7 @@
 		CF3D62591EFD4CAD0051706A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CF96D7781F17E33A003B5C2B /* Sounds */,
 				CF3D62741EFD67030051706A /* Fonts */,
 				CF3D622D1EFD4B4F0051706A /* Main.storyboard */,
 				CF3D62321EFD4B4F0051706A /* LaunchScreen.storyboard */,
@@ -342,6 +349,15 @@
 			path = GrabItOrItsGoneUITests;
 			sourceTree = "<group>";
 		};
+		CF96D7781F17E33A003B5C2B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				CF96D77B1F17E9A5003B5C2B /* yeah.m4a */,
+				CF96D7791F17E364003B5C2B /* swoosh.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		CFACAD021F1755F80066D666 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +373,7 @@
 				CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */,
 				CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */,
 				CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */,
+				CF96D7761F17DBE3003B5C2B /* MainControllerFacade.swift */,
 			);
 			name = Facade;
 			sourceTree = "<group>";
@@ -530,6 +547,8 @@
 				CF3D62791EFD67680051706A /* OpenSans-Regular.ttf in Resources */,
 				CF3D627F1EFD72C30051706A /* MarckScript-Regular.ttf in Resources */,
 				CF3D62341EFD4B4F0051706A /* LaunchScreen.storyboard in Resources */,
+				CF96D77C1F17E9A5003B5C2B /* yeah.m4a in Resources */,
+				CF96D77A1F17E364003B5C2B /* swoosh.wav in Resources */,
 				CF3D62311EFD4B4F0051706A /* Assets.xcassets in Resources */,
 				CF6C79251F0FB9E200A681F4 /* GoogleService-Info.plist in Resources */,
 				CF3D622F1EFD4B4F0051706A /* Main.storyboard in Resources */,
@@ -721,6 +740,7 @@
 				CFAE1D4A1F126C0300165E9D /* News.swift in Sources */,
 				CFACAD041F175D5D0066D666 /* ManageAddressFacade.swift in Sources */,
 				CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */,
+				CF96D7771F17DBE3003B5C2B /* MainControllerFacade.swift in Sources */,
 				CF4A3C611F16A73600F3345D /* Address+CoreDataProperties.swift in Sources */,
 				CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */,
 				CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */,

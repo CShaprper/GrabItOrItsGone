@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 extension Double {
     var degreesToRadians: CGFloat { return CGFloat(self) * .pi / 180 }
 }
@@ -35,6 +37,9 @@ class MainController: UIViewController {
     @IBOutlet var OldPriceBlurryViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var lbl_NewPrice: UILabel!
     @IBOutlet var NewPriceBlurryView: UIVisualEffectView!
+    @IBOutlet var SoundSwitch: UISwitch!
+    @IBOutlet var SoundImage: UIImageView!
+    @IBOutlet var SoundStack: UIStackView!
     
     //MARK: Members
     let style = UIStyleHelper()
@@ -42,17 +47,16 @@ class MainController: UIViewController {
     var isMenuOut = false
     var isProductInformationSheetVisible:Bool = false
     let productCard:ProductCard = ProductCard()
-    var products:[ProductCard] = []
-    var facade:LoginSignUpFacade!
+    var facade:MainControllerFacade!
     
     
     //MARK: - ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        facade = MainControllerFacade(presentingController: self)
         //Create Dummy Products
-        products = productCard.CreateDummyProducts()
-        facade = LoginSignUpFacade(presentingController: self)
-        
+        facade.productsArray = productCard.CreateDummyProducts()
+        facade.CheckForSoundSetting()
         //Setup Views
         SetupMainControllerViews()
         
@@ -63,8 +67,14 @@ class MainController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = .blackTranslucent        
+        self.navigationController?.navigationBar.barStyle = .blackTranslucent
         self.navigationController?.navigationBar.isOpaque  = false
+        //Set Sound Switch value
+        if (UserDefaults.standard.object(forKey: "SoundsOn") != nil) {
+            let sound = UserDefaults.standard.bool(forKey: "SoundsOn")
+            SoundSwitch.setOn(sound, animated: true)
+            SoundImage.image = sound == true ?  #imageLiteral(resourceName: "SoundOn-icon") : #imageLiteral(resourceName: "SoundOff-icon")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,13 +90,21 @@ class MainController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     func LogOutBarButtonItemPressed(sender: UIBarButtonItem) -> Void{
-        let isLoggedInWithFacebook = UserDefaults.standard.bool(forKey: "isLoggedInWithFacebook")
-        let isSignedInAsGuest = UserDefaults.standard.bool(forKey: "isLoggedInAsGuest")
-        let isSignedInWithGoogle = UserDefaults.standard.bool(forKey: "isLoggedInWithGoogle")
-        if isSignedInAsGuest || isLoggedInWithFacebook || isSignedInWithGoogle{
+        let loginService = facade.GetUserLoggedInService()
+        if loginService == .guest || loginService == .facebook  || loginService == .google {
             SegueToLogInController(notification: Notification(name: NSNotification.Name.SegueToLogInController))
         }
         facade.LogoutFirebaseUser()
+    }
+    
+    func SoundSwitch_Changed(sender: UISwitch) -> Void {
+        if sender.isOn {
+            UserDefaults.standard.set(true, forKey: "SoundsOn")
+            SoundImage.image =  #imageLiteral(resourceName: "SoundOn-icon")
+        } else {
+            UserDefaults.standard.set(false, forKey: "SoundsOn")
+            SoundImage.image =   #imageLiteral(resourceName: "SoundOff-icon")
+        }
     }
     
     
@@ -103,8 +121,8 @@ class MainController: UIViewController {
         let swipeLimitBottom = view.frame.height * 0.7 // top border when the card gets animated off
         print(swipeLimitBottom)
         print(sender.location(in: view))
-        let ySpin:CGFloat = yFromCenter < 0 ? -100 : 100 // gives the card a spin in y direction
-        let xSpin:CGFloat = xFromCenter < 0 ? -100 : 100 // gives the card a spin in y direction
+        let ySpin:CGFloat = yFromCenter < 0 ? -300 : 300 // gives the card a spin in y direction
+        let xSpin:CGFloat = xFromCenter < 0 ? -300 : 300 // gives the card a spin in x direction
         
         FavoritesStarImage.alpha =  card.center.y < swipeLimitBottom ? 0 : 1
         
@@ -119,6 +137,7 @@ class MainController: UIViewController {
             let swipeDuration = 0.3
             // Move off to the left side if drag reached swipeLimitLeft
             if card.center.x < swipeLimitLeft{
+                facade.PlaySwooshSound()
                 UIView.animate(withDuration: swipeDuration, animations: {
                     card.center.x = card.center.x - self.view.frame.size.width
                     card.center.y = card.center.y + ySpin
@@ -129,6 +148,7 @@ class MainController: UIViewController {
                 return
                 //Move off to the right side if drag reached swipeLimitRight
             } else if card.center.x > swipeLimitRight{
+                facade.PlaySwooshSound()
                 UIView.animate(withDuration: swipeDuration, animations: {
                     card.center.x = card.center.x + self.view.frame.size.width
                     card.center.y = card.center.y + ySpin
@@ -139,6 +159,7 @@ class MainController: UIViewController {
                 return
                 //Move off the top side if drag reached swipeLimitTop
             } else if card.center.y < swipeLimitTop{
+                facade.PlaySwooshSound()
                 UIView.animate(withDuration: swipeDuration, animations: {
                     card.center.y = card.center.y - self.view.frame.size.height
                     card.center.x = card.center.x + xSpin
@@ -150,6 +171,7 @@ class MainController: UIViewController {
                 //Move downways if drag reached swipeLimitBottom
             } else if card.center.y > swipeLimitBottom
             {
+                facade.PlayYeahSound()
                 UIView.animate(withDuration: swipeDuration, animations:
                     { card.center.y = card.center.y + self.view.frame.size.height
                 }, completion: { (true) in
@@ -178,17 +200,17 @@ class MainController: UIViewController {
         card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians)
         card.Arise(duration: 0.5, delay: 0, options: [.allowUserInteraction], toAlpha: 1)
         
-        imageCount = imageCount == products.count - 1 ? 0 : imageCount + 1
-        ProductImageView.image = products[imageCount].ProdcutImage
-        lbl_ProductTitle.text = products[imageCount].Title!
-        lbl_ProductSubtitle.text = products[imageCount].Subtitle!
-        ProductInformationTextView.text = products[imageCount].Productinformation!
+        imageCount = imageCount == facade.productsArray.count - 1 ? 0 : imageCount + 1
+        ProductImageView.image = facade.productsArray[imageCount].ProdcutImage
+        lbl_ProductTitle.text = facade.productsArray[imageCount].Title!
+        lbl_ProductSubtitle.text = facade.productsArray[imageCount].Subtitle!
+        ProductInformationTextView.text = facade.productsArray[imageCount].Productinformation!
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "de_DE")
-        formatter.string(for: products[imageCount].OriginalPrice!)
-        lbl_OldPrice.text = formatter.string(for: products[imageCount].OriginalPrice!)
-        lbl_NewPrice.text = formatter.string(for: products[imageCount].NewPrice!)
+        formatter.string(for: facade.productsArray[imageCount].OriginalPrice!)
+        lbl_OldPrice.text = formatter.string(for: facade.productsArray[imageCount].OriginalPrice!)
+        lbl_NewPrice.text = formatter.string(for: facade.productsArray[imageCount].NewPrice!)
         FavoritesStarImage.alpha = 0
     }
     
@@ -231,7 +253,8 @@ class MainController: UIViewController {
     
     private func HideMenu(closure: @escaping () -> Void){
         isMenuOut = false
-        UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+        self.TopBackGroundView.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 0.5, delay: 0.6, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.TopBackGroundView.transform = .identity
             self.TopBackGroundView.alpha = 1
         }, completion: {(true) in
@@ -252,31 +275,34 @@ class MainController: UIViewController {
         
         UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuAccount.transform = CGAffineTransform(translationX: self.btn_MenuAccount.frame.size.width + 100, y: 0)
+        }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.6, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+            self.SoundStack.transform = CGAffineTransform(translationX: self.SoundStack.frame.size.width + 100, y: 0)
         }, completion: {(true) in
             closure()
         })
     }
     private func ShowMenu(closure: @escaping () -> Void){
         isMenuOut = true
+        self.TopBackGroundView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.TopBackGroundView.transform = CGAffineTransform(translationX: -self.view.frame.width * 0.6, y: 0).scaledBy(x: 0.8, y: 0.7)
             self.TopBackGroundView.alpha = 0.7
         }, completion: nil)
-        
         UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuNews.transform = .identity
         }, completion: nil)
-        
         UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuFavourites.transform = .identity
         }, completion: nil)
-        
         UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuGutscheine.transform = .identity
         }, completion: nil)
-        
         UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuAccount.transform = .identity
+        }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.6, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
+            self.SoundStack.transform = .identity
         }, completion: nil)
     }
     
@@ -326,7 +352,7 @@ class MainController: UIViewController {
         self.navigationItem.leftBarButtonItem = newBackButton
         
         //Main Backgroundimage
-        MainBackgroundImage.image = UIImage(named: "NatureBG")         
+        MainBackgroundImage.image = UIImage(named: "NatureBG")
         
         //Card view
         CardView.center = view.center
@@ -353,11 +379,12 @@ class MainController: UIViewController {
         ProductInformationSheet.transform = CGAffineTransform(translationX: 0, y: (ProductInformationSheet.frame.size.height + 100))
         ProductInformationSheet.layer.cornerRadius = 20
         
-        //Wire targets to Buttons
+        //Wire targets
         btn_Menu.addTarget(self, action: #selector(btn_Menu_Pressed), for: .touchUpInside)
         btn_ProductInformation.addTarget(self, action: #selector(btn_ProductInformation_Pressed), for: .touchUpInside)
         btn_MenuAccount.addTarget(self, action: #selector(btn_MenuAccount_Pressed), for: .touchUpInside)
         btn_MenuNews.addTarget(self, action: #selector(btn_MenuNews_Pressed), for: .touchUpInside)
+        SoundSwitch.addTarget(self, action: #selector(SoundSwitch_Changed), for: .valueChanged)
         
         //Transform UIControls to initial position
         FavoritesStarImage.transform = CGAffineTransform(translationX: 0, y: FavoritesStarImage.frame.size.height * 0.4)
@@ -365,5 +392,6 @@ class MainController: UIViewController {
         btn_MenuFavourites.transform = CGAffineTransform(translationX: btn_MenuFavourites.frame.size.width + 100, y: 0)
         btn_MenuGutscheine.transform = CGAffineTransform(translationX: btn_MenuGutscheine.frame.size.width + 100, y: 0)
         btn_MenuAccount.transform = CGAffineTransform(translationX: btn_MenuAccount.frame.size.width + 100, y: 0)
+        SoundStack.transform = CGAffineTransform(translationX: SoundStack.frame.size.width + 100, y: 0)
     }
 }

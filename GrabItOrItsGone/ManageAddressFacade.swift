@@ -30,6 +30,9 @@ class ManageAddressFacade {
     
     func FetchAdresses()->Void{
         addresses = Address.FetchAdresses(context: context)
+       /* for a in addresses{
+            print("City \(a.city) firstname \(a.firstname) lastname \(a.lastname) zip \(a.zipnumber) isShipment \(a.isDeliveryAddress)")
+        }*/
     }
 
     func DeleteAddress(address: Address){

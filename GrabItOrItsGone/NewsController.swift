@@ -16,7 +16,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var NewsTableView: UITableView!
     
     //MARK: Members
-    var facade:LoginSignUpFacade?
+    var facade:NewsControllerFacade?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +24,13 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SetUpViews()
         
         //Init facade
-        facade = LoginSignUpFacade(presentingController: self)
+        facade = NewsControllerFacade(presentingController: self)
         facade!.firebaseDataReceivedDelegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        facade!.ReadFirebaseNewsSection()
         self.navigationItem.title = view.NewsController_TitleString
+        facade!.firebaseClient.ReadFirebaseNewsSection()
     }
     
     override func didReceiveMemoryWarning() {

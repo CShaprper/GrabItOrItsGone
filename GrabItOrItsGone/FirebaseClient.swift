@@ -14,7 +14,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataReceivedDelegate {
-    private var presentingViewController:UIViewController!
+    private var presentingController:UIViewController!
     private var alert:IAlertMessage?
     private var ref:DatabaseReference!
     private var refhandle:UInt!
@@ -53,7 +53,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if error != nil{
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
-                    self.ShowAlertMessage(title:"FirebaseUserAuthenticationErrorMessage_TitleString".localized, message: "FirebaseUserAuthenticationErrorMessage_MessageString".localized)
+                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseUserAuthenticationErrorMessage_TitleString, message: self.presentingController.view.FirebaseUserAuthenticationErrorMessage_MessageString)
                     self.StopActivityAnimation()
                 }
                 return
@@ -71,7 +71,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
                     self.StopActivityAnimation()
-                    self.ShowAlertMessage(title:"FirebaseUserLoginErrorAlert_TitleString".localized, message: "FirebaseUserLoginErrorAlert_MessageString".localized)
+                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseUserLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseUserLoginErrorAlert_MessageString)
                 }
                 return
             }
@@ -89,7 +89,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
                     self.StopActivityAnimation()
-                    self.ShowAlertMessage(title:"FirebaseResetPasswordErrorAlert_TitleString".localized, message: "FirebaseResetPasswordErrorAlert_MessageString".localized)
+                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseResetPasswordErrorAlert_TitleString, message:  self.presentingController.view.FirebaseResetPasswordErrorAlert_MessageString)
                     return
                 }
             }
@@ -108,7 +108,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
                     self.StopActivityAnimation()
-                    self.ShowAlertMessage(title:"FirebaseThirdPartyLoginErrorAlert_TitleString".localized, message: "FirebaseThirdPartyLoginErrorAlert_MessageString".localized)
+                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_MessageString)
                     return
                 }
             }
@@ -128,7 +128,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if error != nil {
                 print(error!.localizedDescription)
                 self.StopActivityAnimation()
-                self.ShowAlertMessage(title:"FirebaseThirdPartyLoginErrorAlert_TitleString".localized, message: "FirebaseThirdPartyLoginErrorAlert_MessageString".localized)
+                self.ShowAlertMessage(title:self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_MessageString)
                 return
             }
             self.isCalled = false
@@ -139,7 +139,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                         print(error!.localizedDescription)
                         DispatchQueue.main.async {
                             self.StopActivityAnimation()
-                            self.ShowAlertMessage(title:"FirebaseThirdPartyLoginErrorAlert_TitleString".localized, message: "FirebaseThirdPartyLoginErrorAlert_MessageString".localized)
+                            self.ShowAlertMessage(title:self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_MessageString)
                             return
                         }
                     }
@@ -191,7 +191,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             print(error.localizedDescription)
             DispatchQueue.main.async {
                 self.StopActivityAnimation()
-                self.ShowAlertMessage(title:"FirebaseUserLogoutErrorAlert_TitleString".localized, message: "FirebaseUserLogoutErrorAlert_MessageString".localized)
+                self.ShowAlertMessage(title:self.presentingController.view.FirebaseUserLogoutErrorAlert_TitleString, message: self.presentingController.view.FirebaseUserLogoutErrorAlert_MessageString)
             }
         }
         

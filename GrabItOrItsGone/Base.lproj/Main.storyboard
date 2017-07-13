@@ -476,26 +476,41 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MenuBG" translatesAutoresizingMaskIntoConstraints="NO" id="dF8-gS-bYX" userLabel="MenuBackgroundImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3As-cC-ph3" userLabel="btn Menu News">
-                                        <rect key="frame" x="170" y="100" width="100" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3As-cC-ph3" userLabel="btn Menu News">
+                                        <rect key="frame" x="170" y="80" width="100" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="9t8-Dt-CwL"/>
                                             <constraint firstAttribute="height" constant="50" id="wLh-qZ-TvQ"/>
                                         </constraints>
                                         <state key="normal" title="News"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFt-Vw-Jds" userLabel="Favoriten">
-                                        <rect key="frame" x="170" y="180" width="100" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFt-Vw-Jds" userLabel="Favoriten">
+                                        <rect key="frame" x="170" y="150" width="100" height="50"/>
                                         <state key="normal" title="Button"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxS-Dd-mTW" userLabel="Gutscheine">
-                                        <rect key="frame" x="170" y="260" width="100" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxS-Dd-mTW" userLabel="Gutscheine">
+                                        <rect key="frame" x="170" y="220" width="100" height="50"/>
                                         <state key="normal" title="Button"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE7-O4-E3l" userLabel="btn Your Account">
-                                        <rect key="frame" x="170" y="340" width="100" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE7-O4-E3l" userLabel="btn Your Account">
+                                        <rect key="frame" x="170" y="290" width="100" height="50"/>
                                         <state key="normal" title="Dein Account"/>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ov1-xP-DbG" userLabel="Sound Stack">
+                                        <rect key="frame" x="170" y="360" width="100" height="50"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="SoundOn-icon" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-cW-tKJ">
+                                                <rect key="frame" x="0.0" y="5" width="46" height="40"/>
+                                            </imageView>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ltj-W9-c2G">
+                                                <rect key="frame" x="51" y="9.5" width="51" height="31"/>
+                                            </switch>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="L2K-cW-tKJ" firstAttribute="top" secondItem="ov1-xP-DbG" secondAttribute="top" constant="5" id="PDl-dT-ylY"/>
+                                            <constraint firstAttribute="bottom" secondItem="L2K-cW-tKJ" secondAttribute="bottom" constant="5" id="y7n-9W-fDS"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -505,18 +520,22 @@
                                     <constraint firstItem="BE7-O4-E3l" firstAttribute="centerX" secondItem="lxS-Dd-mTW" secondAttribute="centerX" id="3mz-RG-4oO"/>
                                     <constraint firstItem="SFt-Vw-Jds" firstAttribute="width" secondItem="3As-cC-ph3" secondAttribute="width" id="4ka-Fx-zmL"/>
                                     <constraint firstItem="dF8-gS-bYX" firstAttribute="top" secondItem="q72-Rn-AI6" secondAttribute="top" id="CgZ-0u-RMP"/>
+                                    <constraint firstItem="ov1-xP-DbG" firstAttribute="top" secondItem="BE7-O4-E3l" secondAttribute="bottom" constant="20" id="DSw-Pg-EcK"/>
                                     <constraint firstItem="SFt-Vw-Jds" firstAttribute="centerX" secondItem="3As-cC-ph3" secondAttribute="centerX" id="ESl-4O-Ca5"/>
+                                    <constraint firstItem="ov1-xP-DbG" firstAttribute="centerX" secondItem="BE7-O4-E3l" secondAttribute="centerX" id="Ebt-Zm-TGH"/>
+                                    <constraint firstItem="ov1-xP-DbG" firstAttribute="width" secondItem="BE7-O4-E3l" secondAttribute="width" id="JYI-03-Fez"/>
                                     <constraint firstItem="SFt-Vw-Jds" firstAttribute="height" secondItem="3As-cC-ph3" secondAttribute="height" id="Lb4-UY-I26"/>
-                                    <constraint firstItem="3As-cC-ph3" firstAttribute="top" secondItem="q72-Rn-AI6" secondAttribute="top" constant="100" id="OYf-0a-Oxq"/>
-                                    <constraint firstItem="BE7-O4-E3l" firstAttribute="top" secondItem="lxS-Dd-mTW" secondAttribute="bottom" constant="30" id="UXv-R6-bKF"/>
+                                    <constraint firstItem="3As-cC-ph3" firstAttribute="top" secondItem="q72-Rn-AI6" secondAttribute="top" constant="80" id="OYf-0a-Oxq"/>
+                                    <constraint firstItem="BE7-O4-E3l" firstAttribute="top" secondItem="lxS-Dd-mTW" secondAttribute="bottom" constant="20" id="UXv-R6-bKF"/>
                                     <constraint firstAttribute="trailing" secondItem="dF8-gS-bYX" secondAttribute="trailing" id="XZ9-Wr-fqy"/>
                                     <constraint firstItem="lxS-Dd-mTW" firstAttribute="width" secondItem="SFt-Vw-Jds" secondAttribute="width" id="e2k-Dh-8R7"/>
                                     <constraint firstAttribute="bottom" secondItem="dF8-gS-bYX" secondAttribute="bottom" id="faH-NK-sr3"/>
                                     <constraint firstItem="lxS-Dd-mTW" firstAttribute="centerX" secondItem="SFt-Vw-Jds" secondAttribute="centerX" id="jGC-xj-4Mo"/>
                                     <constraint firstAttribute="trailing" secondItem="3As-cC-ph3" secondAttribute="trailing" constant="50" id="mpq-2e-1Xq"/>
-                                    <constraint firstItem="SFt-Vw-Jds" firstAttribute="top" secondItem="3As-cC-ph3" secondAttribute="bottom" constant="30" id="tbK-jy-Ecj"/>
+                                    <constraint firstItem="ov1-xP-DbG" firstAttribute="height" secondItem="BE7-O4-E3l" secondAttribute="height" id="sM2-Qe-shk"/>
+                                    <constraint firstItem="SFt-Vw-Jds" firstAttribute="top" secondItem="3As-cC-ph3" secondAttribute="bottom" constant="20" id="tbK-jy-Ecj"/>
                                     <constraint firstItem="BE7-O4-E3l" firstAttribute="height" secondItem="lxS-Dd-mTW" secondAttribute="height" id="vYt-KV-6nl"/>
-                                    <constraint firstItem="lxS-Dd-mTW" firstAttribute="top" secondItem="SFt-Vw-Jds" secondAttribute="bottom" constant="30" id="z9e-Au-EEu"/>
+                                    <constraint firstItem="lxS-Dd-mTW" firstAttribute="top" secondItem="SFt-Vw-Jds" secondAttribute="bottom" constant="20" id="z9e-Au-EEu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihu-PI-29C" userLabel="InformationSheet">
@@ -740,6 +759,9 @@
                         <outlet property="ProductImageView" destination="H5e-7q-kXm" id="BHz-9M-v9N"/>
                         <outlet property="ProductInformationSheet" destination="ihu-PI-29C" id="UaX-24-Akc"/>
                         <outlet property="ProductInformationTextView" destination="QB2-fu-Ly6" id="5Qt-Yx-a9s"/>
+                        <outlet property="SoundImage" destination="L2K-cW-tKJ" id="RH4-w3-JG4"/>
+                        <outlet property="SoundStack" destination="ov1-xP-DbG" id="6ak-dp-rVw"/>
+                        <outlet property="SoundSwitch" destination="Ltj-W9-c2G" id="4ox-MP-06n"/>
                         <outlet property="TopBackGroundView" destination="s1y-sa-vtg" id="Wcu-ja-faH"/>
                         <outlet property="btn_Menu" destination="i49-Yc-cDv" id="Ub6-Qp-OMM"/>
                         <outlet property="btn_MenuAccount" destination="BE7-O4-E3l" id="TgU-SE-K6i"/>
@@ -917,8 +939,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJd-hk-iUW">
-                                                    <rect key="frame" x="90" y="25.5" width="180" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                                    <rect key="frame" x="100" y="25.5" width="170" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -943,7 +965,7 @@
                                                 <constraint firstItem="akm-sr-Oki" firstAttribute="leading" secondItem="KYz-FH-fSf" secondAttribute="leading" constant="20" id="XA2-Wb-a3c"/>
                                                 <constraint firstItem="BJd-hk-iUW" firstAttribute="centerY" secondItem="KYz-FH-fSf" secondAttribute="centerY" id="aBe-vn-Zzl"/>
                                                 <constraint firstAttribute="trailing" secondItem="2Wo-Ir-Lhi" secondAttribute="trailing" constant="20" id="gFc-wf-sTE"/>
-                                                <constraint firstItem="BJd-hk-iUW" firstAttribute="leading" secondItem="akm-sr-Oki" secondAttribute="trailing" constant="10" id="r2f-yc-62O"/>
+                                                <constraint firstItem="BJd-hk-iUW" firstAttribute="leading" secondItem="akm-sr-Oki" secondAttribute="trailing" constant="20" id="r2f-yc-62O"/>
                                             </constraints>
                                             <connections>
                                                 <outletCollection property="gestureRecognizers" destination="7UU-kw-AcM" appends="YES" id="xIK-xj-7WL"/>
@@ -985,7 +1007,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQ4-0a-hfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="7UU-kw-AcM"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="384"/>
+            <point key="canvasLocation" x="2618" y="1260"/>
         </scene>
         <!--Manage Adress-->
         <scene sceneID="knY-rU-3Oc">
@@ -1322,7 +1344,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="3360" y="384"/>
+            <point key="canvasLocation" x="3433" y="1261"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xse-od-QJ6">
@@ -1355,6 +1377,7 @@
         <image name="MenuBG" width="213" height="379"/>
         <image name="NatureBG" width="600" height="700"/>
         <image name="Product_Cream" width="667" height="667"/>
+        <image name="SoundOn-icon" width="60" height="60"/>
         <image name="Star" width="150" height="150"/>
         <image name="addressbook-icon" width="60" height="60"/>
         <image name="facebook-icon" width="100" height="100"/>
