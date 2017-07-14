@@ -6,9 +6,10 @@
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 @objc protocol IActivityAnimationDelegate {
-    @objc optional func StartActivityAnimation() -> Void
-    @objc optional func StopActivityAnimation() -> Void
+    @objc optional var activityAnimationDelegate:IActivityAnimationDelegate? { get set }
+    func StartActivityAnimation() -> Void
+    func StopActivityAnimation() -> Void
 }

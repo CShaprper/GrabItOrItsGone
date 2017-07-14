@@ -9,5 +9,5 @@
 import Foundation
 
 @objc protocol IFirebaseDataReceivedDelegate {
-    @objc optional func FirebaseDataReceived() -> Void
+    func FirebaseDataReceived() -> Void
 }

@@ -27,7 +27,7 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
         XCTAssertNotNil(sut!.BackgroundBlurryView, "BackgroundBlurryView should exist")
     }
     func test_NavigationController_Title() {
-        XCTAssertEqual(sut!.view.YourAccount_Controller_TitleString, sut!.navigationItem.title)
+        XCTAssertEqual(sut!.navigationItem.title, String.YourAccount_Controller_TitleString)
     }
     func test_ManageAdressContainer_Exists(){
         XCTAssertNotNil(sut!.ManageAdressContainer, "ManageAdressContainer should exist")
@@ -45,7 +45,7 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
         XCTAssertEqual(sut!.lbl_ManageAddressArrow.textColor, sut!.view.tintColor, "lbl_ManageAddressArrow should be in global tintColor")
     }
     func test_lbl_manageAddress_isLocalized() {
-        XCTAssertEqual(sut!.lbl_manageAddress.text, sut!.view.lbl_manageAddress_String, "lbl_manageAddress should be localized")
+        XCTAssertEqual(sut!.lbl_manageAddress.text, String.lbl_manageAddress_String, "lbl_manageAddress should be localized")
     }
     func test_lbl_manageAddress_isSetToGlobalTintColor(){
         XCTAssertEqual(sut!.lbl_manageAddress.textColor, sut!.view.tintColor, "lbl_manageAddress should be in global tintColor")

@@ -16,8 +16,7 @@ enum eValidationType{
     case password
 }
 //FBSDKLoginButtonDelegate
-class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IActivityAnimationDelegate  {
-    
+class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IActivityAnimationDelegate, IAlertMessageDelegate  {
     //MARK: - Outlets
     @IBOutlet var lbl_GrabIt_Header: UILabel!
     @IBOutlet var LogInSignUpBGImage: UIImageView!
@@ -47,34 +46,21 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     @IBOutlet var RegisterPopUpLogoBackground: DesignableUIView!
     
     
-    //MARK: Members
+    //MARK: - Members
     var facade:LoginSignUpFacade!
     let style = UIStyleHelper()
     let appDel = UIApplication.shared.delegate as! AppDelegate
     
-    //MARK: IAuthenticableDelegate implementation
-    func StartActivityAnimation() {
-        view.insertSubview(ActivityIndicator, aboveSubview: RegisterPopUp)
-        ActivityIndicator.alpha = 1
-        ActivityIndicator.startAnimating()
-        ActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        ActivityIndicator.transform = CGAffineTransform(translationX: view.center.x, y: 0)
-    }
-    func StopActivityAnimation() {
-        ActivityIndicator.stopAnimating()
-        ActivityIndicator.alpha = 0
-    }
     
-    //MARK: - ViewController Setup
+    //MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        facade = LoginSignUpFacade(presentingController: self)
-        facade.activityAnitmationDelegate = self
+        facade = LoginSignUpFacade()
+        facade.firebaseClient.activityAnimationDelegate = self
+        facade.firebaseClient.alertMessageDelegate = self
+        facade.presentingController = self 
         
-        //Setup Views
         SetUpViews()
-        
-        //Notification Observers
         AddNotificationListeners()
     }
     override func didReceiveMemoryWarning() {
@@ -105,27 +91,6 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         style.RemoveViewsForStyling(views: [RegisterPopUpBackground, RegisterPopUpLogoBackground, btn_Register_popUp, btn_Guest, lbl_Subtitle, lbl_GrabIt_Header, btn_Login, btn_SignUp, LogInSignUpBGImage, LoginPopUpBackground, LoginPopUpLogoBackground, btn_LogIn_PopUp, txt_Register_Email, txt_Login_Password, txt_Login_Email, txt_Register_Password])
     }
     
-    func AddNotificationListeners() -> Void {
-        NotificationCenter.default.addObserver(self, selector: #selector(SegueToMainController), name: NSNotification.Name.SegueToMainController, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
-    }
-    
-    //MARK: Actions from Notification listeners
-    func KeyboardWillShow(notification: Notification) -> Void{
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-           RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
-            LoginPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
-        }
-        
-    }
-    func KeyboardWillHide(notification: Notification) -> Void{
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
-            LoginPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
-        }
-        
-    }
     
     //MARK: - GoogleSign In Button Delegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -136,11 +101,55 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         facade.LoginFirebaseUserWithGoogle(guser: user)
     }
     
+    
     //MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
+    func txt_Login_Email_TextChanged(sender: DesignableTextField) -> Void {
+        facade.SetValidationService(validationservice: EmailValidationService())
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
+    }
+    func txt_Login_Password_TextChanged(sender: DesignableTextField) -> Void{
+        facade.SetValidationService(validationservice: PasswordValidationService())
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
+    }
+    func txt_Register_Email_TextChanged(sender: DesignableTextField) -> Void {
+        facade.SetValidationService(validationservice: EmailValidationService())
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
+    }
+    func txt_Register_Password_TextChanged(sender:DesignableTextField) -> Void {
+        facade.SetValidationService(validationservice: PasswordValidationService())
+        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
+    }
+
+    
+    
+    //MARK: - IActivityAnimationDelegate implementation
+    func StartActivityAnimation() {
+        view.insertSubview(ActivityIndicator, aboveSubview: RegisterPopUp)
+        ActivityIndicator.alpha = 1
+        ActivityIndicator.startAnimating()
+        ActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        ActivityIndicator.transform = CGAffineTransform(translationX: view.center.x, y: 0)
+    }
+    func StopActivityAnimation() {
+        ActivityIndicator.stopAnimating()
+        ActivityIndicator.alpha = 0
+    }
+    
+    //MARK: - IAlertMessageDelegate implementation
+    func ShowAlertMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
+        present(alert, animated: true, completion: nil)        
+    }
+    
     
     //MARK:- Wired Actions
     func btn_Login_Pressed(sender: UIButton) -> Void {
@@ -152,30 +161,116 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         LoginPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
         PopUpBlurrScreenView.Arise(duration: 0.5, delay: 0, options: [.curveEaseOut], toAlpha: 1)
     }
-    
-    func txt_Login_Email_TextChanged(sender: DesignableTextField) -> Void {
-        facade.SetValidationService(validationservice: EmailValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
-        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
+    func PopUpBlurrScreenView_Touched(sender: UITapGestureRecognizer) -> Void {
+        LoginPopUp.removeFromSuperview()
+        RegisterPopUp.removeFromSuperview()
+        PopUpBlurrScreenView.alpha = 0
+    }
+    func btn_SignUp_Pressed(sender: DesignableUIButton) -> Void {
+        view.addSubview(RegisterPopUp)
+        RegisterPopUp.frame.size.height = 0.5 * view.frame.size.height
+        RegisterPopUp.frame.size.width = 0.9 * view.frame.size.width
+        RegisterPopUp.center = view.center
+        RegisterPopUp.alpha = 0
+        RegisterPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
+        PopUpBlurrScreenView.Arise(duration: 0.5, delay: 0, options: [.curveEaseOut], toAlpha: 1)
+    }
+    func btn_SignUp_PopUp_Pressed(sender: DesignableUIButton) -> Void {
+        //Firebase sign Up
+        facade.CreateNewFirebaseUser(email: txt_Register_Email.text!, password: txt_Register_Password.text!)
+    }
+    func btn_LogIn_PopUp_Pressed(sender: DesignableUIButton) -> Void {
+        facade.firebaseClient.alertMessageDelegate = self
+        facade.LoginFirebaseUser(email: txt_Login_Email.text!, password: txt_Login_Password.text!)
+    }
+    func btn_Guest_Pressed(sender: DesignableUIButton){
+        UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+        self.performSegue(withIdentifier: .SegueToMainController_Identifier, sender: nil)
+    }
+    func btn_PasswordForgotten_Pressed(sender:UIButton) -> Void {
+        facade.ResetUserPassword(email: txt_Login_Email.text!)
+    }
+    func btn_FacebookLogin_Pressed(sender: UIButton) -> Void {
+        facade.LoginFirebaseUserWithFacebook(controller:self)
+    }
+    func btn_CustomGoogleLogin_Pressed(sender: DesignableUIButton) -> Void {
+        UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
+        GIDSignIn.sharedInstance().signIn()
     }
     
-    func txt_Login_Password_TextChanged(sender: DesignableTextField) -> Void{
-        facade.SetValidationService(validationservice: PasswordValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
-        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
+    
+    //MARK:- Wired actions from Notifications
+    func SegueToMainController(notification: Notification) -> Void{
+        txt_Register_Email.text = String()
+        txt_Login_Email.text = String()
+        txt_Login_Password.text = String()
+        txt_Register_Password.text = String()
+        performSegue(withIdentifier: .SegueToMainController_Identifier, sender: nil)
+    }
+    func KeyboardWillShow(notification: Notification) -> Void{
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
+            LoginPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
+        }
+    }
+    func KeyboardWillHide(notification: Notification) -> Void{
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
+            LoginPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
+        }
     }
     
-    func txt_Register_Email_TextChanged(sender: DesignableTextField) -> Void {
-        facade.SetValidationService(validationservice: EmailValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
-        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
+    
+    //MARK: - Helper Methods
+    private func SetUpViews() -> Void {
+        PopUpBlurrScreenView.alpha = 0
+        PopUpBlurrScreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PopUpBlurrScreenView_Touched)))
+        ActivityIndicator.alpha = 0
+        lbl_GrabIt_Header.text = "90 seconds"
+        lbl_Subtitle.text = "Or it's gone"
+        btn_SignUp.setTitle(.btn_SignUp_String , for: .normal)
+        btn_SignUp.addTarget(self, action: #selector(btn_SignUp_Pressed), for: .touchUpInside)
+        btn_Login.setTitle(.btn_Login_String, for: .normal)
+        btn_Login.addTarget(self, action: #selector(btn_Login_Pressed), for: .touchUpInside)
+        btn_Guest.setTitle(.btn_Guest_String, for: .normal)
+        btn_Guest.addTarget(self, action: #selector(btn_Guest_Pressed), for: .touchUpInside)
+        btn_CustomFacebookLogin.addTarget(self, action: #selector(btn_FacebookLogin_Pressed), for: .touchUpInside)
+        btn_CustomGoogleLogin.addTarget(self, action: #selector(btn_CustomGoogleLogin_Pressed), for: .touchUpInside)
+        
+        /*let googleButton = GIDSignInButton()
+         ButonContainer.addArrangedSubview(googleButton)*/
+        GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
+        GIDSignIn.sharedInstance().delegate = self
+        
+        //Login PopUp
+        btn_SignUp_PopUp.setTitle(.btn_SignUp_String, for: .normal)
+        btn_SignUp_PopUp.addTarget(self, action: #selector(btn_SignUp_PopUp_Pressed), for: .touchUpInside)
+        btn_LogIn_PopUp.setTitle(.btn_Login_String, for: .normal)
+        btn_LogIn_PopUp.addTarget(self, action: #selector(btn_LogIn_PopUp_Pressed), for: .touchUpInside)
+        txt_Login_Email.placeholder = .txt_Login_Email_Placeholder_String
+        txt_Login_Email.delegate = self
+        txt_Login_Email.addTarget(self, action: #selector(txt_Login_Email_TextChanged), for: .editingChanged)
+        txt_Login_Password.placeholder = .txt_Login_Password_Placeholder_String
+        txt_Login_Password.delegate = self
+        txt_Login_Password.addTarget(self, action: #selector(txt_Login_Password_TextChanged), for: .editingChanged)
+        btn_PasswordForgotten.setTitle(.btn_PasswordForgotten_Title_String, for: .normal)
+        btn_PasswordForgotten.addTarget(self, action: #selector(btn_PasswordForgotten_Pressed), for: .touchUpInside)
+        
+        //Register PopUp
+        txt_Register_Email.placeholder = .txt_Login_Email_Placeholder_String
+        txt_Register_Email.delegate = self
+        txt_Register_Email.addTarget(self, action: #selector(txt_Register_Email_TextChanged), for: .editingChanged)
+        txt_Register_Password.placeholder = .txt_Login_Password_Placeholder_String
+        txt_Register_Password.delegate = self
+        txt_Register_Password.addTarget(self, action: #selector(txt_Register_Password_TextChanged), for: .editingChanged)
+        btn_Register_popUp.setTitle(.btn_SignUp_String, for: .normal)
+    }
+   private  func AddNotificationListeners() -> Void {
+        NotificationCenter.default.addObserver(self, selector: #selector(SegueToMainController), name: NSNotification.Name.SegueToMainController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     }
     
-    func txt_Register_Password_TextChanged(sender:DesignableTextField) -> Void {
-        facade.SetValidationService(validationservice: PasswordValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
-        ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
-    }
     private func ConfigureDesignableTextfieldDuringInput(sender:DesignableTextField, validationType: eValidationType)->Void{
         switch validationType {
         case .email:
@@ -195,102 +290,8 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
             }
             if sender.text!.isEmpty{
                 sender.RightImageVisibility = false
-            }            
+            }
         }
-    }
-    
-    func PopUpBlurrScreenView_Touched(sender: UITapGestureRecognizer) -> Void {
-        LoginPopUp.removeFromSuperview()
-        RegisterPopUp.removeFromSuperview()
-        PopUpBlurrScreenView.alpha = 0
-    }
-    
-    func btn_SignUp_Pressed(sender: DesignableUIButton) -> Void {
-        view.addSubview(RegisterPopUp)
-        RegisterPopUp.frame.size.height = 0.5 * view.frame.size.height
-        RegisterPopUp.frame.size.width = 0.9 * view.frame.size.width
-        RegisterPopUp.center = view.center
-        RegisterPopUp.alpha = 0
-        RegisterPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
-        PopUpBlurrScreenView.Arise(duration: 0.5, delay: 0, options: [.curveEaseOut], toAlpha: 1)
-    }
-    
-    func btn_SignUp_PopUp_Pressed(sender: DesignableUIButton) -> Void {
-        //Firebase sign Up
-        facade.CreateNewFirebaseUser(email: txt_Register_Email.text!, password: txt_Register_Password.text!)
-    }
-    
-    func btn_LogIn_PopUp_Pressed(sender: DesignableUIButton) -> Void {
-        //Firebase Login
-        facade.LoginFirebaseUser(email: txt_Login_Email.text!, password: txt_Login_Password.text!)
-    }
-    
-    func btn_Guest_Pressed(sender: DesignableUIButton){
-        UserDefaults.standard.set(true, forKey: "isLoggedInAsGuest")
-        self.performSegue(withIdentifier: "SegueToMainController", sender: nil)
-    }
-    
-    func btn_PasswordForgotten_Pressed(sender:UIButton) -> Void {
-        facade.ResetUserPassword(email: txt_Login_Email.text!)
-    }
-    
-    func SegueToMainController(notification: Notification) -> Void{
-        txt_Register_Email.text = String()
-        txt_Login_Email.text = String()
-        txt_Login_Password.text = String()
-        txt_Register_Password.text = String()
-        performSegue(withIdentifier: "SegueToMainController", sender: nil)
-    }
-    
-    func btn_FacebookLogin_Pressed(sender: UIButton) -> Void {
-        facade.LoginFirebaseUserWithFacebook(controller:self)
-    }
-    func btn_CustomGoogleLogin_Pressed(sender: DesignableUIButton) -> Void {
-        UserDefaults.standard.set(true, forKey: "isLoggedInWithGoogle")
-        GIDSignIn.sharedInstance().signIn()
-    }
-    
-    func SetUpViews() -> Void {
-        PopUpBlurrScreenView.alpha = 0
-        PopUpBlurrScreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PopUpBlurrScreenView_Touched)))
-        lbl_GrabIt_Header.text = "90 seconds"
-        lbl_Subtitle.text = "Or it's gone"
-        btn_SignUp.setTitle(view.btn_SignUp_String , for: .normal)
-        btn_SignUp.addTarget(self, action: #selector(btn_SignUp_Pressed), for: .touchUpInside)
-        btn_Login.setTitle(view.btn_Login_String, for: .normal)
-        btn_Login.addTarget(self, action: #selector(btn_Login_Pressed), for: .touchUpInside)
-        btn_Guest.setTitle(view.btn_Guest_String, for: .normal)
-        btn_Guest.addTarget(self, action: #selector(btn_Guest_Pressed), for: .touchUpInside)
-        btn_CustomFacebookLogin.addTarget(self, action: #selector(btn_FacebookLogin_Pressed), for: .touchUpInside)
-        btn_CustomGoogleLogin.addTarget(self, action: #selector(btn_CustomGoogleLogin_Pressed), for: .touchUpInside)
-        
-        /*let googleButton = GIDSignInButton()
-         ButonContainer.addArrangedSubview(googleButton)*/
-        GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
-        GIDSignIn.sharedInstance().delegate = self
-        
-        //Login PopUp
-        btn_SignUp_PopUp.setTitle(view.btn_SignUp_String, for: .normal)
-        btn_SignUp_PopUp.addTarget(self, action: #selector(btn_SignUp_PopUp_Pressed), for: .touchUpInside)
-        btn_LogIn_PopUp.setTitle(view.btn_Login_String, for: .normal)
-        btn_LogIn_PopUp.addTarget(self, action: #selector(btn_LogIn_PopUp_Pressed), for: .touchUpInside)
-        txt_Login_Email.placeholder = view.txt_Login_Email_Placeholder_String
-        txt_Login_Email.delegate = self
-        txt_Login_Email.addTarget(self, action: #selector(txt_Login_Email_TextChanged), for: .editingChanged)
-        txt_Login_Password.placeholder = view.txt_Login_Password_Placeholder_String
-        txt_Login_Password.delegate = self
-        txt_Login_Password.addTarget(self, action: #selector(txt_Login_Password_TextChanged), for: .editingChanged)
-        btn_PasswordForgotten.setTitle(view.btn_PasswordForgotten_Title_String, for: .normal)
-        btn_PasswordForgotten.addTarget(self, action: #selector(btn_PasswordForgotten_Pressed), for: .touchUpInside)
-        
-        //Register PopUp
-        txt_Register_Email.placeholder = view.txt_Login_Email_Placeholder_String
-        txt_Register_Email.delegate = self
-        txt_Register_Email.addTarget(self, action: #selector(txt_Register_Email_TextChanged), for: .editingChanged)
-        txt_Register_Password.placeholder = view.txt_Login_Password_Placeholder_String
-        txt_Register_Password.delegate = self
-        txt_Register_Password.addTarget(self, action: #selector(txt_Register_Password_TextChanged), for: .editingChanged)
-        btn_Register_popUp.setTitle(view.btn_SignUp_String, for: .normal)
     }
 }
 

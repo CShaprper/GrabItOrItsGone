@@ -6,7 +6,9 @@
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
 @objc protocol IAlertMessageDelegate {
-    @objc optional func ShowAlertMessage(title: String, message: String)->Void
+    @objc optional var alertMessageDelegate:IAlertMessageDelegate? { get set }
+    func ShowAlertMessage(title: String, message: String)->Void
 }

@@ -29,7 +29,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = view.NewsController_TitleString
+        self.navigationItem.title = .NewsController_TitleString
         facade!.firebaseClient.ReadFirebaseNewsSection()
     }
     
@@ -50,7 +50,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell") as! NewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: .NewsTableViewCell_Identifier) as! NewsTableViewCell
         cell.ConfigureCell(title: facade!.newsArray![indexPath.row].title!, message: facade!.newsArray![indexPath.row].message!, date: facade!.newsArray[indexPath.row].date!)
         
         tableView.rowHeight = UITableViewAutomaticDimension

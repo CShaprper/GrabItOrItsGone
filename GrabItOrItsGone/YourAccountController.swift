@@ -33,8 +33,8 @@ class YourAccountController: UIViewController {
     }
     
     func SetUpViews() -> Void {
-        self.navigationItem.title = view.YourAccount_Controller_TitleString
-        lbl_manageAddress.text = view.lbl_manageAddress_String
+        self.navigationItem.title = .YourAccount_Controller_TitleString
+        lbl_manageAddress.text = .lbl_manageAddress_String
         lbl_manageAddress.textColor = self.view.tintColor
         lbl_ManageAddressArrow.textColor = self.view.tintColor 
         
@@ -46,6 +46,6 @@ class YourAccountController: UIViewController {
     }
 
     func ManageAdressContainer_Touched(sender: UITapGestureRecognizer) -> Void {
-        self.performSegue(withIdentifier: "SegueToManageAddressController", sender: nil)
+        self.performSegue(withIdentifier: .SegueToManageAddressController_Identifier, sender: nil)
     }
 }

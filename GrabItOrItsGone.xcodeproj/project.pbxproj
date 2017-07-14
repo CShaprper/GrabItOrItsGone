@@ -28,7 +28,6 @@
 		CF3E97031F01698F001C1C9B /* ProductCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3E97021F01698F001C1C9B /* ProductCards.swift */; };
 		CF4766AB1F1002D70045F22B /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4766AA1F1002D70045F22B /* NewsController.swift */; };
 		CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */; };
-		CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */; };
 		CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62621EFD4EBC0051706A /* NotificatioName_extension.swift */; };
 		CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62651EFD501B0051706A /* UIViewAnimationExtension.swift */; };
 		CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64751EFE4CD400C2FBD3 /* DesignableTextfield.swift */; };
@@ -39,7 +38,6 @@
 		CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */; };
 		CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328F1F07C2D700346879 /* IAuthenticable.swift */; };
 		CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF034FEB1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift */; };
-		CF477BB21F0FEF6900DA1EE1 /* IAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2329F1F07D4F900346879 /* IAlertMessage.swift */; };
 		CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */; };
 		CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF034FF71F08FF8000D8F03D /* IValidateable.swift */; };
 		CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */; };
@@ -69,7 +67,6 @@
 		CFB2328D1F07C28D00346879 /* LoginSignUpFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */; };
 		CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328F1F07C2D700346879 /* IAuthenticable.swift */; };
 		CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232931F07C41E00346879 /* FirebaseClient.swift */; };
-		CFB232A01F07D4F900346879 /* IAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2329F1F07D4F900346879 /* IAlertMessage.swift */; };
 		CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232AA1F0804B300346879 /* EmailValidationService.swift */; };
 		CFB232B11F080B8900346879 /* PasswordValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232B01F080B8900346879 /* PasswordValidationService.swift */; };
 		CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */; };
@@ -79,6 +76,10 @@
 		CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
+		CFF1E85E1F18C2ED00E1653C /* TextfieldInputValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E85D1F18C2ED00E1653C /* TextfieldInputValidationService.swift */; };
+		CFF1E8601F18CCF700E1653C /* LoninSignUpControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E85F1F18CCF700E1653C /* LoninSignUpControllerTests.swift */; };
+		CFF1E8651F19142000E1653C /* eUserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */; };
+		CFF1E8671F19191D00E1653C /* SegmentedControlValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,7 +132,6 @@
 		CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsControllerTests.swift; sourceTree = "<group>"; };
 		CF477B9C1F0FEE2F00DA1EE1 /* GrabItOrItsGoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrabItOrItsGoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF477BA01F0FEE2F00DA1EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalisationStringsTests.swift; sourceTree = "<group>"; };
 		CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountControllerTests.swift; sourceTree = "<group>"; };
 		CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInSignUpControllerTests.swift; sourceTree = "<group>"; };
 		CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainControllerTests.swift; sourceTree = "<group>"; };
@@ -163,7 +163,6 @@
 		CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpFacade.swift; sourceTree = "<group>"; };
 		CFB2328F1F07C2D700346879 /* IAuthenticable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAuthenticable.swift; sourceTree = "<group>"; };
 		CFB232931F07C41E00346879 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
-		CFB2329F1F07D4F900346879 /* IAlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlertMessage.swift; sourceTree = "<group>"; };
 		CFB232AA1F0804B300346879 /* EmailValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationService.swift; sourceTree = "<group>"; };
 		CFB232B01F080B8900346879 /* PasswordValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidationService.swift; sourceTree = "<group>"; };
 		CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountController.swift; sourceTree = "<group>"; };
@@ -172,6 +171,10 @@
 		CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAdressController.swift; sourceTree = "<group>"; };
 		CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFirebaseDataDelegate.swift; sourceTree = "<group>"; };
 		CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		CFF1E85D1F18C2ED00E1653C /* TextfieldInputValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldInputValidationService.swift; sourceTree = "<group>"; };
+		CFF1E85F1F18CCF700E1653C /* LoninSignUpControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoninSignUpControllerTests.swift; sourceTree = "<group>"; };
+		CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eUserDefaultKeys.swift; sourceTree = "<group>"; };
+		CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlValidationService.swift; sourceTree = "<group>"; };
 		CFF6E02A1F0D89CC00664B35 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D15A09F65E756D61A098E205 /* Pods_GrabItOrItsGone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrabItOrItsGone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -250,6 +253,7 @@
 				CF6C79241F0FB9E200A681F4 /* GoogleService-Info.plist */,
 				CF3D62291EFD4B4F0051706A /* AppDelegate.swift */,
 				CF3D62611EFD4E9C0051706A /* Helper */,
+				CFF1E8631F1913F400E1653C /* Enums */,
 				CFB232921F07C2E100346879 /* Protocols */,
 				CF3D62581EFD4C9F0051706A /* Controller */,
 				CF3D625A1EFD4CDA0051706A /* Model */,
@@ -288,13 +292,15 @@
 		CF3D625A1EFD4CDA0051706A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CFACAD061F175DEE0066D666 /* Facade */,
-				CFACAD021F1755F80066D666 /* CoreDataModel */,
 				CFB232931F07C41E00346879 /* FirebaseClient.swift */,
 				CF3E97021F01698F001C1C9B /* ProductCards.swift */,
+				CFAE1D491F126C0300165E9D /* News.swift */,
 				CFB232B01F080B8900346879 /* PasswordValidationService.swift */,
 				CFB232AA1F0804B300346879 /* EmailValidationService.swift */,
-				CFAE1D491F126C0300165E9D /* News.swift */,
+				CFF1E85D1F18C2ED00E1653C /* TextfieldInputValidationService.swift */,
+				CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */,
+				CFACAD061F175DEE0066D666 /* Facade */,
+				CFACAD021F1755F80066D666 /* CoreDataModel */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -329,13 +335,13 @@
 			isa = PBXGroup;
 			children = (
 				CF477BA01F0FEE2F00DA1EE1 /* Info.plist */,
-				CF477BA61F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift */,
 				CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */,
 				CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */,
 				CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */,
 				CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */,
 				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
 				CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */,
+				CFF1E85F1F18CCF700E1653C /* LoninSignUpControllerTests.swift */,
 			);
 			path = GrabItOrItsGoneTests;
 			sourceTree = "<group>";
@@ -383,7 +389,6 @@
 			children = (
 				CFB2328F1F07C2D700346879 /* IAuthenticable.swift */,
 				CF034FEB1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift */,
-				CFB2329F1F07D4F900346879 /* IAlertMessage.swift */,
 				CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */,
 				CF034FF71F08FF8000D8F03D /* IValidateable.swift */,
 				CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */,
@@ -398,6 +403,14 @@
 				CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */,
 			);
 			name = TablewViewCells;
+			sourceTree = "<group>";
+		};
+		CFF1E8631F1913F400E1653C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */,
+			);
+			name = Enums;
 			sourceTree = "<group>";
 		};
 		D9EC10993D48FD207C51F56E /* Frameworks */ = {
@@ -717,7 +730,6 @@
 				CF4766AB1F1002D70045F22B /* NewsController.swift in Sources */,
 				CF4B64791EFE4CE800C2FBD3 /* DesingableUIView.swift in Sources */,
 				CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */,
-				CFB232A01F07D4F900346879 /* IAlertMessage.swift in Sources */,
 				CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
 				CFACAD081F1764CC0066D666 /* NewsControllerFacade.swift in Sources */,
@@ -736,18 +748,21 @@
 				CF3D622C1EFD4B4F0051706A /* LogInSignUpController.swift in Sources */,
 				CF034FF81F08FF8000D8F03D /* IValidateable.swift in Sources */,
 				CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */,
+				CFF1E8671F19191D00E1653C /* SegmentedControlValidationService.swift in Sources */,
 				CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
 				CFAE1D4A1F126C0300165E9D /* News.swift in Sources */,
 				CFACAD041F175D5D0066D666 /* ManageAddressFacade.swift in Sources */,
 				CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */,
 				CF96D7771F17DBE3003B5C2B /* MainControllerFacade.swift in Sources */,
 				CF4A3C611F16A73600F3345D /* Address+CoreDataProperties.swift in Sources */,
+				CFF1E85E1F18C2ED00E1653C /* TextfieldInputValidationService.swift in Sources */,
 				CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */,
 				CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */,
 				CF3D62661EFD501B0051706A /* UIViewAnimationExtension.swift in Sources */,
 				CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */,
 				CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */,
 				CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */,
+				CFF1E8651F19142000E1653C /* eUserDefaultKeys.swift in Sources */,
 				CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,14 +772,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
+				CFF1E8601F18CCF700E1653C /* LoninSignUpControllerTests.swift in Sources */,
 				CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */,
 				CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
-				CF477BA71F0FEEEA00DA1EE1 /* LocalisationStringsTests.swift in Sources */,
 				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
 				CF477BAD1F0FEF6400DA1EE1 /* DesignableButton.swift in Sources */,
 				CF721F421F13F97D00B52C8D /* ManageAddressControllerTests.swift in Sources */,
-				CF477BB21F0FEF6900DA1EE1 /* IAlertMessage.swift in Sources */,
 				CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */,
 				CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */,
 				CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */,

@@ -8,18 +8,18 @@
 
 import UIKit
 
-class NewsControllerFacade: IFirebaseDataReceivedDelegate, IAlertMessageDelegate {
+class NewsControllerFacade: IFirebaseDataReceivedDelegate {
+
     //MARK:-Members
-    private var presentingController:UIViewController!
-    private var alertService:IAlertMessage!
+    var alertMessateTitle: String?
+    var alertMessageMessage: String?
     var newsArray:[News]!
     var firebaseClient:FirebaseClient!
     var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
     
     //Constructor
     init(presentingController: NewsController) {
-        self.presentingController = presentingController
-        firebaseClient = FirebaseClient()
+        firebaseClient = FirebaseClient() 
         firebaseClient.firebaseDataReceivedDelegate = self
         newsArray = []
     }
@@ -32,14 +32,7 @@ class NewsControllerFacade: IFirebaseDataReceivedDelegate, IAlertMessageDelegate
     func FirebaseDataReceived() -> Void {
         if firebaseDataReceivedDelegate != nil{
             newsArray = firebaseClient.newsArray
-            firebaseDataReceivedDelegate!.FirebaseDataReceived!()
+            firebaseDataReceivedDelegate!.FirebaseDataReceived()
         }
-    }
-    
-    
-    func ShowAlertMessage(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        presentingController.present(alert, animated: true, completion: nil)
     }
 }

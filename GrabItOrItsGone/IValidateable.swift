@@ -6,7 +6,9 @@
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
-import Foundation
-@objc protocol IValidateable {
-   @objc optional func Validate(validationString: String) -> Bool
+import UIKit
+
+@objc protocol IValidateable { 
+    @objc optional func Validate(validationString: String?) -> Bool
+    @objc optional func Validate(segmentedControl: UISegmentedControl?) -> Bool
 }

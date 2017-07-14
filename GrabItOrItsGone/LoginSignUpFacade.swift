@@ -10,23 +10,21 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 
-class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFirebaseDataReceivedDelegate{
+class LoginSignUpFacade{
     //MARK: Members
-    private var presentingController:UIViewController!
+    var presentingController:UIViewController!
     var firebaseClient:FirebaseClient!
     
     //MARK: NewsController Members
     var validationService:IValidateable!
-    var activityAnitmationDelegate: IActivityAnimationDelegate?
     
     
     //Constructor
-    init(presentingController: UIViewController) {
+    init() {
         self.firebaseClient = FirebaseClient()
-        self.presentingController = presentingController
-        self.firebaseClient.alertMessageDelegate = self
-        self.firebaseClient.activityAnimationDelegate = self
     }
+    
+    //MARK:- IAlertMessageDelegate implementation
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -37,14 +35,14 @@ class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFir
         SetValidationService(validationservice: EmailValidationService())
         if validationService.Validate!(validationString: email) == false
         {
-            ShowAlertMessage(title: presentingController.view.EmailValidationErrorAlert_TitleString, message: presentingController.view.EmailValidationErrorAlert_MessageString)
+            ShowAlertMessage(title: .ValidationErrorAlert_TitleString, message: .EmailValidationErrorAlert_MessageString)
             return
         }
         
         SetValidationService(validationservice: PasswordValidationService())
         if validationService.Validate!(validationString: password) == false
         {
-            ShowAlertMessage(title: presentingController.view.PasswordValidationErrorAlert_TitleString, message: presentingController.view.PasswordValidationErrorAlert_MessageString)
+            ShowAlertMessage(title: .ValidationErrorAlert_TitleString, message: .PasswordValidationErrorAlert_MessageString)
             return
         }
         
@@ -55,14 +53,14 @@ class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFir
         SetValidationService(validationservice: EmailValidationService())
         if validationService.Validate!(validationString: email) == false
         {
-            ShowAlertMessage(title: presentingController.view.EmailValidationErrorAlert_TitleString, message: presentingController.view.EmailValidationErrorAlert_MessageString)
+            ShowAlertMessage(title: .ValidationErrorAlert_TitleString, message: .EmailValidationErrorAlert_MessageString)
             return
         }
         
         SetValidationService(validationservice: PasswordValidationService())
         if validationService.Validate!(validationString: password) == false
         {
-            ShowAlertMessage(title: presentingController.view.PasswordValidationErrorAlert_TitleString, message: presentingController.view.PasswordValidationErrorAlert_MessageString)
+            ShowAlertMessage(title: .ValidationErrorAlert_TitleString, message: .PasswordValidationErrorAlert_MessageString)
             return
         }
         firebaseClient.LoginAuthenticableUser(email: email, password: password)
@@ -95,17 +93,5 @@ class LoginSignUpFacade: IActivityAnimationDelegate, IAlertMessageDelegate, IFir
     //MARK: - Helper Methods
     func SetValidationService(validationservice: IValidateable){
         self.validationService = validationservice
-    }
-    
-    //MARK: - IActivityAnimationDelegate implementation
-    func StartActivityAnimation() {
-        if activityAnitmationDelegate != nil{
-            activityAnitmationDelegate!.StartActivityAnimation!()
-        }
-    }
-    func StopActivityAnimation() {
-        if activityAnitmationDelegate != nil{
-            activityAnitmationDelegate!.StopActivityAnimation!()
-        }
     }
 }

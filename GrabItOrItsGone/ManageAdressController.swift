@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ManageAdressController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class ManageAdressController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, IAlertMessageDelegate {
     //MARK: - Outlets
     @IBOutlet var BackgroundImage: UIImageView!
     @IBOutlet var BackgroundBlurrView: UIVisualEffectView!
@@ -33,107 +33,20 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     let appDel = UIApplication.shared.delegate as! AppDelegate
     
     
+    //MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        facade = ManageAddressFacade()
-        
-        //SetUp Views
+        ConfigureFacade()
         SetUpViews()
-        
-        //Add Notification Listeners
         AddNotificationListeners()
-        
-        facade.FetchAdresses()  
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func AddNotificationListeners() -> Void {
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
-    }
     
-    func SetUpViews() -> Void {
-        //Set TableView Delegate & Datasource
-        AddressTableView.delegate = self
-        AddressTableView.dataSource = self
-        txt_City.delegate = self
-        txt_Address.delegate = self
-        txt_Zipcode.delegate = self
-        txt_Firstname.delegate = self
-        txt_Lastname.delegate = self
-        txt_Housenumber.delegate = self
-        txt_City.textColor = self.view.tintColor
-        txt_Address.textColor = self.view.tintColor
-        txt_Zipcode.textColor = self.view.tintColor
-        txt_Firstname.textColor = self.view.tintColor
-        txt_Lastname.textColor = self.view.tintColor
-        txt_Housenumber.textColor = self.view.tintColor
-        txt_Firstname.placeholder = view.AddressPopUpFirstname_PlaceholderString
-        txt_Lastname.placeholder = view.AddressPopUpLastname_PlaceholderString
-        txt_Address.placeholder = view.AddressPopUpAddress_PlaceholderString
-        txt_Housenumber.placeholder = view.AddressPopUpHousenumber_PlaceholderString
-        txt_Zipcode.placeholder = view.AddressPopUpZipcode_PlaceholderString
-        txt_City.placeholder = view.AddressPopUpCity_PlaceholderString
-        AddressTypeSegmentedControl.setTitle(view.AddressTypeShipment, forSegmentAt: 0)
-        AddressTypeSegmentedControl.setTitle(view.AddressTypeInvoice, forSegmentAt: 1)
-        AddressTypeSegmentedControl.selectedSegmentIndex = -1
-        self.navigationItem.title = view.ManageAddressController_TitleString
-        //Textfield Events
-        txt_Firstname.addTarget(self, action: #selector(txt_Firstname_TextChanged), for: .editingChanged)
-        txt_Lastname.addTarget(self, action: #selector(txt_Lastname_TextChanged), for: .editingChanged)
-        txt_Address.addTarget(self, action: #selector(txt_Address_TextChanged), for: .editingChanged)
-        txt_Housenumber.addTarget(self, action: #selector(txt_Housenumber_TextChanged), for: .editingChanged)
-        txt_Zipcode.addTarget(self, action: #selector(txt_Zipcode_TextChanged), for: .editingChanged)
-        txt_City.addTarget(self, action: #selector(txt_City_TextChanged), for: .editingChanged)
-        
-        btn_SaveAddress.addTarget(self, action: #selector(btn_SaveAddress_Pressed), for: .touchUpInside)
-        AddressTypeSegmentedControl.addTarget(self, action: #selector(AddressTypeSegmentedControl_Switched), for: .valueChanged)
-        
-        let addAddressButton = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.plain, target: self, action:#selector(btn_AddAddress_Pressed))
-        self.navigationItem.rightBarButtonItem = addAddressButton
-    }
     
-    func btn_AddAddress_Pressed(sender: UIButton) -> Void {
-        ShowAddAddressPopUp()
-    }
-    
-    func ShowAddAddressPopUp()->Void{
-        if !self.view.subviews.contains(AddAddressPopUp){
-            facade.CreateNewAddressToInsert()
-            ShowBlurryView()
-            view.addSubview(AddAddressPopUp)
-            AddAddressPopUp.frame.size.height = 0.5 * view.frame.size.height
-            AddAddressPopUp.frame.size.width = 0.9 * view.frame.size.width
-            AddAddressPopUp.center = view.center
-            AddAddressPopUp.alpha = 0
-            AddAddressPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
-        }
-    }
-    
-    func HideAddAddressPopUp() -> Void {
-        if self.view.subviews.contains(AddAddressPopUp){
-            HideBlurrView()
-            AddAddressPopUp.removeFromSuperview()
-        }
-    }
-    
-    func ShowBlurryView(){
-        blurryView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        blurryView.frame.size.width = view.frame.size.width
-        blurryView.frame.size.height = view.frame.size.height
-        blurryView.center = view.center
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(BlurryViewTouched))
-        blurryView.addGestureRecognizer(tapRecognizer)
-        view.addSubview(blurryView!)
-    }
-    
-    func HideBlurrView() -> Void {
-        blurryView.removeFromSuperview()
-    }
-    //MARK: Actions from Notification listeners
+    //MARK: - Actions from Notification listeners
     func KeyboardWillShow(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             AddAddressPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
@@ -159,10 +72,24 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     func btn_SaveAddress_Pressed(sender: DesignableUIButton) -> Void {
-        facade.SaveAddress()
-        HideAddAddressPopUp()
-        AddressTableView.reloadData()
+        if facade.ValidateUserTextfieldInput() && facade.ValidateUserInput_SegmentedtControl(control: AddressTypeSegmentedControl) {
+            facade.SaveAddress()
+            HideAddAddressPopUp()
+            AddressTableView.reloadData()
+        }
     }
+    func btn_AddAddress_Pressed(sender: UIButton) -> Void {
+        ShowAddAddressPopUp()
+    }
+    
+    
+    //MARK:- IAlertMessageDelegate implementation
+    func ShowAlertMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))        
+        present(alert, animated: true, completion: nil)
+    }
+    
     
     //MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -188,15 +115,16 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         facade.address.city = sender.text!
     }
     
+    
     //MARK: - TableView SetUp
     @available(iOS 2.0, *)
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return facade.addresses.count
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: "AdressTableViewCell") as! AdressTableViewCell
-        myCell.ConfigureCell(address: facade.addresses[indexPath.row])        
+        let myCell = tableView.dequeueReusableCell(withIdentifier: .AdressTableViewCell_Identifier) as! AdressTableViewCell
+        myCell.ConfigureCell(address: facade.addresses[indexPath.row])
         return myCell
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -211,5 +139,87 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
             facade.addresses.remove(at: indexPath.row)
             tableView.reloadData()
         }
+    }
+    
+    
+    //MARK: - Helper Methods
+    func SetUpViews() -> Void {
+        AddressTableView.delegate = self
+        AddressTableView.dataSource = self
+        txt_City.delegate = self
+        txt_Address.delegate = self
+        txt_Zipcode.delegate = self
+        txt_Firstname.delegate = self
+        txt_Lastname.delegate = self
+        txt_Housenumber.delegate = self
+        txt_City.textColor = self.view.tintColor
+        txt_Address.textColor = self.view.tintColor
+        txt_Zipcode.textColor = self.view.tintColor
+        txt_Firstname.textColor = self.view.tintColor
+        txt_Lastname.textColor = self.view.tintColor
+        txt_Housenumber.textColor = self.view.tintColor
+        txt_Firstname.placeholder = .AddressPopUpFirstname_PlaceholderString
+        txt_Lastname.placeholder = .AddressPopUpLastname_PlaceholderString
+        txt_Address.placeholder = .AddressPopUpAddress_PlaceholderString
+        txt_Housenumber.placeholder = .AddressPopUpHousenumber_PlaceholderString
+        txt_Zipcode.placeholder = .AddressPopUpZipcode_PlaceholderString
+        txt_City.placeholder = .AddressPopUpCity_PlaceholderString
+        AddressTypeSegmentedControl.setTitle(.AddressTypeShipment, forSegmentAt: 0)
+        AddressTypeSegmentedControl.setTitle(.AddressTypeInvoice, forSegmentAt: 1)
+        AddressTypeSegmentedControl.selectedSegmentIndex = -1
+        self.navigationItem.title = .ManageAddressController_TitleString
+        //Textfield Events
+        txt_Firstname.addTarget(self, action: #selector(txt_Firstname_TextChanged), for: .editingChanged)
+        txt_Lastname.addTarget(self, action: #selector(txt_Lastname_TextChanged), for: .editingChanged)
+        txt_Address.addTarget(self, action: #selector(txt_Address_TextChanged), for: .editingChanged)
+        txt_Housenumber.addTarget(self, action: #selector(txt_Housenumber_TextChanged), for: .editingChanged)
+        txt_Zipcode.addTarget(self, action: #selector(txt_Zipcode_TextChanged), for: .editingChanged)
+        txt_City.addTarget(self, action: #selector(txt_City_TextChanged), for: .editingChanged)
+        
+        btn_SaveAddress.addTarget(self, action: #selector(btn_SaveAddress_Pressed), for: .touchUpInside)
+        AddressTypeSegmentedControl.addTarget(self, action: #selector(AddressTypeSegmentedControl_Switched), for: .valueChanged)
+        
+        let addAddressButton = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.plain, target: self, action:#selector(btn_AddAddress_Pressed))
+        self.navigationItem.rightBarButtonItem = addAddressButton
+    }
+    func AddNotificationListeners() -> Void {
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+    }
+    func ConfigureFacade() -> Void {
+        facade = ManageAddressFacade()
+        facade.textfieldInputValidationService?.alertMessageDelegate = self
+        facade.segmentedControlValidationService?.alertMessageDelegate = self
+        facade.FetchAdresses()
+    }
+    func ShowAddAddressPopUp()->Void{
+        if !self.view.subviews.contains(AddAddressPopUp){
+            facade.CreateNewAddressToInsert()
+            ShowBlurryView()
+            view.addSubview(AddAddressPopUp)
+            AddAddressPopUp.frame.size.height = 0.5 * view.frame.size.height
+            AddAddressPopUp.frame.size.width = 0.9 * view.frame.size.width
+            AddAddressPopUp.center = view.center
+            AddAddressPopUp.alpha = 0
+            AddAddressPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
+        }
+    }
+    func HideAddAddressPopUp() -> Void {
+        if self.view.subviews.contains(AddAddressPopUp){
+            HideBlurrView()
+            AddAddressPopUp.removeFromSuperview()
+        }
+    }
+    func ShowBlurryView(){
+        blurryView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        blurryView.frame.size.width = view.frame.size.width
+        blurryView.frame.size.height = view.frame.size.height
+        blurryView.center = view.center
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(BlurryViewTouched))
+        blurryView.addGestureRecognizer(tapRecognizer)
+        view.addSubview(blurryView!)
+    }    
+    func HideBlurrView() -> Void {
+        blurryView.removeFromSuperview()
     }
 }

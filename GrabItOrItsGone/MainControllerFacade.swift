@@ -6,7 +6,7 @@
 //  Copyright © 2017 Peter Sypek. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import AVFoundation
 
 enum eUserLoggedInService{
@@ -20,10 +20,8 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
     //MARK:-Members
     private var audioplayer:AVAudioPlayer!
     private var presentingController:MainController!
-    private var alertService:IAlertMessage!
     var productsArray:[ProductCard]!
     var firebaseClient:FirebaseClient!
-    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
     
     //Constructor
     init(presentingController: MainController) {
@@ -42,7 +40,7 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
             }
     }
     private func AudioPlayerPlaySound(){
-        let sound = UserDefaults.standard.bool(forKey: "SoundsOn")
+        let sound = UserDefaults.standard.bool(forKey: eUserDefaultKeys.SoundsOn.rawValue)
           if sound {
         audioplayer.play()
         }
@@ -62,9 +60,9 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
     }
     
     func GetUserLoggedInService() -> eUserLoggedInService {
-        let isLoggedInWithFacebook = UserDefaults.standard.bool(forKey: "isLoggedInWithFacebook")
-        let isSignedInAsGuest = UserDefaults.standard.bool(forKey: "isLoggedInAsGuest")
-        let isSignedInWithGoogle = UserDefaults.standard.bool(forKey: "isLoggedInWithGoogle")
+        let isLoggedInWithFacebook = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
+        let isSignedInAsGuest = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+        let isSignedInWithGoogle = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
         if isLoggedInWithFacebook {
             return eUserLoggedInService.facebook
         }
@@ -79,8 +77,12 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
     }
     
     func CheckForSoundSetting(){
-        if (UserDefaults.standard.object(forKey: "SoundOn") == nil) {
-            UserDefaults.standard.set(false, forKey: "SoundOn")
+        if (UserDefaults.standard.object(forKey: eUserDefaultKeys.SoundsOn.rawValue) == nil) {
+            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.SoundsOn.rawValue)
         }
+    }
+    
+    func FirebaseDataReceived() {
+        //todo implement products data from Firebase Client
     }
 }

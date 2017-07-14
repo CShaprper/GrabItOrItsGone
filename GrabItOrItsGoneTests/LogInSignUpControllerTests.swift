@@ -27,7 +27,12 @@ class LogInSignUpControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+    func test_ActivityIndicatior_InitialAlphaValue_isZero(){
+        XCTAssertTrue(sut!.ActivityIndicator.alpha == 0, "Initial alpha of ActivityIndicator should be 0")
+    }
+    func test_ActivityAnimationDelegate_isSet() {
+        XCTAssertNotNil(sut!.facade.firebaseClient.activityAnimationDelegate, "facade.firebaseClient.activityAnimationDelegate not set to show activity animation!")
+    }
     func  test_lbl_GrabIt_Header_Exists(){
         XCTAssertNotNil(sut!.lbl_GrabIt_Header, "lbl_GrabIt_Header should exist")
     }
@@ -86,6 +91,12 @@ class LogInSignUpControllerTests: XCTestCase {
     }
     func test_txt_Login_Email_Exists(){
         XCTAssertNotNil(sut!.txt_Login_Email, "txt_Login_Email should exist")
+    }
+    func test_txt_Login_Email_Placeholder_isSet(){
+        XCTAssertTrue(sut!.txt_Login_Email.placeholder != "", "Missing placeholder value")
+    }
+    func test_txt_Login_Email_Placeholder_isNotNil(){
+        XCTAssertNotNil(sut!.txt_Login_Email.placeholder, "Placeholder not set")
     }
     func test_txt_Login_Password_Exists(){
         XCTAssertNotNil(sut!.txt_Login_Password, "txt_Login_Password should exist")

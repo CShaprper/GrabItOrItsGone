@@ -13,15 +13,13 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataReceivedDelegate {
-    private var presentingController:UIViewController!
-    private var alert:IAlertMessage?
+class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataReceivedDelegate, IAlertMessageDelegate {
+    var alertMessageDelegate: IAlertMessageDelegate?
+    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
+    var activityAnimationDelegate:IActivityAnimationDelegate?
     private var ref:DatabaseReference!
     private var refhandle:UInt!
     let firebaseURL:String = "https://grabitoritsgone.firebaseio.com/"
-    var alertMessageDelegate:IAlertMessageDelegate?
-    var activityAnimationDelegate: IActivityAnimationDelegate?
-    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
     var isCalled:Bool = false
     
     init() {
@@ -29,19 +27,25 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
     }
     
     func ShowAlertMessage(title: String, message: String)->Void{
-        if alertMessageDelegate != nil{
-            alertMessageDelegate!.ShowAlertMessage!(title: title, message: message)
+        if self.alertMessageDelegate != nil{
+            self.alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
+        } else {
+            print("alertMessageDelegate not set from calling class")
         }
     }
     
     func StartActivityAnimation() {
         if activityAnimationDelegate != nil{
-            activityAnimationDelegate!.StartActivityAnimation!()
+            activityAnimationDelegate!.StartActivityAnimation()
+        } else {
+            print("activityAnimationDelegate not set from calling class")
         }
     }
     func StopActivityAnimation() {
         if activityAnimationDelegate != nil{
-            activityAnimationDelegate!.StopActivityAnimation!()
+            activityAnimationDelegate!.StopActivityAnimation()
+        } else {
+            print("activityAnimationDelegate not set from calling class")
         }
     }
     
@@ -53,8 +57,9 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if error != nil{
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
-                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseUserAuthenticationErrorMessage_TitleString, message: self.presentingController.view.FirebaseUserAuthenticationErrorMessage_MessageString)
-                    self.StopActivityAnimation()
+                    let title = String.FirebaseUserAuthenticationErrorMessage_TitleString
+                    let message = String.FirebaseUserAuthenticationErrorMessage_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
                 }
                 return
             }
@@ -71,12 +76,14 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
                     self.StopActivityAnimation()
-                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseUserLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseUserLoginErrorAlert_MessageString)
+                    let title = String.FirebaseUserLoginErrorAlert_TitleString
+                    let message = String.FirebaseUserLoginErrorAlert_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
                 }
                 return
             }
             self.StopActivityAnimation()
-            UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
+            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
             print("Succesfully loged user in to Firebase")
         }
         
@@ -89,7 +96,9 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
                     self.StopActivityAnimation()
-                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseResetPasswordErrorAlert_TitleString, message:  self.presentingController.view.FirebaseResetPasswordErrorAlert_MessageString)
+                    let title = String.FirebaseResetPasswordErrorAlert_TitleString
+                    let message = String.FirebaseResetPasswordErrorAlert_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
                     return
                 }
             }
@@ -108,11 +117,13 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
                     self.StopActivityAnimation()
-                    self.ShowAlertMessage(title:self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_MessageString)
+                    let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                    let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
                     return
                 }
             }
-            UserDefaults.standard.set(true, forKey: "isLoggedInWithGoogle")
+            UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
             print("User logged in with Google")
             self.StopActivityAnimation()
             self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
@@ -128,7 +139,9 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if error != nil {
                 print(error!.localizedDescription)
                 self.StopActivityAnimation()
-                self.ShowAlertMessage(title:self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_MessageString)
+                let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                self.ShowAlertMessage(title: title, message: message)
                 return
             }
             self.isCalled = false
@@ -139,13 +152,15 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                         print(error!.localizedDescription)
                         DispatchQueue.main.async {
                             self.StopActivityAnimation()
-                            self.ShowAlertMessage(title:self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_TitleString, message: self.presentingController.view.FirebaseThirdPartyLoginErrorAlert_MessageString)
+                            let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                            let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                            self.ShowAlertMessage(title: title, message: message)
                             return
                         }
                     }
                     print("User logged in with Facebook")
-                    UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
-                    UserDefaults.standard.set(true, forKey: "isLoggedInWithFacebook")
+                    UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+                    UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
                     self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
                 }
             }
@@ -178,12 +193,12 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         let auth = Auth.auth()
         GIDSignIn.sharedInstance().signOut()
         FBSDKLoginManager().logOut()
-        UserDefaults.standard.set(false, forKey: "isLoggedInWithFacebook")
-        UserDefaults.standard.set(false, forKey: "isLoggedInWithGoogle")
+        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
+        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
         do{
             try  auth.signOut()
             self.StopActivityAnimation()
-            UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
+            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
             print("Succesfully logged out")
             self.isCalled = false
         }
@@ -191,7 +206,9 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             print(error.localizedDescription)
             DispatchQueue.main.async {
                 self.StopActivityAnimation()
-                self.ShowAlertMessage(title:self.presentingController.view.FirebaseUserLogoutErrorAlert_TitleString, message: self.presentingController.view.FirebaseUserLogoutErrorAlert_MessageString)
+                let title = String.FirebaseUserLogoutErrorAlert_TitleString
+                let message = String.FirebaseUserLogoutErrorAlert_MessageString
+                self.ShowAlertMessage(title: title, message: message)
             }
         }
         
@@ -202,14 +219,14 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if user != nil{
                 if !self.isCalled{
                     print("State listener detected user loged in")
-                    UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
+                    UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
                     NotificationCenter.default.post(name: NSNotification.Name.SegueToMainController, object: nil)
                     self.isCalled = true
                 }
             } else {
                 FBSDKLoginManager().logOut()
                 print("State listener detected user loged out")
-                UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
+                UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
                 NotificationCenter.default.post(name: NSNotification.Name.SegueToLogInController, object: nil)
             }
         }
@@ -241,13 +258,19 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 self.newsArray.append(news)
                 
                 DispatchQueue.main.async {
-                    if self.firebaseDataReceivedDelegate != nil{
-                        self.firebaseDataReceivedDelegate!.FirebaseDataReceived!()
-                    }
+                    self.FirebaseDataReceived()
                 }
                 
             }
         })
+    }
+    
+    func FirebaseDataReceived() {
+        if self.firebaseDataReceivedDelegate != nil{
+            self.firebaseDataReceivedDelegate!.FirebaseDataReceived()
+        } else {
+            print("firebaseDataReceivedDelegate not set from calling class")
+        }
     }
     
     private func SaveNewUserWithUIDtoFirebase(user: User?, firebaseURL: String){
@@ -266,7 +289,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 }
                 //self.Post_StopActivityAnimation_Notification()
                 print("Succesfully saved user to Firebase")
-                UserDefaults.standard.set(false, forKey: "isLoggedInAsGuest")
+                UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
             })
         }
     }

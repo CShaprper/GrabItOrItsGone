@@ -70,8 +70,8 @@ class MainController: UIViewController {
         self.navigationController?.navigationBar.barStyle = .blackTranslucent
         self.navigationController?.navigationBar.isOpaque  = false
         //Set Sound Switch value
-        if (UserDefaults.standard.object(forKey: "SoundsOn") != nil) {
-            let sound = UserDefaults.standard.bool(forKey: "SoundsOn")
+        if (UserDefaults.standard.object(forKey: eUserDefaultKeys.SoundsOn.rawValue) != nil) {
+            let sound = UserDefaults.standard.bool(forKey: eUserDefaultKeys.SoundsOn.rawValue)
             SoundSwitch.setOn(sound, animated: true)
             SoundImage.image = sound == true ?  #imageLiteral(resourceName: "SoundOn-icon") : #imageLiteral(resourceName: "SoundOff-icon")
         }
@@ -99,10 +99,10 @@ class MainController: UIViewController {
     
     func SoundSwitch_Changed(sender: UISwitch) -> Void {
         if sender.isOn {
-            UserDefaults.standard.set(true, forKey: "SoundsOn")
+            UserDefaults.standard.set(true, forKey: eUserDefaultKeys.SoundsOn.rawValue)
             SoundImage.image =  #imageLiteral(resourceName: "SoundOn-icon")
         } else {
-            UserDefaults.standard.set(false, forKey: "SoundsOn")
+            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.SoundsOn.rawValue)
             SoundImage.image =   #imageLiteral(resourceName: "SoundOff-icon")
         }
     }
@@ -237,7 +237,7 @@ class MainController: UIViewController {
         }
     }
     func PerformSegueToYourAccountController() -> Void {
-        performSegue(withIdentifier: "SegueToYourAccountController", sender: nil)
+        performSegue(withIdentifier: .SegueToYourAccountController_Identifer, sender: nil)
     }
     
     func btn_MenuNews_Pressed(sender: UIButton) -> Void {
@@ -248,7 +248,7 @@ class MainController: UIViewController {
         }
     }
     func PerformSegueToNewsConroller()->Void{
-        performSegue(withIdentifier: "SegueToNewsController", sender: nil)
+        performSegue(withIdentifier: .SegueToNewsController_Identifier, sender: nil)
     }
     
     private func HideMenu(closure: @escaping () -> Void){
