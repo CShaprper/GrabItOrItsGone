@@ -73,6 +73,9 @@ class LoginSignUpFacade{
     func LoginFirebaseUserWithFacebook(controller:UIViewController)->Void{
         firebaseClient.LoginWithFacebook(controller: controller)
     }
+    func LoginFirebaseUserWithInstagram(controller:UIViewController) -> Void{
+        firebaseClient.LoginWithInstagram(controller: controller)
+    }
     
     func LogoutFirebaseUser(){
         firebaseClient.LogoutAuthenticableUser()

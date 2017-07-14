@@ -83,7 +83,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0ie-sL-5ow">
-                                <rect key="frame" x="90" y="363" width="140" height="60"/>
+                                <rect key="frame" x="50" y="363" width="220" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ya-Oo-hew" userLabel="btn_CustomGoogle" customClass="DesignableUIButton" customModule="GrabItOrItsGone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -96,6 +96,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lq4-3p-a8n" userLabel="btn_CustomFacebook" customClass="DesignableUIButton" customModule="GrabItOrItsGone" customModuleProvider="target">
                                         <rect key="frame" x="80" y="0.0" width="60" height="60"/>
                                         <state key="normal" image="facebook-icon"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ua-Ee-pTt" userLabel="btn_CustomInstagram">
+                                        <rect key="frame" x="160" y="0.0" width="60" height="60"/>
+                                        <state key="normal" title="Button"/>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -175,6 +179,7 @@
                         <outlet property="RegisterPopUpLogoBackground" destination="1ih-WL-5TA" id="vDx-2s-7OP"/>
                         <outlet property="btn_CustomFacebookLogin" destination="Lq4-3p-a8n" id="93c-zf-jpV"/>
                         <outlet property="btn_CustomGoogleLogin" destination="7Ya-Oo-hew" id="l2q-fz-JAb"/>
+                        <outlet property="btn_CustomInstagramLogin" destination="2ua-Ee-pTt" id="jFh-0m-1fW"/>
                         <outlet property="btn_Guest" destination="vub-5v-6fe" id="I4h-XF-xja"/>
                         <outlet property="btn_LogIn_PopUp" destination="oEm-zG-hHl" id="UZ8-6k-8Sq"/>
                         <outlet property="btn_Login" destination="Q59-9y-C9t" id="irP-iS-Ekx"/>

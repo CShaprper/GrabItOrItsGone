@@ -13,6 +13,7 @@ target 'GrabItOrItsGone' do
   pod 'Firebase/Storage'
   pod 'FBSDKLoginKit'
   pod 'GoogleSignIn'
+  pod 'OAuthSwift', '~> 1.1.0'
 
   target 'GrabItOrItsGoneTests' do
    inherit! :search_paths
@@ -23,6 +24,7 @@ target 'GrabItOrItsGone' do
  pod 'Firebase/Storage'
  pod 'FBSDKLoginKit'
  pod 'GoogleSignIn'
+ pod 'OAuthSwift', '~> 1.1.0'
 
   end
 
@@ -35,6 +37,7 @@ target 'GrabItOrItsGone' do
  pod 'Firebase/Storage'
  pod 'FBSDKLoginKit'
  pod 'GoogleSignIn'
+ pod 'OAuthSwift', '~> 1.1.0'
 
  end
   

@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
+import OAuthSwift
 
 class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataReceivedDelegate, IAlertMessageDelegate {
     var alertMessageDelegate: IAlertMessageDelegate?
@@ -128,6 +129,20 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             self.StopActivityAnimation()
             self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
         }
+    }
+    
+    func LoginWithInstagram(controller: UIViewController){
+        self.isCalled = false
+        self.StartActivityAnimation()
+        let oauthSwift = OAuth2Swift(consumerKey: "d9b8a7748ca744aca7894f0044d09545", consumerSecret: "4c37f561b15f4f7596b6970e4d6e6ff3 ", authorizeUrl: "https://api.instagram.com/oauth/authorize", responseType:   "token")
+        let handle = oauthSwift.authorize(withCallbackURL: URL(string: "http://localhost:8080/instagram-callback")!, scope: "likes+comments", state:"INSTAGRAM", success: {
+            credential, response, parameters in
+            print(credential.oauthToken)
+            // Do your request
+        },
+            failure: { error in
+                print(error.localizedDescription)
+        })
     }
     
     

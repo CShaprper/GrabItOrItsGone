@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import Foundation
 import FBSDKLoginKit
 import FirebaseAuth
 import GoogleSignIn
+import OAuthSwift
 
 enum eValidationType{
     case email
     case password
 }
-//FBSDKLoginButtonDelegate
-class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IActivityAnimationDelegate, IAlertMessageDelegate  {
+
+
+class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IActivityAnimationDelegate, IAlertMessageDelegate, UIWebViewDelegate  {
     //MARK: - Outlets
     @IBOutlet var lbl_GrabIt_Header: UILabel!
     @IBOutlet var LogInSignUpBGImage: UIImageView!
@@ -27,6 +30,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     @IBOutlet var ActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var btn_CustomFacebookLogin: DesignableUIButton!
     @IBOutlet var btn_CustomGoogleLogin: DesignableUIButton!
+    @IBOutlet var btn_CustomInstagramLogin: UIButton!
     //Login PopUp
     @IBOutlet var LoginPopUp: UIView!
     @IBOutlet var PopUpBlurrScreenView: UIVisualEffectView!
@@ -50,6 +54,9 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     var facade:LoginSignUpFacade!
     let style = UIStyleHelper()
     let appDel = UIApplication.shared.delegate as! AppDelegate
+    var instagramLoginWebView : UIWebView?
+    var success : ((URLRequest) -> Void)?
+    var presentVC : UIViewController?
     
     
     //MARK: - ViewController Methods
@@ -58,9 +65,10 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         facade = LoginSignUpFacade()
         facade.firebaseClient.activityAnimationDelegate = self
         facade.firebaseClient.alertMessageDelegate = self
-        facade.presentingController = self 
+        facade.presentingController = self
         
         SetUpViews()
+        instagramLoginWebView?.delegate = self
         AddNotificationListeners()
     }
     override func didReceiveMemoryWarning() {
@@ -127,7 +135,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
     }
-
+    
     
     
     //MARK: - IActivityAnimationDelegate implementation
@@ -147,7 +155,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
-        present(alert, animated: true, completion: nil)        
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -197,6 +205,50 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
         GIDSignIn.sharedInstance().signIn()
     }
+    func btn_CustomInstagramLogin_Pressed(sender: UIButton) -> Void{
+        view.addSubview(instagramLoginWebView!)
+        handle()
+        //facade.LoginFirebaseUserWithInstagram(controller: self)
+    }
+   /* func doOAuthInstagram(){
+        let oauthswift = OAuth2Swift(consumerKey:"d9b8a7748ca744aca7894f0044d09545", consumerSecret:"4c37f561b15f4f7596b6970e4d6e6ff3", authorizeUrl:   "https://api.instagram.com/oauth/authorize",responseType: "token")
+        oauthswift.authorize(deviceToken: <#T##String#>, success: <#T##OAuthSwift.TokenRenewedHandler##OAuthSwift.TokenRenewedHandler##(OAuthSwiftCredential) -> Void#>, failure: <#T##OAuthSwiftHTTPRequest.FailureHandler##OAuthSwiftHTTPRequest.FailureHandler##(OAuthSwiftError) -> Void#>)
+        oauthswift.authorize(withCallbackURL: "https://localhost:8080/instagram-callback", scope: "public_content", state: "INSTAGRAM", success: { (credential, response, parameters) in
+            print(parameters["name"] ?? "")
+            print("Instagram oauth_token:\(credential.oauthToken)")
+            print(parameters)
+        }) { (error) in
+            
+        }
+    }*/
+    
+    
+    func handle() {
+        view.tag = 1 // Make sure our view and thus webview is loaded.
+        let INSTAGRAM_AUTHURL = "https://api.instagram.com/oauth/authorize/"
+        let INSTAGRAM_CLIENT_ID = "d9b8a7748ca744aca7894f0044d09545"
+        let INSTAGRAM_REDIRECT_URI = "https://localhost:8080/instagram-callback"
+        let INSTAGRAM_SCOPE = "public_content"
+        let clientSecret = "&client_secret=4c37f561b15f4f7596b6970e4d6e6ff3"
+        let authURL = String(format: "%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@", arguments:[INSTAGRAM_AUTHURL,INSTAGRAM_CLIENT_ID,INSTAGRAM_REDIRECT_URI, INSTAGRAM_SCOPE ])
+        instagramLoginWebView!.loadRequest(URLRequest.init(url: URL.init(string: authURL)!))
+    }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if request.url?.fragment?.contains("access_token") == true {
+            print(request.url ?? "")
+            print(request.url?.fragment ?? "")
+           
+            webView.removeFromSuperview()
+            return false
+        }
+        return true
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        // If we stop on a page before the redirect closes us, user interaction is required.  Present.
+        presentVC?.present(self, animated: true, completion: nil)
+    }
     
     
     //MARK:- Wired actions from Notifications
@@ -223,6 +275,8 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     //MARK: - Helper Methods
     private func SetUpViews() -> Void {
+        instagramLoginWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        
         PopUpBlurrScreenView.alpha = 0
         PopUpBlurrScreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PopUpBlurrScreenView_Touched)))
         ActivityIndicator.alpha = 0
@@ -236,6 +290,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         btn_Guest.addTarget(self, action: #selector(btn_Guest_Pressed), for: .touchUpInside)
         btn_CustomFacebookLogin.addTarget(self, action: #selector(btn_FacebookLogin_Pressed), for: .touchUpInside)
         btn_CustomGoogleLogin.addTarget(self, action: #selector(btn_CustomGoogleLogin_Pressed), for: .touchUpInside)
+        btn_CustomInstagramLogin.addTarget(self, action: #selector(btn_CustomInstagramLogin_Pressed), for: .touchUpInside)
         
         /*let googleButton = GIDSignInButton()
          ButonContainer.addArrangedSubview(googleButton)*/
@@ -265,7 +320,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         txt_Register_Password.addTarget(self, action: #selector(txt_Register_Password_TextChanged), for: .editingChanged)
         btn_Register_popUp.setTitle(.btn_SignUp_String, for: .normal)
     }
-   private  func AddNotificationListeners() -> Void {
+    private  func AddNotificationListeners() -> Void {
         NotificationCenter.default.addObserver(self, selector: #selector(SegueToMainController), name: NSNotification.Name.SegueToMainController, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
