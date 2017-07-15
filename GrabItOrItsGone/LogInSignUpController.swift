@@ -54,7 +54,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     var facade:LoginSignUpFacade!
     let style = UIStyleHelper()
     let appDel = UIApplication.shared.delegate as! AppDelegate
-    var instagramLoginWebView : UIWebView?
+   var instagramLoginWebView : UIWebView?
     var success : ((URLRequest) -> Void)?
     var presentVC : UIViewController?
     
@@ -68,7 +68,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         facade.presentingController = self
         
         SetUpViews()
-        instagramLoginWebView?.delegate = self
+        //instagramLoginWebView?.delegate = self
         AddNotificationListeners()
     }
     override func didReceiveMemoryWarning() {
@@ -206,7 +206,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         GIDSignIn.sharedInstance().signIn()
     }
     func btn_CustomInstagramLogin_Pressed(sender: UIButton) -> Void{
-        view.addSubview(instagramLoginWebView!)
+         view.addSubview(instagramLoginWebView!)
         handle()
         //facade.LoginFirebaseUserWithInstagram(controller: self)
     }
@@ -229,7 +229,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         let INSTAGRAM_CLIENT_ID = "d9b8a7748ca744aca7894f0044d09545"
         let INSTAGRAM_REDIRECT_URI = "https://localhost:8080/instagram-callback"
         let INSTAGRAM_SCOPE = "public_content"
-        let clientSecret = "&client_secret=4c37f561b15f4f7596b6970e4d6e6ff3"
+        //let INSTAGRAM_CLIENT_SECRET = "&client_secret=4c37f561b15f4f7596b6970e4d6e6ff3"
         let authURL = String(format: "%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@", arguments:[INSTAGRAM_AUTHURL,INSTAGRAM_CLIENT_ID,INSTAGRAM_REDIRECT_URI, INSTAGRAM_SCOPE ])
         instagramLoginWebView!.loadRequest(URLRequest.init(url: URL.init(string: authURL)!))
     }
@@ -275,7 +275,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     //MARK: - Helper Methods
     private func SetUpViews() -> Void {
-        instagramLoginWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        // instagramLoginWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         
         PopUpBlurrScreenView.alpha = 0
         PopUpBlurrScreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PopUpBlurrScreenView_Touched)))
