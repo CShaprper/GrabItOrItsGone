@@ -31,8 +31,12 @@ class NewsTableViewCell: UITableViewCell {
         lbl_MessageDate.text = date
         messageTextView.text = message
         
-        let size = messageTextView.sizeThatFits(CGSize(width: messageTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
-        if size.height != messageTextViewHeightConstraint.constant && size.height > messageTextView.frame.size.height{
+        messageTextView.translatesAutoresizingMaskIntoConstraints = false
+      let size = messageTextView.sizeThatFits(CGSize(width: messageTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
+        if  size.height > messageTextView.frame.size.height{
+            messageTextViewHeightConstraint.constant = size.height
+            messageTextView.setContentOffset(CGPoint.zero, animated: false)
+        } else {
             messageTextViewHeightConstraint.constant = size.height
             messageTextView.setContentOffset(CGPoint.zero, animated: false)
         }

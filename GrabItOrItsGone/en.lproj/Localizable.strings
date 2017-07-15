@@ -52,3 +52,4 @@ lbl_manageFavorites_String = "Manage Favorites";
 FirebaseImageUploadErrorAlert_MessageString = "An error occured during saving the image";
 FirebaseImageUploadErrorAlert_TitleString = "Image Upload Error";
 ManageFavoritesController_TitleString = "Favorites";
+FavotritesDetailsController_Title = "Details";

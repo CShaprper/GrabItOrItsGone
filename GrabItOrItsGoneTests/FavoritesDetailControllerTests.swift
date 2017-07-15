@@ -30,9 +30,27 @@ class FavoritesDetailControllerTests: XCTestCase {
     }
     
     func test_BachgroundImage_Exists(){
-    XCTAssertNotNil(sut!.BachgroundImage, "BachgroundImage should exist")
+        XCTAssertNotNil(sut!.BachgroundImage, "BachgroundImage should exist")
     }
     func test_BackgroundBlurrView_Exists(){
-    XCTAssertNotNil(sut!.BackgroundBlurrView, "BackgroundBlurrView should exist")
+        XCTAssertNotNil(sut!.BackgroundBlurrView, "BackgroundBlurrView should exist")
+    }
+    func test_ContentScrollView_Exists(){
+        XCTAssertNotNil(sut!.ContentScrollView, "ContentScrollView should exist")
+    }
+    func test_ContentScrollViewDelegate_isSet() {
+        XCTAssertNotNil(sut!.ContentScrollView.delegate, "ContentScrollView.delegate not set")
+    }
+    func test_ProductImage_Exists(){
+        XCTAssertNotNil(sut!.ProductImage, "ProductImage should exist")
+    }
+    func test_ProductTitle_Exists(){
+        XCTAssertNotNil(sut!.ProductTitle, "ProductTitle should exist")
+    }
+    func test_ProductInformation_Exists(){
+        XCTAssertNotNil(sut!.ProductInformation, "ProductInformation should exist")
+    }
+    func test_sleectedProduct_Exists(){
+        XCTAssertNil(sut!.selectedProduct, "selectedProduct should be nil")
     }
 }

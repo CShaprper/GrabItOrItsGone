@@ -78,6 +78,7 @@
 		CFB599B31F1A474800C0CCF9 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */; };
 		CFB599B51F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */; };
 		CFB599B71F1A55B600C0CCF9 /* LocalisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */; };
+		CFB599B91F1A7B9100C0CCF9 /* FavoritesDetailControllerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B81F1A7B9100C0CCF9 /* FavoritesDetailControllerFacade.swift */; };
 		CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */; };
 		CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */; };
 		CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */; };
@@ -183,6 +184,7 @@
 		CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
 		CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailControllerTests.swift; sourceTree = "<group>"; };
 		CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalisationTests.swift; sourceTree = "<group>"; };
+		CFB599B81F1A7B9100C0CCF9 /* FavoritesDetailControllerFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailControllerFacade.swift; sourceTree = "<group>"; };
 		CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountController.swift; sourceTree = "<group>"; };
 		CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleHelper.swift; sourceTree = "<group>"; };
 		CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */,
 				CF96D7761F17DBE3003B5C2B /* MainControllerFacade.swift */,
 				CFB599AE1F1A309A00C0CCF9 /* ManageFavoritesFacade.swift */,
+				CFB599B81F1A7B9100C0CCF9 /* FavoritesDetailControllerFacade.swift */,
 			);
 			name = Facade;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				CF4A3C611F16A73600F3345D /* Address+CoreDataProperties.swift in Sources */,
 				CFF1E85E1F18C2ED00E1653C /* TextfieldInputValidationService.swift in Sources */,
 				CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */,
+				CFB599B91F1A7B9100C0CCF9 /* FavoritesDetailControllerFacade.swift in Sources */,
 				CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */,
 				CF3D62661EFD501B0051706A /* UIViewAnimationExtension.swift in Sources */,
 				CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */,

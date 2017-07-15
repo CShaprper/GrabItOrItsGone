@@ -20,6 +20,7 @@ class ManageFavoritesFacade: IFirebaseDataReceivedDelegate {
     }
     
     func ReadFirebaseFavoritesSection(){
+        favoritesArray = []
         firebaseClient.ReadFirebaseFavoritesSection()
     }
     

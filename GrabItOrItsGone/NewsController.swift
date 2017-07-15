@@ -50,19 +50,21 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: .NewsTableViewCell_Identifier) as! NewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: .NewsTableViewCell_Identifier) as! NewsTableViewCell 
         cell.ConfigureCell(title: facade!.newsArray![indexPath.row].title!, message: facade!.newsArray![indexPath.row].message!, date: facade!.newsArray[indexPath.row].date!)
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 80
         return cell
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        return view.frame.size.height * 0.1
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     //MARK: - Setup Views
     func SetUpViews() -> Void {
         NewsTableView.delegate = self
         NewsTableView.dataSource = self as UITableViewDataSource
-        NewsTableView.rowHeight = UITableViewAutomaticDimension
-        NewsTableView.estimatedRowHeight = 180
     }
 }

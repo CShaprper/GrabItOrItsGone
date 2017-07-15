@@ -51,3 +51,4 @@ lbl_manageFavorites_String = "Favoriten Verwalten";
 FirebaseImageUploadErrorAlert_MessageString = "Beim Ipload des Bildes ist ein Fehler aufgetreten!";
 FirebaseImageUploadErrorAlert_TitleString = "Bild Upload Fehler";
 ManageFavoritesController_TitleString = "Favoriten";
+FavotritesDetailsController_Title = "Details";

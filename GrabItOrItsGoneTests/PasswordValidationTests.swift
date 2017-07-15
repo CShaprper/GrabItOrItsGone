@@ -18,8 +18,8 @@ class PasswordValidationTests: XCTestCase {
     }
     
     override func tearDown() {
-        super.tearDown()
         validation = nil
+        super.tearDown()
     }
     
     func test_Validation_Passes_When_PassWord_hasSixCharacters() {
