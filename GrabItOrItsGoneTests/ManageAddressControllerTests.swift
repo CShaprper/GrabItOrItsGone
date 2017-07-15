@@ -21,11 +21,10 @@ class ManageAddressControllerTests: XCTestCase {
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.loadView())
-        //sut!.facade = ManageAddressFacade()
+        sut.viewDidLoad()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         sut = nil
         super.tearDown()
     }
@@ -96,18 +95,16 @@ class ManageAddressControllerTests: XCTestCase {
     func test_NavigationItemIsNotEmpty(){
     XCTAssertTrue(sut!.navigationItem.title != "", "NavigationItem.title should not be empty")
     }
-   /*func test_segmentedControlValidationServiceDelegate_isSet() {
+   func test_segmentedControlValidationServiceDelegate_isSet() {
     XCTAssertNotNil(sut!.facade.segmentedControlValidationService?.alertMessageDelegate, "facade.segmentedControlValidationService?.alertMessageDelegate not set")
-    }*/
-    /*func test_NavigationItemIsLocalized(){
+    }
+    func test_NavigationItemIsLocalized(){
         print(sut!.navigationItem.title!)
-        print(sut!.view.ManageAddressController_TitleString)
-        XCTAssertTrue(sut!.navigationItem.title! == sut!.view.ManageAddressController_TitleString , "NavigationItem.title is not localized")
-    }*/
-    
-    /* func test_btn_SaveAddress_isWired_ToAction(){
-     XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SaveAddress, actionName: "btn_SaveAddress_Pressed", event: .touchUpInside, controller: sut! ))
-     }*/
+        XCTAssertEqual(sut!.navigationItem.title, String.ManageAddressController_TitleString , "NavigationItem.title is not localized")
+    }
+    func test_btn_SaveAddress_isWired_ToAction(){
+     XCTAssertTrue(checkButtonActionForOutlet(outlet: sut!.btn_SaveAddress, actionName: "btn_SaveAddress_Pressed", event: .touchUpInside, controller: sut! ))
+     }
     
     //MARK: - Button action test helper
     func checkButtonActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{

@@ -14,7 +14,8 @@ import FBSDKLoginKit
 import GoogleSignIn
 import GoogleToolboxForMac
 import UserNotifications
-//import OAuthSwift
+import OAuthSwift
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
+        
+        
         
         // Use Facebook SDK for Login with facebook
          FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -56,18 +59,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return handled
     }
     
-   /* func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         applicationHandle(url: url)
+        GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         return true
     }
     func applicationHandle(url: URL) {
         if (url.host == "oauth-callback") {
             OAuthSwift.handle(url: url)
+           print(OAuthSwift.Parameters.self)
         } else {
             // Google provider is the only one with your.bundle.id url schema.
             OAuthSwift.handle(url: url)
         }
-    }*/
+    }
     
     
     /// This method will be called whenever FCM receives a new, default FCM token for your

@@ -9,22 +9,21 @@
 import XCTest
 @testable import GrabItOrItsGone
 
-class LoninSignUpControllerTests: XCTestCase {
-    var sut:LoginSignUpFacade!
+class LoninSignUpFacadeTests: XCTestCase {
+    var facade:LoginSignUpFacade!
     
     override func setUp() {
         super.setUp()
-        
-        sut = LoginSignUpFacade()
+        facade = LoginSignUpFacade()
     }
     
     override func tearDown() {
-        sut = nil
+        facade = nil
         super.tearDown()
     }
     
     func test_firbaseClientVar_isSet() {
-        XCTAssertNotNil(sut!.firebaseClient, "firebaseClient not set")
+        XCTAssertNotNil(facade.firebaseClient, "firebaseClient not set")
     }
     
 }

@@ -23,37 +23,35 @@ class MainControllerTests: XCTestCase {
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.view)
+        sut.viewDidLoad()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
         super.tearDown()
     }
     
     func test_MainBackgroundImage_Outlet_Exists(){
         XCTAssertNotNil(sut!.MainBackgroundImage, "MainController should contain a background image outlet")
     }
-    
     func test_CardView_Outlet_Exists(){
         XCTAssertNotNil(sut!.CardView, "MainController shoul contain a CardView outlet")
     }
-    
+    func test_CardView_isWiredTo_GestureRecognizer(){
+        XCTAssertTrue(CheckForGestureRecognizer(view: sut!.CardView), "CardView not wired to GestureRecognizer")
+    }
     func test_CardViewBackgroundImageView_Outlet_Exists(){
         XCTAssertNotNil(sut!.CardBackgrounImageView, "MainController shoul contain a CardView background image view outlet")
     }
-    
     func test_ProductImageView_Outlet_Exists(){
         XCTAssertNotNil(sut!.ProductImageView, "MainController should contain a ProductImageView outlet")
     }
-    
     func test_lbl_ProductTitle_Outlet_Exists(){
         XCTAssertNotNil(sut!.lbl_ProductTitle, "MainController should contain a label outlet for ProductTitle")
     }
-    
     func test_lbl_ProductSubtitle_Outlet_Exists(){
         XCTAssertNotNil(sut!.lbl_ProductSubtitle, "MainController should contain a label outlet for ProductSubtitle")
     }
-    
     func test_btn_Menu_Outlet_Exists(){
         XCTAssertNotNil(sut!.btn_Menu, "MainController should contain a label outlet for ProductSubtitle")
     }
@@ -94,20 +92,19 @@ class MainControllerTests: XCTestCase {
         XCTAssertNotNil(sut!.NewPriceBlurryView, "NewPriceBlurryView should exist to hold new price label")
     }
     func test_btn_MenuAccount_Exists(){
-    XCTAssertNotNil(sut!.btn_MenuAccount, "btn_MenuAccount should exist")
+        XCTAssertNotNil(sut!.btn_MenuAccount, "btn_MenuAccount should exist")
     }
     func test_btn_MenuAccount_Pressed_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuAccount, actionName: "btn_MenuAccount_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuAccount, actionName: "btn_MenuAccount_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_SegueToYourAccount_IdentifierExists() {
-        let identifiers = segues(ofViewController: sut!)
-        XCTAssertTrue(identifiers.contains("SegueToYourAccountController"))
+        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToYourAccountController"))
     }
     func test_btn_MenuNews_Exists(){
-    XCTAssertNotNil(sut!.btn_MenuNews, "btn_MenuNews should exist")
+        XCTAssertNotNil(sut!.btn_MenuNews, "btn_MenuNews should exist")
     }
     func test_btn_MenuNews_isWired_ToAction(){
-    XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuNews, actionName: "btn_MenuNews_Pressed", event: .touchUpInside, controller: sut! ))
+        XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_MenuNews, actionName: "btn_MenuNews_Pressed", event: .touchUpInside, controller: sut! ))
     }
     func test_SegueToNewsController_IdentifierExists() {
         let identifiers = segues(ofViewController: sut!)
@@ -115,7 +112,15 @@ class MainControllerTests: XCTestCase {
     }
     
     
-    // Mark: - Segues Helper Methods
+    
+    //MARK: - Segue Identifier Helper
+    func CheckSegueIndentifier(segueIdentifier:String) -> Bool{
+        let identifiers = segues(ofViewController: sut!)
+        if identifiers.contains(segueIdentifier) {
+            return true
+        }
+        return false
+    }
     func segues(ofViewController viewController: UIViewController) -> [String] {
         let identifiers = (viewController.value(forKey: "storyboardSegueTemplates") as? [AnyObject])?.flatMap({ $0.value(forKey: "identifier") as? String }) ?? []
         return identifiers
@@ -124,9 +129,16 @@ class MainControllerTests: XCTestCase {
     //MARK: - Button action test helper
     func checkActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{
         if let unwrappedButton = outlet {
-             let actions: [String] = unwrappedButton.actions(forTarget: controller, forControlEvent: event)! as [String]
-                let myActionName:String = actionName.appending("WithSender:")
-                return actions.contains(myActionName)
+            let actions: [String] = unwrappedButton.actions(forTarget: controller, forControlEvent: event)! as [String]
+            let myActionName:String = actionName.appending("WithSender:")
+            return actions.contains(myActionName)
+        }
+        return false
+    }
+    //MARK: Gesture Recognizer Helper
+    func CheckForGestureRecognizer(view: UIView) -> Bool{
+        if let _ = view.gestureRecognizers{
+            return true
         }
         return false
     }

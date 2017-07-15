@@ -69,6 +69,15 @@
 		CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232931F07C41E00346879 /* FirebaseClient.swift */; };
 		CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232AA1F0804B300346879 /* EmailValidationService.swift */; };
 		CFB232B11F080B8900346879 /* PasswordValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232B01F080B8900346879 /* PasswordValidationService.swift */; };
+		CFB599A51F19E6DC00C0CCF9 /* eUserLoggenInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599A41F19E6DC00C0CCF9 /* eUserLoggenInService.swift */; };
+		CFB599A91F1A16B200C0CCF9 /* ManageFavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599A81F1A16B200C0CCF9 /* ManageFavoritesController.swift */; };
+		CFB599AB1F1A1FEF00C0CCF9 /* ManageFavoritesControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599AA1F1A1FEF00C0CCF9 /* ManageFavoritesControllerTest.swift */; };
+		CFB599AD1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599AC1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift */; };
+		CFB599AF1F1A309A00C0CCF9 /* ManageFavoritesFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599AE1F1A309A00C0CCF9 /* ManageFavoritesFacade.swift */; };
+		CFB599B11F1A33BF00C0CCF9 /* ManageFavoritesFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B01F1A33BF00C0CCF9 /* ManageFavoritesFacadeTests.swift */; };
+		CFB599B31F1A474800C0CCF9 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */; };
+		CFB599B51F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */; };
+		CFB599B71F1A55B600C0CCF9 /* LocalisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */; };
 		CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */; };
 		CFCBC3CD1EFFDBC4003B2E60 /* UIStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */; };
 		CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */; };
@@ -77,7 +86,7 @@
 		CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */; };
 		CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */; };
 		CFF1E85E1F18C2ED00E1653C /* TextfieldInputValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E85D1F18C2ED00E1653C /* TextfieldInputValidationService.swift */; };
-		CFF1E8601F18CCF700E1653C /* LoninSignUpControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E85F1F18CCF700E1653C /* LoninSignUpControllerTests.swift */; };
+		CFF1E8601F18CCF700E1653C /* LoninSignUpFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E85F1F18CCF700E1653C /* LoninSignUpFacadeTests.swift */; };
 		CFF1E8651F19142000E1653C /* eUserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */; };
 		CFF1E8671F19191D00E1653C /* SegmentedControlValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */; };
 /* End PBXBuildFile section */
@@ -165,6 +174,15 @@
 		CFB232931F07C41E00346879 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		CFB232AA1F0804B300346879 /* EmailValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidationService.swift; sourceTree = "<group>"; };
 		CFB232B01F080B8900346879 /* PasswordValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidationService.swift; sourceTree = "<group>"; };
+		CFB599A41F19E6DC00C0CCF9 /* eUserLoggenInService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eUserLoggenInService.swift; sourceTree = "<group>"; };
+		CFB599A81F1A16B200C0CCF9 /* ManageFavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageFavoritesController.swift; sourceTree = "<group>"; };
+		CFB599AA1F1A1FEF00C0CCF9 /* ManageFavoritesControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageFavoritesControllerTest.swift; sourceTree = "<group>"; };
+		CFB599AC1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		CFB599AE1F1A309A00C0CCF9 /* ManageFavoritesFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageFavoritesFacade.swift; sourceTree = "<group>"; };
+		CFB599B01F1A33BF00C0CCF9 /* ManageFavoritesFacadeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageFavoritesFacadeTests.swift; sourceTree = "<group>"; };
+		CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
+		CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailControllerTests.swift; sourceTree = "<group>"; };
+		CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalisationTests.swift; sourceTree = "<group>"; };
 		CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourAccountController.swift; sourceTree = "<group>"; };
 		CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleHelper.swift; sourceTree = "<group>"; };
 		CFCBC3CE1EFFF8C7003B2E60 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -172,7 +190,7 @@
 		CFF173B91F10DDB500BA4F9B /* IFirebaseDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFirebaseDataDelegate.swift; sourceTree = "<group>"; };
 		CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		CFF1E85D1F18C2ED00E1653C /* TextfieldInputValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldInputValidationService.swift; sourceTree = "<group>"; };
-		CFF1E85F1F18CCF700E1653C /* LoninSignUpControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoninSignUpControllerTests.swift; sourceTree = "<group>"; };
+		CFF1E85F1F18CCF700E1653C /* LoninSignUpFacadeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoninSignUpFacadeTests.swift; sourceTree = "<group>"; };
 		CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eUserDefaultKeys.swift; sourceTree = "<group>"; };
 		CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlValidationService.swift; sourceTree = "<group>"; };
 		CFF6E02A1F0D89CC00664B35 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -271,6 +289,8 @@
 				CFB9D59B1F0E99CF0049777D /* YourAccountController.swift */,
 				CF4766AA1F1002D70045F22B /* NewsController.swift */,
 				CFCBFE5E1F12C73E002F9E1C /* ManageAdressController.swift */,
+				CFB599A81F1A16B200C0CCF9 /* ManageFavoritesController.swift */,
+				CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -335,13 +355,17 @@
 			isa = PBXGroup;
 			children = (
 				CF477BA01F0FEE2F00DA1EE1 /* Info.plist */,
+				CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */,
+				CFF1E85F1F18CCF700E1653C /* LoninSignUpFacadeTests.swift */,
+				CFB599B01F1A33BF00C0CCF9 /* ManageFavoritesFacadeTests.swift */,
+				CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */,
 				CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */,
 				CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */,
 				CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */,
-				CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */,
 				CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */,
 				CF721F411F13F97D00B52C8D /* ManageAddressControllerTests.swift */,
-				CFF1E85F1F18CCF700E1653C /* LoninSignUpControllerTests.swift */,
+				CFB599AA1F1A1FEF00C0CCF9 /* ManageFavoritesControllerTest.swift */,
+				CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */,
 			);
 			path = GrabItOrItsGoneTests;
 			sourceTree = "<group>";
@@ -380,6 +404,7 @@
 				CFACAD031F175D5D0066D666 /* ManageAddressFacade.swift */,
 				CFACAD071F1764CC0066D666 /* NewsControllerFacade.swift */,
 				CF96D7761F17DBE3003B5C2B /* MainControllerFacade.swift */,
+				CFB599AE1F1A309A00C0CCF9 /* ManageFavoritesFacade.swift */,
 			);
 			name = Facade;
 			sourceTree = "<group>";
@@ -401,6 +426,7 @@
 			children = (
 				CFF173BD1F10EC0200BA4F9B /* NewsTableViewCell.swift */,
 				CF721F3E1F13F3DE00B52C8D /* AdressTableViewCell.swift */,
+				CFB599AC1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift */,
 			);
 			name = TablewViewCells;
 			sourceTree = "<group>";
@@ -409,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */,
+				CFB599A41F19E6DC00C0CCF9 /* eUserLoggenInService.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -732,10 +759,13 @@
 				CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */,
 				CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
+				CFB599AD1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift in Sources */,
 				CFACAD081F1764CC0066D666 /* NewsControllerFacade.swift in Sources */,
+				CFB599AF1F1A309A00C0CCF9 /* ManageFavoritesFacade.swift in Sources */,
 				CF4A3C5F1F16A73600F3345D /* Address+CoreDataClass.swift in Sources */,
 				CF3D62631EFD4EBC0051706A /* NotificatioName_extension.swift in Sources */,
 				CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */,
+				CFB599A91F1A16B200C0CCF9 /* ManageFavoritesController.swift in Sources */,
 				CFCBFE5F1F12C73E002F9E1C /* ManageAdressController.swift in Sources */,
 				CF034FEC1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift in Sources */,
 				CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */,
@@ -750,6 +780,7 @@
 				CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */,
 				CFF1E8671F19191D00E1653C /* SegmentedControlValidationService.swift in Sources */,
 				CFF173BA1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
+				CFB599A51F19E6DC00C0CCF9 /* eUserLoggenInService.swift in Sources */,
 				CFAE1D4A1F126C0300165E9D /* News.swift in Sources */,
 				CFACAD041F175D5D0066D666 /* ManageAddressFacade.swift in Sources */,
 				CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */,
@@ -763,6 +794,7 @@
 				CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */,
 				CF721F3F1F13F3DE00B52C8D /* AdressTableViewCell.swift in Sources */,
 				CFF1E8651F19142000E1653C /* eUserDefaultKeys.swift in Sources */,
+				CFB599B31F1A474800C0CCF9 /* FavoritesDetailController.swift in Sources */,
 				CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,12 +803,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB599B11F1A33BF00C0CCF9 /* ManageFavoritesFacadeTests.swift in Sources */,
 				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
-				CFF1E8601F18CCF700E1653C /* LoninSignUpControllerTests.swift in Sources */,
+				CFF1E8601F18CCF700E1653C /* LoninSignUpFacadeTests.swift in Sources */,
 				CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */,
 				CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
 				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
+				CFB599B51F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift in Sources */,
 				CF477BAD1F0FEF6400DA1EE1 /* DesignableButton.swift in Sources */,
 				CF721F421F13F97D00B52C8D /* ManageAddressControllerTests.swift in Sources */,
 				CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */,
@@ -784,6 +818,7 @@
 				CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */,
 				CF477BAC1F0FEF6400DA1EE1 /* DesignableUIEffectView.swift in Sources */,
 				CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */,
+				CFB599B71F1A55B600C0CCF9 /* LocalisationTests.swift in Sources */,
 				CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */,
 				CF477BBA1F0FF0C300DA1EE1 /* MainControllerTests.swift in Sources */,
 				CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */,
@@ -791,6 +826,7 @@
 				CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */,
 				CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */,
 				CFF173BB1F10DDB500BA4F9B /* IFirebaseDataDelegate.swift in Sources */,
+				CFB599AB1F1A1FEF00C0CCF9 /* ManageFavoritesControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

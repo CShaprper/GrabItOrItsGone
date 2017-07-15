@@ -19,8 +19,11 @@ class LogInSignUpControllerTests: XCTestCase {
         storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
         sut = navigationController?.topViewController as? LogInSignUpController
-        _ = sut?.view
-        // firebaseUser = UserAuthentication()
+        
+        // Test and Load the View at the Same Time!
+        XCTAssertNotNil(navigationController?.view)
+        XCTAssertNotNil(sut?.view)
+        sut?.viewDidLoad()
     }
     
     override func tearDown() {

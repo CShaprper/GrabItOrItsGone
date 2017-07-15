@@ -68,7 +68,6 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         facade.presentingController = self
         
         SetUpViews()
-        //instagramLoginWebView?.delegate = self
         AddNotificationListeners()
     }
     override func didReceiveMemoryWarning() {
@@ -238,7 +237,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         if request.url?.fragment?.contains("access_token") == true {
             print(request.url ?? "")
             print(request.url?.fragment ?? "")
-           
+           facade.LoginFirebaseUserWithInstagram(controller: self, customToken: request.url?.fragment ?? "")
             webView.removeFromSuperview()
             return false
         }
@@ -275,8 +274,6 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     //MARK: - Helper Methods
     private func SetUpViews() -> Void {
-        // instagramLoginWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        
         PopUpBlurrScreenView.alpha = 0
         PopUpBlurrScreenView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PopUpBlurrScreenView_Touched)))
         ActivityIndicator.alpha = 0
@@ -319,6 +316,10 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         txt_Register_Password.delegate = self
         txt_Register_Password.addTarget(self, action: #selector(txt_Register_Password_TextChanged), for: .editingChanged)
         btn_Register_popUp.setTitle(.btn_SignUp_String, for: .normal)
+        
+        // Web view Instagram login
+        instagramLoginWebView = UIWebView(frame: CGRect(x: view.frame.size.width * 0.5 - 200, y: view.frame.size.height * 0.5 - 235 * 0.5, width: 400, height: 235))
+        instagramLoginWebView?.delegate = self
     }
     private  func AddNotificationListeners() -> Void {
         NotificationCenter.default.addObserver(self, selector: #selector(SegueToMainController), name: NSNotification.Name.SegueToMainController, object: nil)

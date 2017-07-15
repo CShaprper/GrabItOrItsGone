@@ -13,7 +13,7 @@ extension Double {
     var degreesToRadians: CGFloat { return CGFloat(self) * .pi / 180 }
 }
 
-class MainController: UIViewController {
+class MainController: UIViewController, IAlertMessageDelegate {
     //MARK: - Outlets
     @IBOutlet var MainBackgroundImage: UIImageView!
     @IBOutlet var CardView: DesignableUIView!
@@ -49,6 +49,12 @@ class MainController: UIViewController {
     let productCard:ProductCard = ProductCard()
     var facade:MainControllerFacade!
     
+    func ShowAlertMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))        
+        present(alert, animated: true, completion: nil)
+    }
+    
     
     //MARK: - ViewController functions
     override func viewDidLoad() {
@@ -56,6 +62,7 @@ class MainController: UIViewController {
         facade = MainControllerFacade(presentingController: self)
         //Create Dummy Products
         facade.productsArray = productCard.CreateDummyProducts()
+        facade.firebaseClient.alertMessageDelegate = self
         facade.CheckForSoundSetting()
         //Setup Views
         SetupMainControllerViews()
@@ -76,11 +83,9 @@ class MainController: UIViewController {
             SoundImage.image = sound == true ?  #imageLiteral(resourceName: "SoundOn-icon") : #imageLiteral(resourceName: "SoundOff-icon")
         }
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         style.RemoveViewsForStyling(views: [MainBackgroundImage])
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,7 +96,7 @@ class MainController: UIViewController {
     }
     func LogOutBarButtonItemPressed(sender: UIBarButtonItem) -> Void{
         let loginService = facade.GetUserLoggedInService()
-        if loginService == .guest || loginService == .facebook  || loginService == .google {
+        if loginService == .guest || loginService == .facebook  || loginService == .google || loginService == .instagram {
             SegueToLogInController(notification: Notification(name: NSNotification.Name.SegueToLogInController))
         }
         facade.LogoutFirebaseUser()
@@ -119,9 +124,9 @@ class MainController: UIViewController {
         let swipeLimitRight = view.frame.width * 0.6 // right border when the card gets animated off
         let swipeLimitTop = view.frame.height * 0.4 // top border when the card gets animated off
         let swipeLimitBottom = view.frame.height * 0.7 // top border when the card gets animated off
-        print(swipeLimitBottom)
-        print(sender.location(in: view))
-        let ySpin:CGFloat = yFromCenter < 0 ? -300 : 300 // gives the card a spin in y direction
+        //print(swipeLimitBottom)
+        //print(sender.location(in: view))
+        let ySpin:CGFloat = yFromCenter < 0 ? -200 : 200 // gives the card a spin in y direction
         let xSpin:CGFloat = xFromCenter < 0 ? -300 : 300 // gives the card a spin in x direction
         
         FavoritesStarImage.alpha =  card.center.y < swipeLimitBottom ? 0 : 1
@@ -172,6 +177,7 @@ class MainController: UIViewController {
             } else if card.center.y > swipeLimitBottom
             {
                 facade.PlayYeahSound()
+                self.facade.SaveProductToFavorites(product: facade.productsArray[imageCount])
                 UIView.animate(withDuration: swipeDuration, animations:
                     { card.center.y = card.center.y + self.view.frame.size.height
                 }, completion: { (true) in
@@ -361,8 +367,8 @@ class MainController: UIViewController {
         CardBackgrounImageView.backgroundColor = UIColor.black
         
         //Imageview of CardView
-        MainBackgroundImage.image = UIImage(named: "NatureBG")
-        ProductImageView.image = UIImage(named: "Product_Cream")
+        MainBackgroundImage.image = #imageLiteral(resourceName: "NatureBG")
+        ProductImageView.image = #imageLiteral(resourceName: "Product_Cream")
         ProductImageView.layer.cornerRadius = 20
         ProductImageView.clipsToBounds = true
         

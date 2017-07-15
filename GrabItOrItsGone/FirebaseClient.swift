@@ -24,9 +24,10 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
     var isCalled:Bool = false
     
     init() {
-        ref = Database.database().reference()
+        ref = Database.database().reference(fromURL: firebaseURL)
     }
     
+    //MARK:- IAlertMessageDelegate implementation
     func ShowAlertMessage(title: String, message: String)->Void{
         if self.alertMessageDelegate != nil{
             self.alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
@@ -35,6 +36,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         }
     }
     
+    //MARK:- IActivityAnimationDelegate implementation
     func StartActivityAnimation() {
         if activityAnimationDelegate != nil{
             activityAnimationDelegate!.StartActivityAnimation()
@@ -50,7 +52,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         }
     }
     
-    //MARK: IAuthenticable implementtation
+    //MARK:- Firebase Auth Section
     func CreateNewAutenticableUser(email: String, password: String) {
         self.isCalled = false
         self.StartActivityAnimation()
@@ -63,10 +65,11 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                     self.ShowAlertMessage(title: title, message: message)
                 }
                 return
+            } else {
+                self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
+                self.StopActivityAnimation()
+                print("Succesfully created new Firebase User")
             }
-            self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
-            self.StopActivityAnimation()
-            print("Succesfully created new Firebase User")
         })
     }
     func LoginAuthenticableUser(email: String, password: String) {
@@ -82,14 +85,14 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                     self.ShowAlertMessage(title: title, message: message)
                 }
                 return
+            } else {
+                self.StopActivityAnimation()
+                UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+                print("Succesfully loged user in to Firebase")
             }
-            self.StopActivityAnimation()
-            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
-            print("Succesfully loged user in to Firebase")
         }
         
     }
-    
     func ResetUserPassword(email:String){
         self.StartActivityAnimation()
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
@@ -108,7 +111,6 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         }
         
     }
-    
     func LoginWithGoogle(guser: GIDGoogleUser) -> Void {
         self.isCalled = false
         self.StartActivityAnimation()
@@ -117,35 +119,45 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if error != nil{
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
+                    self.SetUserDefualtsLoggedInKeysToFalse()
                     self.StopActivityAnimation()
                     let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
                     let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
                     self.ShowAlertMessage(title: title, message: message)
                     return
                 }
+            } else {
+                UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
+                print("User logged in with Google")
+                self.StopActivityAnimation()
+                self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
             }
-            UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
-            print("User logged in with Google")
-            self.StopActivityAnimation()
-            self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
         }
     }
-    
-    func LoginWithInstagram(controller: UIViewController){
+    func LoginWithInstagram(controller: UIViewController, customToken: String){
         self.isCalled = false
         self.StartActivityAnimation()
-        let oauthSwift = OAuth2Swift(consumerKey: "d9b8a7748ca744aca7894f0044d09545", consumerSecret: "4c37f561b15f4f7596b6970e4d6e6ff3 ", authorizeUrl: "https://api.instagram.com/oauth/authorize", responseType:   "token")
-        let handle = oauthSwift.authorize(withCallbackURL: URL(string: "http://localhost:8080/instagram-callback")!, scope: "likes+comments", state:"INSTAGRAM", success: {
-            credential, response, parameters in
-            print(credential.oauthToken)
-            // Do your request
-        },
-            failure: { error in
-                print(error.localizedDescription)
-        })
+        let token = customToken.replacingOccurrences(of: "access_token=", with: "")
+        print(token)
+        
+        Auth.auth().signIn(withCustomToken: token) { (user, error) in
+            if error != nil{
+                print(error!.localizedDescription)
+                DispatchQueue.main.async {
+                    self.StopActivityAnimation()
+                    self.SetUserDefualtsLoggedInKeysToFalse()
+                    let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                    let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
+                    return
+                }
+            } else {
+                print("User logged in with Instagram")
+                UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithInstagram.rawValue)
+                self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
+            }
+        }
     }
-    
-    
     func LoginWithFacebook(controller: UIViewController) -> Void {
         self.isCalled = false
         self.StartActivityAnimation()
@@ -153,6 +165,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         { (result, error) in
             if error != nil {
                 print(error!.localizedDescription)
+                self.SetUserDefualtsLoggedInKeysToFalse()
                 self.StopActivityAnimation()
                 let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
                 let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
@@ -172,11 +185,11 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                             self.ShowAlertMessage(title: title, message: message)
                             return
                         }
+                    } else {
+                        print("User logged in with Facebook")
+                        UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
+                        self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
                     }
-                    print("User logged in with Facebook")
-                    UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
-                    UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
-                    self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
                 }
             }
             self.StopActivityAnimation()
@@ -201,19 +214,17 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
              }*/
         }
     }
-    
     func LogoutAuthenticableUser() {
         self.isCalled = false
         self.StartActivityAnimation()
         let auth = Auth.auth()
         GIDSignIn.sharedInstance().signOut()
         FBSDKLoginManager().logOut()
-        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
-        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
+        SetUserDefualtsLoggedInKeysToFalse()
         do{
             try  auth.signOut()
             self.StopActivityAnimation()
-            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+            self.SetUserDefualtsLoggedInKeysToFalse()
             print("Succesfully logged out")
             self.isCalled = false
         }
@@ -228,26 +239,32 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         }
         
     }
-    
     func AddUserStateListener() -> Void {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil{
                 if !self.isCalled{
                     print("State listener detected user loged in")
-                    UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+                    self.SetUserDefualtsLoggedInKeysToFalse()
                     NotificationCenter.default.post(name: NSNotification.Name.SegueToMainController, object: nil)
                     self.isCalled = true
                 }
             } else {
                 FBSDKLoginManager().logOut()
+                self.SetUserDefualtsLoggedInKeysToFalse()
                 print("State listener detected user loged out")
-                UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
                 NotificationCenter.default.post(name: NSNotification.Name.SegueToLogInController, object: nil)
             }
         }
     }
+    private func SetUserDefualtsLoggedInKeysToFalse(){
+        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithInstagram.rawValue)
+        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
+        UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
+    }
     
     
+    //MARK: - Firebase read functions
     var newsArray = [News]()
     func ReadFirebaseNewsSection() -> Void{
         ref.child("news").observe(.childAdded, with: { (snapshot) in
@@ -275,37 +292,94 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 DispatchQueue.main.async {
                     self.FirebaseDataReceived()
                 }
-                
             }
         })
     }
-    
-    func FirebaseDataReceived() {
-        if self.firebaseDataReceivedDelegate != nil{
-            self.firebaseDataReceivedDelegate!.FirebaseDataReceived()
-        } else {
-            print("firebaseDataReceivedDelegate not set from calling class")
+    var favoritesArray:[ProductCard] = []
+    func ReadFirebaseFavoritesSection(){
+        if let uid = Auth.auth().currentUser?.uid{
+            ref.child("favorites_uid_\(uid)").observe(.childAdded, with: { (snapshot) in
+                if let dict = snapshot.value as? [String:AnyObject]{
+                    print(dict)
+                    let product = ProductCard()
+                    product.ID = dict["id"] as? String
+                    product.Title = dict["title"] as? String
+                    product.Subtitle = dict["subtitle"] as? String
+                    product.NewPrice = dict["newprice"] as? Double
+                    product.OriginalPrice = dict["originalprice"] as? Double
+                    product.Productinformation = dict["productinformation"] as? String
+                    self.favoritesArray.append(product)
+                    DispatchQueue.main.async {
+                        self.FirebaseDataReceived()
+                    }
+                }
+            })
         }
     }
     
+    
+    //MARK: - Firebase save functions
+    func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {
+        if let uid = Auth.auth().currentUser?.uid{
+            let favRef = ref.child("favorites_uid_\(uid)")
+            let key = favRef.childByAutoId().key
+            let values = (["id":key, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!] as [String : Any])
+            //self.ref.child("Favorites\(uid)").setValue(values)
+            favRef.child(key).updateChildValues(values, withCompletionBlock: { (error, databaseref) in
+                if error != nil{
+                    print(error!.localizedDescription)
+                }
+                print("Succesfully saved Product to Firebase Favorites")
+                /* Image Upload
+                let storage = Storage.storage()
+                let storageRef = storage.reference()
+                let imagesRef = storageRef.child("images_uid_\(uid)")
+                let nameRef = imagesRef.child(product.ImageName!)
+                let data = UIImagePNGRepresentation(product.ProdcutImage!)
+                let uploadTask = nameRef.putData(data!, metadata: nil, completion: { (metadata, error) in
+                    guard let metadata = metadata else{
+                        if error != nil{
+                            print(error!.localizedDescription)
+                            let title = String.FirebaseImageUploadErrorAlert_TitleString
+                            let message = String.FirebaseImageUploadErrorAlert_MessageString
+                            self.ShowAlertMessage(title: title, message: message)
+                            return
+                        }
+                        return
+                    }
+                    let downloadURL = metadata.downloadURL()
+                    print("Image Uploaded Successfully")
+                }) */
+            })
+        }
+    }
     private func SaveNewUserWithUIDtoFirebase(user: User?, firebaseURL: String){
         DispatchQueue.main.async {
             guard let uid = user?.uid else{
                 return
             }
-            
-            let ref = Database.database().reference(fromURL: firebaseURL)
-            let usersReference = ref.child("users").child(uid)
+            let usersReference = self.ref.child("users").child(uid)
             let values = (["name": user!.displayName, "email": user!.email])
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 if err != nil{
+                    self.StopActivityAnimation()
                     print(err!.localizedDescription)
                     return
+                } else {
+                    self.StopActivityAnimation()
+                    print("Succesfully saved user to Firebase")
+                    self.SetUserDefualtsLoggedInKeysToFalse()
                 }
-                //self.Post_StopActivityAnimation_Notification()
-                print("Succesfully saved user to Firebase")
-                UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
             })
+        }
+    }
+    
+    //MARK: - IFirebaseDataReceivedDelegate implementation
+    func FirebaseDataReceived() {
+        if self.firebaseDataReceivedDelegate != nil{
+            self.firebaseDataReceivedDelegate!.FirebaseDataReceived()
+        } else {
+            print("firebaseDataReceivedDelegate not set from calling class")
         }
     }
 }

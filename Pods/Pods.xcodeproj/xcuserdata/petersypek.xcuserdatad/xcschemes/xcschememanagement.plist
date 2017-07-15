@@ -9,55 +9,90 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>FBSDKCoreKit.xcscheme</key>
+		<key>CMDQueryStringSerialization.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>12</integer>
 		</dict>
-		<key>FBSDKLoginKit.xcscheme</key>
+		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>GTMOAuth2.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>GTMSessionFetcher.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>GoogleToolboxForMac.xcscheme</key>
+		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>OAuthSwift.xcscheme</key>
+		<key>GTMOAuth2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>5</integer>
 		</dict>
-		<key>Pods-GrabItOrItsGone.xcscheme</key>
+		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>Pods-GrabItOrItsGoneTests.xcscheme</key>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>ISO8601.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>OAuthSwift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>Pods-GrabItOrItsGone.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
-		<key>Pods-GrabItOrItsGoneUITests.xcscheme</key>
+		<key>Pods-GrabItOrItsGoneTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
-		<key>Protobuf.xcscheme</key>
+		<key>Pods-GrabItOrItsGoneUITests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>Protobuf.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>ReactiveCocoa.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
+		<key>ReactiveSwift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
+		<key>Result.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>SimpleAuth-SimpleAuth.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+		<key>SimpleAuth.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -72,6 +107,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>26E091F14E558ED87DFE0C22946FA4A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>29B226DD5FF02C1535EDEDAD9BE7CEFB</key>
 		<dict>
 			<key>primary</key>
@@ -82,7 +122,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>40EE7A98B40D5620878B1506AB497515</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>496437D526F98FE57827DFAA2F200C78</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>56B6BF8D384FA4C74C0784A3D5B924E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5FFCD7D157FF93FB6FBDA7B3301017DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,12 +167,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>77A4E1175A9262ABAF0ABFF66252FECD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>85C745DF85EB0711CFCC6ACD6069E401</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8BAFE244BF6221B22E09063CC0C12897</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A25F2D7222BF7C2FADA9E63F7B3532FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A3637575A5A4EA5674D5610D5E60155F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4731A297CB99A39C0808E42141DDB1B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,6 +213,16 @@
 			<true/>
 		</dict>
 		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA52C7D25F11A681EBE697BCBD416B59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF9F3DF02C6EBDEC092B84CAA244B13B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -12,14 +12,20 @@ import UIKit
 extension String{
     static let NewsTableViewCell_Identifier = "NewsTableViewCell"
     static let AdressTableViewCell_Identifier = "AdressTableViewCell"
+    static let FavoritesTableViewCell_Identifier = "FavoritesTableViewCell"
     static let SegueToMainController_Identifier = "SegueToMainController"
     static let SegueToYourAccountController_Identifer = "SegueToYourAccountController"
     static let SegueToNewsController_Identifier = "SegueToNewsController"
     static let SegueToManageAddressController_Identifier = "SegueToManageAddressController"
+    static let SegueToManageFavoritesController_Identifier = "SegueToManageFavoritesController"
+    static let SegueToFavoritesDetailController_Identifier = "SegueToFavoritesDetailController"
 } 
 
 //Localization Strings extension
 extension String {
+    static let ManageFavoritesController_TitleString = NSLocalizedString("ManageFavoritesController_TitleString", comment: "")
+   static let FirebaseImageUploadErrorAlert_TitleString = NSLocalizedString("FirebaseImageUploadErrorAlert_TitleString", comment: "")
+    static let FirebaseImageUploadErrorAlert_MessageString = NSLocalizedString("FirebaseImageUploadErrorAlert_MessageString", comment: "")
     static let AddresTypeSegmentNotSetAlert_MessageString = NSLocalizedString("AddresTypeSegmentNotSetAlert_MessageString", comment: "")
     static let btn_SignUp_String = NSLocalizedString("btn_SignUp_String", comment: "")
     static let btn_Login_String = NSLocalizedString("btn_Login_String", comment: "")
@@ -57,5 +63,6 @@ extension String {
     static let AddressTypeInvoice = NSLocalizedString("AddressTypeInvoice", comment: "")
     static let ValidationErrorAlert_TitleString = NSLocalizedString("ValidationErrorAlert_TitleString", comment: "")
     static let TextfieldInputEmptyValidationError_MessageString = NSLocalizedString("TextfieldInputEmptyValidationError_MessageString", comment: "")
+    static let lbl_manageFavorites_String = NSLocalizedString("lbl_manageFavorites_String", comment: "")
 }
 

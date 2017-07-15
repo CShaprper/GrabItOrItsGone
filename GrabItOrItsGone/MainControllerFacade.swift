@@ -9,13 +9,6 @@
 import UIKit
 import AVFoundation
 
-enum eUserLoggedInService{
-    case facebook
-    case google
-    case email
-    case guest
-}
-
 class MainControllerFacade: IFirebaseDataReceivedDelegate {
     //MARK:-Members
     private var audioplayer:AVAudioPlayer!
@@ -63,6 +56,7 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
         let isLoggedInWithFacebook = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
         let isSignedInAsGuest = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
         let isSignedInWithGoogle = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
+        let isLoggedInWithInstagram = UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInWithInstagram.rawValue)
         if isLoggedInWithFacebook {
             return eUserLoggedInService.facebook
         }
@@ -71,9 +65,16 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
         }
         if isSignedInAsGuest {
             return eUserLoggedInService.guest
+        }
+        if isLoggedInWithInstagram {
+            return eUserLoggedInService.instagram
         } else {
             return eUserLoggedInService.email
         }
+    }
+    
+    func SaveProductToFavorites(product: ProductCard){
+        firebaseClient.SaveProductToFirebaseFavorites(product: product)
     }
     
     func CheckForSoundSetting(){
