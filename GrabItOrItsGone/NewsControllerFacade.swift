@@ -30,7 +30,7 @@ class NewsControllerFacade: IFirebaseDataReceivedDelegate {
     }
     
     func FirebaseDataReceived() -> Void {
-        if firebaseDataReceivedDelegate != nil{
+       if firebaseDataReceivedDelegate != nil{
             newsArray = firebaseClient.newsArray
             firebaseDataReceivedDelegate!.FirebaseDataReceived()
         }

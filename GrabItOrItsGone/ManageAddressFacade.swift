@@ -16,11 +16,13 @@ class ManageAddressFacade{
     var addresses:[Address]!
     var textfieldInputValidationService:TextfieldInputValidationService?
     var segmentedControlValidationService:SegmentedControlValidationService?
+    var zipCodeInputValidationService:ZipCodeInputValidationService?
     
     init() {
         addresses = []
         textfieldInputValidationService = TextfieldInputValidationService()
         segmentedControlValidationService = SegmentedControlValidationService()
+        zipCodeInputValidationService = ZipCodeInputValidationService()
     }
     
     func CreateNewAddressToInsert() -> Void {
@@ -40,16 +42,9 @@ class ManageAddressFacade{
         Address.DeleteAddress(address: address, context: context)
     }
   
-    func ValidateUserTextfieldInput() -> Bool{
-        if !textfieldInputValidationService!.Validate(validationString: address.firstname) || !textfieldInputValidationService!.Validate(validationString: address.lastname) || !textfieldInputValidationService!.Validate(validationString: address.streetname) || !textfieldInputValidationService!.Validate(validationString: address.city) ||
-        !textfieldInputValidationService!.Validate(validationString: address.zipnumber){
-            return false
-        }
-        return true
-    }
-    
-    func ValidateUserInput_SegmentedtControl(control: UISegmentedControl) -> Bool {
-        if !segmentedControlValidationService!.Validate(segmentedControl: control){
+    func ValidateUserInput(segmentedControl: UISegmentedControl) -> Bool{
+        if !segmentedControlValidationService!.Validate(segmentedControl: segmentedControl) || !textfieldInputValidationService!.Validate(validationString: address.firstname) || !textfieldInputValidationService!.Validate(validationString: address.lastname) || !textfieldInputValidationService!.Validate(validationString: address.streetname) || !textfieldInputValidationService!.Validate(validationString: address.city) ||
+            !zipCodeInputValidationService!.Validate(validationString: address.zipnumber) {
             return false
         }
         return true

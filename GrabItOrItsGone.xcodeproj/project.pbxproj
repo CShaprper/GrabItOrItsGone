@@ -61,9 +61,10 @@
 		CFAE1D081F122F4F00165E9D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */; };
 		CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D091F1268EA00165E9D /* Model.xcdatamodeld */; };
 		CFAE1D4A1F126C0300165E9D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D491F126C0300165E9D /* News.swift */; };
-		CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */; };
+		CFAE1D521F12804700165E9D /* UserInputValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE1D511F12804700165E9D /* UserInputValidationTests.swift */; };
 		CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */; };
 		CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */; };
+		CFB196BF1F1B7C4F00AB5535 /* ZipCodeInputValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB196BE1F1B7C4F00AB5535 /* ZipCodeInputValidationService.swift */; };
 		CFB2328D1F07C28D00346879 /* LoginSignUpFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */; };
 		CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328F1F07C2D700346879 /* IAuthenticable.swift */; };
 		CFB232941F07C41E00346879 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB232931F07C41E00346879 /* FirebaseClient.swift */; };
@@ -167,9 +168,10 @@
 		CFAE1D071F122F4F00165E9D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CFAE1D0A1F1268EA00165E9D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CFAE1D491F126C0300165E9D /* News.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
-		CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidationTests.swift; sourceTree = "<group>"; };
+		CFAE1D511F12804700165E9D /* UserInputValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInputValidationTests.swift; sourceTree = "<group>"; };
 		CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAlertMessageDelegate.swift; sourceTree = "<group>"; };
 		CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringExtension.swift; sourceTree = "<group>"; };
+		CFB196BE1F1B7C4F00AB5535 /* ZipCodeInputValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipCodeInputValidationService.swift; sourceTree = "<group>"; };
 		CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpFacade.swift; sourceTree = "<group>"; };
 		CFB2328F1F07C2D700346879 /* IAuthenticable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAuthenticable.swift; sourceTree = "<group>"; };
 		CFB232931F07C41E00346879 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				CFB232AA1F0804B300346879 /* EmailValidationService.swift */,
 				CFF1E85D1F18C2ED00E1653C /* TextfieldInputValidationService.swift */,
 				CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */,
+				CFB196BE1F1B7C4F00AB5535 /* ZipCodeInputValidationService.swift */,
 				CFACAD061F175DEE0066D666 /* Facade */,
 				CFACAD021F1755F80066D666 /* CoreDataModel */,
 			);
@@ -357,7 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				CF477BA01F0FEE2F00DA1EE1 /* Info.plist */,
-				CFAE1D511F12804700165E9D /* PasswordValidationTests.swift */,
+				CFAE1D511F12804700165E9D /* UserInputValidationTests.swift */,
 				CFF1E85F1F18CCF700E1653C /* LoninSignUpFacadeTests.swift */,
 				CFB599B01F1A33BF00C0CCF9 /* ManageFavoritesFacadeTests.swift */,
 				CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */,
@@ -761,6 +764,7 @@
 				CF4B64791EFE4CE800C2FBD3 /* DesingableUIView.swift in Sources */,
 				CFB0D37F1F0AA708000706E7 /* IAlertMessageDelegate.swift in Sources */,
 				CFF173BE1F10EC0200BA4F9B /* NewsTableViewCell.swift in Sources */,
+				CFB196BF1F1B7C4F00AB5535 /* ZipCodeInputValidationService.swift in Sources */,
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
 				CFB599AD1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift in Sources */,
 				CFACAD081F1764CC0066D666 /* NewsControllerFacade.swift in Sources */,
@@ -811,7 +815,7 @@
 				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
 				CFF1E8601F18CCF700E1653C /* LoninSignUpFacadeTests.swift in Sources */,
 				CF477BB11F0FEF6900DA1EE1 /* IActivityAnimationDelegate.swift in Sources */,
-				CFAE1D521F12804700165E9D /* PasswordValidationTests.swift in Sources */,
+				CFAE1D521F12804700165E9D /* UserInputValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
 				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
 				CFB599B51F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift in Sources */,

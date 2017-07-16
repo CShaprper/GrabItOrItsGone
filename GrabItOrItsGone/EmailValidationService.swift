@@ -10,7 +10,7 @@ import Foundation
 /// **Class needs to implement IValidateable.**
 /// 
 /// Validates email user input
-class EmailValidationService: IValidateable{
+class EmailValidationService: IValidateable{ 
     
     /// This function validates email input.
     /// * parameter validationString: String for validation process

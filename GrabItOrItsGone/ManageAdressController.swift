@@ -32,7 +32,6 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     var facade:ManageAddressFacade!
     let appDel = UIApplication.shared.delegate as! AppDelegate
     
-    
     //MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +71,7 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     func btn_SaveAddress_Pressed(sender: DesignableUIButton) -> Void {
-        if facade.ValidateUserTextfieldInput() && facade.ValidateUserInput_SegmentedtControl(control: AddressTypeSegmentedControl) {
+        if facade.ValidateUserInput(segmentedControl: AddressTypeSegmentedControl) {
             facade.SaveAddress()
             HideAddAddressPopUp()
             AddressTableView.reloadData()
@@ -84,6 +83,11 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     
     
     //MARK:- IAlertMessageDelegate implementation
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        facade.textfieldInputValidationService?.alertMessageDelegate = delegate
+        facade.zipCodeInputValidationService?.alertMessageDelegate = delegate
+        facade.segmentedControlValidationService?.alertMessageDelegate = delegate
+    }    
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))        
@@ -188,9 +192,8 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     }
     func ConfigureFacade() -> Void {
         facade = ManageAddressFacade()
-        facade.textfieldInputValidationService?.alertMessageDelegate = self
-        facade.segmentedControlValidationService?.alertMessageDelegate = self
         facade.FetchAdresses()
+        initAlertMessageDelegate(delegate: self)
     }
     func ShowAddAddressPopUp()->Void{
         if !self.view.subviews.contains(AddAddressPopUp){

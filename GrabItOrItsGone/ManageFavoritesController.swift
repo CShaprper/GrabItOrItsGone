@@ -52,7 +52,7 @@ class ManageFavoritesController: UIViewController, UITableViewDelegate, UITableV
     
     
     //MARK:- IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() {
+    func FirebaseDataReceived() { 
         facade.favoritesArray = facade.firebaseClient.favoritesArray
         FavoritesTableView.reloadData()
     }

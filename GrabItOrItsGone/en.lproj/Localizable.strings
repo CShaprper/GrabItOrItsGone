@@ -53,3 +53,5 @@ FirebaseImageUploadErrorAlert_MessageString = "An error occured during saving th
 FirebaseImageUploadErrorAlert_TitleString = "Image Upload Error";
 ManageFavoritesController_TitleString = "Favorites";
 FavotritesDetailsController_Title = "Details";
+ZipCodeErrorAlert_MessageString = "The zip code has to be five digits!";
+TextfieldInputToShortValidationError_MessageString = "The textfield input needs to be at least three characters long!";

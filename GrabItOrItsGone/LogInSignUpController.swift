@@ -58,14 +58,18 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     var success : ((URLRequest) -> Void)?
     var presentVC : UIViewController?
     
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        facade.firebaseClient.alertMessageDelegate = delegate
+    }
+    
     
     //MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         facade = LoginSignUpFacade()
         facade.firebaseClient.activityAnimationDelegate = self
-        facade.firebaseClient.alertMessageDelegate = self
         facade.presentingController = self
+        initAlertMessageDelegate(delegate: self)
         
         SetUpViews()
         AddNotificationListeners()

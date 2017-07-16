@@ -9,23 +9,44 @@
 import UIKit
 
 class SegmentedControlValidationService: IValidateable, IAlertMessageDelegate {
-     var alertMessageDelegate: IAlertMessageDelegate?
+    var alertMessageDelegate: IAlertMessageDelegate?
+    let title = String.ValidationErrorAlert_TitleString
+    var message = String.AddresTypeSegmentNotSetAlert_MessageString
+    
+    
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        alertMessageDelegate = delegate
+    }
     
     func Validate(segmentedControl: UISegmentedControl?) -> Bool {
-        if segmentedControl?.selectedSegmentIndex == -1{
-                let title = String.ValidationErrorAlert_TitleString
-                let message = String.AddresTypeSegmentNotSetAlert_MessageString
-                ShowAlertMessage(title: title, message: message)
-                return false 
+        var isValid:Bool = false
+        
+        isValid = validateNotNil(segmentedControl: segmentedControl)
+        isValid = validateIsSet(segmentedControl: segmentedControl)
+        return isValid
+    }
+    
+    private func validateNotNil(segmentedControl: UISegmentedControl?) -> Bool{
+        if segmentedControl == nil {
+            ShowAlertMessage(title: title, message: message)
+             return false
+        }
+        return true
+    }
+    private func validateIsSet(segmentedControl: UISegmentedControl?) -> Bool{
+        if segmentedControl == nil { return false }
+        if segmentedControl!.selectedSegmentIndex == -1 {
+            ShowAlertMessage(title: title, message: message)
+            return false
         }
         return true
     }
     
-    func ShowAlertMessage(title: String, message: String) {
+    internal func ShowAlertMessage(title: String, message: String) {
         if alertMessageDelegate != nil{
             alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
         } else {
-            print("alertMessageDelegate not set from calling class")
+            print("SegmentedControlValidationService: alertMessageDelegate not set from calling class")
         }
     }
 }

@@ -41,7 +41,7 @@ class LoginSignUpFacade{
         
         SetValidationService(validationservice: PasswordValidationService())
         if validationService.Validate!(validationString: password) == false
-        {
+        {        
             ShowAlertMessage(title: .ValidationErrorAlert_TitleString, message: .PasswordValidationErrorAlert_MessageString)
             return
         }

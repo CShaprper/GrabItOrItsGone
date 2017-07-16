@@ -52,3 +52,5 @@ FirebaseImageUploadErrorAlert_MessageString = "Beim Ipload des Bildes ist ein Fe
 FirebaseImageUploadErrorAlert_TitleString = "Bild Upload Fehler";
 ManageFavoritesController_TitleString = "Favoriten";
 FavotritesDetailsController_Title = "Details";
+ZipCodeErrorAlert_MessageString = "Die Polstleitzahl muss fünfstellig sein!";
+TextfieldInputToShortValidationError_MessageString = "Die Eingaben in den Textfeldern müssen mindestens drei Buchstaben betragen!";

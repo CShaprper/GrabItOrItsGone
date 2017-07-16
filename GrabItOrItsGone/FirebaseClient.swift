@@ -27,6 +27,19 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         ref = Database.database().reference(fromURL: firebaseURL)
     }
     
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        alertMessageDelegate = delegate
+    }
+    
+    //MARK: - IFirebaseDataReceivedDelegate implementation
+    func FirebaseDataReceived() {
+        if self.firebaseDataReceivedDelegate != nil{
+            self.firebaseDataReceivedDelegate!.FirebaseDataReceived()
+        } else {
+            print("firebaseDataReceivedDelegate not set from calling class")
+        }
+    }
+    
     //MARK:- IAlertMessageDelegate implementation
     func ShowAlertMessage(title: String, message: String)->Void{
         if self.alertMessageDelegate != nil{
@@ -371,15 +384,6 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                     self.SetUserDefualtsLoggedInKeysToFalse()
                 }
             })
-        }
-    }
-    
-    //MARK: - IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() {
-        if self.firebaseDataReceivedDelegate != nil{
-            self.firebaseDataReceivedDelegate!.FirebaseDataReceived()
-        } else {
-            print("firebaseDataReceivedDelegate not set from calling class")
         }
     }
 }

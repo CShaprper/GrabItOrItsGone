@@ -32,16 +32,17 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationItem.title = .NewsController_TitleString
         facade!.firebaseClient.ReadFirebaseNewsSection()
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
     //MARK: - IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() {
+    func FirebaseDataReceived() { 
         self.NewsTableView.reloadData()
     }
+    
     
     //MARK: - Tableview Setup
     @available(iOS 2.0, *)
@@ -61,6 +62,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
+    
     
     //MARK: - Setup Views
     func SetUpViews() -> Void {

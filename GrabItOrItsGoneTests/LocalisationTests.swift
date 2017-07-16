@@ -22,15 +22,27 @@ class LocalisationTests: XCTestCase {
     }
     
     func test_FirebaseImageUploadErrorAlert_TitleString_Exist(){
-    XCTAssertNotNil(String.FirebaseImageUploadErrorAlert_TitleString, "FirebaseImageUploadErrorAlert_TitleString should exist")
+        XCTAssertNotNil(String.FirebaseImageUploadErrorAlert_TitleString, "FirebaseImageUploadErrorAlert_TitleString should exist")
     }
     func test_FirebaseImageUploadErrorAlert_TitleString_isLocalized(){
-    XCTAssertTrue(String.FirebaseImageUploadErrorAlert_TitleString != "FirebaseImageUploadErrorAlert_TitleString", "FirebaseImageUploadErrorAlert_TitleString is not localized in strings file!")
+        XCTAssertTrue(String.FirebaseImageUploadErrorAlert_TitleString != "FirebaseImageUploadErrorAlert_TitleString", "FirebaseImageUploadErrorAlert_TitleString is not localized in strings file!")
     }
     func test_ManageFavoritesController_TitleString_Exist(){
-    XCTAssertNotNil(String.ManageFavoritesController_TitleString, "ManageFavoritesController_TitleString should exist in string extension")
+        XCTAssertNotNil(String.ManageFavoritesController_TitleString, "ManageFavoritesController_TitleString should exist in string extension")
     }
     func test_ManageFavoritesController_TitleString_isLocalized(){
-    XCTAssertTrue(String.ManageFavoritesController_TitleString != "ManageFavoritesController_TitleString", "ManageFavoritesController_TitleString is not localized in strings file!")
+        XCTAssertTrue(String.ManageFavoritesController_TitleString != "ManageFavoritesController_TitleString", "ManageFavoritesController_TitleString is not localized in strings file!")
+    }
+    func test_ZipCodeErrorAlert_MessageString_Exist(){
+        XCTAssertNotNil(String.ZipCodeErrorAlert_MessageString, "ZipCodeErrorAlert_MessageString should exist in string extension")
+    }
+    func test_ZipCodeErrorAlert_MessageString_isLocalized(){
+        XCTAssertTrue(String.ZipCodeErrorAlert_MessageString != "ZipCodeErrorAlert_MessageString", "ZipCodeErrorAlert_MessageString is not localized in strings file!")
+    }
+    func test_TextfieldInputToShortValidationError_MessageString_Exist(){
+        XCTAssertNotNil(String.TextfieldInputToShortValidationError_MessageString, "TextfieldInputToShortValidationError_MessageString should exist in string extension")
+    }
+    func test_TextfieldInputToShortValidationError_MessageString_isLocalized(){
+        XCTAssertTrue(String.TextfieldInputToShortValidationError_MessageString != "TextfieldInputToShortValidationError_MessageString", "TextfieldInputToShortValidationError_MessageString is not localized in strings file!")
     }
 }

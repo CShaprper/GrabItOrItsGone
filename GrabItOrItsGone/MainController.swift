@@ -55,6 +55,9 @@ class MainController: UIViewController, IAlertMessageDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        facade.firebaseClient.alertMessageDelegate = delegate
+    }
     
     //MARK: - ViewController functions
     override func viewDidLoad() {
@@ -62,8 +65,8 @@ class MainController: UIViewController, IAlertMessageDelegate {
         facade = MainControllerFacade(presentingController: self)
         //Create Dummy Products
         facade.productsArray = productCard.CreateDummyProducts()
-        facade.firebaseClient.alertMessageDelegate = self
         facade.CheckForSoundSetting()
+        initAlertMessageDelegate(delegate: self)
         //Setup Views
         SetupMainControllerViews()
         

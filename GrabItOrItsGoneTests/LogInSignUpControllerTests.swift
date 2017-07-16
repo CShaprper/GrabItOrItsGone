@@ -12,7 +12,6 @@ import XCTest
 class LogInSignUpControllerTests: XCTestCase {
     var storyboard:UIStoryboard!
     var sut:LogInSignUpController?
-    //var firebaseUser:UserAuthentication!
     
     override func setUp() {
         super.setUp()
@@ -25,11 +24,12 @@ class LogInSignUpControllerTests: XCTestCase {
         XCTAssertNotNil(sut?.view)
         sut?.viewDidLoad()
     }
-    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    //Activity Animation
     func test_ActivityIndicatior_InitialAlphaValue_isZero(){
         XCTAssertTrue(sut!.ActivityIndicator.alpha == 0, "Initial alpha of ActivityIndicator should be 0")
     }

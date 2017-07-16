@@ -27,6 +27,5 @@ class ManageFavoritesFacade: IFirebaseDataReceivedDelegate {
     //MARK: - IFirebaseDataReceivedDelegate implementation
     func FirebaseDataReceived() {
         favoritesArray = firebaseClient.favoritesArray
-        
     }
 }

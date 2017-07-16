@@ -23,6 +23,8 @@ extension String{
 
 //Localization Strings extension
 extension String {
+    static let TextfieldInputToShortValidationError_MessageString = NSLocalizedString("TextfieldInputToShortValidationError_MessageString", comment: "")
+    static let ZipCodeErrorAlert_MessageString = NSLocalizedString("ZipCodeErrorAlert_MessageString", comment: "")
     static let FavotritesDetailsController_Title = NSLocalizedString("FavotritesDetailsController_Title", comment: "")
     static let ManageFavoritesController_TitleString = NSLocalizedString("ManageFavoritesController_TitleString", comment: "")
    static let FirebaseImageUploadErrorAlert_TitleString = NSLocalizedString("FirebaseImageUploadErrorAlert_TitleString", comment: "")
