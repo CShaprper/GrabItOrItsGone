@@ -54,8 +54,8 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_lbl_manageAddress_isSetToGlobalTintColor(){
         XCTAssertEqual(sut!.lbl_manageAddress.textColor, sut!.view.tintColor, "lbl_manageAddress should be in global tintColor")
     }
-    func test_SegueToManageAddressController_IdentifierExists() {
-        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToManageAddressController"))
+    func test_SegueToAddressController_IdentifierExists() {
+        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToAddressController"))
     }
     //MARK:- Manage Favorites Container
     func test_ManageFavoritesContainer_Exists(){
@@ -82,14 +82,14 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_lbl_ManageFavoritesArrowTextColor_isSet(){
         XCTAssertEqual(sut!.lbl_ManageFavoritesArrow.textColor, sut!.view.tintColor, "lbl_ManageFavoritesArrow.textColor should be set")
     }
-    func test_SegueToManageFavoritesController_Identifier_Exist(){
-        XCTAssertNotNil(String.SegueToManageFavoritesController_Identifier, "SegueToManageFavoritesController_Identifier should exist for holding Segue identifier")
+    func test_SegueToFavoritesController_Identifier_Exist(){
+        XCTAssertNotNil(String.SegueToFavoritesController_Identifier, "SegueToFavoritesController_Identifier should exist for holding Segue identifier")
     }
-    func test_SegueToManageFavoritesController_Identifier_isSet(){
-        XCTAssertTrue(String.SegueToManageFavoritesController_Identifier == "SegueToManageFavoritesController", "SegueToManageFavoritesController_Identifier is not properly set")
+    func test_SegueToFavoritesController_Identifier_isSet(){
+        XCTAssertTrue(String.SegueToFavoritesController_Identifier == "SegueToFavoritesController", "SegueToFavoritesController_Identifier is not properly set")
     }
-    func test_SegueToManageFavoritesController_IdentifierExists() {
-        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToManageFavoritesController"))
+    func test_SegueToFavoritesController_IdentifierExists() {
+        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToFavoritesController"))
     }
     //MARK: - Check for UITapGestureRecognizer of view
     func CheckForGestureRecognizer(view: UIView) -> Bool{

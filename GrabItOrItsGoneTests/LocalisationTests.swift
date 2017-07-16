@@ -45,4 +45,16 @@ class LocalisationTests: XCTestCase {
     func test_TextfieldInputToShortValidationError_MessageString_isLocalized(){
         XCTAssertTrue(String.TextfieldInputToShortValidationError_MessageString != "TextfieldInputToShortValidationError_MessageString", "TextfieldInputToShortValidationError_MessageString is not localized in strings file!")
     }
+    func test_FirebaseDeleteErrorAlert_TitleString_Exist(){
+        XCTAssertNotNil(String.FirebaseDeleteErrorAlert_TitleString, "FirebaseDeleteErrorAlert_TitleString should exist in string extension")
+    }
+    func test_FirebaseDeleteErrorAlert_TitleString_isLocalized(){
+        XCTAssertTrue(String.FirebaseDeleteErrorAlert_TitleString != "FirebaseDeleteErrorAlert_TitleString", "FirebaseDeleteErrorAlert_TitleString is not localized in strings file!")
+    }
+    func test_FirebaseDeleteErrorAlert_MessageString_Exist(){
+        XCTAssertNotNil(String.FirebaseDeleteErrorAlert_MessageString, "FirebaseDeleteErrorAlert_MessageString should exist in string extension")
+    }
+    func test_FirebaseDeleteErrorAlert_MessageString_isLocalized(){
+        XCTAssertTrue(String.FirebaseDeleteErrorAlert_MessageString != "FirebaseDeleteErrorAlert_MessageString", "FirebaseDeleteErrorAlert_MessageString is not localized in strings file!")
+    }
 }

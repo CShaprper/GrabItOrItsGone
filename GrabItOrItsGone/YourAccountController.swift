@@ -56,10 +56,10 @@ class YourAccountController: UIViewController {
     }
     
     func ManageAdressContainer_Touched(sender: UITapGestureRecognizer) -> Void {
-        self.performSegue(withIdentifier: .SegueToManageAddressController_Identifier, sender: nil)
+        self.performSegue(withIdentifier: .SegueToAddressController_Identifier, sender: nil)
     }
     
     func ManageFavoritesContainer_Touched(sender: UITapGestureRecognizer) -> Void{
-        self.performSegue(withIdentifier: .SegueToManageFavoritesController_Identifier, sender: nil)
+        self.performSegue(withIdentifier: .SegueToFavoritesController_Identifier, sender: nil)
     }
 }

@@ -8,21 +8,21 @@
 
 import UIKit
 
-class ManageFavoritesController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseDataReceivedDelegate {
+class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseDataReceivedDelegate {
     //MARK:- Outlets
     @IBOutlet var BackgroundImange: UIImageView!
     @IBOutlet var BackgroundImageBlurrView: UIVisualEffectView!
     @IBOutlet var FavoritesTableView: UITableView!
     
     //MARK:- Members
-    var facade:ManageFavoritesFacade!
+    var facade:FavoritesFacade!
     var selectedProduct:ProductCard!
     
     //MARK:- Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        facade = ManageFavoritesFacade()
+        facade = FavoritesFacade()
         facade.firebaseClient.firebaseDataReceivedDelegate = self
         self.navigationItem.title = .ManageFavoritesController_TitleString
         facade.ReadFirebaseFavoritesSection()
@@ -48,6 +48,15 @@ class ManageFavoritesController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedProduct = facade.favoritesArray[indexPath.row]
         performSegue(withIdentifier: String.SegueToFavoritesDetailController_Identifier, sender: nil)
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            facade.DeleteFavoriteWithID(idToDelete: facade.favoritesArray[indexPath.row].ID!)
+            facade.favoritesArray.remove(at: indexPath.row)
+        }
     }
     
     

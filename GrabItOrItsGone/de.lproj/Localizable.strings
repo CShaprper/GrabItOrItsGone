@@ -54,3 +54,5 @@ ManageFavoritesController_TitleString = "Favoriten";
 FavotritesDetailsController_Title = "Details";
 ZipCodeErrorAlert_MessageString = "Die Polstleitzahl muss fünfstellig sein!";
 TextfieldInputToShortValidationError_MessageString = "Die Eingaben in den Textfeldern müssen mindestens drei Buchstaben betragen!";
+FirebaseDeleteErrorAlert_TitleString = "Fehler beim Löschen";
+FirebaseDeleteErrorAlert_MessageString = "Während dem Löschvorgang ist ein Fehler Aufgetreten! Prüfe Deine Internetverbindung!";

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ManageAdressController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, IAlertMessageDelegate {
+class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, IAlertMessageDelegate {
     //MARK: - Outlets
     @IBOutlet var BackgroundImage: UIImageView!
     @IBOutlet var BackgroundBlurrView: UIVisualEffectView!
@@ -29,7 +29,7 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Members
     var blurryView:UIVisualEffectView!
-    var facade:ManageAddressFacade!
+    var facade:AddressFacade!
     let appDel = UIApplication.shared.delegate as! AppDelegate
     
     //MARK: - ViewController Methods
@@ -191,7 +191,7 @@ class ManageAdressController: UIViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     }
     func ConfigureFacade() -> Void {
-        facade = ManageAddressFacade()
+        facade = AddressFacade()
         facade.FetchAdresses()
         initAlertMessageDelegate(delegate: self)
     }

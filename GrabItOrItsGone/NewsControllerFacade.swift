@@ -8,31 +8,28 @@
 
 import UIKit
 
-class NewsControllerFacade: IFirebaseDataReceivedDelegate {
-
+class NewsControllerFacade {
     //MARK:-Members
     var alertMessateTitle: String?
     var alertMessageMessage: String?
-    var newsArray:[News]!
     var firebaseClient:FirebaseClient!
     var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
+    var newsArray:[News]{
+        get {
+            return firebaseClient.newsArray
+        }
+        set {
+            firebaseClient.newsArray = newValue
+        }
+    }
     
     //Constructor
     init(presentingController: NewsController) {
-        firebaseClient = FirebaseClient() 
-        firebaseClient.firebaseDataReceivedDelegate = self
-        newsArray = []
+        firebaseClient = FirebaseClient()  
     }
     
     //MARK: - IFirebaseDataReceivedDelegate implementation
     func ReadFirebaseNewsSection() -> Void {
         firebaseClient.ReadFirebaseNewsSection()
-    }
-    
-    func FirebaseDataReceived() -> Void {
-       if firebaseDataReceivedDelegate != nil{
-            newsArray = firebaseClient.newsArray
-            firebaseDataReceivedDelegate!.FirebaseDataReceived()
-        }
     }
 }

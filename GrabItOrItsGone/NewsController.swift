@@ -16,7 +16,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var NewsTableView: UITableView!
     
     //MARK: Members
-    var facade:NewsControllerFacade?
+    var facade:NewsControllerFacade!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +25,12 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Init facade
         facade = NewsControllerFacade(presentingController: self)
-        facade!.firebaseDataReceivedDelegate = self
+        facade.firebaseClient.firebaseDataReceivedDelegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = .NewsController_TitleString
-        facade!.firebaseClient.ReadFirebaseNewsSection()
+        facade.firebaseClient.ReadFirebaseNewsSection()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -52,7 +52,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: .NewsTableViewCell_Identifier) as! NewsTableViewCell 
-        cell.ConfigureCell(title: facade!.newsArray![indexPath.row].title!, message: facade!.newsArray![indexPath.row].message!, date: facade!.newsArray[indexPath.row].date!)
+        cell.ConfigureCell(title: facade.newsArray[indexPath.row].title!, message: facade.newsArray[indexPath.row].message!, date: facade.newsArray[indexPath.row].date!)
         return cell
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

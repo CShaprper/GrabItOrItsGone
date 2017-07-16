@@ -16,13 +16,15 @@ extension String{
     static let SegueToMainController_Identifier = "SegueToMainController"
     static let SegueToYourAccountController_Identifer = "SegueToYourAccountController"
     static let SegueToNewsController_Identifier = "SegueToNewsController"
-    static let SegueToManageAddressController_Identifier = "SegueToManageAddressController"
-    static let SegueToManageFavoritesController_Identifier = "SegueToManageFavoritesController"
+    static let SegueToAddressController_Identifier = "SegueToAddressController"
+    static let SegueToFavoritesController_Identifier = "SegueToFavoritesController"
     static let SegueToFavoritesDetailController_Identifier = "SegueToFavoritesDetailController"
 } 
 
 //Localization Strings extension
 extension String {
+    static let FirebaseDeleteErrorAlert_MessageString = NSLocalizedString("FirebaseDeleteErrorAlert_MessageString", comment: "")
+    static let FirebaseDeleteErrorAlert_TitleString = NSLocalizedString("FirebaseDeleteErrorAlert_TitleString", comment: "")
     static let TextfieldInputToShortValidationError_MessageString = NSLocalizedString("TextfieldInputToShortValidationError_MessageString", comment: "")
     static let ZipCodeErrorAlert_MessageString = NSLocalizedString("ZipCodeErrorAlert_MessageString", comment: "")
     static let FavotritesDetailsController_Title = NSLocalizedString("FavotritesDetailsController_Title", comment: "")

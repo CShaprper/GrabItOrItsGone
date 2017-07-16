@@ -1070,8 +1070,8 @@
                         <outlet property="lbl_ManageFavorites" destination="OLv-s2-Gts" id="YVD-KV-1sO"/>
                         <outlet property="lbl_ManageFavoritesArrow" destination="Qxy-k2-X2O" id="kx4-7k-i7R"/>
                         <outlet property="lbl_manageAddress" destination="BJd-hk-iUW" id="G4H-rb-M78"/>
-                        <segue destination="3cK-bX-emi" kind="show" identifier="SegueToManageAddressController" id="Tlz-nG-iWT"/>
-                        <segue destination="pvB-EL-yeT" kind="show" identifier="SegueToManageFavoritesController" id="kOe-SH-SPn"/>
+                        <segue destination="3cK-bX-emi" kind="show" identifier="SegueToAddressController" id="Tlz-nG-iWT"/>
+                        <segue destination="pvB-EL-yeT" kind="show" identifier="SegueToFavoritesController" id="kOe-SH-SPn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQ4-0a-hfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1082,7 +1082,7 @@
         <!--Adresses-->
         <scene sceneID="knY-rU-3Oc">
             <objects>
-                <viewController storyboardIdentifier="ManageAdressController" title="Adresses" id="3cK-bX-emi" customClass="ManageAdressController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdressController" title="Adresses" id="3cK-bX-emi" customClass="AdressController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MiC-eA-di4"/>
                         <viewControllerLayoutGuide type="bottom" id="rfT-Gx-35c"/>
@@ -1419,7 +1419,7 @@
         <!--Favorites-->
         <scene sceneID="WgL-o4-XrA">
             <objects>
-                <viewController storyboardIdentifier="ManageFavoritesController" title="Favorites" id="pvB-EL-yeT" customClass="ManageFavoritesController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoritesController" title="Favorites" id="pvB-EL-yeT" customClass="FavoritesController" customModule="GrabItOrItsGone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hjO-3Z-xlC"/>
                         <viewControllerLayoutGuide type="bottom" id="5qC-WE-Gmd"/>

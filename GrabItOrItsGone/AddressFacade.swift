@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ManageAddressFacade{
+class AddressFacade{
     //MARK:-Members 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var address:Address!

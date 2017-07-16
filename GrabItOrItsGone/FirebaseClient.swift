@@ -344,25 +344,25 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 }
                 print("Succesfully saved Product to Firebase Favorites")
                 /* Image Upload
-                let storage = Storage.storage()
-                let storageRef = storage.reference()
-                let imagesRef = storageRef.child("images_uid_\(uid)")
-                let nameRef = imagesRef.child(product.ImageName!)
-                let data = UIImagePNGRepresentation(product.ProdcutImage!)
-                let uploadTask = nameRef.putData(data!, metadata: nil, completion: { (metadata, error) in
-                    guard let metadata = metadata else{
-                        if error != nil{
-                            print(error!.localizedDescription)
-                            let title = String.FirebaseImageUploadErrorAlert_TitleString
-                            let message = String.FirebaseImageUploadErrorAlert_MessageString
-                            self.ShowAlertMessage(title: title, message: message)
-                            return
-                        }
-                        return
-                    }
-                    let downloadURL = metadata.downloadURL()
-                    print("Image Uploaded Successfully")
-                }) */
+                 let storage = Storage.storage()
+                 let storageRef = storage.reference()
+                 let imagesRef = storageRef.child("images_uid_\(uid)")
+                 let nameRef = imagesRef.child(product.ImageName!)
+                 let data = UIImagePNGRepresentation(product.ProdcutImage!)
+                 let uploadTask = nameRef.putData(data!, metadata: nil, completion: { (metadata, error) in
+                 guard let metadata = metadata else{
+                 if error != nil{
+                 print(error!.localizedDescription)
+                 let title = String.FirebaseImageUploadErrorAlert_TitleString
+                 let message = String.FirebaseImageUploadErrorAlert_MessageString
+                 self.ShowAlertMessage(title: title, message: message)
+                 return
+                 }
+                 return
+                 }
+                 let downloadURL = metadata.downloadURL()
+                 print("Image Uploaded Successfully")
+                 }) */
             })
         }
     }
@@ -385,5 +385,25 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 }
             })
         }
+    }
+    
+    //MARK: - Firebase Delete functions
+    func DeleteProductFromFirebaseFavorites(idToDelete: String)->Void{
+        if let uid = Auth.auth().currentUser?.uid{
+            let favRef = ref.child("favorites_uid_\(uid)")
+            // favRef.child(idToDelete)
+            favRef.child(idToDelete).removeValue(completionBlock: { (error, database) in
+                if error != nil{
+                    print(error!.localizedDescription)
+                    let title = String.FirebaseDeleteErrorAlert_TitleString
+                    let message = String.FirebaseDeleteErrorAlert_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
+                }
+                DispatchQueue.main.async {
+                    self.FirebaseDataReceived() 
+                }
+                print("Succesfully deleted Favorite from Firebase")
+            })
+        } // No uid for current User
     }
 }

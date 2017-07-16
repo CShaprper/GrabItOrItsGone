@@ -8,24 +8,28 @@
 
 import UIKit
 
-class ManageFavoritesFacade: IFirebaseDataReceivedDelegate {
+class FavoritesFacade {
     //MARK: - Members
-    var favoritesArray:[ProductCard]!
+    var favoritesArray:[ProductCard]{
+        get {
+            return firebaseClient.favoritesArray
+        }
+        set {
+            firebaseClient.favoritesArray = newValue
+        }
+    }
     var firebaseClient:FirebaseClient! 
     
     //Constructor
     init() {
-        favoritesArray = []
         firebaseClient = FirebaseClient()
     }
     
     func ReadFirebaseFavoritesSection(){
-        favoritesArray = []
         firebaseClient.ReadFirebaseFavoritesSection()
     }
     
-    //MARK: - IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() {
-        favoritesArray = firebaseClient.favoritesArray
+    func DeleteFavoriteWithID(idToDelete: String){
+        firebaseClient.DeleteProductFromFirebaseFavorites(idToDelete: idToDelete)
     }
 }
