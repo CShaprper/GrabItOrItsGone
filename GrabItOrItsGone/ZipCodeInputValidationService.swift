@@ -20,8 +20,7 @@ class ZipCodeInputValidationService: IValidateable, IAlertMessageDelegate {
     func Validate(validationString: String?) -> Bool {
         var isValid:Bool = false
         isValid = validateNotNil(validationString: validationString)
-        isValid = validateCharactersCountNotBelowFive(validationString: validationString)
-        isValid = validateCharactersCountNotAboveFive(validationString: validationString)
+        isValid = validateCharactersCountEqualFive(validationString: validationString)
         return isValid
     }
     
@@ -32,28 +31,20 @@ class ZipCodeInputValidationService: IValidateable, IAlertMessageDelegate {
         }
         return true
     }
-    private func validateCharactersCountNotBelowFive(validationString: String?) -> Bool{
+    private func validateCharactersCountEqualFive(validationString: String?) -> Bool{
         if validationString == nil { return false }
-        if validationString!.characters.count < 5 {
-            ShowAlertMessage(title: title, message: message)
-            return false
-        }
-        return true
-    }
-    private func validateCharactersCountNotAboveFive(validationString: String?) -> Bool{
-        if validationString == nil { return false }
-        if validationString!.characters.count > 5 {
+        if validationString!.characters.count != 5 {
             ShowAlertMessage(title: title, message: message)
             return false
         }
         return true
     }
     
-   internal func ShowAlertMessage(title: String, message: String) {
+    internal func ShowAlertMessage(title: String, message: String) {
         if alertMessageDelegate != nil{
             alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
         } else {
             print("ZipCodeInputValidationService: alertMessageDelegate not set from calling class")
-    }
+        }
     }
 }

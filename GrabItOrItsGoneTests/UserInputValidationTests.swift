@@ -32,7 +32,7 @@ class UserInputValidationTests: XCTestCase {
         XCTAssertFalse(txt.Validate(validationString: ""), "Validation should fail on empty Textfield")
     }
     
-    //MARK:- Email Validation
+    //MARK:- Password Validation
     func test_Validation_Passes_When_PassWord_hasSixCharacters() {
         XCTAssertTrue(password.Validate(validationString: "123456"), "Validation should pass when validated string is six characters ore more")
     }

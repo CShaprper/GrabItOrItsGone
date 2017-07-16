@@ -8,38 +8,74 @@
 
 import Foundation
 /// **Class needs to implement IValidateable.**
-/// 
+///
 /// Validates email user input
-class EmailValidationService: IValidateable{ 
+class EmailValidationService: IValidateable{
     
-    /// This function validates email input.
-    /// * parameter validationString: String for validation process
-    /// - returns: Boolean value: Representing validation status
     func Validate(validationString: String?) -> Bool {
-        if validationString == nil || validationString!.contains("@") == false || validationString!.contains(".") == false{
+        var isValid:Bool = false
+        isValid = validateNotNil(validationString: validationString)
+        isValid = validateNotEmpty(validationString: validationString)
+        isValid = validateNoAtSign(validationString: validationString)
+        isValid = validateNoDot(validationString: validationString)
+        isValid = validateSpaces(validationString: validationString)
+        isValid = validateMailEndingContainsDot(validationString: validationString)
+        isValid = validateMailEndsWithDotAndAtLeastTwoCharacters(validationString: validationString)
+        isValid = validateMailNotContainsInvalidCharacters(validationString: validationString)
+        return isValid
+    }
+    
+    private func validateNotNil(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        return true
+    }
+    private func validateNotEmpty(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        if validationString!.isEmpty {  return false }
+        return true
+    }
+    private func validateNoAtSign(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        if !validationString!.contains("@") {
             return false
         }
-        if validationString!.contains(" "){
+        return true
+    }
+    private func validateNoDot(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        if !validationString!.contains(".") {
             return false
         }
-        if let ending = validationString!.components(separatedBy: "@").last {
-            if ending.range(of: ".") == nil{
-                return false
-            }
-            if let endOfEnding = ending.components(separatedBy: ".").last{
-                if endOfEnding.characters.count < 2{
-                    return false
-                }
-            }
-        }
-        if validationString!.isEmpty{
+        return true
+    }
+    private func validateSpaces(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        if validationString!.contains(" ") {
             return false
         }
+        return true
+    }
+    private func validateMailEndingContainsDot(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        let ending = validationString!.components(separatedBy: "@").last
+        if ending == nil { return false }
+        if ending!.range(of: ".") == nil{ return false }
+        return true
+    }
+    private func validateMailEndsWithDotAndAtLeastTwoCharacters(validationString: String?) -> Bool{
+        if validationString == nil { return false }
+        let ending = validationString!.components(separatedBy: "@").last
+        if ending == nil { return false }
+        let endOfEnding = ending!.components(separatedBy: ".").last
+        if endOfEnding == nil { return false }
+        if endOfEnding!.characters.count < 2 { return false }
+        return true
+    }
+    private func validateMailNotContainsInvalidCharacters(validationString: String?) -> Bool{
+        if validationString == nil { return false }
         let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        if emailPredicate.evaluate(with: validationString) == false{
-            return false
-        }
+        if !emailPredicate.evaluate(with: validationString){ return false }
         return true
     }
 }
