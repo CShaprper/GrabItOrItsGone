@@ -5,7 +5,8 @@
   Created by Peter Sypek on 23.06.17.
   Copyright © 2017 Peter Sypek. All rights reserved.
  ENGLISH
-*/
+ */
+lbl_Purchases_String = "Deine Einkäufe";
 btn_SignUp_String = "Registrieren";
 btn_Login_String = "Einloggen";
 txt_Login_Email_Placeholder_String = "E-Mail";
@@ -60,3 +61,4 @@ EmailMissingAtSignErrorAlert_MessageString = "Deine Email Adresse muss ein @-Zei
 EmailInvalidCharactersErrorAlert_MessageString = "Deine Email Adresse enthält ungültige Zeichen!";
 NoRegisteredUserAlert_TitleString = "Nicht Registriert?";
 NoRegisteredUserAlert_MessageString = "Diese Funktion steht nur registrierten Benutzern zur Verfügung. Bitte registriere Dich als Benutzer um die Funktionalität zu nutzen.";
+lbl_FilterCategories_String = "Kategorie Filter";

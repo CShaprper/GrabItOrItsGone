@@ -20,6 +20,12 @@ class LocalisationTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    func test_lbl_Purchases_String_Exist(){
+    XCTAssertNotNil(String.lbl_Purchases_String, "lbl_Purchases_String should exist in string extension")
+    }
+    func test_lbl_Purchases_String_isLocalized(){
+    XCTAssertTrue(String.lbl_Purchases_String != "lbl_Purchases_String", "lbl_Purchases_String is not localized in strings file!")
+    }
     func test_NoRegisteredUserAlert_MessageString_Exist(){
     XCTAssertNotNil(String.NoRegisteredUserAlert_MessageString, "NoRegisteredUserAlert_MessageString should exist in string extension")
     }

@@ -110,6 +110,9 @@ class MainControllerTests: XCTestCase {
         let identifiers = segues(ofViewController: sut!)
         XCTAssertTrue(identifiers.contains("SegueToNewsController"))
     }
+    func test_SegueToBasketController_IdentifierExists() {
+    XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToBasketController"))
+    } 
     
     
     

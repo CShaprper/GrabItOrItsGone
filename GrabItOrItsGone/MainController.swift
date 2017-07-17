@@ -8,12 +8,13 @@
 
 import UIKit
 import AVFoundation
+import FirebaseMessaging
 
 extension Double {
     var degreesToRadians: CGFloat { return CGFloat(self) * .pi / 180 }
 }
 
-class MainController: UIViewController, IAlertMessageDelegate {
+class MainController: UIViewController, IAlertMessageDelegate{
     //MARK: - Outlets
     @IBOutlet var MainBackgroundImage: UIImageView!
     @IBOutlet var CardView: DesignableUIView!
@@ -26,7 +27,7 @@ class MainController: UIViewController, IAlertMessageDelegate {
     @IBOutlet var MenuBackgroundContainer: UIView!
     @IBOutlet var FavoritesStarImage: UIImageView!
     @IBOutlet var btn_MenuNews: UIButton!
-    @IBOutlet var btn_MenuFavourites: UIButton!
+    @IBOutlet var btn_Warenkorb: UIButton!
     @IBOutlet var btn_MenuGutscheine: UIButton!
     @IBOutlet var btn_MenuAccount: UIButton!
     @IBOutlet var btn_ProductInformation: UIButton!
@@ -59,16 +60,24 @@ class MainController: UIViewController, IAlertMessageDelegate {
         facade.firebaseClient.alertMessageDelegate = delegate
     }
     
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print(fcmToken)
+    }
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print(remoteMessage)
+    }
+    
     //MARK: - ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         facade = MainControllerFacade(presentingController: self)
         //Create Dummy Products
         facade.productsArray = productCard.CreateDummyProducts()
         facade.CheckForSoundSetting()
         initAlertMessageDelegate(delegate: self)
         //Setup Views
-        SetupMainControllerViews()
+        SetupMainControllerViews() 
         
         NotificationCenter.default.addObserver(self, selector: #selector(SegueToLogInController), name: NSNotification.Name.SegueToLogInController, object: nil)
     }
@@ -249,6 +258,9 @@ class MainController: UIViewController, IAlertMessageDelegate {
             ShowMenu(closure: {})
         }
     }
+    func btn_Warenkorb_Pressed(sender: UIButton) -> Void{
+        performSegue(withIdentifier: String.SegueToBasketController_Identifier, sender: nil)
+    }
     
     func btn_MenuAccount_Pressed(sender: UIButton) -> Void {
         if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
@@ -294,7 +306,7 @@ class MainController: UIViewController, IAlertMessageDelegate {
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-            self.btn_MenuFavourites.transform  = CGAffineTransform(translationX: self.btn_MenuFavourites.frame.size.width + 100, y: 0)
+            self.btn_Warenkorb.transform  = CGAffineTransform(translationX: self.btn_Warenkorb.frame.size.width + 100, y: 0)
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
@@ -321,7 +333,7 @@ class MainController: UIViewController, IAlertMessageDelegate {
             self.btn_MenuNews.transform = .identity
         }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-            self.btn_MenuFavourites.transform = .identity
+            self.btn_Warenkorb.transform = .identity
         }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.btn_MenuGutscheine.transform = .identity
@@ -412,12 +424,14 @@ class MainController: UIViewController, IAlertMessageDelegate {
         btn_ProductInformation.addTarget(self, action: #selector(btn_ProductInformation_Pressed), for: .touchUpInside)
         btn_MenuAccount.addTarget(self, action: #selector(btn_MenuAccount_Pressed), for: .touchUpInside)
         btn_MenuNews.addTarget(self, action: #selector(btn_MenuNews_Pressed), for: .touchUpInside)
+        btn_Warenkorb.addTarget(self, action: #selector(btn_Warenkorb_Pressed), for: .touchUpInside)
         SoundSwitch.addTarget(self, action: #selector(SoundSwitch_Changed), for: .valueChanged)
+        
         
         //Transform UIControls to initial position
         FavoritesStarImage.transform = CGAffineTransform(translationX: 0, y: FavoritesStarImage.frame.size.height * 0.4)
         btn_MenuNews.transform = CGAffineTransform(translationX: btn_MenuNews.frame.size.width + 100, y: 0)
-        btn_MenuFavourites.transform = CGAffineTransform(translationX: btn_MenuFavourites.frame.size.width + 100, y: 0)
+        btn_Warenkorb.transform = CGAffineTransform(translationX: btn_Warenkorb.frame.size.width + 100, y: 0)
         btn_MenuGutscheine.transform = CGAffineTransform(translationX: btn_MenuGutscheine.frame.size.width + 100, y: 0)
         btn_MenuAccount.transform = CGAffineTransform(translationX: btn_MenuAccount.frame.size.width + 100, y: 0)
         SoundStack.transform = CGAffineTransform(translationX: SoundStack.frame.size.width + 100, y: 0)

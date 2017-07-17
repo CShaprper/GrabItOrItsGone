@@ -6,6 +6,7 @@
   Copyright © 2017 Peter Sypek. All rights reserved.
  ENGLISH
 */
+lbl_Purchases_String = "Your Purchases";
 btn_SignUp_String = "Sign Up";
 btn_Login_String = "Login";
 txt_Login_Email_Placeholder_String = "e-mail";
@@ -61,3 +62,4 @@ EmailMissingAtSignErrorAlert_MessageString = "Your email address must contain @ 
 EmailInvalidCharactersErrorAlert_MessageString = "Your email address contains invalid characters!";
 NoRegisteredUserAlert_TitleString = "Not Registered?";
 NoRegisteredUserAlert_MessageString = "This functionality is only for registered users available. Please register as user to use it.";
+lbl_FilterCategories_String = "Category filter";

@@ -23,7 +23,7 @@
 	<key>STORAGE_BUCKET</key>
 	<string>grabitoritsgone.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
@@ -36,5 +36,7 @@
 	<string>1:40915546361:ios:5dd4e575a59896e2</string>
 	<key>DATABASE_URL</key>
 	<string>https://grabitoritsgone.firebaseio.com</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>

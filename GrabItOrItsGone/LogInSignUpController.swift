@@ -55,6 +55,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
         facade.firebaseClient.alertMessageDelegate = delegate
+        facade.firebaseClient.activityAnimationDelegate = self
         ValidationFactory.alertMessageDelegate = self
         facade.presentingController = self
     }

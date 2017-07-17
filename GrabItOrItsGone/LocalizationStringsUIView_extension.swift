@@ -19,10 +19,15 @@ extension String{
     static let SegueToAddressController_Identifier = "SegueToAddressController"
     static let SegueToFavoritesController_Identifier = "SegueToFavoritesController"
     static let SegueToFavoritesDetailController_Identifier = "SegueToFavoritesDetailController"
+    static let SegueToCategoriesController_Identifier = "SegueToCategoriesController"
+    static let SegueToPurchaseController_Identifier = "SegueToPurchaseController"
+    static let SegueToBasketController_Identifier = "SegueToBasketController"
 } 
 
 //Localization Strings extension
 extension String {
+    static let lbl_Purchases_String = NSLocalizedString("lbl_Purchases_String", comment: "")
+    static let lbl_FilterCategories_String = NSLocalizedString("lbl_FilterCategories_String", comment: "")
     static let NoRegisteredUserAlert_MessageString = NSLocalizedString("NoRegisteredUserAlert_MessageString", comment: "")
     static let NoRegisteredUserAlert_TitleString = NSLocalizedString("NoRegisteredUserAlert_TitleString", comment: "")
     static let EmailInvalidCharactersErrorAlert_MessageString = NSLocalizedString("EmailInvalidCharactersErrorAlert_MessageString", comment: "")

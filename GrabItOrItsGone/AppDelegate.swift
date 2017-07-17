@@ -18,20 +18,18 @@ import OAuthSwift
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+    
     var style:eUIStyles?
-    var window: UIWindow? 
+    var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        // Use Firebase library to configure APIs
         FirebaseApp.configure()
-        
-        
+        // Messaging.messaging().delegate = self
+        Messaging.messaging().shouldEstablishDirectChannel = true
         
         // Use Facebook SDK for Login with facebook
-         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         // Initialize Google sign-in
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -46,12 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotifications()
         }
             // iOS 7 support
-        else {  
+        else {
             application.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
         }
         return true
     }
-    
+   
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL!, sourceApplication: sourceApplication, annotation: annotation)
         GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
@@ -59,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return handled
     }
     
-   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         applicationHandle(url: url)
         GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
         FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
@@ -68,13 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationHandle(url: URL) {
         if (url.host == "oauth-callback") {
             OAuthSwift.handle(url: url)
-           print(OAuthSwift.Parameters.self)
+            print(OAuthSwift.Parameters.self)
         } else {
             // Google provider is the only one with your.bundle.id url schema.
             OAuthSwift.handle(url: url)
         }
     }
-    
     
     /// This method will be called whenever FCM receives a new, default FCM token for your
     /// Firebase project's Sender ID.
@@ -87,8 +84,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        // Print it to console
         print("APNs device token: \(deviceTokenString)")
+        //Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.sandbox)
+        Messaging.messaging().subscribe(toTopic: "/topics/news")
         
         // Persist it in your backend in case it's new
         UserDefaults.standard.set(deviceTokenString, forKey: "PushDeviceTokenString")
@@ -101,7 +99,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        // Let FCM know about the message for analytics etc.
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        // handle your message
+        
+        
         // Print notification payload data
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print full message.
         print("Push notification received: \(userInfo)")
     }
     
@@ -111,9 +121,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // Print notification payload data
-        print("Push notification received: \(userInfo)") 
+        print("Push notification received: \(userInfo)")
+        completionHandler(UIBackgroundFetchResult.newData)
     }
-
+    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -132,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-         FBSDKAppEvents.activateApp()
+        FBSDKAppEvents.activateApp()
         application.applicationIconBadgeNumber = 0
     }
     
@@ -184,7 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
     
     
 }

@@ -82,8 +82,38 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_lbl_ManageFavoritesArrowTextColor_isSet(){
         XCTAssertEqual(sut!.lbl_ManageFavoritesArrow.textColor, sut!.view.tintColor, "lbl_ManageFavoritesArrow.textColor should be set")
     }
+    func test_FilterCategoriesContainer_Exists(){
+    XCTAssertNotNil(sut!.FilterCategoriesContainer, "FilterCategoriesContainer should exist")
+    }
+    func test_FilterCategoriesImage_Exists(){
+    XCTAssertNotNil(sut!.FilterCategoriesImage, "FilterCategoriesImage should exist")
+    }
+    func test_lbl_FilterCategories_Exists(){
+    XCTAssertNotNil(sut!.lbl_FilterCategories, "lbl_FilterCategories should exist")
+    }
+    func test_lbl_FilterCategoriesArrow_Exists(){
+    XCTAssertNotNil(sut!.lbl_FilterCategoriesArrow, "lbl_FilterCategoriesArrow should exist")
+    }
+    func test_FilterCategoriesContainer_isWiredTo_GestureRecognizer(){
+        XCTAssertTrue(CheckForGestureRecognizer(view: sut!.FilterCategoriesContainer), "FilterCategoriesContainer not wired to GestureRecognizer")
+    }
+    func test_PurchasesContainer_Exists(){
+    XCTAssertNotNil(sut!.PurchasesContainer, "PurchasesContainer should exist")
+    }
+    func test_PurchasesContainer_isWiredTo_GestureRecognizer(){
+    XCTAssertTrue(CheckForGestureRecognizer(view: sut!.PurchasesContainer), "PurchasesContainer not wired to GestureRecognizer")
+    } 
     func test_SegueToFavoritesController_Identifier_Exist(){
         XCTAssertNotNil(String.SegueToFavoritesController_Identifier, "SegueToFavoritesController_Identifier should exist for holding Segue identifier")
+    }
+    func test_PurchasesImage_Exists(){
+    XCTAssertNotNil(sut!.PurchasesImage, "PurchasesImage should exist")
+    }
+    func test_lbl_Purchases_Exists(){
+    XCTAssertNotNil(sut!.lbl_Purchases, "lbl_Purchases should exist")
+    }
+    func test_lbl_PurchasesArrow_Exists(){
+    XCTAssertNotNil(sut!.lbl_PurchasesArrow, "lbl_PurchasesArrow should exist")
     }
     func test_SegueToFavoritesController_Identifier_isSet(){
         XCTAssertTrue(String.SegueToFavoritesController_Identifier == "SegueToFavoritesController", "SegueToFavoritesController_Identifier is not properly set")
@@ -91,6 +121,14 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_SegueToFavoritesController_IdentifierExists() {
         XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToFavoritesController"))
     }
+    func test_SegueToCategoriesController_IdentifierExists() {
+        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToCategoriesController"))
+    }
+    func test_SegueToPurchaseController_IdentifierExists() {
+        XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToPurchaseController"))
+    }
+    
+    
     //MARK: - Check for UITapGestureRecognizer of view
     func CheckForGestureRecognizer(view: UIView) -> Bool{
         if let _ = view.gestureRecognizers{

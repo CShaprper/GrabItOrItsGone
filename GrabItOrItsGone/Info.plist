@@ -43,6 +43,12 @@
 				<string>com.googleusercontent.apps.40915546361-qda4rmmsolrft46r6h22i5k6gi2nosi6</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -51,7 +57,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Grab It Or Its Gone</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<true/>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
