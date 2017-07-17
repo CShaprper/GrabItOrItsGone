@@ -95,9 +95,6 @@ class AddressControllerTests: XCTestCase {
     func test_NavigationItemIsNotEmpty(){
     XCTAssertTrue(sut!.navigationItem.title != "", "NavigationItem.title should not be empty")
     }
-   func test_segmentedControlValidationServiceDelegate_isSet() {
-    XCTAssertNotNil(sut!.facade.segmentedControlValidationService?.alertMessageDelegate, "facade.segmentedControlValidationService?.alertMessageDelegate not set")
-    }
     func test_NavigationItemIsLocalized(){
         print(sut!.navigationItem.title!)
         XCTAssertEqual(sut!.navigationItem.title, String.ManageAddressController_TitleString , "NavigationItem.title is not localized")

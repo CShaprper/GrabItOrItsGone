@@ -14,15 +14,9 @@ class AddressFacade{
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var address:Address!
     var addresses:[Address]!
-    var textfieldInputValidationService:TextfieldInputValidationService?
-    var segmentedControlValidationService:SegmentedControlValidationService?
-    var zipCodeInputValidationService:ZipCodeInputValidationService?
     
     init() {
         addresses = []
-        textfieldInputValidationService = TextfieldInputValidationService()
-        segmentedControlValidationService = SegmentedControlValidationService()
-        zipCodeInputValidationService = ZipCodeInputValidationService()
     }
     
     func CreateNewAddressToInsert() -> Void {
@@ -43,10 +37,14 @@ class AddressFacade{
     }
   
     func ValidateUserInput(segmentedControl: UISegmentedControl) -> Bool{
-        if !segmentedControlValidationService!.Validate(segmentedControl: segmentedControl) || !textfieldInputValidationService!.Validate(validationString: address.firstname) || !textfieldInputValidationService!.Validate(validationString: address.lastname) || !textfieldInputValidationService!.Validate(validationString: address.streetname) || !textfieldInputValidationService!.Validate(validationString: address.city) ||
-            !zipCodeInputValidationService!.Validate(validationString: address.zipnumber) {
-            return false
-        }
-        return true
+        var isValid: Bool
+        ValidationFactory.segmentedControl = segmentedControl
+        isValid = ValidationFactory.Validate(type: .segmentedControl, validationString: nil)
+        isValid = ValidationFactory.Validate(type: .textField, validationString: address.firstname)
+        isValid = ValidationFactory.Validate(type: .textField, validationString: address.lastname)
+        isValid = ValidationFactory.Validate(type: .textField, validationString: address.streetname)
+        isValid = ValidationFactory.Validate(type: .textField, validationString: address.city)
+        isValid = ValidationFactory.Validate(type: .zipCode, validationString: address.zipnumber)
+        return isValid
     }
 }

@@ -11,14 +11,14 @@ import XCTest
 
 class UserInputValidationTests: XCTestCase {
     var password:PasswordValidationService!
-    var zip:ZipCodeInputValidationService!
-    var txt:TextfieldInputValidationService!
+    var zip:ZipCodeValidationService!
+    var txt:TextfieldValidationService!
     
     override func setUp() {
         super.setUp()
         password = PasswordValidationService()
-        zip = ZipCodeInputValidationService()
-        txt = TextfieldInputValidationService()
+        zip = ZipCodeValidationService()
+        txt = TextfieldValidationService()
     }
     
     override func tearDown() {

@@ -9,7 +9,10 @@
 import Foundation
 
 
-class PasswordValidationService: IValidateable {
+class PasswordValidationService: IValidateable, IAlertMessageDelegate {
+    var alertMessageDelegate:IAlertMessageDelegate?
+    let title = String.ValidationErrorAlert_TitleString
+    var message = String.Validation_Error_Message_String
     
     func Validate(validationString: String?) -> Bool{
         var isValid: Bool = false
@@ -20,12 +23,18 @@ class PasswordValidationService: IValidateable {
     }
     
     private func validateNotNil(validationString: String?) -> Bool{
-        if validationString == nil { return false }
+        if validationString == nil {
+            message = String.TextfieldInputEmptyValidationError_MessageString
+            ShowAlertMessage(title: title, message: message)
+            return false
+        }
         return true
     }
     private func validateNotEmpty(validationString: String?) -> Bool{
         if validationString == nil { return false }
         if validationString! == "" {
+            message = String.TextfieldInputEmptyValidationError_MessageString
+            ShowAlertMessage(title: title, message: message)
             return false
         }
         return true
@@ -33,46 +42,22 @@ class PasswordValidationService: IValidateable {
     private func validateCharactersCountNotBelowSix(validationString: String?) -> Bool{
         if validationString == nil { return false }
         if validationString!.characters.count < 6 {
+            message = String.PasswordValidationErrorAlert_MessageString
+            ShowAlertMessage(title: title, message: message)
             return false
         }
         return true
     }
-}
-
-/* var alertMessageDelegate: IAlertMessageDelegate?
- private let title = String.ValidationErrorAlert_TitleString
- var message = String.PasswordValidationErrorAlert_MessageString
- 
- func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
- alertMessageDelegate = delegate
- }
- 
- func ValidateWithAlertMessage(validationString: String?) -> Bool{
- var isValid: Bool = false
- isValid = validateNotNil(validationString: validationString)
- if !isValid {
- message = String.TextfieldInputEmptyValidationError_MessageString
- ShowAlertMessage(title: title, message: message)
- }
- isValid = validateNotEmpty(validationString: validationString)
- if !isValid {
- message = String.TextfieldInputEmptyValidationError_MessageString
- ShowAlertMessage(title: title, message: message)
- }
- isValid = validateCharactersCountNotBelowSix(validationString: validationString)
- if !isValid {
- message = String.PasswordValidationErrorAlert_MessageString
- ShowAlertMessage(title: title, message: message)
- }
- return isValid
- }
- 
- 
- 
- func ShowAlertMessage(title: String, message: String) {
- if alertMessageDelegate != nil{
- alertMessageDelegate?.ShowAlertMessage(title: title, message: message)
- } else {
- print("PasswordValidationService: AlertMessageDelegate not set from calling class")
- }
- }*/
+    
+    //MARK: - IAlertMessageDeleagate implementation
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        alertMessageDelegate = delegate
+    }
+    func ShowAlertMessage(title: String, message: String) {
+        if alertMessageDelegate != nil{
+            alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
+        } else {
+            print("TextfieldValidationService: alertMessageDelegate not set from calling class")
+        }
+    }
+} 

@@ -179,6 +179,19 @@ class MainController: UIViewController, IAlertMessageDelegate {
                 //Move downways if drag reached swipeLimitBottom
             } else if card.center.y > swipeLimitBottom
             {
+                if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
+                    let title = String.NoRegisteredUserAlert_TitleString
+                    let message = String.NoRegisteredUserAlert_MessageString
+                    ShowAlertMessage(title: title, message: message)
+                    //Position card in center
+                    UIView.animate(withDuration: 0.3, animations: {
+                        card.center = self.view.center
+                        card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians).scaledBy(x: 1, y: 1)
+                        self.FavoritesStarImage.alpha = 0
+                    })
+
+                    return
+                }
                 facade.PlayYeahSound()
                 self.facade.SaveProductToFavorites(product: facade.productsArray[imageCount])
                 UIView.animate(withDuration: swipeDuration, animations:
@@ -238,6 +251,12 @@ class MainController: UIViewController, IAlertMessageDelegate {
     }
     
     func btn_MenuAccount_Pressed(sender: UIButton) -> Void {
+        if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
+            let title = String.NoRegisteredUserAlert_TitleString
+            let message = String.NoRegisteredUserAlert_MessageString
+            ShowAlertMessage(title: title, message: message)             
+            return
+        }
         if isMenuOut
         {
             HideMenu(closure: PerformSegueToYourAccountController )

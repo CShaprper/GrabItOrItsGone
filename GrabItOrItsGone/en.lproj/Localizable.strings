@@ -57,3 +57,7 @@ ZipCodeErrorAlert_MessageString = "The zip code has to be five digits!";
 TextfieldInputToShortValidationError_MessageString = "The textfield input needs to be at least three characters long!";
 FirebaseDeleteErrorAlert_TitleString = "Delete Error";
 FirebaseDeleteErrorAlert_MessageString = "An error occured during delete process! Please check your internet connection!";
+EmailMissingAtSignErrorAlert_MessageString = "Your email address must contain @ sign!";
+EmailInvalidCharactersErrorAlert_MessageString = "Your email address contains invalid characters!";
+NoRegisteredUserAlert_TitleString = "Not Registered?";
+NoRegisteredUserAlert_MessageString = "This functionality is only for registered users available. Please register as user to use it.";

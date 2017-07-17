@@ -84,9 +84,7 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     //MARK:- IAlertMessageDelegate implementation
     func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
-        facade.textfieldInputValidationService?.alertMessageDelegate = delegate
-        facade.zipCodeInputValidationService?.alertMessageDelegate = delegate
-        facade.segmentedControlValidationService?.alertMessageDelegate = delegate
+        ValidationFactory.alertMessageDelegate = self 
     }    
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

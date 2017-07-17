@@ -362,7 +362,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                  }
                  let downloadURL = metadata.downloadURL()
                  print("Image Uploaded Successfully")
-                 }) */
+                 }) */                
             })
         }
     }

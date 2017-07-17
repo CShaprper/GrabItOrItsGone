@@ -23,6 +23,10 @@ extension String{
 
 //Localization Strings extension
 extension String {
+    static let NoRegisteredUserAlert_MessageString = NSLocalizedString("NoRegisteredUserAlert_MessageString", comment: "")
+    static let NoRegisteredUserAlert_TitleString = NSLocalizedString("NoRegisteredUserAlert_TitleString", comment: "")
+    static let EmailInvalidCharactersErrorAlert_MessageString = NSLocalizedString("EmailInvalidCharactersErrorAlert_MessageString", comment: "")
+    static let EmailMissingAtSignErrorAlert_MessageString = NSLocalizedString("EmailMissingAtSignErrorAlert_MessageString", comment: "")
     static let FirebaseDeleteErrorAlert_MessageString = NSLocalizedString("FirebaseDeleteErrorAlert_MessageString", comment: "")
     static let FirebaseDeleteErrorAlert_TitleString = NSLocalizedString("FirebaseDeleteErrorAlert_TitleString", comment: "")
     static let TextfieldInputToShortValidationError_MessageString = NSLocalizedString("TextfieldInputToShortValidationError_MessageString", comment: "")

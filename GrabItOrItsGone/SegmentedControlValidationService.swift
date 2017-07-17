@@ -19,8 +19,7 @@ class SegmentedControlValidationService: IValidateable, IAlertMessageDelegate {
     }
     
     func Validate(segmentedControl: UISegmentedControl?) -> Bool {
-        var isValid:Bool = false
-        
+        var isValid:Bool = false        
         isValid = validateNotNil(segmentedControl: segmentedControl)
         isValid = validateIsSet(segmentedControl: segmentedControl)
         return isValid

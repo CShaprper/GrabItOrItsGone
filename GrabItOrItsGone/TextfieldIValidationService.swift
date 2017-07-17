@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextfieldInputValidationService: IValidateable, IAlertMessageDelegate {
+class TextfieldValidationService: IValidateable, IAlertMessageDelegate {
     var alertMessageDelegate: IAlertMessageDelegate?
     let title = String.Validation_Error_Message_String
     var message = String.TextfieldInputEmptyValidationError_MessageString

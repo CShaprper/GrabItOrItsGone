@@ -13,11 +13,6 @@ import FirebaseAuth
 import GoogleSignIn
 import OAuthSwift
 
-enum eValidationType{
-    case email
-    case password
-}
-
 
 class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IActivityAnimationDelegate, IAlertMessageDelegate, UIWebViewDelegate  {
     //MARK: - Outlets
@@ -54,12 +49,14 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     var facade:LoginSignUpFacade!
     let style = UIStyleHelper()
     let appDel = UIApplication.shared.delegate as! AppDelegate
-   var instagramLoginWebView : UIWebView?
+    var instagramLoginWebView : UIWebView?
     var success : ((URLRequest) -> Void)?
     var presentVC : UIViewController?
     
     func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
         facade.firebaseClient.alertMessageDelegate = delegate
+        ValidationFactory.alertMessageDelegate = self
+        facade.presentingController = self
     }
     
     
@@ -67,10 +64,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     override func viewDidLoad() {
         super.viewDidLoad()
         facade = LoginSignUpFacade()
-        facade.firebaseClient.activityAnimationDelegate = self
-        facade.presentingController = self
         initAlertMessageDelegate(delegate: self)
-        
         SetUpViews()
         AddNotificationListeners()
     }
@@ -119,23 +113,23 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         return true
     }
     func txt_Login_Email_TextChanged(sender: DesignableTextField) -> Void {
-        facade.SetValidationService(validationservice: EmailValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ValidationFactory.alertMessageDelegate = nil
+        sender.RightImageVisibility = ValidationFactory.Validate(type: .email, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
     }
     func txt_Login_Password_TextChanged(sender: DesignableTextField) -> Void{
-        facade.SetValidationService(validationservice: PasswordValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ValidationFactory.alertMessageDelegate = nil
+        sender.RightImageVisibility = ValidationFactory.Validate(type: .password, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
     }
     func txt_Register_Email_TextChanged(sender: DesignableTextField) -> Void {
-        facade.SetValidationService(validationservice: EmailValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ValidationFactory.alertMessageDelegate = nil
+        sender.RightImageVisibility = ValidationFactory.Validate(type: .email, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
     }
     func txt_Register_Password_TextChanged(sender:DesignableTextField) -> Void {
-        facade.SetValidationService(validationservice: PasswordValidationService())
-        sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
+        ValidationFactory.alertMessageDelegate = nil
+        sender.RightImageVisibility = ValidationFactory.Validate(type: .password, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
     }
     
@@ -187,12 +181,22 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         PopUpBlurrScreenView.Arise(duration: 0.5, delay: 0, options: [.curveEaseOut], toAlpha: 1)
     }
     func btn_SignUp_PopUp_Pressed(sender: DesignableUIButton) -> Void {
-        //Firebase sign Up
-        facade.CreateNewFirebaseUser(email: txt_Register_Email.text!, password: txt_Register_Password.text!)
+        ValidationFactory.alertMessageDelegate = self
+        var isValid:Bool = false
+        isValid = ValidationFactory.Validate(type: .email, validationString: txt_Register_Email.text)
+        isValid = ValidationFactory.Validate(type: .password, validationString: txt_Register_Password.text)
+        if isValid{
+          facade.firebaseClient.CreateNewAutenticableUser(email: txt_Register_Email.text!, password: txt_Register_Password.text!)
+        }
     }
     func btn_LogIn_PopUp_Pressed(sender: DesignableUIButton) -> Void {
-        facade.firebaseClient.alertMessageDelegate = self
-        facade.LoginFirebaseUser(email: txt_Login_Email.text!, password: txt_Login_Password.text!)
+        ValidationFactory.alertMessageDelegate = self
+        var isValid:Bool = false
+        isValid = ValidationFactory.Validate(type: .email, validationString: txt_Login_Email.text)
+        isValid = ValidationFactory.Validate(type: .password, validationString: txt_Login_Password.text)
+        if isValid{
+            facade.firebaseClient.LoginAuthenticableUser(email: txt_Login_Email.text!, password: txt_Login_Password.text!)
+        } 
     }
     func btn_Guest_Pressed(sender: DesignableUIButton){
         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
@@ -209,21 +213,21 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         GIDSignIn.sharedInstance().signIn()
     }
     func btn_CustomInstagramLogin_Pressed(sender: UIButton) -> Void{
-         view.addSubview(instagramLoginWebView!)
+        view.addSubview(instagramLoginWebView!)
         handle()
         //facade.LoginFirebaseUserWithInstagram(controller: self)
     }
-   /* func doOAuthInstagram(){
-        let oauthswift = OAuth2Swift(consumerKey:"d9b8a7748ca744aca7894f0044d09545", consumerSecret:"4c37f561b15f4f7596b6970e4d6e6ff3", authorizeUrl:   "https://api.instagram.com/oauth/authorize",responseType: "token")
-        oauthswift.authorize(deviceToken: <#T##String#>, success: <#T##OAuthSwift.TokenRenewedHandler##OAuthSwift.TokenRenewedHandler##(OAuthSwiftCredential) -> Void#>, failure: <#T##OAuthSwiftHTTPRequest.FailureHandler##OAuthSwiftHTTPRequest.FailureHandler##(OAuthSwiftError) -> Void#>)
-        oauthswift.authorize(withCallbackURL: "https://localhost:8080/instagram-callback", scope: "public_content", state: "INSTAGRAM", success: { (credential, response, parameters) in
-            print(parameters["name"] ?? "")
-            print("Instagram oauth_token:\(credential.oauthToken)")
-            print(parameters)
-        }) { (error) in
-            
-        }
-    }*/
+    /* func doOAuthInstagram(){
+     let oauthswift = OAuth2Swift(consumerKey:"d9b8a7748ca744aca7894f0044d09545", consumerSecret:"4c37f561b15f4f7596b6970e4d6e6ff3", authorizeUrl:   "https://api.instagram.com/oauth/authorize",responseType: "token")
+     oauthswift.authorize(deviceToken: <#T##String#>, success: <#T##OAuthSwift.TokenRenewedHandler##OAuthSwift.TokenRenewedHandler##(OAuthSwiftCredential) -> Void#>, failure: <#T##OAuthSwiftHTTPRequest.FailureHandler##OAuthSwiftHTTPRequest.FailureHandler##(OAuthSwiftError) -> Void#>)
+     oauthswift.authorize(withCallbackURL: "https://localhost:8080/instagram-callback", scope: "public_content", state: "INSTAGRAM", success: { (credential, response, parameters) in
+     print(parameters["name"] ?? "")
+     print("Instagram oauth_token:\(credential.oauthToken)")
+     print(parameters)
+     }) { (error) in
+     
+     }
+     }*/
     
     
     func handle() {
@@ -241,7 +245,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         if request.url?.fragment?.contains("access_token") == true {
             print(request.url ?? "")
             print(request.url?.fragment ?? "")
-           facade.LoginFirebaseUserWithInstagram(controller: self, customToken: request.url?.fragment ?? "")
+            facade.LoginFirebaseUserWithInstagram(controller: self, customToken: request.url?.fragment ?? "")
             webView.removeFromSuperview()
             return false
         }
@@ -334,23 +338,19 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     private func ConfigureDesignableTextfieldDuringInput(sender:DesignableTextField, validationType: eValidationType)->Void{
         switch validationType {
         case .email:
-            facade.SetValidationService(validationservice: EmailValidationService())
-            sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
-            if facade.validationService!.Validate!(validationString: sender.text!) == false{
-                sender.rightView?.shake()
-            }
-            if sender.text!.isEmpty{
-                sender.RightImageVisibility = false
-            }
+            var isValid:Bool = false
+            isValid = ValidationFactory.Validate(type: .email, validationString: sender.text!)
+            sender.RightImageVisibility = !isValid
+            if isValid == false { sender.rightView?.shake() }
+            if sender.text!.isEmpty { sender.RightImageVisibility = false }
         case .password:
-            facade.SetValidationService(validationservice: PasswordValidationService())
-            sender.RightImageVisibility = !facade.validationService!.Validate!(validationString: sender.text!)
-            if facade.validationService!.Validate!(validationString: sender.text!) == false{
-                sender.rightView?.shake()
-            }
-            if sender.text!.isEmpty{
-                sender.RightImageVisibility = false
-            }
+            var isValid:Bool = false
+            isValid = ValidationFactory.Validate(type: .password, validationString: sender.text!)
+            sender.RightImageVisibility = !isValid
+            if isValid == false { sender.rightView?.shake() }
+            if sender.text!.isEmpty { sender.RightImageVisibility = false }
+        default:
+            break
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ZipCodeInputValidationService: IValidateable, IAlertMessageDelegate {
+class ZipCodeValidationService: IValidateable, IAlertMessageDelegate {
     var alertMessageDelegate: IAlertMessageDelegate?
     let title = String.ValidationErrorAlert_TitleString
     let message = String.ZipCodeErrorAlert_MessageString
@@ -44,7 +44,7 @@ class ZipCodeInputValidationService: IValidateable, IAlertMessageDelegate {
         if alertMessageDelegate != nil{
             alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
         } else {
-            print("ZipCodeInputValidationService: alertMessageDelegate not set from calling class")
+            print("ZipCodeValidationService: alertMessageDelegate not set from calling class")
         }
     }
 }

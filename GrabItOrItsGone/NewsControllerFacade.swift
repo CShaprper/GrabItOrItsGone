@@ -9,11 +9,8 @@
 import UIKit
 
 class NewsControllerFacade {
-    //MARK:-Members
-    var alertMessateTitle: String?
-    var alertMessageMessage: String?
+    //MARK:-Members 
     var firebaseClient:FirebaseClient!
-    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
     var newsArray:[News]{
         get {
             return firebaseClient.newsArray
