@@ -14,4 +14,5 @@ enum eUserDefaultKeys: String {
     case isLoggedInWithGoogle = "isLoggedInWithGoogle"
     case isLoggedInWithInstagram = "isLoggedInWithInstagram"
     case SoundsOn = "SoundsOn"
+    case isAdmin = "isAdmin"
 }

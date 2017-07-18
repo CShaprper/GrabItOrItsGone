@@ -14,7 +14,7 @@ extension Double {
     var degreesToRadians: CGFloat { return CGFloat(self) * .pi / 180 }
 }
 
-class MainController: UIViewController, IAlertMessageDelegate{
+class MainController: UIViewController, IAlertMessageDelegate, IFirebaseDataReceivedDelegate{
     //MARK: - Outlets
     @IBOutlet var MainBackgroundImage: UIImageView!
     @IBOutlet var CardView: DesignableUIView!
@@ -41,6 +41,7 @@ class MainController: UIViewController, IAlertMessageDelegate{
     @IBOutlet var SoundSwitch: UISwitch!
     @IBOutlet var SoundImage: UIImageView!
     @IBOutlet var SoundStack: UIStackView!
+    @IBOutlet var btn_AdminAddProduct: UIButton!
     
     //MARK: Members
     let style = UIStyleHelper()
@@ -49,16 +50,6 @@ class MainController: UIViewController, IAlertMessageDelegate{
     var isProductInformationSheetVisible:Bool = false
     let productCard:ProductCard = ProductCard()
     var facade:MainControllerFacade!
-    
-    func ShowAlertMessage(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
-        facade.firebaseClient.alertMessageDelegate = delegate
-    }
     
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print(fcmToken)
@@ -72,14 +63,14 @@ class MainController: UIViewController, IAlertMessageDelegate{
         super.viewDidLoad()
         
         facade = MainControllerFacade(presentingController: self)
-        //Create Dummy Products
-        facade.productsArray = productCard.CreateDummyProducts()
         facade.CheckForSoundSetting()
+        facade.firebaseDateReceivedDelegate = self
         initAlertMessageDelegate(delegate: self)
         //Setup Views
-        SetupMainControllerViews() 
+        SetupMainControllerViews()
         
         NotificationCenter.default.addObserver(self, selector: #selector(SegueToLogInController), name: NSNotification.Name.SegueToLogInController, object: nil)
+            self.facade.firebaseClient.ReadFirebaseProductsSection()      
     }
     override func viewDidAppear(_ animated: Bool) {
         style.AddToViewsForStyling(views: [MainBackgroundImage])
@@ -122,6 +113,29 @@ class MainController: UIViewController, IAlertMessageDelegate{
             UserDefaults.standard.set(false, forKey: eUserDefaultKeys.SoundsOn.rawValue)
             SoundImage.image =   #imageLiteral(resourceName: "SoundOff-icon")
         }
+    }
+    
+    //MARK: IFirebaseDataReceivedDelagate
+    func FirebaseDataReceived() {
+        print("Prodcut data with images received from Firebase")
+        ProductImageView.image =  facade.productsArray[0].ProdcutImage != nil ? facade.productsArray[0].ProdcutImage! : #imageLiteral(resourceName: "Image-placeholder")
+        OldPriceBlurryView.alpha = 1
+        NewPriceBlurryView.alpha = 1
+        lbl_ProductTitle.text = facade.productsArray[0].Title!
+        lbl_ProductSubtitle.text = facade.productsArray[0].Subtitle!
+        lbl_OldPrice.text = String(facade.productsArray[0].OriginalPrice!)
+        lbl_NewPrice.text = String(facade.productsArray[0].NewPrice!)
+        
+    }
+    
+    //MARK: - IAlertMessageDelegate
+    func ShowAlertMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+        facade.firebaseClient.alertMessageDelegate = delegate
     }
     
     
@@ -198,11 +212,12 @@ class MainController: UIViewController, IAlertMessageDelegate{
                         card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians).scaledBy(x: 1, y: 1)
                         self.FavoritesStarImage.alpha = 0
                     })
-
                     return
                 }
                 facade.PlayYeahSound()
-                self.facade.SaveProductToFavorites(product: facade.productsArray[imageCount])
+                DispatchQueue.main.async {
+                    self.facade.SaveProductToFavorites(product: self.facade.productsArray[self.imageCount])
+                }
                 UIView.animate(withDuration: swipeDuration, animations:
                     { card.center.y = card.center.y + self.view.frame.size.height
                 }, completion: { (true) in
@@ -230,19 +245,23 @@ class MainController: UIViewController, IAlertMessageDelegate{
         card.center = self.view.center
         card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians)
         card.Arise(duration: 0.5, delay: 0, options: [.allowUserInteraction], toAlpha: 1)
-        
-        imageCount = imageCount == facade.productsArray.count - 1 ? 0 : imageCount + 1
-        ProductImageView.image = facade.productsArray[imageCount].ProdcutImage
-        lbl_ProductTitle.text = facade.productsArray[imageCount].Title!
-        lbl_ProductSubtitle.text = facade.productsArray[imageCount].Subtitle!
-        ProductInformationTextView.text = facade.productsArray[imageCount].Productinformation!
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.string(for: facade.productsArray[imageCount].OriginalPrice!)
-        lbl_OldPrice.text = formatter.string(for: facade.productsArray[imageCount].OriginalPrice!)
-        lbl_NewPrice.text = formatter.string(for: facade.productsArray[imageCount].NewPrice!)
         FavoritesStarImage.alpha = 0
+        print(facade.productsArray.count)
+        if facade.productsArray.count > 0{
+            OldPriceBlurryView.alpha = 1
+            NewPriceBlurryView.alpha = 1
+            imageCount = imageCount == facade.productsArray.count - 1 ? 0 : imageCount + 1
+            ProductImageView.image = facade.productsArray[imageCount].ProdcutImage
+            lbl_ProductTitle.text = facade.productsArray[imageCount].Title!
+            lbl_ProductSubtitle.text = facade.productsArray[imageCount].Subtitle!
+            ProductInformationTextView.text = facade.productsArray[imageCount].Productinformation!
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.locale = Locale(identifier: "de_DE")
+            formatter.string(for: facade.productsArray[imageCount].OriginalPrice!)
+            lbl_OldPrice.text = formatter.string(for: facade.productsArray[imageCount].OriginalPrice!)
+            lbl_NewPrice.text = formatter.string(for: facade.productsArray[imageCount].NewPrice!)
+        }
     }
     
     func btn_Menu_Pressed(sender: DesignableUIButton) -> Void {
@@ -266,7 +285,7 @@ class MainController: UIViewController, IAlertMessageDelegate{
         if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
             let title = String.NoRegisteredUserAlert_TitleString
             let message = String.NoRegisteredUserAlert_MessageString
-            ShowAlertMessage(title: title, message: message)             
+            ShowAlertMessage(title: title, message: message)
             return
         }
         if isMenuOut
@@ -385,6 +404,10 @@ class MainController: UIViewController, IAlertMessageDelegate{
         }, completion: nil)
     }
     
+    func btn_AdminAddProduct_Pressed(sender: UIButton) -> Void{
+        performSegue(withIdentifier: String.SegueToAdminAddProductController_Identifier, sender: nil)
+    }
+    
     private func SetupMainControllerViews(){
         //Hide back button to show custom Button
         self.navigationItem.hidesBackButton = true
@@ -402,7 +425,7 @@ class MainController: UIViewController, IAlertMessageDelegate{
         
         //Imageview of CardView
         MainBackgroundImage.image = #imageLiteral(resourceName: "NatureBG")
-        ProductImageView.image = #imageLiteral(resourceName: "Product_Cream")
+        ProductImageView.image = #imageLiteral(resourceName: "Image-placeholder")
         ProductImageView.layer.cornerRadius = 20
         ProductImageView.clipsToBounds = true
         
@@ -411,13 +434,26 @@ class MainController: UIViewController, IAlertMessageDelegate{
         OldPriceBlurryView.layer.cornerRadius = 10
         OldPriceBlurryView.clipsToBounds = true
         OldPriceBlurryView.transform = CGAffineTransform(rotationAngle: Double(-35).degreesToRadians)
+        OldPriceBlurryView.alpha = 0
+        lbl_ProductTitle.text = ""
+        lbl_ProductSubtitle.text = ""
+        lbl_OldPrice.text = ""
+        lbl_NewPrice.text = ""
         
         //NewPrice label of CardView
         NewPriceBlurryView.layer.cornerRadius = 10
         NewPriceBlurryView.clipsToBounds = true
+        NewPriceBlurryView.alpha = 0
         ProductInformationSheet.alpha = 0
         ProductInformationSheet.transform = CGAffineTransform(translationX: 0, y: (ProductInformationSheet.frame.size.height + 100))
         ProductInformationSheet.layer.cornerRadius = 20
+        
+        if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isAdmin.rawValue){
+            btn_AdminAddProduct.alpha = 1
+        } else {
+            btn_AdminAddProduct.alpha = 0
+        }
+        btn_AdminAddProduct.addTarget(self, action: #selector(btn_AdminAddProduct_Pressed), for: .touchUpInside)
         
         //Wire targets
         btn_Menu.addTarget(self, action: #selector(btn_Menu_Pressed), for: .touchUpInside)

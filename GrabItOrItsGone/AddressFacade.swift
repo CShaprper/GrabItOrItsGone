@@ -43,6 +43,7 @@ class AddressFacade{
         isValid = ValidationFactory.Validate(type: .textField, validationString: address.firstname)
         isValid = ValidationFactory.Validate(type: .textField, validationString: address.lastname)
         isValid = ValidationFactory.Validate(type: .textField, validationString: address.streetname)
+        isValid = ValidationFactory.Validate(type: .housenumber, validationString: address.houseneumber)
         isValid = ValidationFactory.Validate(type: .textField, validationString: address.city)
         isValid = ValidationFactory.Validate(type: .zipCode, validationString: address.zipnumber)
         return isValid

@@ -22,10 +22,12 @@ extension String{
     static let SegueToCategoriesController_Identifier = "SegueToCategoriesController"
     static let SegueToPurchaseController_Identifier = "SegueToPurchaseController"
     static let SegueToBasketController_Identifier = "SegueToBasketController"
+    static let SegueToAdminAddProductController_Identifier = "SegueToAdminAddProductController"
 } 
 
 //Localization Strings extension
 extension String {
+    static let HousenumberToShortValidationError_MessageString = NSLocalizedString("HousenumberToShortValidationError_MessageString", comment: "")
     static let lbl_Purchases_String = NSLocalizedString("lbl_Purchases_String", comment: "")
     static let lbl_FilterCategories_String = NSLocalizedString("lbl_FilterCategories_String", comment: "")
     static let NoRegisteredUserAlert_MessageString = NSLocalizedString("NoRegisteredUserAlert_MessageString", comment: "")

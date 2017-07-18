@@ -12,3 +12,10 @@ extension String{
         return NSLocalizedString(self, comment: "")
     }
 }
+extension String {
+    var isNumeric : Bool {
+        get{
+            return !self.isEmpty && self.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+        }
+    }
+}

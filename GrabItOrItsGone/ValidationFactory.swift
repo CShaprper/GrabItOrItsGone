@@ -30,6 +30,10 @@ class ValidationFactory {
             let validationService = ZipCodeValidationService()
             validationService.alertMessageDelegate = alertMessageDelegate
             return validationService.Validate(validationString: validationString)
+        case .housenumber:
+            let validationService = HousenumberValidationService()
+            validationService.alertMessageDelegate = alertMessageDelegate
+            return validationService.Validate(validationString: validationString)
         case .segmentedControl:
             let validationService = SegmentedControlValidationService()
             validationService.alertMessageDelegate = alertMessageDelegate

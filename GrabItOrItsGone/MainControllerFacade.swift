@@ -11,10 +11,19 @@ import AVFoundation
 
 class MainControllerFacade: IFirebaseDataReceivedDelegate {
     //MARK:-Members
+    var firebaseDateReceivedDelegate:IFirebaseDataReceivedDelegate?
     private var audioplayer:AVAudioPlayer!
-    private var presentingController:MainController!
-    var productsArray:[ProductCard]!
+    private var presentingController:MainController! 
     var firebaseClient:FirebaseClient!
+    var productsArray:[ProductCard]!
+    var tempProductsArray:[ProductCard]{
+        get {
+            return firebaseClient.productsArray
+        }
+        set {
+            firebaseClient.productsArray = newValue
+        }
+    }
     
     //Constructor
     init(presentingController: MainController) {
@@ -84,6 +93,9 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
     }
     
     func FirebaseDataReceived() {
-        //todo implement products data from Firebase Client
+        productsArray = tempProductsArray
+        if firebaseDateReceivedDelegate != nil{
+            firebaseDateReceivedDelegate?.FirebaseDataReceived()
+        }
     }
 }

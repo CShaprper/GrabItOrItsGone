@@ -26,6 +26,7 @@ class FavoritesTableViewCell: UITableViewCell {
     }
     
     func ConfigureCell(product: ProductCard){
+        ProductImage.image = product.ProdcutImage!
         lbl_Title.text = product.Title != nil ? product.Title! : ""
         lbl_Subtitle.text = product.Subtitle != nil ? product.Subtitle! : ""
         let formatter = NumberFormatter()

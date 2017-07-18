@@ -101,10 +101,19 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             } else {
                 self.StopActivityAnimation()
                 UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+                self.RecognizeAdmin(email: email)
                 print("Succesfully loged user in to Firebase")
             }
         }
         
+    }
+    func RecognizeAdmin(email: String)
+    {
+        if email == "p.sypek@icloud.com" || email == "sypekpeter@gmail.com" || email == "peter.sypek@gmx.de"{
+            UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isAdmin.rawValue)
+        } else {
+            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isAdmin.rawValue)
+        }
     }
     func ResetUserPassword(email:String){
         self.StartActivityAnimation()
@@ -142,6 +151,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             } else {
                 UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
                 print("User logged in with Google")
+                self.RecognizeAdmin(email: user!.email!)
                 self.StopActivityAnimation()
                 self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
             }
@@ -198,8 +208,9 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                             self.ShowAlertMessage(title: title, message: message)
                             return
                         }
-                    } else {
+                    }else {
                         print("User logged in with Facebook")
+                        self.RecognizeAdmin(email: user!.email!)
                         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
                         self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
                     }
@@ -298,8 +309,8 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 //Set News properties
                 news.title = dict["title"] as? String
                 news.message = dict["message"] as? String
-                print(news.title!)
-                print(news.message!)
+                print(news.title ?? "*****")
+                print(news.message ?? "*****")
                 self.newsArray.append(news)
                 
                 DispatchQueue.main.async {
@@ -321,13 +332,73 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                     product.NewPrice = dict["newprice"] as? Double
                     product.OriginalPrice = dict["originalprice"] as? Double
                     product.Productinformation = dict["productinformation"] as? String
-                    self.favoritesArray.append(product)
+                    product.ImageURL = dict["imageURL"] as? String
+                    product.ProdcutImage = #imageLiteral(resourceName: "Image-placeholder")
                     DispatchQueue.main.async {
+                        self.favoritesArray.append(product)
                         self.FirebaseDataReceived()
+                    }
+                    DispatchQueue.main.async {
+                        if let imgURL = product.ImageURL{
+                            if let data2 = NSData(contentsOf: URL(string: imgURL)!){
+                                for prod in self.favoritesArray{
+                                    if prod.ImageURL == imgURL{
+                                        prod.ProdcutImage = UIImage(data: data2 as Data)
+                                        self.FirebaseDataReceived()
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             })
         }
+    }
+    var productsArray:[ProductCard] = []
+    func ReadFirebaseProductsSection() -> Void{
+        ref.child("products").child("Electronic").observe(.childAdded, with: { (snapshot) in
+            if let dict = snapshot.value as? [String:AnyObject]{
+                let product = ProductCard()
+                product.ID = dict["id"] as? String
+                product.Title = dict["title"] as? String
+                product.Subtitle = dict["subtitle"] as? String
+                product.NewPrice = dict["newprice"] as? Double
+                product.OriginalPrice = dict["originalprice"] as? Double
+                product.Productinformation = dict["productinformation"] as? String
+                product.ProductCategory = dict["category"] as? String
+                product.ImageURL = dict["imageURL"] as? String
+                product.ProdcutImage = #imageLiteral(resourceName: "Image-placeholder")
+                DispatchQueue.main.async {
+                    self.productsArray.append(product)
+                    self.FirebaseDataReceived()
+                }
+                
+                print(dict)
+                if let imgURL = product.ImageURL{
+                    DispatchQueue.main.async {
+                        if let data2 = NSData(contentsOf: URL(string: imgURL)!){
+                            for prod in self.productsArray{
+                                if prod.ImageURL == imgURL{
+                                    prod.ProdcutImage = UIImage(data: data2 as Data)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        
+    }
+    private func DownloadImages(url: URL, product: ProductCard){
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            if error != nil{
+                print(error!.localizedDescription)
+            }
+            DispatchQueue.main.async {
+                product.ProdcutImage = UIImage(data: data!)
+            }
+        })
+        
     }
     
     
@@ -335,36 +406,55 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
     func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {
         if let uid = Auth.auth().currentUser?.uid{
             let favRef = ref.child("favorites_uid_\(uid)")
-            let key = favRef.childByAutoId().key
-            let values = (["id":key, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!] as [String : Any])
-            //self.ref.child("Favorites\(uid)").setValue(values)
+            let key = favRef.child(product.ID!).key
+            let values = ["id":key, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL":product.ImageURL!] as [String : Any]
             favRef.child(key).updateChildValues(values, withCompletionBlock: { (error, databaseref) in
                 if error != nil{
                     print(error!.localizedDescription)
                 }
                 print("Succesfully saved Product to Firebase Favorites")
-                /* Image Upload
-                 let storage = Storage.storage()
-                 let storageRef = storage.reference()
-                 let imagesRef = storageRef.child("images_uid_\(uid)")
-                 let nameRef = imagesRef.child(product.ImageName!)
-                 let data = UIImagePNGRepresentation(product.ProdcutImage!)
-                 let uploadTask = nameRef.putData(data!, metadata: nil, completion: { (metadata, error) in
-                 guard let metadata = metadata else{
-                 if error != nil{
-                 print(error!.localizedDescription)
-                 let title = String.FirebaseImageUploadErrorAlert_TitleString
-                 let message = String.FirebaseImageUploadErrorAlert_MessageString
-                 self.ShowAlertMessage(title: title, message: message)
-                 return
-                 }
-                 return
-                 }
-                 let downloadURL = metadata.downloadURL()
-                 print("Image Uploaded Successfully")
-                 }) */                
             })
         }
+    }
+    func SaveNewProdcutAsAdmin(product: ProductCard, productImage: UIImage) -> Void{
+        //Image Upload
+        let imagesRef = Storage.storage().reference().child(product.ID!)
+        if let uploadData = productImage.mediumQualityJPEGNSData{
+            self.StartActivityAnimation()
+            let _ = imagesRef.putData(uploadData as Data, metadata: nil, completion: { (metadata, error) in
+                if error != nil{
+                    print(error!.localizedDescription)
+                    let title = String.FirebaseImageUploadErrorAlert_TitleString
+                    let message = String.FirebaseImageUploadErrorAlert_MessageString
+                    self.ShowAlertMessage(title: title, message: message)
+                    self.StopActivityAnimation()
+                    return
+                }
+                print(metadata ?? "")
+                if let imgURL =  metadata?.downloadURL()?.absoluteString{
+                    let values = ["id":product.ID!, "category":product.ProductCategory!, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL": imgURL] as [String : Any]
+                    self.RegisterProductIntoFirebase(product: product, values: values)
+                }
+                
+                print("Successfully uploaded prodcut image!")
+            }) // end: let _ = imagesRef.putData
+        }//end: if let let uploadData
+    }
+    private func RegisterProductIntoFirebase(product: ProductCard, values: [String : Any]){
+        let productRef = self.ref.child("products")
+        let categoryRef = productRef.child(product.ProductCategory!)
+        let idRef = categoryRef.child(product.ID!).key
+        categoryRef.child(idRef).updateChildValues(values, withCompletionBlock: { (error, dbref) in
+            if error != nil{
+                print(error!.localizedDescription)
+                let title = String.FirebaseImageUploadErrorAlert_TitleString
+                let message = String.FirebaseImageUploadErrorAlert_MessageString
+                self.ShowAlertMessage(title: title, message: message)
+                self.StopActivityAnimation()
+            }
+            print("Succesfully added Prodcut Data with imageURL")
+        })
+        
     }
     private func SaveNewUserWithUIDtoFirebase(user: User?, firebaseURL: String){
         DispatchQueue.main.async {
@@ -400,10 +490,27 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                     self.ShowAlertMessage(title: title, message: message)
                 }
                 DispatchQueue.main.async {
-                    self.FirebaseDataReceived() 
+                    self.FirebaseDataReceived()
                 }
                 print("Succesfully deleted Favorite from Firebase")
             })
         } // No uid for current User
+    }
+}
+let imageChache = NSCache<AnyObject, AnyObject>()
+extension UIImageView{
+    func loadImageUsingCacheWithURLString(urlString: String) -> Void {
+        let url = URL(string: urlString)
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil{
+                print(error!.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async {
+                if let downloadImage = UIImage(data: data!){
+                    imageChache.setObject(downloadImage, forKey: "imageURL" as AnyObject)
+                }
+            }
+        }
     }
 }

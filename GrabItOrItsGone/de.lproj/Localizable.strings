@@ -62,3 +62,4 @@ EmailInvalidCharactersErrorAlert_MessageString = "Deine Email Adresse enthält u
 NoRegisteredUserAlert_TitleString = "Nicht Registriert?";
 NoRegisteredUserAlert_MessageString = "Diese Funktion steht nur registrierten Benutzern zur Verfügung. Bitte registriere Dich als Benutzer um die Funktionalität zu nutzen.";
 lbl_FilterCategories_String = "Kategorie Filter";
+HousenumberToShortValidationError_MessageString = "Die Eingabe Deiner Hausnummer sollte mindestens eine Ziffer sein.";

@@ -99,6 +99,9 @@
 		CFF1E8601F18CCF700E1653C /* LoninSignUpFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E85F1F18CCF700E1653C /* LoninSignUpFacadeTests.swift */; };
 		CFF1E8651F19142000E1653C /* eUserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */; };
 		CFF1E8671F19191D00E1653C /* SegmentedControlValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */; };
+		CFFA99671F1DEDB10089D89C /* HousnumberValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA99661F1DEDB10089D89C /* HousnumberValidationService.swift */; };
+		CFFA99691F1E230A0089D89C /* AdminAddProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA99681F1E230A0089D89C /* AdminAddProductController.swift */; };
+		CFFA996B1F1E271C0089D89C /* eProductCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA996A1F1E271C0089D89C /* eProductCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +217,9 @@
 		CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eUserDefaultKeys.swift; sourceTree = "<group>"; };
 		CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlValidationService.swift; sourceTree = "<group>"; };
 		CFF6E02A1F0D89CC00664B35 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CFFA99661F1DEDB10089D89C /* HousnumberValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HousnumberValidationService.swift; sourceTree = "<group>"; };
+		CFFA99681F1E230A0089D89C /* AdminAddProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminAddProductController.swift; sourceTree = "<group>"; };
+		CFFA996A1F1E271C0089D89C /* eProductCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eProductCategory.swift; sourceTree = "<group>"; };
 		D15A09F65E756D61A098E205 /* Pods_GrabItOrItsGone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrabItOrItsGone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -266,6 +272,7 @@
 				CFF1E85D1F18C2ED00E1653C /* TextfieldIValidationService.swift */,
 				CFF1E8661F19191D00E1653C /* SegmentedControlValidationService.swift */,
 				CFB196BE1F1B7C4F00AB5535 /* ZipCodeValidationService.swift */,
+				CFFA99661F1DEDB10089D89C /* HousnumberValidationService.swift */,
 			);
 			name = ValidationService;
 			sourceTree = "<group>";
@@ -326,6 +333,7 @@
 				CF037A961F1CF83C00BEAE44 /* CategoriesController.swift */,
 				CFE2882C1F1D365C00810209 /* PurchasesController.swift */,
 				CFE2882E1F1D3A1D00810209 /* BasketController.swift */,
+				CFFA99681F1E230A0089D89C /* AdminAddProductController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -474,6 +482,7 @@
 				CFF1E8641F19142000E1653C /* eUserDefaultKeys.swift */,
 				CFB599A41F19E6DC00C0CCF9 /* eUserLoggenInService.swift */,
 				CF037A931F1CD78B00BEAE44 /* eValidationType.swift */,
+				CFFA996A1F1E271C0089D89C /* eProductCategory.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -807,6 +816,7 @@
 				CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */,
 				CFB599A91F1A16B200C0CCF9 /* FavoritesController.swift in Sources */,
 				CFCBFE5F1F12C73E002F9E1C /* AdressController.swift in Sources */,
+				CFFA99691F1E230A0089D89C /* AdminAddProductController.swift in Sources */,
 				CF037A941F1CD78B00BEAE44 /* eValidationType.swift in Sources */,
 				CF034FEC1F08DB0B00D8F03D /* IActivityAnimationDelegate.swift in Sources */,
 				CFB9D59C1F0E99CF0049777D /* YourAccountController.swift in Sources */,
@@ -832,6 +842,7 @@
 				CFB599B91F1A7B9100C0CCF9 /* FavoritesDetailControllerFacade.swift in Sources */,
 				CFCBC3CF1EFFF8C7003B2E60 /* MainController.swift in Sources */,
 				CF3D62661EFD501B0051706A /* UIViewAnimationExtension.swift in Sources */,
+				CFFA99671F1DEDB10089D89C /* HousnumberValidationService.swift in Sources */,
 				CFB0D3871F0ABA51000706E7 /* LocalizedStringExtension.swift in Sources */,
 				CF037A971F1CF83C00BEAE44 /* CategoriesController.swift in Sources */,
 				CFAE1D0B1F1268EA00165E9D /* Model.xcdatamodeld in Sources */,
@@ -839,6 +850,7 @@
 				CFF1E8651F19142000E1653C /* eUserDefaultKeys.swift in Sources */,
 				CFE2882F1F1D3A1D00810209 /* BasketController.swift in Sources */,
 				CF037A921F1CD67D00BEAE44 /* ValidationFactory.swift in Sources */,
+				CFFA996B1F1E271C0089D89C /* eProductCategory.swift in Sources */,
 				CFB599B31F1A474800C0CCF9 /* FavoritesDetailController.swift in Sources */,
 				CFB232901F07C2D700346879 /* IAuthenticable.swift in Sources */,
 			);

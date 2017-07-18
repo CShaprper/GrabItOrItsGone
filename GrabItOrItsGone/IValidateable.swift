@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol IValidateable { 
+@objc protocol IValidateable: class { 
     @objc optional func Validate(validationString: String?) -> Bool
     @objc optional func Validate(segmentedControl: UISegmentedControl?) -> Bool
 }

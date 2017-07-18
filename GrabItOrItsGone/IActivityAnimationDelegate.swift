@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol IActivityAnimationDelegate {
+@objc protocol IActivityAnimationDelegate: class {
     @objc optional var activityAnimationDelegate:IActivityAnimationDelegate? { get set }
     func StartActivityAnimation() -> Void
     func StopActivityAnimation() -> Void

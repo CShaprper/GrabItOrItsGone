@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol IAuthenticalbe {
+@objc protocol IAuthenticalbe: class {
     var firebaseURL:String { get }
     func CreateNewAutenticableUser(email: String, password: String) -> Void
     func LoginAuthenticableUser(email: String, password: String) -> Void

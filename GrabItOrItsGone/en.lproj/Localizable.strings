@@ -63,3 +63,4 @@ EmailInvalidCharactersErrorAlert_MessageString = "Your email address contains in
 NoRegisteredUserAlert_TitleString = "Not Registered?";
 NoRegisteredUserAlert_MessageString = "This functionality is only for registered users available. Please register as user to use it.";
 lbl_FilterCategories_String = "Category filter";
+HousenumberToShortValidationError_MessageString = "The number of your address is to short. It must be at least one digit.";
