@@ -298,7 +298,7 @@ class FirebaseClient: IFirebaseWebService {
     }
     func ReadFirebaseFavoritesSection(){
         if let uid = Auth.auth().currentUser?.uid{
-            ref.child("favorites_uid_\(uid)").observe(.childAdded, with: { (snapshot) in
+            ref.child("favorites").child(uid).observe(.childAdded, with: { (snapshot) in
                 if let dict = snapshot.value as? [String:AnyObject]{
                     print(dict)
                     var product = ProductCard()
@@ -403,10 +403,10 @@ class FirebaseClient: IFirebaseWebService {
     //MARK: - Firebase save functions
     func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {
         if let uid = Auth.auth().currentUser?.uid{
-            let favRef = ref.child("favorites_uid_\(uid)")
-            let key = favRef.child(product.ID!).key
+            let userRef = ref.child("favorites").child(uid)
+            let key = userRef.child(product.ID!).key
             let values = ["id":key, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL":product.ImageURL!, "dateAdded":FormatDateToString(date: Date())] as [String : Any]
-            favRef.child(key).updateChildValues(values, withCompletionBlock: { (error, databaseref) in
+            userRef.child(key).updateChildValues(values, withCompletionBlock: { (error, databaseref) in
                 if error != nil{
                     print(error!.localizedDescription)
                 }
@@ -479,9 +479,9 @@ class FirebaseClient: IFirebaseWebService {
     //MARK: - Firebase Delete functions
     func DeleteProductFromFirebaseFavorites(idToDelete: String)->Void{
         if let uid = Auth.auth().currentUser?.uid{
-            let favRef = ref.child("favorites_uid_\(uid)")
+            let userRef = ref.child("favorites").child(uid)
             // favRef.child(idToDelete)
-            favRef.child(idToDelete).removeValue(completionBlock: { (error, database) in
+            userRef.child(idToDelete).removeValue(completionBlock: { (error, database) in
                 if error != nil{
                     print(error!.localizedDescription)
                     let title = String.FirebaseDeleteErrorAlert_TitleString

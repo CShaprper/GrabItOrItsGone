@@ -89,54 +89,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522164956.070405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "420"
-            endingLineNumber = "420"
-            landmarkName = "SaveNewProdcutAsAdmin(product:productImage:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GrabItOrItsGone.FirebaseClient.SaveNewProdcutAsAdmin (product : GrabItOrItsGone.ProductCard, productImage : __ObjC.UIImage) -&gt; ()"
-                  moduleName = "GrabItOrItsGone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/FirebaseClient.swift"
-                  timestampString = "522093224.855718"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "396"
-                  endingLineNumber = "396"
-                  offsetFromSymbolStart = "436">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GrabItOrItsGone.FirebaseClient.SaveNewProdcutAsAdmin (product : GrabItOrItsGone.ProductCard, productImage : __ObjC.UIImage) -&gt; ()"
-                  moduleName = "GrabItOrItsGone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/FirebaseClient.swift"
-                  timestampString = "522093224.858171"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "396"
-                  endingLineNumber = "396"
-                  offsetFromSymbolStart = "556">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/AdminAddProductController.swift"
             timestampString = "522095237.805701"
             startingColumnNumber = "9223372036854775807"
@@ -161,86 +113,6 @@
             endingLineNumber = "150"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522164956.070405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "426"
-            endingLineNumber = "426"
-            landmarkName = "SaveNewProdcutAsAdmin(product:productImage:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522164956.070405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "SaveNewProdcutAsAdmin(product:productImage:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522164956.070405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
-            landmarkName = "SaveNewProdcutAsAdmin(product:productImage:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GrabItOrItsGone.FirebaseClient.(SaveNewProdcutAsAdmin (product : GrabItOrItsGone.ProductCard, productImage : __ObjC.UIImage) -&gt; ()).(closure #1)"
-                  moduleName = "GrabItOrItsGone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/FirebaseClient.swift"
-                  timestampString = "522094301.762625"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "408"
-                  endingLineNumber = "408"
-                  offsetFromSymbolStart = "1312">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GrabItOrItsGone.FirebaseClient.(SaveNewProdcutAsAdmin (product : GrabItOrItsGone.ProductCard, productImage : __ObjC.UIImage) -&gt; ()).(closure #1)"
-                  moduleName = "GrabItOrItsGone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/FirebaseClient.swift"
-                  timestampString = "522094301.764992"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "408"
-                  endingLineNumber = "408"
-                  offsetFromSymbolStart = "1592">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -314,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522166960.873985"
+            timestampString = "522168343.896555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "FirebaseRequestFinished()"
             landmarkType = "7">
          </BreakpointContent>
@@ -397,22 +269,6 @@
             timestampString = "522166960.873985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "CardPanRecocnizerAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522166960.873985"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
             endingLineNumber = "107"
             landmarkName = "btn_Menu_Pressed(sender:)"
@@ -465,6 +321,22 @@
                   offsetFromSymbolStart = "0">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GrabItOrItsGone/MainController.swift"
+            timestampString = "522168140.701043"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "CardPanRecocnizerAction(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

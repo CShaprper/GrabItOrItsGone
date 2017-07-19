@@ -141,10 +141,10 @@ class MainController: UIViewController, IFirebaseWebService{
         let scaleY = min((view.frame.size.width * 0.25) / abs(yFromCenter), 1)
         let swipeLimitLeft = view.frame.width * 0.4 // left border when the card gets animated off
         let swipeLimitRight = view.frame.width * 0.6 // right border when the card gets animated off
-        let swipeLimitTop = view.frame.height * 0.4 // top border when the card gets animated off
-        let swipeLimitBottom = view.frame.height * 0.7 // top border when the card gets animated off
+        let swipeLimitTop = view.frame.height * 0.5 // top border when the card gets animated off
+        let swipeLimitBottom = view.frame.height * 0.8 // top border when the card gets animated off
         let ySpin:CGFloat = yFromCenter < 0 ? -200 : 200 // gives the card a spin in y direction
-        let xSpin:CGFloat = xFromCenter < 0 ? -500 : 500 // gives the card a spin in x direction
+        let xSpin:CGFloat = xFromCenter < 0 ? -200 : 200 // gives the card a spin in x direction
         
         FavoritesStarImage.alpha =  card.center.y < swipeLimitBottom ? 0 : 1
         
@@ -169,20 +169,24 @@ class MainController: UIViewController, IFirebaseWebService{
                 //Move off the top side if drag reached swipeLimitTop
                 SwipeCardOffTop(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
                 return
-            } else if card.center.y > swipeLimitBottom && UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
-                //Move downways if drag reached swipe limit bottom
-                let title = String.NoRegisteredUserAlert_TitleString
-                let message = String.NoRegisteredUserAlert_MessageString
-                AlertFromFirebaseService(title: title, message: message)
-                ResetCardAfterSwipeOff(card: card)
-                return
-            }  else {
-                facade.PlayYeahSound()
-                DispatchQueue.main.async {
-                    self.facade.SaveProductToFavorites(product: self.facade.productsArray[self.currentImageIndex])
+            } else if card.center.y > swipeLimitBottom {
+                if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
+                    let title = String.NoRegisteredUserAlert_TitleString
+                    let message = String.NoRegisteredUserAlert_MessageString
+                    AlertFromFirebaseService(title: title, message: message)
+                    ResetCardAfterSwipeOff(card: card)
+                    return
+                } else {
+                    //Move downways if drag reached swipe limit bottom
+                    SwipeCardOffBottom(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
+                    DispatchQueue.main.async {
+                        self.facade.SaveProductToFavorites(product: self.facade.productsArray[self.currentImageIndex])
+                    }
+                    return
                 }
+            } else {
+                // Reset card if no drag limit reached
                 self.ResetCardAfterSwipeOff(card: card)
-                return
             }
         }
     }
@@ -248,6 +252,17 @@ class MainController: UIViewController, IFirebaseWebService{
         facade.PlaySwooshSound()
         UIView.animate(withDuration: swipeDuration, animations: {
             card.center.y = card.center.y - self.view.frame.size.height
+            card.center.x = card.center.x + xSpin
+        }, completion: { (true) in
+            //Card arise in Center for new view
+            self.ResetCardAfterSwipeOff(card: card)
+            self.SetNewCardProdcutAfterSwipe(card: card)
+        })
+    }
+    private func SwipeCardOffBottom(swipeDuration: TimeInterval, card: UIView, xSpin: CGFloat){
+        facade.PlayYeahSound()
+        UIView.animate(withDuration: swipeDuration, animations: {
+            card.center.y = card.center.y + self.view.frame.size.height
             card.center.x = card.center.x + xSpin
         }, completion: { (true) in
             //Card arise in Center for new view
