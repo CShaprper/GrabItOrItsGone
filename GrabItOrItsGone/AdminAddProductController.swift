@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 import MobileCoreServices
 
-class AdminAddProductController: UIViewController, UITextFieldDelegate, IActivityAnimationDelegate {
+class AdminAddProductController: UIViewController, UITextFieldDelegate, IFirebaseWebService {
     //MARK:- Outlets
     @IBOutlet var txt_ProductTitle: UITextField!
     @IBOutlet var txt_productSubtitle: UITextField!
@@ -33,11 +33,11 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IActivit
     //MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        firebaseClient = FirebaseClient()
-        product = ProductCard()
         
+        product = ProductCard()
+        firebaseClient = FirebaseClient()
         firebaseClient!.ReadFirebaseProductsSection()
-        firebaseClient!.activityAnimationDelegate = self
+        firebaseClient!.delegate = self
         
         ActivityIndicator.color = UIColor.green
         ActivityIndicator.alpha = 0
@@ -80,12 +80,16 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IActivit
     }
     
     
-    //MARK: - IActivityAnimationSelegate
-    func StartActivityAnimation() {
+    //MARK: - IFirebaseWebService implementation
+    func FirebaseRequestStarted() {
         ActivityIndicator.alpha = 1
+        ActivityIndicator.frame.size.width = 60
+        ActivityIndicator.frame.size.height = 60
         view.addSubview(ActivityIndicator)
+        view.bringSubview(toFront: ActivityIndicator)
+        ActivityIndicator.center = view.center
     }
-    func StopActivityAnimation() {
+    func FirebaseRequestFinished() {
         ActivityIndicator.alpha = 0
         ActivityIndicator.removeFromSuperview()
     }
@@ -126,6 +130,7 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IActivit
         ContentContainer.transform = .identity
     }
 }
+//Image Compression
 extension UIImage
 {
     var highestQualityJPEGNSData: NSData? { return UIImageJPEGRepresentation(self, 1.0)! as NSData }
@@ -135,7 +140,7 @@ extension UIImage
     var lowestQualityJPEGNSData: NSData?  { return UIImageJPEGRepresentation(self, 0.0)! as NSData }
 }
 
-
+//ImagePicker
 extension AdminAddProductController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString

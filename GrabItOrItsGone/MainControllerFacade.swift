@@ -9,19 +9,19 @@
 import UIKit
 import AVFoundation
 
-class MainControllerFacade: IFirebaseDataReceivedDelegate {
+class MainControllerFacade: IFirebaseWebService {
     //MARK:-Members
-    var firebaseDateReceivedDelegate:IFirebaseDataReceivedDelegate?
+    var delegate: IFirebaseWebService?
     private var audioplayer:AVAudioPlayer!
     private var presentingController:MainController! 
     var firebaseClient:FirebaseClient!
-    var productsArray:[ProductCard]!
-    var tempProductsArray:[ProductCard]{
+    let appDel = UIApplication.shared.delegate as! AppDelegate
+    var productsArray:[ProductCard]{
         get {
-            return firebaseClient.productsArray
+            return appDel.productsArray
         }
         set {
-            firebaseClient.productsArray = newValue
+            appDel.productsArray = newValue
         }
     }
     
@@ -29,11 +29,10 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
     init(presentingController: MainController) {
         self.presentingController = presentingController
         firebaseClient = FirebaseClient()
-        firebaseClient.firebaseDataReceivedDelegate = self
-        productsArray = []
+        firebaseClient.delegate = self
     }
     
-    //Audioplayer vorbereiten
+    //MARK: - Audioplayer
     private func PrepareAudioPlayer(filename:String, filetype:String) -> Void {
             if let path = Bundle.main.path(forResource: filename, ofType: filetype){
                 let url = URL(fileURLWithPath: path)
@@ -47,8 +46,7 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
         audioplayer.play()
         }
     }
-    
-    func PlaySwooshSound() -> Void {
+        func PlaySwooshSound() -> Void {
         PrepareAudioPlayer(filename: "swoosh", filetype: "wav")
         AudioPlayerPlaySound()
     }
@@ -56,6 +54,7 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
         PrepareAudioPlayer(filename: "yeah", filetype: "m4a")
         AudioPlayerPlaySound()
     }
+    
     
     func LogoutFirebaseUser(){
         firebaseClient.LogoutAuthenticableUser()
@@ -91,11 +90,9 @@ class MainControllerFacade: IFirebaseDataReceivedDelegate {
             UserDefaults.standard.set(false, forKey: eUserDefaultKeys.SoundsOn.rawValue)
         }
     }
-    
-    func FirebaseDataReceived() {
-        productsArray = tempProductsArray
-        if firebaseDateReceivedDelegate != nil{
-            firebaseDateReceivedDelegate?.FirebaseDataReceived()
+    func FirebaseRequestFinished() { 
+        if delegate != nil{
+            delegate!.FirebaseRequestFinished!()
         }
     }
 }

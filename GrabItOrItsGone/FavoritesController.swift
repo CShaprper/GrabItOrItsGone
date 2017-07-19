@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseDataReceivedDelegate {
+class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseWebService {
     //MARK:- Outlets
     @IBOutlet var BackgroundImange: UIImageView!
     @IBOutlet var BackgroundImageBlurrView: UIVisualEffectView!
@@ -23,7 +23,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         facade = FavoritesFacade()
-        facade.firebaseClient.firebaseDataReceivedDelegate = self
+        facade.firebaseClient.delegate = self
         self.navigationItem.title = .ManageFavoritesController_TitleString
         facade.ReadFirebaseFavoritesSection()
     }
@@ -61,8 +61,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     //MARK:- IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() { 
-        facade.favoritesArray = facade.firebaseClient.favoritesArray
+    func FirebaseRequestFinished() {
         FavoritesTableView.reloadData()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

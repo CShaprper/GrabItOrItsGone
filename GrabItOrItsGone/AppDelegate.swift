@@ -22,8 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     var style:eUIStyles?
     var window: UIWindow?
+    var imageCache:[TempProductCard]!
+    var productsArray:[ProductCard]!
+    var favoritesArray:[ProductCard]!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        imageCache = []
+        productsArray = []
+        favoritesArray = []
+        
         FirebaseApp.configure()
         // Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true

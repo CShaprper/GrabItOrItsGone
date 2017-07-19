@@ -14,7 +14,7 @@ import GoogleSignIn
 import OAuthSwift
 
 
-class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IActivityAnimationDelegate, IAlertMessageDelegate, UIWebViewDelegate  {
+class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, IFirebaseWebService, IAlertMessageDelegate, UIWebViewDelegate  {
     //MARK: - Outlets
     @IBOutlet var lbl_GrabIt_Header: UILabel!
     @IBOutlet var LogInSignUpBGImage: UIImageView!
@@ -54,8 +54,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     var presentVC : UIViewController?
     
     func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
-        facade.firebaseClient.alertMessageDelegate = delegate
-        facade.firebaseClient.activityAnimationDelegate = self
+        facade.firebaseClient.delegate = self
         ValidationFactory.alertMessageDelegate = self
         facade.presentingController = self
     }
@@ -137,14 +136,14 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     
     //MARK: - IActivityAnimationDelegate implementation
-    func StartActivityAnimation() {
+    func FirebaseRequestStarted() {
         view.insertSubview(ActivityIndicator, aboveSubview: RegisterPopUp)
         ActivityIndicator.alpha = 1
         ActivityIndicator.startAnimating()
         ActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
         ActivityIndicator.transform = CGAffineTransform(translationX: view.center.x, y: 0)
     }
-    func StopActivityAnimation() {
+    func FirebaseRequestFinished() { 
         ActivityIndicator.stopAnimating()
         ActivityIndicator.alpha = 0
     }

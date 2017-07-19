@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseDataReceivedDelegate {
+class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFirebaseWebService {
     //MARK:- Outlets
     @IBOutlet var BackgroundImage: UIImageView!
     @IBOutlet var NewsTableView: UITableView!
@@ -25,21 +25,20 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //Init facade
         facade = NewsControllerFacade(presentingController: self)
-        facade.firebaseClient.firebaseDataReceivedDelegate = self
+        facade.firebaseClient.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = .NewsController_TitleString
+        self.navigationItem.title = String.NewsController_TitleString
         facade.firebaseClient.ReadFirebaseNewsSection()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
-    //MARK: - IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() { 
+    //MARK: - IFirebaseWebService implementation
+    func FirebaseRequestFinished() {
         self.NewsTableView.reloadData()
     }
     

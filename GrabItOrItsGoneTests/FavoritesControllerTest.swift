@@ -53,8 +53,8 @@ class FavoritesControllerTest: XCTestCase {
     func test_ManageFavoritesFacade_NotNil(){
         XCTAssertNotNil(sut!.facade, "ManageFavoritesFacade should be set")
     }
-   func test_facade_firebadeClient_DataReceibedDelegate_isSet() {
-        XCTAssertNotNil(sut!.facade.firebaseClient.firebaseDataReceivedDelegate, "facade.firebaseClient.firebaseDataReceivedDelegate not set")
+   func test_facade_IFirebaseWebserviceDelegate_isSet() {
+        XCTAssertNotNil(sut!.facade.firebaseClient.delegate, "facade.firebaseClient.delegate not set IFirebaseWebserviceDelegate")
     }
     func test_SegueToFavoritesDetailController_Identifier() {
         XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToFavoritesDetailController"))

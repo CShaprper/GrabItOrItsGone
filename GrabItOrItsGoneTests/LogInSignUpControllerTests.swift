@@ -33,8 +33,8 @@ class LogInSignUpControllerTests: XCTestCase {
     func test_ActivityIndicatior_InitialAlphaValue_isZero(){
         XCTAssertTrue(sut!.ActivityIndicator.alpha == 0, "Initial alpha of ActivityIndicator should be 0")
     }
-    func test_ActivityAnimationDelegate_isSet() {
-        XCTAssertNotNil(sut!.facade.firebaseClient.activityAnimationDelegate, "facade.firebaseClient.activityAnimationDelegate not set to show activity animation!")
+    func test_IFirebaseWebServiceDelegate_isSet() {
+        XCTAssertNotNil(sut!.facade.firebaseClient.delegate, "facade.firebaseClient.delegate not set IFirebaseWebService!")
     }
     func  test_lbl_GrabIt_Header_Exists(){
         XCTAssertNotNil(sut!.lbl_GrabIt_Header, "lbl_GrabIt_Header should exist")

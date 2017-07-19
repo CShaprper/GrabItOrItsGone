@@ -55,11 +55,12 @@ class UserInputValidationTests: XCTestCase {
         XCTAssertTrue(zip.Validate(validationString: "12345"), "Zipcode validation should pass with five digits")
     }
     func test_ZipNumberValidatioService_ShowsCorrectAlertMessage(){
-   /*  let alertMock = FakeAlertMock()
-        zip.alertMessageDelegate = alertMock as! IAlertMessageDelegate
+  /* let alertMock = FakeAlertMock()
+        zip.alertMessageDelegate = alertMock
      
         XCTAssertTrue(alertMock.title! == "MyDesiredTitle")
-        XCTAssertTrue(alertMock.message! == "MyDesiredMessage")*/
+        XCTAssertTrue(alertMock.message! == "MyDesiredMessage")
+ */
     }
 }
 

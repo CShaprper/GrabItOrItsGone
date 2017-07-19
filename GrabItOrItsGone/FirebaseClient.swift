@@ -14,92 +14,83 @@ import FBSDKLoginKit
 import GoogleSignIn
 import OAuthSwift
 
-class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataReceivedDelegate, IAlertMessageDelegate {
-    var alertMessageDelegate: IAlertMessageDelegate?
-    var firebaseDataReceivedDelegate:IFirebaseDataReceivedDelegate?
-    var activityAnimationDelegate:IActivityAnimationDelegate?
+class FirebaseClient: IFirebaseWebService {
+    var delegate: IFirebaseWebService?
     private var ref:DatabaseReference!
     private var refhandle:UInt!
-    let firebaseURL:String = "https://grabitoritsgone.firebaseio.com/"
-    var isCalled:Bool = false
+    internal let firebaseURL:String = "https://grabitoritsgone.firebaseio.com/"
+    private var isCalled:Bool = false
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     init() {
         ref = Database.database().reference(fromURL: firebaseURL)
     }
     
-    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
-        alertMessageDelegate = delegate
-    }
-    
-    //MARK: - IFirebaseDataReceivedDelegate implementation
-    func FirebaseDataReceived() {
-        if self.firebaseDataReceivedDelegate != nil{
-            self.firebaseDataReceivedDelegate!.FirebaseDataReceived()
+    //MARK: - IFirebaseWebService implementation
+    func FirebaseRequestStarted() {
+        if delegate != nil{
+            DispatchQueue.main.async {
+                self.delegate!.FirebaseRequestStarted!()
+            }
         } else {
-            print("firebaseDataReceivedDelegate not set from calling class")
+            print("IFirebaseWebService delegate not set from calling class")
         }
     }
-    
-    //MARK:- IAlertMessageDelegate implementation
-    func ShowAlertMessage(title: String, message: String)->Void{
-        if self.alertMessageDelegate != nil{
-            self.alertMessageDelegate!.ShowAlertMessage(title: title, message: message)
+    func FirebaseRequestFinished() {
+        if delegate != nil{
+            DispatchQueue.main.async {
+                self.delegate!.FirebaseRequestFinished!()
+            }
         } else {
-            print("alertMessageDelegate not set from calling class")
+            print("IFirebaseWebService delegate not set from calling class")
         }
     }
-    
-    //MARK:- IActivityAnimationDelegate implementation
-    func StartActivityAnimation() {
-        if activityAnimationDelegate != nil{
-            activityAnimationDelegate!.StartActivityAnimation()
+    func AlertFromFirebaseService(title: String, message: String) {
+        if delegate != nil{
+            DispatchQueue.main.async {
+                self.delegate!.AlertFromFirebaseService!(title: title, message: message)
+            }
         } else {
-            print("activityAnimationDelegate not set from calling class")
-        }
-    }
-    func StopActivityAnimation() {
-        if activityAnimationDelegate != nil{
-            activityAnimationDelegate!.StopActivityAnimation()
-        } else {
-            print("activityAnimationDelegate not set from calling class")
+            print("IFirebaseWebService delegate not set from calling class")
         }
     }
     
     //MARK:- Firebase Auth Section
     func CreateNewAutenticableUser(email: String, password: String) {
         self.isCalled = false
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             if error != nil{
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
+                    self.FirebaseRequestFinished()
                     let title = String.FirebaseUserAuthenticationErrorMessage_TitleString
                     let message = String.FirebaseUserAuthenticationErrorMessage_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
+                    self.AlertFromFirebaseService(title: title, message: message)
                 }
                 return
             } else {
                 self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
-                self.StopActivityAnimation()
+                self.FirebaseRequestFinished()
                 print("Succesfully created new Firebase User")
             }
         })
     }
     func LoginAuthenticableUser(email: String, password: String) {
         self.isCalled = false
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil{
                 print(error!.localizedDescription)
                 DispatchQueue.main.async {
-                    self.StopActivityAnimation()
+                    self.FirebaseRequestFinished()
                     let title = String.FirebaseUserLoginErrorAlert_TitleString
                     let message = String.FirebaseUserLoginErrorAlert_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
+                    self.AlertFromFirebaseService(title: title, message: message)
                 }
                 return
             } else {
-                self.StopActivityAnimation()
+                self.FirebaseRequestFinished()
                 UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
                 self.RecognizeAdmin(email: email)
                 print("Succesfully loged user in to Firebase")
@@ -107,7 +98,7 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         }
         
     }
-    func RecognizeAdmin(email: String)
+    private func RecognizeAdmin(email: String)
     {
         if email == "p.sypek@icloud.com" || email == "sypekpeter@gmail.com" || email == "peter.sypek@gmx.de"{
             UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isAdmin.rawValue)
@@ -116,17 +107,15 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         }
     }
     func ResetUserPassword(email:String){
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
             if error == nil {
                 print(error!.localizedDescription)
-                DispatchQueue.main.async {
-                    self.StopActivityAnimation()
-                    let title = String.FirebaseResetPasswordErrorAlert_TitleString
-                    let message = String.FirebaseResetPasswordErrorAlert_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
-                    return
-                }
+                self.FirebaseRequestFinished()
+                let title = String.FirebaseResetPasswordErrorAlert_TitleString
+                let message = String.FirebaseResetPasswordErrorAlert_MessageString
+                self.AlertFromFirebaseService(title: title, message: message)
+                return
             }
             print("Succesfully sent password reset mail")
             return
@@ -135,45 +124,41 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
     }
     func LoginWithGoogle(guser: GIDGoogleUser) -> Void {
         self.isCalled = false
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         let credential = GoogleAuthProvider.credential(withIDToken: guser.authentication.idToken, accessToken: guser.authentication.accessToken)
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil{
                 print(error!.localizedDescription)
-                DispatchQueue.main.async {
-                    self.SetUserDefualtsLoggedInKeysToFalse()
-                    self.StopActivityAnimation()
-                    let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
-                    let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
-                    return
-                }
+                self.SetUserDefualtsLoggedInKeysToFalse()
+                self.FirebaseRequestFinished()
+                let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                self.AlertFromFirebaseService(title: title, message: message)
+                return
             } else {
                 UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
                 print("User logged in with Google")
                 self.RecognizeAdmin(email: user!.email!)
-                self.StopActivityAnimation()
+                self.FirebaseRequestFinished()
                 self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
             }
         }
     }
     func LoginWithInstagram(controller: UIViewController, customToken: String){
         self.isCalled = false
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         let token = customToken.replacingOccurrences(of: "access_token=", with: "")
         print(token)
         
         Auth.auth().signIn(withCustomToken: token) { (user, error) in
             if error != nil{
                 print(error!.localizedDescription)
-                DispatchQueue.main.async {
-                    self.StopActivityAnimation()
-                    self.SetUserDefualtsLoggedInKeysToFalse()
-                    let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
-                    let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
-                    return
-                }
+                self.FirebaseRequestFinished()
+                self.SetUserDefualtsLoggedInKeysToFalse()
+                let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                self.AlertFromFirebaseService(title: title, message: message)
+                return
             } else {
                 print("User logged in with Instagram")
                 UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithInstagram.rawValue)
@@ -183,16 +168,16 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
     }
     func LoginWithFacebook(controller: UIViewController) -> Void {
         self.isCalled = false
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         FBSDKLoginManager().logIn(withReadPermissions: ["public_profile", "email"], from: controller)
         { (result, error) in
             if error != nil {
                 print(error!.localizedDescription)
                 self.SetUserDefualtsLoggedInKeysToFalse()
-                self.StopActivityAnimation()
+                self.FirebaseRequestFinished()
                 let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
                 let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
-                self.ShowAlertMessage(title: title, message: message)
+                self.AlertFromFirebaseService(title: title, message: message)
                 return
             }
             self.isCalled = false
@@ -201,22 +186,21 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                 Auth.auth().signIn(with: credential) { (user, error) in
                     if error != nil{
                         print(error!.localizedDescription)
-                        DispatchQueue.main.async {
-                            self.StopActivityAnimation()
-                            let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
-                            let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
-                            self.ShowAlertMessage(title: title, message: message)
-                            return
-                        }
+                        self.FirebaseRequestFinished()
+                        let title = String.FirebaseThirdPartyLoginErrorAlert_TitleString
+                        let message = String.FirebaseThirdPartyLoginErrorAlert_MessageString
+                        self.AlertFromFirebaseService(title: title, message: message)
+                        return
                     }else {
                         print("User logged in with Facebook")
+                        self.FirebaseRequestFinished()
                         self.RecognizeAdmin(email: user!.email!)
                         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
                         self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
                     }
                 }
             }
-            self.StopActivityAnimation()
+            self.FirebaseRequestFinished()
             /* FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, first_name, last_name, picture.type(large), name, email"]).start
              { (connection, result, error) in
              if error != nil{
@@ -240,26 +224,24 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
     }
     func LogoutAuthenticableUser() {
         self.isCalled = false
-        self.StartActivityAnimation()
+        self.FirebaseRequestStarted()
         let auth = Auth.auth()
         GIDSignIn.sharedInstance().signOut()
         FBSDKLoginManager().logOut()
         SetUserDefualtsLoggedInKeysToFalse()
         do{
             try  auth.signOut()
-            self.StopActivityAnimation()
+            self.FirebaseRequestFinished()
             self.SetUserDefualtsLoggedInKeysToFalse()
             print("Succesfully logged out")
             self.isCalled = false
         }
         catch let error as NSError{
             print(error.localizedDescription)
-            DispatchQueue.main.async {
-                self.StopActivityAnimation()
-                let title = String.FirebaseUserLogoutErrorAlert_TitleString
-                let message = String.FirebaseUserLogoutErrorAlert_MessageString
-                self.ShowAlertMessage(title: title, message: message)
-            }
+            self.FirebaseRequestFinished()
+            let title = String.FirebaseUserLogoutErrorAlert_TitleString
+            let message = String.FirebaseUserLogoutErrorAlert_MessageString
+            self.AlertFromFirebaseService(title: title, message: message)
         }
         
     }
@@ -295,119 +277,135 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             if let dict = snapshot.value as? [String:AnyObject]{
                 print(dict)
                 let news = News()
-                
-                //Format Date
-                let formatter = DateFormatter()
-                formatter.locale = Locale(identifier: "de_DE")
-                formatter.dateFormat = "d.M.yyyy"
-                let date = dict["date"] as? String
-                if date != nil{
-                    let newDate = formatter.date(from: date!)
-                    formatter.dateFormat = "d. MMMM yyyy"
-                    news.date = formatter.string(from: newDate!)
-                }
-                //Set News properties
-                news.title = dict["title"] as? String
-                news.message = dict["message"] as? String
+                news.date = dict["date"] as? String != nil ? self.FormatStringToDate(strDate: (dict["date"] as? String)!) : ""
+                news.title = dict["title"] as? String != nil ? dict["title"] as? String : ""
+                news.message = dict["message"] as? String != nil ? dict["message"] as? String : ""
                 print(news.title ?? "*****")
                 print(news.message ?? "*****")
                 self.newsArray.append(news)
                 
-                DispatchQueue.main.async {
-                    self.FirebaseDataReceived()
-                }
+                self.FirebaseRequestFinished()
             }
         })
     }
-    var favoritesArray:[ProductCard] = []
+    private func FormatStringToDate(strDate: String) -> String{
+        //Format Date
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "d.MMMM.yyyy"
+        let date = formatter.date(from: strDate)
+        return formatter.string(from: date!)
+    }
     func ReadFirebaseFavoritesSection(){
         if let uid = Auth.auth().currentUser?.uid{
             ref.child("favorites_uid_\(uid)").observe(.childAdded, with: { (snapshot) in
                 if let dict = snapshot.value as? [String:AnyObject]{
                     print(dict)
-                    let product = ProductCard()
-                    product.ID = dict["id"] as? String
-                    product.Title = dict["title"] as? String
-                    product.Subtitle = dict["subtitle"] as? String
-                    product.NewPrice = dict["newprice"] as? Double
-                    product.OriginalPrice = dict["originalprice"] as? Double
-                    product.Productinformation = dict["productinformation"] as? String
-                    product.ImageURL = dict["imageURL"] as? String
-                    product.ProdcutImage = #imageLiteral(resourceName: "Image-placeholder")
-                    DispatchQueue.main.async {
-                        self.favoritesArray.append(product)
-                        self.FirebaseDataReceived()
-                    }
-                    DispatchQueue.main.async {
-                        if let imgURL = product.ImageURL{
-                            if let data2 = NSData(contentsOf: URL(string: imgURL)!){
-                                for prod in self.favoritesArray{
-                                    if prod.ImageURL == imgURL{
-                                        prod.ProdcutImage = UIImage(data: data2 as Data)
-                                        self.FirebaseDataReceived()
-                                    }
-                                }
-                            }
-                        }
+                    var product = ProductCard()
+                    product = self.SetProductCardValues(dict: dict, product: product)
+                    self.appDel.favoritesArray.append(product)
+                    self.FirebaseRequestFinished()
+                    if let imgURL = product.ImageURL{
+                        self.DownloadImages(url: imgURL, product: product, array:  self.appDel.favoritesArray)
                     }
                 }
             })
         }
     }
-    var productsArray:[ProductCard] = []
     func ReadFirebaseProductsSection() -> Void{
         ref.child("products").child("Electronic").observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String:AnyObject]{
-                let product = ProductCard()
-                product.ID = dict["id"] as? String
-                product.Title = dict["title"] as? String
-                product.Subtitle = dict["subtitle"] as? String
-                product.NewPrice = dict["newprice"] as? Double
-                product.OriginalPrice = dict["originalprice"] as? Double
-                product.Productinformation = dict["productinformation"] as? String
-                product.ProductCategory = dict["category"] as? String
-                product.ImageURL = dict["imageURL"] as? String
-                product.ProdcutImage = #imageLiteral(resourceName: "Image-placeholder")
-                DispatchQueue.main.async {
-                    self.productsArray.append(product)
-                    self.FirebaseDataReceived()
-                }
-                
+                var product = ProductCard()
+                product = self.SetProductCardValues(dict: dict, product: product)
+                self.appDel.productsArray.append(product)
+                self.FirebaseRequestFinished()
                 print(dict)
                 if let imgURL = product.ImageURL{
-                    DispatchQueue.main.async {
-                        if let data2 = NSData(contentsOf: URL(string: imgURL)!){
-                            for prod in self.productsArray{
-                                if prod.ImageURL == imgURL{
-                                    prod.ProdcutImage = UIImage(data: data2 as Data)
-                                }
-                            }
+                    self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
+                }
+            }
+        })
+    }
+    private func SetProductCardValues(dict: [String:AnyObject], product: ProductCard) -> ProductCard{
+        let id:String = dict["id"] as? String != nil ? (dict["id"] as? String)! : ""
+        let title:String = dict["title"] as? String != nil ? (dict["title"] as? String)! : ""
+        let subtitle:String = dict["subtitle"] as? String != nil ? (dict["subtitle"] as? String)! : ""
+        let newPrice:Double = dict["newprice"] as? Double != nil ? (dict["newprice"] as? Double)! : 0
+        let originalPrice:Double = dict["originalprice"] as? Double != nil ? (dict["originalprice"] as? Double)! : 0
+        let productinformation:String = dict["productinformation"] as? String != nil ?  (dict["productinformation"] as? String)! : ""
+        let productCategory:String = dict["category"] as? String != nil ? (dict["category"] as? String)! : ""
+        let imageURL:String = dict["imageURL"] as? String != nil ? (dict["imageURL"] as? String)! : ""
+        product.ID = id
+        product.Title = title
+        product.Subtitle = subtitle
+        product.NewPrice = newPrice
+        product.OriginalPrice = originalPrice
+        product.Productinformation = productinformation
+        product.ProductCategory = productCategory
+        product.ImageURL = imageURL
+        product.ProdcutImage = #imageLiteral(resourceName: "Image-placeholder")
+        return product
+    }
+    private func DownloadImages(url: String, product: ProductCard, array: [ProductCard]){
+        if let index = appDel.imageCache.index(where: { $0.ImageURL == url }) {
+            for prod in array{
+                if prod.ImageURL == appDel.imageCache[index].ImageURL!{
+                    print("ProdcutImage set from ImageCache!")
+                    prod.ProdcutImage = appDel.imageCache[index].Image!
+                    break
+                }
+            }
+        } else {
+            loadImageUsingCacheWithURLString(urlString: url, array: array)
+        }
+        /*if let data2 = NSData(contentsOf: URL(string: url)!){
+         for prod in array{
+         if prod.ImageURL == url{
+         prod.ProdcutImage = UIImage(data: data2 as Data)
+         }
+         }
+         }*/
+    }
+    func loadImageUsingCacheWithURLString(urlString: String, array: [ProductCard]) -> Void {
+        let url = URL(string: urlString)!
+        let task:URLSessionDataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil{
+                print(error!.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async {
+                if let downloadImage = UIImage(data: data!){
+                    var tempProd = TempProductCard()
+                    tempProd.Image = downloadImage
+                    tempProd.ImageURL = urlString
+                    self.appDel.imageCache.append(tempProd)
+                    print("Added Image to imageChache!")
+                    for prod in array{
+                        if prod.ImageURL == urlString{
+                            prod.ProdcutImage = downloadImage
+                            print("ProdcutImage set from Download!")
+                            self.FirebaseRequestFinished()
                         }
                     }
                 }
             }
-        })
-        
-    }
-    private func DownloadImages(url: URL, product: ProductCard){
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if error != nil{
-                print(error!.localizedDescription)
-            }
-            DispatchQueue.main.async {
-                product.ProdcutImage = UIImage(data: data!)
-            }
-        })
-        
+        }
+        task.resume()
     }
     
+    private func FormatDateToString(date: Date) -> String{
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "d.MMMM.yyyy"
+        return formatter.string(from: date)
+    }
     
     //MARK: - Firebase save functions
     func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {
         if let uid = Auth.auth().currentUser?.uid{
             let favRef = ref.child("favorites_uid_\(uid)")
             let key = favRef.child(product.ID!).key
-            let values = ["id":key, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL":product.ImageURL!] as [String : Any]
+            let values = ["id":key, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL":product.ImageURL!, "dateAdded":FormatDateToString(date: Date())] as [String : Any]
             favRef.child(key).updateChildValues(values, withCompletionBlock: { (error, databaseref) in
                 if error != nil{
                     print(error!.localizedDescription)
@@ -420,23 +418,24 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         //Image Upload
         let imagesRef = Storage.storage().reference().child(product.ID!)
         if let uploadData = productImage.mediumQualityJPEGNSData{
-            self.StartActivityAnimation()
+            self.FirebaseRequestStarted()
             let _ = imagesRef.putData(uploadData as Data, metadata: nil, completion: { (metadata, error) in
                 if error != nil{
                     print(error!.localizedDescription)
+                    self.FirebaseRequestFinished()
                     let title = String.FirebaseImageUploadErrorAlert_TitleString
                     let message = String.FirebaseImageUploadErrorAlert_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
-                    self.StopActivityAnimation()
+                    self.AlertFromFirebaseService(title: title, message: message)
                     return
                 }
-                print(metadata ?? "")
-                if let imgURL =  metadata?.downloadURL()?.absoluteString{
-                    let values = ["id":product.ID!, "category":product.ProductCategory!, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL": imgURL] as [String : Any]
-                    self.RegisterProductIntoFirebase(product: product, values: values)
-                }
-                
-                print("Successfully uploaded prodcut image!")
+                DispatchQueue.main.async {
+                    print(metadata ?? "")
+                    if let imgURL =  metadata?.downloadURL()?.absoluteString{
+                        let values = ["id":product.ID!, "category":product.ProductCategory!, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL": imgURL] as [String : Any]
+                        self.RegisterProductIntoFirebase(product: product, values: values)
+                    }
+                    print("Successfully uploaded prodcut image!")
+                }//end: Dispatch Queue
             }) // end: let _ = imagesRef.putData
         }//end: if let let uploadData
     }
@@ -447,10 +446,10 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
         categoryRef.child(idRef).updateChildValues(values, withCompletionBlock: { (error, dbref) in
             if error != nil{
                 print(error!.localizedDescription)
+                self.FirebaseRequestFinished()
                 let title = String.FirebaseImageUploadErrorAlert_TitleString
                 let message = String.FirebaseImageUploadErrorAlert_MessageString
-                self.ShowAlertMessage(title: title, message: message)
-                self.StopActivityAnimation()
+                self.AlertFromFirebaseService(title: title, message: message)
             }
             print("Succesfully added Prodcut Data with imageURL")
         })
@@ -465,11 +464,11 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
             let values = (["name": user!.displayName, "email": user!.email])
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 if err != nil{
-                    self.StopActivityAnimation()
+                    self.FirebaseRequestStarted()
                     print(err!.localizedDescription)
                     return
                 } else {
-                    self.StopActivityAnimation()
+                    self.FirebaseRequestFinished()
                     print("Succesfully saved user to Firebase")
                     self.SetUserDefualtsLoggedInKeysToFalse()
                 }
@@ -487,30 +486,11 @@ class FirebaseClient: IAuthenticalbe, IActivityAnimationDelegate, IFirebaseDataR
                     print(error!.localizedDescription)
                     let title = String.FirebaseDeleteErrorAlert_TitleString
                     let message = String.FirebaseDeleteErrorAlert_MessageString
-                    self.ShowAlertMessage(title: title, message: message)
+                    self.AlertFromFirebaseService(title: title, message: message)
                 }
-                DispatchQueue.main.async {
-                    self.FirebaseDataReceived()
-                }
+                self.FirebaseRequestFinished()
                 print("Succesfully deleted Favorite from Firebase")
             })
         } // No uid for current User
-    }
-}
-let imageChache = NSCache<AnyObject, AnyObject>()
-extension UIImageView{
-    func loadImageUsingCacheWithURLString(urlString: String) -> Void {
-        let url = URL(string: urlString)
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil{
-                print(error!.localizedDescription)
-                return
-            }
-            DispatchQueue.main.async {
-                if let downloadImage = UIImage(data: data!){
-                    imageChache.setObject(downloadImage, forKey: "imageURL" as AnyObject)
-                }
-            }
-        }
     }
 }

@@ -10,15 +10,16 @@ import UIKit
 
 class FavoritesFacade {
     //MARK: - Members
+    let appDel = UIApplication.shared.delegate as! AppDelegate
+    var firebaseClient:FirebaseClient!
     var favoritesArray:[ProductCard]{
         get {
-            return firebaseClient.favoritesArray
+            return appDel.favoritesArray
         }
         set {
-            firebaseClient.favoritesArray = newValue
+            appDel.favoritesArray = newValue
         }
     }
-    var firebaseClient:FirebaseClient! 
     
     //Constructor
     init() {
@@ -26,7 +27,9 @@ class FavoritesFacade {
     }
     
     func ReadFirebaseFavoritesSection(){
-        firebaseClient.ReadFirebaseFavoritesSection()
+        if appDel.favoritesArray.count == 0{
+            firebaseClient.ReadFirebaseFavoritesSection()
+        }
     }
     
     func DeleteFavoriteWithID(idToDelete: String){
