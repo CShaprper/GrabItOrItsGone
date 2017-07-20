@@ -331,14 +331,13 @@ class FirebaseClient: IFirebaseWebService {
             if snapshot.value is NSNull{
                 return
             }
-            //Iterate each category
-            for category in snapshot.children{
+            for category in snapshot.children{//Iterate each category
                 if let dict = snapshot.value as? [String: AnyObject]{
-                    if dict.index(forKey: eProductCategory.Electronic.rawValue) != nil {
+                    if dict.index(forKey: eProductCategory.Electronic.rawValue) != nil {//Check that category exists
                         print("dict contains key \(eProductCategory.Electronic.rawValue)")
-                        let prodID = category as! DataSnapshot
-                        for prod in prodID.children{
-                            let p = prod as! DataSnapshot
+                        let prodID = category as! DataSnapshot //Get ProductID snapshot
+                        for prod in prodID.children{//Iterate each product in Category
+                            let p = prod as! DataSnapshot //Get Product snapshot
                             if let dic = p.value as? [String: AnyObject]{
                                 var product = ProductCard()
                                 product = self.SetProductCardValues(dict: dic, product: product)
