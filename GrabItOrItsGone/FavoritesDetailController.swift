@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesDetailController: UIViewController, UIScrollViewDelegate {
+class FavoritesDetailController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     //MARK:- Outlets
     @IBOutlet var BachgroundImage: UIImageView!
     @IBOutlet var BackgroundBlurrView: UIVisualEffectView!
@@ -18,6 +18,8 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var ProductSubtitle: UILabel!
     @IBOutlet var ProductInformation: UITextView!
     @IBOutlet var ProductInformationHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var Pinch: UIPinchGestureRecognizer!
+    @IBOutlet var Pan: UIPanGestureRecognizer!
     
     
     //MARK:- Members
@@ -53,7 +55,14 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate {
         ProductImage.frame.size.width = view.frame.size.width * 0.95
         ProductInformation.frame.size.width = view.frame.size.width * 0.95*/
         ProductImage.layer.cornerRadius = 20
-        ProductImage.clipsToBounds = true
+        ProductImage.clipsToBounds = true        
+        Pinch.addTarget(self, action: #selector(Image_Pinch))
+        Pinch.delegate = self
+        ProductImage.addGestureRecognizer(Pinch)
+        view.bringSubview(toFront: ProductImage)
+        Pan.addTarget(self, action: #selector(Image_Drag))
+        Pan.delegate = self
+        ProductImage.addGestureRecognizer(Pan)
         ProductInformation.text = ""
         ProductInformation.translatesAutoresizingMaskIntoConstraints = false
         let size = ProductInformation.sizeThatFits(CGSize(width: ProductInformation.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
@@ -69,5 +78,23 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate {
         if ContentScrollView.contentOffset.x > 0 || ContentScrollView.contentOffset.x < 0  {
             ContentScrollView.contentOffset.x = 0
         }
+    }
+    func Image_Pinch(sender: UIPinchGestureRecognizer) -> Void{
+        view.bringSubview(toFront: ProductImage)
+        ProductImage.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+        if sender.state == .ended {
+            ProductImage.transform = .identity
+        }
+    }
+    func Image_Drag(sender: UIPanGestureRecognizer) -> Void{
+      /*  let translation = sender.translation(in: sender.view)
+        let myview = sender.view!
+        myview.transform = CGAffineTransform(translationX: myview.center.x + translation.x, y: myview.center.y + translation.y)
+        if sender.state == .ended{
+          ProductImage.transform = .identity
+        }*/
+    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

@@ -58,7 +58,6 @@ class FirebaseClient: IFirebaseWebService {
     //MARK:- Firebase Auth Section
     func CreateNewAutenticableUser(email: String, password: String) {
         self.isCalled = false
-        self.FirebaseRequestStarted()
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             if error != nil{
                 print(error!.localizedDescription)
@@ -109,7 +108,6 @@ class FirebaseClient: IFirebaseWebService {
         }
     }
     func ResetUserPassword(email:String){
-        self.FirebaseRequestStarted()
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
             if error == nil {
                 print(error!.localizedDescription)
@@ -282,9 +280,7 @@ class FirebaseClient: IFirebaseWebService {
     
     
     //MARK: - Firebase read functions
-    var newsArray = [News]()
     func ReadFirebaseNewsSection() -> Void{
-        self.FirebaseRequestStarted()
         ref.child("news").observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String:AnyObject]{
                 print(dict)
@@ -294,7 +290,7 @@ class FirebaseClient: IFirebaseWebService {
                 news.message = dict["message"] as? String != nil ? dict["message"] as? String : ""
                 print(news.title ?? "*****")
                 print(news.message ?? "*****")
-                self.newsArray.append(news)
+                self.appDel.newsArray.append(news)
                 
                 self.FirebaseRequestFinished()
             }
@@ -309,7 +305,6 @@ class FirebaseClient: IFirebaseWebService {
         return formatter.string(from: date!)
     }
     func ReadFirebaseFavoritesSection(){
-        self.FirebaseRequestStarted()
         if let uid = Auth.auth().currentUser?.uid{
             ref.child("favorites").child(uid).observe(.childAdded, with: { (snapshot) in
                 if let dict = snapshot.value as? [String:AnyObject]{
@@ -326,7 +321,6 @@ class FirebaseClient: IFirebaseWebService {
         }
     }
     func ReadFirebaseProductsSection() -> Void{
-        self.FirebaseRequestStarted()
         ref.child("products").observe(.value, with: { (snapshot) in
             if snapshot.value is NSNull{
                 return
@@ -474,7 +468,7 @@ class FirebaseClient: IFirebaseWebService {
     }
     
     //MARK: - Firebase save functions
-    func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {
+    func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {       
         if let uid = Auth.auth().currentUser?.uid{
             let userRef = ref.child("favorites").child(uid)
             let key = userRef.child(product.ID!).key

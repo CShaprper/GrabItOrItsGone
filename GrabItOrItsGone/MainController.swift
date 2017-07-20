@@ -70,6 +70,7 @@ class MainController: UIViewController, IFirebaseWebService{
         SetSoundSwitchValue()
         //Reset products array to index 0 otherwise index out of range exception on swipe
         ResetProductArrayIndexAfterCategoryChange()
+        ReloadArrayDataWhenCountIsZero()
     }
     override func viewWillDisappear(_ animated: Bool) {
         style.RemoveViewsForStyling(views: [MainBackgroundImage])
@@ -145,7 +146,7 @@ class MainController: UIViewController, IFirebaseWebService{
         let swipeLimitLeft = view.frame.width * 0.4 // left border when the card gets animated off
         let swipeLimitRight = view.frame.width * 0.6 // right border when the card gets animated off
         let swipeLimitTop = view.frame.height * 0.5 // top border when the card gets animated off
-        let swipeLimitBottom = view.frame.height * 0.8 // top border when the card gets animated off
+        let swipeLimitBottom = view.frame.height * 0.65 // top border when the card gets animated off
         let ySpin:CGFloat = yFromCenter < 0 ? -200 : 200 // gives the card a spin in y direction
         let xSpin:CGFloat = xFromCenter < 0 ? -200 : 200 // gives the card a spin in x direction
         
@@ -275,33 +276,38 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     var currentImageIndex:Int = 0
     private func SetNewCardProdcutAfterSwipe(card: UIView){
-        print(facade.productsArray.count)
-        if facade.productsArray.count > 0{
+        print(appDel.productsArray.count)
+        if appDel.productsArray.count > 0{
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
-            currentImageIndex = currentImageIndex == facade.productsArray.count - 1 ? 0 : currentImageIndex + 1
-            ProductImageView.image = facade.productsArray[currentImageIndex].ProdcutImage
-            lbl_ProductTitle.text = facade.productsArray[currentImageIndex].Title!
-            lbl_ProductSubtitle.text = facade.productsArray[currentImageIndex].Subtitle!
-            ProductInformationTextView.text = facade.productsArray[currentImageIndex].Productinformation!
+            currentImageIndex = currentImageIndex == appDel.productsArray.count - 1 ? 0 : currentImageIndex + 1
+            ProductImageView.image = appDel.productsArray[currentImageIndex].ProdcutImage
+            lbl_ProductTitle.text = appDel.productsArray[currentImageIndex].Title!
+            lbl_ProductSubtitle.text = appDel.productsArray[currentImageIndex].Subtitle!
+            ProductInformationTextView.text = appDel.productsArray[currentImageIndex].Productinformation!
             
-            lbl_OldPrice.text = FormatToCurrency(digit: facade.productsArray[currentImageIndex].OriginalPrice!)
-            lbl_NewPrice.text = FormatToCurrency(digit: facade.productsArray[currentImageIndex].NewPrice!)
+            lbl_OldPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].OriginalPrice!)
+            lbl_NewPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].NewPrice!)
+        }
+    }
+    private func ReloadArrayDataWhenCountIsZero(){
+        if appDel.productsArray.count == 0{
+            facade.firebaseClient.ReadFirebaseProductsSection()
         }
     }
     private func ResetProductArrayIndexAfterCategoryChange(){
-        if facade.productsArray.count > 0 && UserDefaults.standard.bool(forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue){
+        if appDel.productsArray.count > 0 && UserDefaults.standard.bool(forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue){
             UserDefaults.standard.set(false, forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue)
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
             currentImageIndex = 0
-            ProductImageView.image = facade.productsArray[currentImageIndex].ProdcutImage
-            lbl_ProductTitle.text = facade.productsArray[currentImageIndex].Title!
-            lbl_ProductSubtitle.text = facade.productsArray[currentImageIndex].Subtitle!
-            ProductInformationTextView.text = facade.productsArray[currentImageIndex].Productinformation!
+            ProductImageView.image = appDel.productsArray[currentImageIndex].ProdcutImage
+            lbl_ProductTitle.text = appDel.productsArray[currentImageIndex].Title!
+            lbl_ProductSubtitle.text = appDel.productsArray[currentImageIndex].Subtitle!
+            ProductInformationTextView.text = appDel.productsArray[currentImageIndex].Productinformation!
             
-            lbl_OldPrice.text = FormatToCurrency(digit: facade.productsArray[currentImageIndex].OriginalPrice!)
-            lbl_NewPrice.text = FormatToCurrency(digit: facade.productsArray[currentImageIndex].NewPrice!)
+            lbl_OldPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].OriginalPrice!)
+            lbl_NewPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].NewPrice!)
         }
     }
     private func ResetCardAfterSwipeOff(card: UIView){

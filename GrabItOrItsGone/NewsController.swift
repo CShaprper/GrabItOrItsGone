@@ -16,7 +16,8 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var NewsTableView: UITableView!
     
     //MARK: Members
-    var facade:NewsControllerFacade!
+    var firebaseClient:FirebaseClient!
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +25,13 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         SetUpViews()
         
         //Init facade
-        facade = NewsControllerFacade(presentingController: self)
-        facade.firebaseClient.delegate = self
+        firebaseClient = FirebaseClient()
+        firebaseClient.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = String.NewsController_TitleString
-        facade.firebaseClient.ReadFirebaseNewsSection()
+        firebaseClient.ReadFirebaseNewsSection()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,15 +47,15 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: - Tableview Setup
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return facade!.newsArray.count
+        return appDel.newsArray.count
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String.NewsTableViewCell_Identifier) as! NewsTableViewCell
-        if facade.newsArray.count > 0 {
-            let title = facade.newsArray[indexPath.row].title != nil ? facade.newsArray[indexPath.row].title! : ""
-            let message = facade.newsArray[indexPath.row].message != nil ? facade.newsArray[indexPath.row].message! : ""
-            let date = facade.newsArray[indexPath.row].date != nil ? facade.newsArray[indexPath.row].date! : ""
+        if appDel.newsArray.count > 0 {
+            let title = appDel.newsArray[indexPath.row].title != nil ? appDel.newsArray[indexPath.row].title! : ""
+            let message = appDel.newsArray[indexPath.row].message != nil ? appDel.newsArray[indexPath.row].message! : ""
+            let date = appDel.newsArray[indexPath.row].date != nil ? appDel.newsArray[indexPath.row].date! : ""
             cell.ConfigureCell(title: title, message: message , date: date)
         }
         return cell

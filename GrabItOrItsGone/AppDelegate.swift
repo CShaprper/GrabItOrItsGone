@@ -25,11 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     var imageCache:[TempProductCard]!
     var productsArray:[ProductCard]!
     var favoritesArray:[ProductCard]!
+    var newsArray:[News]!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         imageCache = []
         productsArray = []
         favoritesArray = []
+        newsArray = []
         
         FirebaseApp.configure()
         // Messaging.messaging().delegate = self

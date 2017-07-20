@@ -2192,12 +2192,15 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uj3-ip-fTB">
+                                                        <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uj3-ip-fTB">
                                                             <rect key="frame" x="0.0" y="62" width="284" height="284"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="284" id="CNI-if-Fsn"/>
                                                                 <constraint firstAttribute="height" constant="284" id="MVy-xZ-ab6"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outletCollection property="gestureRecognizers" destination="wTT-td-bdh" appends="YES" id="Zes-Lk-clF"/>
+                                                            </connections>
                                                         </imageView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k82-wm-x1A">
                                                             <rect key="frame" x="0.0" y="356" width="284" height="300"/>
@@ -2262,6 +2265,8 @@
                         <outlet property="BachgroundImage" destination="vhQ-Ik-GMp" id="LEq-z4-0Kx"/>
                         <outlet property="BackgroundBlurrView" destination="4jN-uE-5mu" id="RmN-cb-eLb"/>
                         <outlet property="ContentScrollView" destination="Mnv-qn-sUn" id="1Wi-4G-iRZ"/>
+                        <outlet property="Pan" destination="R68-eA-LcM" id="5gm-w4-Tx5"/>
+                        <outlet property="Pinch" destination="wTT-td-bdh" id="sl3-3Z-l0M"/>
                         <outlet property="ProductImage" destination="Uj3-ip-fTB" id="TDA-Dn-Lig"/>
                         <outlet property="ProductInformation" destination="k82-wm-x1A" id="RU8-YY-rRp"/>
                         <outlet property="ProductInformationHeightConstraint" destination="b4C-iw-ctx" id="qu8-O1-mK8"/>
@@ -2270,6 +2275,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbj-uy-WsK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="wTT-td-bdh">
+                    <connections>
+                        <outlet property="delegate" destination="Uj3-ip-fTB" id="E0J-Lf-nxR"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="R68-eA-LcM">
+                    <connections>
+                        <outlet property="delegate" destination="vyB-PN-k0n" id="aaz-P6-F9Y"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4275" y="408"/>
         </scene>
