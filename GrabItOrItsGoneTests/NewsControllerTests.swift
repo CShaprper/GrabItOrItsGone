@@ -22,6 +22,7 @@ class NewsControllerTests: XCTestCase {
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.view)
         sut.viewDidLoad()
+        sut.didReceiveMemoryWarning()
     }
     
     override func tearDown() {
@@ -30,13 +31,13 @@ class NewsControllerTests: XCTestCase {
     }
     
     func test_BackgroundImage_Exists(){
-    XCTAssertNotNil(sut!.BackgroundImage, "BackgroundImage should exist for Background Image")
+        XCTAssertNotNil(sut!.BackgroundImage, "BackgroundImage should exist for Background Image")
     }
     func test_NewsTableView_Exists(){
-    XCTAssertNotNil(sut!.NewsTableView, "NewsTableView should exist to show News")
+        XCTAssertNotNil(sut!.NewsTableView, "NewsTableView should exist to show News")
     }
     func test_NewsArray_Exists(){
-    XCTAssertNotNil(sut!.facade!.newsArray, "NewsArray should exist as datasource for Tableview")
+        XCTAssertNotNil(sut!.facade!.newsArray, "NewsArray should exist as datasource for Tableview")
     }
     func test_NewsTableViewDataSource_isSet() {
         XCTAssertNotNil(sut!.NewsTableView.dataSource, "NewsTableView.dataSource not set")
@@ -44,4 +45,10 @@ class NewsControllerTests: XCTestCase {
     func test_NewsTableViewDelegate_isSet() {
         XCTAssertNotNil(sut!.NewsTableView.delegate, "NewsTableView.delegate not set")
     }
-}
+    func test_TableViewUsesCellWithResuseIdentifier(){
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView(sut!.NewsTableView, cellForRowAt: indexPath)
+        XCTAssertNotNil(cell, "TabelViewCell should not be nil")
+        XCTAssertTrue(cell.reuseIdentifier == String.NewsTableViewCell_Identifier, "TabelViewCell reuseIdentifier is \(String(describing: cell.reuseIdentifier)) and should be \(String.NewsTableViewCell_Identifier)")
+    }
+} 

@@ -73,6 +73,7 @@ class FirebaseClient: IFirebaseWebService {
                 self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
                 self.FirebaseRequestFinished()
                 print("Succesfully created new Firebase User")
+                self.SetCategorysToTrueOnFirstLogin()
             }
         })
     }
@@ -92,6 +93,7 @@ class FirebaseClient: IFirebaseWebService {
             } else {
                 self.FirebaseRequestFinished()
                 UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
+                self.SetCategorysToTrueOnFirstLogin()
                 self.RecognizeAdmin(email: email)
                 print("Succesfully loged user in to Firebase")
             }
@@ -138,6 +140,7 @@ class FirebaseClient: IFirebaseWebService {
             } else {
                 UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
                 print("User logged in with Google")
+                self.SetCategorysToTrueOnFirstLogin()
                 self.RecognizeAdmin(email: user!.email!)
                 self.FirebaseRequestFinished()
                 self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
@@ -161,6 +164,7 @@ class FirebaseClient: IFirebaseWebService {
                 return
             } else {
                 print("User logged in with Instagram")
+                self.SetCategorysToTrueOnFirstLogin()
                 UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithInstagram.rawValue)
                 self.SaveNewUserWithUIDtoFirebase(user: user, firebaseURL: self.firebaseURL)
             }
@@ -193,6 +197,7 @@ class FirebaseClient: IFirebaseWebService {
                         return
                     }else {
                         print("User logged in with Facebook")
+                        self.SetCategorysToTrueOnFirstLogin()
                         self.FirebaseRequestFinished()
                         self.RecognizeAdmin(email: user!.email!)
                         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithFacebook.rawValue)
@@ -262,6 +267,12 @@ class FirebaseClient: IFirebaseWebService {
             }
         }
     }
+    private func SetCategorysToTrueOnFirstLogin(){
+            UserDefaults.standard.set(true, forKey: eProductCategory.Electronic.rawValue)
+            UserDefaults.standard.set(true, forKey: eProductCategory.Clothes.rawValue)
+            UserDefaults.standard.set(true, forKey: eProductCategory.Jewelry.rawValue)
+            UserDefaults.standard.set(true, forKey: eProductCategory.Cosmetics.rawValue)
+    }
     private func SetUserDefualtsLoggedInKeysToFalse(){
         UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
         UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInWithInstagram.rawValue)
@@ -273,6 +284,7 @@ class FirebaseClient: IFirebaseWebService {
     //MARK: - Firebase read functions
     var newsArray = [News]()
     func ReadFirebaseNewsSection() -> Void{
+        self.FirebaseRequestStarted()
         ref.child("news").observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String:AnyObject]{
                 print(dict)
@@ -297,6 +309,7 @@ class FirebaseClient: IFirebaseWebService {
         return formatter.string(from: date!)
     }
     func ReadFirebaseFavoritesSection(){
+        self.FirebaseRequestStarted()
         if let uid = Auth.auth().currentUser?.uid{
             ref.child("favorites").child(uid).observe(.childAdded, with: { (snapshot) in
                 if let dict = snapshot.value as? [String:AnyObject]{
@@ -312,56 +325,79 @@ class FirebaseClient: IFirebaseWebService {
             })
         }
     }
-    func ReadFirebaseElectronicProductsSection() -> Void{
-        ref.child("products").child(eProductCategory.Electronic.rawValue).observe(.childAdded, with: { (snapshot) in
-            if let dict = snapshot.value as? [String:AnyObject]{
-                var product = ProductCard()
-                product = self.SetProductCardValues(dict: dict, product: product)
-                self.appDel.productsArray.append(product)
-                self.FirebaseRequestFinished()
-                print(dict)
-                if let imgURL = product.ImageURL{
-                    self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
-                }
-            }
-        })
-    }
     func ReadFirebaseProductsSection() -> Void{
+        self.FirebaseRequestStarted()
         ref.child("products").observe(.value, with: { (snapshot) in
             if snapshot.value is NSNull{
                 return
             }
             for category in snapshot.children{//Iterate each category
+                let cat = category as! DataSnapshot
                 if let dict = snapshot.value as? [String: AnyObject]{
+                    if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
+                        self.ReadProductsOfCategory(category: cat)
+                        return
+                    }
                     if dict.index(forKey: eProductCategory.Electronic.rawValue) != nil {//Check that category exists
-                        print("dict contains key \(eProductCategory.Electronic.rawValue)")
-                        let prodID = category as! DataSnapshot //Get ProductID snapshot
-                        for prod in prodID.children{//Iterate each product in Category
-                            let p = prod as! DataSnapshot //Get Product snapshot
-                            if let dic = p.value as? [String: AnyObject]{
-                                var product = ProductCard()
-                                product = self.SetProductCardValues(dict: dic, product: product)
-                                self.appDel.productsArray.append(product)
-                                self.FirebaseRequestFinished()
-                                print(dict)
-                                if let imgURL = product.ImageURL{
-                                    self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
-                                }
-                            }
+                        print(cat.key)
+                        if UserDefaults.standard.bool(forKey: eProductCategory.Electronic.rawValue) && cat.key == eProductCategory.Electronic.rawValue {
+                            self.ReadProductsOfCategory(category: cat)
                         }
                     }
                     if dict.index(forKey: eProductCategory.Cosmetics.rawValue) != nil {
-                        print("dict contains key \(eProductCategory.Cosmetics.rawValue)")
+                        print(cat.key)
+                        if UserDefaults.standard.bool(forKey: eProductCategory.Cosmetics.rawValue) && cat.key == eProductCategory.Cosmetics.rawValue {
+                            self.ReadProductsOfCategory(category: cat)
+                        }
                     }
                     if dict.index(forKey: eProductCategory.Jewelry.rawValue) != nil {
-                        print("dict contains key \(eProductCategory.Jewelry.rawValue)")
+                        print(cat.key)
+                        if UserDefaults.standard.bool(forKey: eProductCategory.Jewelry.rawValue) && cat.key == eProductCategory.Jewelry.rawValue {
+                            self.ReadProductsOfCategory(category: cat)
+                        }
                     }
                     if dict.index(forKey: eProductCategory.Clothes.rawValue) != nil {
-                        print("dict contains key \(eProductCategory.Clothes.rawValue)")
+                        print(cat.key)
+                        if UserDefaults.standard.bool(forKey: eProductCategory.Clothes.rawValue) && cat.key == eProductCategory.Jewelry.rawValue {
+                            self.ReadProductsOfCategory(category: cat)
+                        }
                     }
                 }
             }//end: for category in snapshot.children
         })
+    }
+    private func ReadProductsOfCategory(category: DataSnapshot){
+        for prod in category.children{//Iterate each product in Category
+            let p = prod as! DataSnapshot //Get Product snapshot
+            if let dic = p.value as? [String: AnyObject]{
+                var product = ProductCard()
+                product = self.SetProductCardValues(dict: dic, product: product)
+                if self.RefreshProductInAppDelArray(product: product) == false{
+                    self.appDel.productsArray.append(product)
+                }
+                self.FirebaseRequestFinished()
+                if let imgURL = product.ImageURL{
+                    self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
+                }
+            }
+        }
+    }
+    private func RefreshProductInAppDelArray(product: ProductCard) -> Bool{
+        if let index = self.appDel.productsArray.index(where: {$0.ID == product.ID}){
+            //Update array
+            self.appDel.productsArray[index].ID = product.ID
+            self.appDel.productsArray[index].ImageURL = product.ImageURL
+            self.appDel.productsArray[index].NewPrice = product.NewPrice
+            self.appDel.productsArray[index].OriginalPrice = product.OriginalPrice
+            self.appDel.productsArray[index].ProdcutImage = product.ProdcutImage
+            self.appDel.productsArray[index].ProductCategory = product.ProductCategory
+            self.appDel.productsArray[index].Productinformation = product.Productinformation
+            self.appDel.productsArray[index].Subtitle = product.Subtitle
+            self.appDel.productsArray[index].Title = product.Title
+            self.appDel.productsArray[index].AddedToFavorites = product.AddedToFavorites
+            return true
+        }
+        return false
     }
     private func SetProductCardValues(dict: [String:AnyObject], product: ProductCard) -> ProductCard{
         let id:String = dict["id"] as? String != nil ? (dict["id"] as? String)! : ""
@@ -454,8 +490,8 @@ class FirebaseClient: IFirebaseWebService {
     func SaveNewProdcutAsAdmin(product: ProductCard, productImage: UIImage) -> Void{
         //Image Upload
         let imagesRef = Storage.storage().reference().child(product.ID!)
+        self.FirebaseRequestStarted()
         if let uploadData = productImage.mediumQualityJPEGNSData{
-            self.FirebaseRequestStarted()
             let _ = imagesRef.putData(uploadData as Data, metadata: nil, completion: { (metadata, error) in
                 if error != nil{
                     print(error!.localizedDescription)
@@ -469,6 +505,7 @@ class FirebaseClient: IFirebaseWebService {
                     print(metadata ?? "")
                     if let imgURL =  metadata?.downloadURL()?.absoluteString{
                         let values = ["id":product.ID!, "category":product.ProductCategory!, "title":product.Title!, "subtitle":product.Subtitle!, "productinformation":product.Productinformation!, "newprice":product.NewPrice!, "originalprice":product.OriginalPrice!, "imageURL": imgURL] as [String : Any]
+                        product.ImageURL = imgURL
                         self.RegisterProductIntoFirebase(product: product, values: values)
                     }
                     print("Successfully uploaded prodcut image!")

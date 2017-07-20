@@ -26,14 +26,16 @@ class FavoritesTableViewCell: UITableViewCell {
     }
     
     func ConfigureCell(product: ProductCard){
+        //Currency formatter
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        //Set Outlet values
         ProductImage.image = product.ProdcutImage!
         ProductImage.layer.cornerRadius = 10
         ProductImage.clipsToBounds = true
         lbl_Title.text = product.Title != nil ? product.Title! : ""
         lbl_Subtitle.text = product.Subtitle != nil ? product.Subtitle! : ""
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current
         lbl_OriginalPrice.text = product.OriginalPrice != nil ? formatter.string(for: product.OriginalPrice!) : ""
         lbl_OurPrice.text = product.NewPrice != nil ? formatter.string(for: product.NewPrice!) : ""
     }

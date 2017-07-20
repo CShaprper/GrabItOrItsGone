@@ -20,7 +20,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Setup Views 
+        // Setup Views
         SetUpViews()
         
         //Init facade
@@ -50,8 +50,13 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: .NewsTableViewCell_Identifier) as! NewsTableViewCell 
-        cell.ConfigureCell(title: facade.newsArray[indexPath.row].title!, message: facade.newsArray[indexPath.row].message!, date: facade.newsArray[indexPath.row].date!)
+        let cell = tableView.dequeueReusableCell(withIdentifier: String.NewsTableViewCell_Identifier) as! NewsTableViewCell
+        if facade.newsArray.count > 0 {
+            let title = facade.newsArray[indexPath.row].title != nil ? facade.newsArray[indexPath.row].title! : ""
+            let message = facade.newsArray[indexPath.row].message != nil ? facade.newsArray[indexPath.row].message! : ""
+            let date = facade.newsArray[indexPath.row].date != nil ? facade.newsArray[indexPath.row].date! : ""
+            cell.ConfigureCell(title: title, message: message , date: date)
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -84,11 +84,11 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     //MARK:- IAlertMessageDelegate implementation
     func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
-        ValidationFactory.alertMessageDelegate = self 
-    }    
+        ValidationFactory.alertMessageDelegate = self
+    }
     func ShowAlertMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
@@ -126,7 +126,9 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: .AdressTableViewCell_Identifier) as! AdressTableViewCell
-        myCell.ConfigureCell(address: facade.addresses[indexPath.row])
+        if facade.addresses.count > 0{
+            myCell.ConfigureCell(address: facade.addresses[indexPath.row])
+        }
         return myCell
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -219,7 +221,7 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(BlurryViewTouched))
         blurryView.addGestureRecognizer(tapRecognizer)
         view.addSubview(blurryView!)
-    }    
+    }
     func HideBlurrView() -> Void {
         blurryView.removeFromSuperview()
     }

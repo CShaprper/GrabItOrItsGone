@@ -22,6 +22,7 @@ class FavoritesDetailControllerTests: XCTestCase {
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.loadView())
         sut.viewDidLoad()
+        sut.didReceiveMemoryWarning()
     }
     
     override func tearDown() {

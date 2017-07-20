@@ -15,4 +15,5 @@ enum eUserDefaultKeys: String {
     case isLoggedInWithInstagram = "isLoggedInWithInstagram"
     case SoundsOn = "SoundsOn"
     case isAdmin = "isAdmin"
+    case hasUncheckedCategory = "hasUncheckedCategory"
 }

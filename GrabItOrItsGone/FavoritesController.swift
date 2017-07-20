@@ -15,6 +15,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet var FavoritesTableView: UITableView!
     
     //MARK:- Members
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     var facade:FavoritesFacade!
     var selectedProduct:ProductCard!
     
@@ -25,6 +26,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         facade = FavoritesFacade()
         facade.firebaseClient.delegate = self
         self.navigationItem.title = .ManageFavoritesController_TitleString
+        appDel.productsArray = []
         facade.ReadFirebaseFavoritesSection()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -42,7 +44,9 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String.FavoritesTableViewCell_Identifier, for: indexPath) as! FavoritesTableViewCell
-        cell.ConfigureCell(product: facade.favoritesArray[indexPath.row])
+        if facade.favoritesArray.count > 0{
+            cell.ConfigureCell(product: facade.favoritesArray[indexPath.row])
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,7 +72,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         if segue.identifier == String.SegueToFavoritesDetailController_Identifier{
             if let destination = segue.destination as? FavoritesDetailController{
                 if selectedProduct != nil{
-                   destination.selectedProduct = selectedProduct
+                    destination.selectedProduct = selectedProduct
                 }
             }
         }

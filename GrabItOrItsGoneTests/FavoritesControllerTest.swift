@@ -22,6 +22,7 @@ class FavoritesControllerTest: XCTestCase {
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.loadView())
         sut.viewDidLoad()
+        sut.didReceiveMemoryWarning()
     }
     
     override func tearDown() {
@@ -62,6 +63,12 @@ class FavoritesControllerTest: XCTestCase {
     func test_NavigationItemTitle_IsLocalized(){
         XCTAssertEqual(sut!.navigationItem.title, String.ManageFavoritesController_TitleString, "ManageFavoritesController_Title is not localized")
     }
+    /*func test_FavoritesTableViewCell_hasCorrectResuseIdentifier(){
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView(sut!.FavoritesTableView, cellForRowAt: indexPath)
+        XCTAssertNotNil(cell, "FavoritesTableViewCell should not be nil")
+        XCTAssertTrue(cell.reuseIdentifier == String.FavoritesTableViewCell_Identifier, "TabelViewCell reuseIdentifier is \(String(describing: cell.reuseIdentifier)) and should be \(String.FavoritesTableViewCell_Identifier)")
+    }*/
     
     
     

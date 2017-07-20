@@ -22,6 +22,7 @@ class CategoriesControllerTests: XCTestCase {
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.loadView())
         sut.viewDidLoad()
+        sut.didReceiveMemoryWarning()
     }
     
     override func tearDown() {
@@ -30,33 +31,33 @@ class CategoriesControllerTests: XCTestCase {
     }
     
     func test_BakcgroundImage_Exists(){
-    XCTAssertNotNil(sut!.BakcgroundImage, "BakcgroundImage should exist")
+        XCTAssertNotNil(sut!.BakcgroundImage, "BakcgroundImage should exist")
     }
     func test_BackgroundBlurrView_Exists(){
-    XCTAssertNotNil(sut!.BackgroundBlurrView, "BackgroundBlurrView should exist")
+        XCTAssertNotNil(sut!.BackgroundBlurrView, "BackgroundBlurrView should exist")
     }
     func test_lbl_CategoryElectronic_Exists(){
-    XCTAssertNotNil(sut!.lbl_CategoryElectronic, "lbl_CategoryElectronic should exist")
+        XCTAssertNotNil(sut!.lbl_CategoryElectronic, "lbl_CategoryElectronic should exist")
     }
     func test_switchCategoryElectronic_Exists(){
-    XCTAssertNotNil(sut!.switchCategoryElectronic, "switchCategoryElectronic should exist")
+        XCTAssertNotNil(sut!.switchCategoryElectronic, "switchCategoryElectronic should exist")
     }
     func test_lbl_CategoryClothes_Exists(){
-    XCTAssertNotNil(sut!.lbl_CategoryClothes, "lbl_CategoryClothes should exist")
+        XCTAssertNotNil(sut!.lbl_CategoryClothes, "lbl_CategoryClothes should exist")
     }
     func test_switchCategoryClothes_Exists(){
-    XCTAssertNotNil(sut!.switchCategoryClothes, "switchCategoryClothes should exist")
+        XCTAssertNotNil(sut!.switchCategoryClothes, "switchCategoryClothes should exist")
     }
     func test_lbl_CategoryJewelry_Exists(){
-    XCTAssertNotNil(sut!.lbl_CategoryJewelry, "lbl_CategoryJewelry should exist")
+        XCTAssertNotNil(sut!.lbl_CategoryJewelry, "lbl_CategoryJewelry should exist")
     }
     func test_switchCategoryJewelry_Exists(){
-    XCTAssertNotNil(sut!.switchCategoryJewelry, "switchCategoryJewelry should exist")
+        XCTAssertNotNil(sut!.switchCategoryJewelry, "switchCategoryJewelry should exist")
     }
     func test_lbl_CategoryCosmetics_Exists(){
-    XCTAssertNotNil(sut!.lbl_CategoryCosmetics, "lbl_CategoryCosmetics should exist")
+        XCTAssertNotNil(sut!.lbl_CategoryCosmetics, "lbl_CategoryCosmetics should exist")
     }
     func test_switchCategoryCosmetics_Exists(){
-    XCTAssertNotNil(sut!.switchCategoryCosmetics, "switchCategoryCosmetics should exist")
+        XCTAssertNotNil(sut!.switchCategoryCosmetics, "switchCategoryCosmetics should exist")
     }
 }

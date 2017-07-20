@@ -22,9 +22,9 @@ class LogInSignUpControllerTests: XCTestCase {
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(navigationController?.view)
         XCTAssertNotNil(sut?.view)
-        sut?.viewWillAppear(false)
         sut?.viewDidLoad()
-        sut?.viewDidAppear(false)
+        sut?.viewWillAppear(false)
+        sut?.didReceiveMemoryWarning()
     }
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.

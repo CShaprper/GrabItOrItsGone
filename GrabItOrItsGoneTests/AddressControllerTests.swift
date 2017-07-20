@@ -22,6 +22,7 @@ class AddressControllerTests: XCTestCase {
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.loadView())
         sut.viewDidLoad()
+        sut.didReceiveMemoryWarning()
     }
     
     override func tearDown() {
@@ -93,15 +94,21 @@ class AddressControllerTests: XCTestCase {
         XCTAssertNotNil(sut!.btn_SaveAddress, "btn_SaveAddress should exist")
     }
     func test_NavigationItemIsNotEmpty(){
-    XCTAssertTrue(sut!.navigationItem.title != "", "NavigationItem.title should not be empty")
+        XCTAssertTrue(sut!.navigationItem.title != "", "NavigationItem.title should not be empty")
     }
     func test_NavigationItemIsLocalized(){
         print(sut!.navigationItem.title!)
         XCTAssertEqual(sut!.navigationItem.title, String.ManageAddressController_TitleString , "NavigationItem.title is not localized")
     }
     func test_btn_SaveAddress_isWired_ToAction(){
-     XCTAssertTrue(checkButtonActionForOutlet(outlet: sut!.btn_SaveAddress, actionName: "btn_SaveAddress_Pressed", event: .touchUpInside, controller: sut! ))
-     }
+        XCTAssertTrue(checkButtonActionForOutlet(outlet: sut!.btn_SaveAddress, actionName: "btn_SaveAddress_Pressed", event: .touchUpInside, controller: sut! ))
+    }
+    func test_AddressTableViewCell_hasCorrectResuseIdentifier(){
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView(sut!.AddressTableView, cellForRowAt: indexPath)
+        XCTAssertNotNil(cell, "AddressTableViewCell should not be nil")
+        XCTAssertTrue(cell.reuseIdentifier == String.AdressTableViewCell_Identifier, "TabelViewCell reuseIdentifier is \(String(describing: cell.reuseIdentifier)) and should be \(String.AdressTableViewCell_Identifier)")
+    }
     
     //MARK: - Button action test helper
     func checkButtonActionForOutlet(outlet: UIButton?, actionName: String, event: UIControlEvents, controller: UIViewController)->Bool{

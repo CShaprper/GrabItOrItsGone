@@ -54,6 +54,7 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate {
         ProductInformation.frame.size.width = view.frame.size.width * 0.95*/
         ProductImage.layer.cornerRadius = 20
         ProductImage.clipsToBounds = true
+        ProductInformation.text = ""
         ProductInformation.translatesAutoresizingMaskIntoConstraints = false
         let size = ProductInformation.sizeThatFits(CGSize(width: ProductInformation.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         if  size.height > ProductInformation.frame.size.height{

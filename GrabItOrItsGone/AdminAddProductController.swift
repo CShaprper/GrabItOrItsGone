@@ -49,6 +49,13 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IFirebas
         txt_ProductCategory.delegate = self
         txt_ProductInformation.text = ""
         
+        
+        txt_NewPrice.textColor = view.tintColor
+        txt_OldPrice.textColor = view.tintColor
+        txt_ProductTitle.textColor =  view.tintColor
+        txt_productSubtitle.textColor = view.tintColor
+        txt_ProductCategory.textColor = view.tintColor
+        
         txt_NewPrice.addTarget(self, action: #selector(txt_NewPrice_Changed), for: .editingChanged)
         txt_OldPrice.addTarget(self, action: #selector(txt_OldPrice_Changed), for: .editingChanged)
         txt_ProductTitle.addTarget(self, action: #selector(txt_ProductTitle_Changed), for: .editingChanged)

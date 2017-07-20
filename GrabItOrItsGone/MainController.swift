@@ -61,12 +61,15 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     override func viewDidAppear(_ animated: Bool) {
         style.AddToViewsForStyling(views: [MainBackgroundImage])
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barStyle = .blackTranslucent
         self.navigationController?.navigationBar.isOpaque  = false
         SetSoundSwitchValue()
+        //Reset products array to index 0 otherwise index out of range exception on swipe
+        ResetProductArrayIndexAfterCategoryChange()
     }
     override func viewWillDisappear(_ animated: Bool) {
         style.RemoveViewsForStyling(views: [MainBackgroundImage])
@@ -277,6 +280,21 @@ class MainController: UIViewController, IFirebaseWebService{
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
             currentImageIndex = currentImageIndex == facade.productsArray.count - 1 ? 0 : currentImageIndex + 1
+            ProductImageView.image = facade.productsArray[currentImageIndex].ProdcutImage
+            lbl_ProductTitle.text = facade.productsArray[currentImageIndex].Title!
+            lbl_ProductSubtitle.text = facade.productsArray[currentImageIndex].Subtitle!
+            ProductInformationTextView.text = facade.productsArray[currentImageIndex].Productinformation!
+            
+            lbl_OldPrice.text = FormatToCurrency(digit: facade.productsArray[currentImageIndex].OriginalPrice!)
+            lbl_NewPrice.text = FormatToCurrency(digit: facade.productsArray[currentImageIndex].NewPrice!)
+        }
+    }
+    private func ResetProductArrayIndexAfterCategoryChange(){
+        if facade.productsArray.count > 0 && UserDefaults.standard.bool(forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue){
+            UserDefaults.standard.set(false, forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue)
+            OldPriceBlurryView.alpha = 1
+            NewPriceBlurryView.alpha = 1
+            currentImageIndex = 0
             ProductImageView.image = facade.productsArray[currentImageIndex].ProdcutImage
             lbl_ProductTitle.text = facade.productsArray[currentImageIndex].Title!
             lbl_ProductSubtitle.text = facade.productsArray[currentImageIndex].Subtitle!

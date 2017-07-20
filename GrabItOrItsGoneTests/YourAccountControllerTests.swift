@@ -13,6 +13,8 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(navigationController.view)
         XCTAssertNotNil(sut.view)
+        sut.viewDidLoad()
+        sut.didReceiveMemoryWarning()
     }
     
     override func tearDown() {
@@ -127,6 +129,19 @@ class YourAccountControllerTests: XCTestCase {var storyboard:UIStoryboard!
     func test_SegueToPurchaseController_IdentifierExists() {
         XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToPurchaseController"))
     }
+    func test_ManageAdressContainer_hasGestureRecognizer(){
+        XCTAssertNotNil(sut!.ManageAdressContainer.gestureRecognizers, "ManageAdressContainer should be wired with gesture recognizer")
+    }
+    func test_ManageFavoritesContainer_hasGestureRecognizer(){
+        XCTAssertNotNil(sut!.ManageFavoritesContainer.gestureRecognizers, "ManageFavoritesContainer should be wired with gesture recognizer")
+    }
+    func test_FilterCategoriesContainer_hasGestureRecognizer(){
+        XCTAssertNotNil(sut!.FilterCategoriesContainer.gestureRecognizers, "FilterCategoriesContainer should be wired with gesture recognizer")
+    }
+    func test_PurchasesContainer_hasGestureRecognizer(){
+        XCTAssertNotNil(sut!.PurchasesContainer.gestureRecognizers, "PurchasesContainershould be wired with gesture recognizer")
+    }
+    
     
     
     //MARK: - Check for UITapGestureRecognizer of view
