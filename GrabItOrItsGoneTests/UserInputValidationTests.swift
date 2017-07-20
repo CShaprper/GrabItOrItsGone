@@ -13,18 +13,28 @@ class UserInputValidationTests: XCTestCase {
     var password:PasswordValidationService!
     var zip:ZipCodeValidationService!
     var txt:TextfieldValidationService!
+    var house:HousenumberValidationService!
+    var alertMock:FakeAlertMock!
     
     override func setUp() {
         super.setUp()
+        alertMock = FakeAlertMock()
+        house = HousenumberValidationService()
+        house.alertMessageDelegate = alertMock
         password = PasswordValidationService()
+        password.alertMessageDelegate = alertMock
         zip = ZipCodeValidationService()
+        zip.alertMessageDelegate = alertMock
         txt = TextfieldValidationService()
+        txt.alertMessageDelegate = alertMock
     }
     
     override func tearDown() {
         password = nil
+        house = nil
         zip = nil
         txt = nil
+        alertMock = nil
         super.tearDown()
     }
     //MARK:- Simple TextField Validation
@@ -55,23 +65,32 @@ class UserInputValidationTests: XCTestCase {
         XCTAssertTrue(zip.Validate(validationString: "12345"), "Zipcode validation should pass with five digits")
     }
     func test_ZipNumberValidatioService_ShowsCorrectAlertMessage(){
-  /* let alertMock = FakeAlertMock()
-        zip.alertMessageDelegate = alertMock
-     
-        XCTAssertTrue(alertMock.title! == "MyDesiredTitle")
-        XCTAssertTrue(alertMock.message! == "MyDesiredMessage")
- */
+        let _ = zip.Validate(validationString: "1")
+        XCTAssertTrue(alertMock.title! == String.ValidationErrorAlert_TitleString, "Alert Title is \(alertMock.title!) should be: \(String.ValidationErrorAlert_TitleString)")
+        XCTAssertTrue(alertMock.message! == String.ZipCodeErrorAlert_MessageString, "Alert Message is \(alertMock.message!) should be: \(String.ZipCodeErrorAlert_MessageString)")
     }
+    func test_ZipNumberValidatioService_ShowsNoMessageWhenCorrect(){
+        let _ = zip.Validate(validationString: "12345")
+        XCTAssertNil(alertMock.title, "There should be no Message thrown. Title: \(String(describing: alertMock.title))")
+        XCTAssertNil(alertMock.message, "There should be no Message thrown. Message: \(String(describing: alertMock.message))")
+    }
+    func test_HousenumberValidationService_ShowsCorrectAlertMessage(){
+       let _ = house.Validate(validationString: "")
+        XCTAssertTrue(alertMock.title! == String.ValidationErrorAlert_TitleString, "Alert Title is \(alertMock.title!) should be: \(String.ValidationErrorAlert_TitleString)")
+        XCTAssertTrue(alertMock.message! == String.HousenumberToShortValidationError_MessageString, "Alert Message is \(alertMock.message!) should be: \(String.HousenumberToShortValidationError_MessageString)")
+    }
+    
 }
+
 
 //MARK: - Fake Alert Mock
 public class FakeAlertMock:IAlertMessageDelegate {
     var title:String?
     var message:String?
-    func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
+    public func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
     }
     
-    func ShowAlertMessage(title: String, message: String) {
+    public func ShowAlertMessage(title: String, message: String) {
         self.title = title
         self.message = message
     }

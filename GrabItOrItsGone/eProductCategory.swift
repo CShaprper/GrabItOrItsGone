@@ -12,4 +12,5 @@ enum eProductCategory: String {
     case Electronic = "Electronic"
     case Jewelry = "Jewelry"
     case Cosmetics = "Cosmetics"
+    case Clothes = "Clothes"
 }

@@ -312,8 +312,8 @@ class FirebaseClient: IFirebaseWebService {
             })
         }
     }
-    func ReadFirebaseProductsSection() -> Void{
-        ref.child("products").child("Electronic").observe(.childAdded, with: { (snapshot) in
+    func ReadFirebaseElectronicProductsSection() -> Void{
+        ref.child("products").child(eProductCategory.Electronic.rawValue).observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String:AnyObject]{
                 var product = ProductCard()
                 product = self.SetProductCardValues(dict: dict, product: product)
@@ -324,6 +324,44 @@ class FirebaseClient: IFirebaseWebService {
                     self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
                 }
             }
+        })
+    }
+    func ReadFirebaseProductsSection() -> Void{
+        ref.child("products").observe(.value, with: { (snapshot) in
+            if snapshot.value is NSNull{
+                return
+            }
+            //Iterate each category
+            for category in snapshot.children{
+                if let dict = snapshot.value as? [String: AnyObject]{
+                    if dict.index(forKey: eProductCategory.Electronic.rawValue) != nil {
+                        print("dict contains key \(eProductCategory.Electronic.rawValue)")
+                        let prodID = category as! DataSnapshot
+                        for prod in prodID.children{
+                            let p = prod as! DataSnapshot
+                            if let dic = p.value as? [String: AnyObject]{
+                                var product = ProductCard()
+                                product = self.SetProductCardValues(dict: dic, product: product)
+                                self.appDel.productsArray.append(product)
+                                self.FirebaseRequestFinished()
+                                print(dict)
+                                if let imgURL = product.ImageURL{
+                                    self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
+                                }
+                            }
+                        }
+                    }
+                    if dict.index(forKey: eProductCategory.Cosmetics.rawValue) != nil {
+                        print("dict contains key \(eProductCategory.Cosmetics.rawValue)")
+                    }
+                    if dict.index(forKey: eProductCategory.Jewelry.rawValue) != nil {
+                        print("dict contains key \(eProductCategory.Jewelry.rawValue)")
+                    }
+                    if dict.index(forKey: eProductCategory.Clothes.rawValue) != nil {
+                        print("dict contains key \(eProductCategory.Clothes.rawValue)")
+                    }
+                }
+            }//end: for category in snapshot.children
         })
     }
     private func SetProductCardValues(dict: [String:AnyObject], product: ProductCard) -> ProductCard{

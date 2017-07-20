@@ -10,7 +10,7 @@ import Foundation
 
 class HousenumberValidationService: IValidateable, IAlertMessageDelegate {
     var alertMessageDelegate: IAlertMessageDelegate?
-    let title = String.Validation_Error_Message_String
+    let title = String.ValidationErrorAlert_TitleString
     var message = String.HousenumberToShortValidationError_MessageString
     
     func initAlertMessageDelegate(delegate: IAlertMessageDelegate) {
@@ -27,7 +27,6 @@ class HousenumberValidationService: IValidateable, IAlertMessageDelegate {
     
     private func validateNotNil(validationString: String?) -> Bool {
         if validationString == nil{
-            message = String.HousenumberToShortValidationError_MessageString
             ShowAlertMessage(title: title, message: message)
             return false
         }
@@ -37,7 +36,6 @@ class HousenumberValidationService: IValidateable, IAlertMessageDelegate {
     private func validateStringEmpty(validationString: String?) -> Bool {
         if validationString == nil { return false }
         if validationString! == ""{
-            message = String.HousenumberToShortValidationError_MessageString
             ShowAlertMessage(title: title, message: message)
             return false
         }
@@ -46,7 +44,6 @@ class HousenumberValidationService: IValidateable, IAlertMessageDelegate {
     private func validateLessThanOneCharacters(validationString: String?) -> Bool{
         if validationString == nil { return false }
         if validationString!.characters.count < 1{
-            message = String.HousenumberToShortValidationError_MessageString
             ShowAlertMessage(title: title, message: message)
             return false
         }
@@ -55,7 +52,6 @@ class HousenumberValidationService: IValidateable, IAlertMessageDelegate {
     private func validateisNumeric(validationString: String?) -> Bool{
         if validationString == nil { return false }
         if !validationString!.isNumeric{
-            message = String.HousenumberToShortValidationError_MessageString
             ShowAlertMessage(title: title, message: message)
             return false
         }

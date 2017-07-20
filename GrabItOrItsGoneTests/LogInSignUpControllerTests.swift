@@ -22,7 +22,9 @@ class LogInSignUpControllerTests: XCTestCase {
         // Test and Load the View at the Same Time!
         XCTAssertNotNil(navigationController?.view)
         XCTAssertNotNil(sut?.view)
+        sut?.viewWillAppear(false)
         sut?.viewDidLoad()
+        sut?.viewDidAppear(false)
     }
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -129,16 +131,13 @@ class LogInSignUpControllerTests: XCTestCase {
     }
     func test_btn_SignUp_PopUp_isWired_ToAction(){
         XCTAssertTrue(checkActionForOutlet(outlet: sut!.btn_SignUp_PopUp, actionName: "btn_SignUp_PopUp_Pressed", event: .touchUpInside, controller: sut! ))
-    }
+    } 
     
-    //MARK: Segues
+    // Mark: - Segues Helper Methods
     func test_SegueToMainController_IdentifierExists() {
         let identifiers = segues(ofViewController: sut!)
         XCTAssertTrue(identifiers.contains("SegueToMainController"))
     }
-    
-    
-    // Mark: - Segues Helper Methods
     func segues(ofViewController viewController: UIViewController) -> [String] {
         let identifiers = (viewController.value(forKey: "storyboardSegueTemplates") as? [AnyObject])?.flatMap({ $0.value(forKey: "identifier") as? String }) ?? []
         return identifiers

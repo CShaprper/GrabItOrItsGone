@@ -31,17 +31,6 @@
 		CF3E97031F01698F001C1C9B /* ProductCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3E97021F01698F001C1C9B /* ProductCardModel.swift */; };
 		CF4766AB1F1002D70045F22B /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4766AA1F1002D70045F22B /* NewsController.swift */; };
 		CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4766AC1F1002FA0045F22B /* NewsControllerTests.swift */; };
-		CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62621EFD4EBC0051706A /* NotificatioName_extension.swift */; };
-		CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62651EFD501B0051706A /* UIViewAnimationExtension.swift */; };
-		CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64751EFE4CD400C2FBD3 /* DesignableTextfield.swift */; };
-		CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B64781EFE4CE800C2FBD3 /* DesingableUIView.swift */; };
-		CF477BAC1F0FEF6400DA1EE1 /* DesignableUIEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647B1EFE523F00C2FBD3 /* DesignableUIEffectView.swift */; };
-		CF477BAD1F0FEF6400DA1EE1 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B647E1EFE60B800C2FBD3 /* DesignableButton.swift */; };
-		CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBC3CC1EFFDBC4003B2E60 /* UIStyleHelper.swift */; };
-		CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D3861F0ABA51000706E7 /* LocalizedStringExtension.swift */; };
-		CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2328F1F07C2D700346879 /* IAuthenticable.swift */; };
-		CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0D37E1F0AA708000706E7 /* IAlertMessageDelegate.swift */; };
-		CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF034FF71F08FF8000D8F03D /* IValidateable.swift */; };
 		CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB51F0FF05600DA1EE1 /* YourAccountControllerTests.swift */; };
 		CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */; };
 		CF477BBA1F0FF0C300DA1EE1 /* MainControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */; };
@@ -862,30 +851,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFB599B11F1A33BF00C0CCF9 /* FavoritesFacadeTests.swift in Sources */,
-				CF477BA81F0FEF6400DA1EE1 /* NotificatioName_extension.swift in Sources */,
 				CFF1E8601F18CCF700E1653C /* LoninSignUpFacadeTests.swift in Sources */,
 				CFAE1D521F12804700165E9D /* UserInputValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,
-				CF477BB31F0FEF6900DA1EE1 /* IAlertMessageDelegate.swift in Sources */,
 				CFE288331F1D3CB400810209 /* BasketControllerTests.swift in Sources */,
 				CFB599B51F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift in Sources */,
-				CF477BAD1F0FEF6400DA1EE1 /* DesignableButton.swift in Sources */,
 				CF721F421F13F97D00B52C8D /* AddressControllerTests.swift in Sources */,
-				CF477BB01F0FEF6900DA1EE1 /* IAuthenticable.swift in Sources */,
-				CF477BAF1F0FEF6400DA1EE1 /* LocalizedStringExtension.swift in Sources */,
-				CF477BAB1F0FEF6400DA1EE1 /* DesingableUIView.swift in Sources */,
-				CF477BAC1F0FEF6400DA1EE1 /* DesignableUIEffectView.swift in Sources */,
-				CF477BAE1F0FEF6400DA1EE1 /* UIStyleHelper.swift in Sources */,
 				CFB599B71F1A55B600C0CCF9 /* LocalisationTests.swift in Sources */,
 				CFE288311F1D3A3F00810209 /* PurchaseControllerTests.swift in Sources */,
 				CF037A991F1CFA6F00BEAE44 /* CategoriesControllerTests.swift in Sources */,
-				CF477BB41F0FEF6900DA1EE1 /* IValidateable.swift in Sources */,
 				CF477BBA1F0FF0C300DA1EE1 /* MainControllerTests.swift in Sources */,
 				CF4766AD1F1002FA0045F22B /* NewsControllerTests.swift in Sources */,
 				CF477BB61F0FF05600DA1EE1 /* YourAccountControllerTests.swift in Sources */,
-				CF477BA91F0FEF6400DA1EE1 /* UIViewAnimationExtension.swift in Sources */,
 				CFF55C411F1F9B1D003A8C81 /* AppDelTests.swift in Sources */,
-				CF477BAA1F0FEF6400DA1EE1 /* DesignableTextfield.swift in Sources */,
 				CFB599AB1F1A1FEF00C0CCF9 /* FavoritesControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
