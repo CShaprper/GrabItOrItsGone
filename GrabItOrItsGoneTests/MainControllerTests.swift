@@ -117,6 +117,23 @@ class MainControllerTests: XCTestCase {
     func test_SegueToAdminAddProductController_IdentifierExists() {
         XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToAdminAddProductController"))
     }
+    func test_SegueToFavoritesControllerFromMain_Itendifier_IdentifierExists() {
+    XCTAssertTrue(CheckSegueIndentifier(segueIdentifier: "SegueToFavoritesControllerFromMain"))
+    }
+    //Mark: - Segue Identifier Helper
+    /*func CheckSegueIndentifier(segueIdentifier:String) -> Bool{
+     let identifiers = segues(ofViewController: sut!)
+     if identifiers.contains(segueIdentifier) {
+     return true
+     }
+     return false
+     }
+     // Mark: - Segues Helper Methods
+     func segues(ofViewController viewController: UIViewController) -> [String] {
+     let identifiers = (viewController.value(forKey: "storyboardSegueTemplates") as? [AnyObject])?.flatMap({ $0.value(forKey: "identifier") as? String }) ?? []
+     return identifiers
+     }*/
+
     //Mark: - Segue Identifier Helper
     /*func CheckSegueIndentifier(segueIdentifier:String) -> Bool{
      let identifiers = segues(ofViewController: sut!)

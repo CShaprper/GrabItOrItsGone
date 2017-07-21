@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342938.393044"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "531"
-            endingLineNumber = "531"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
             landmarkName = "SaveNewUserWithUIDtoFirebase(user:firebaseURL:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "ReadFirebaseNewsSection()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "ReadFirebaseNewsSection()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,27 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522270377.982281"
+            timestampString = "522356732.747623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "CardPanRecocnizerAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522154911.862757"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522270377.982281"
+            timestampString = "522356732.747623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "FirebaseRequestFinished()"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "loadImageUsingCacheWithURLString(urlString:array:)"
             landmarkType = "7">
             <Locations>
@@ -250,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
+            startingLineNumber = "447"
+            endingLineNumber = "447"
             landmarkName = "loadImageUsingCacheWithURLString(urlString:array:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522270377.982281"
+            timestampString = "522356732.747623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "btn_Menu_Pressed(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522270377.982281"
+            timestampString = "522356732.747623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "btn_Menu_Pressed(sender:)"
             landmarkType = "7">
             <Locations>
@@ -330,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522270377.982281"
+            timestampString = "522356732.747623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "CardPanRecocnizerAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "SaveNewProdcutAsAdmin(product:productImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "ReadFirebaseProductsSection()"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "ReadFirebaseProductsSection()"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "ReadProductsOfCategory(category:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,7 +394,39 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "ReadProductsOfCategory(category:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GrabItOrItsGone/FirebaseClient.swift"
+            timestampString = "522342537.198656"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "ReadFirebaseProductsSection()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GrabItOrItsGone/FirebaseClient.swift"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "364"
@@ -426,43 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
+            timestampString = "522342537.198656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
-            landmarkName = "ReadFirebaseProductsSection()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
-            landmarkName = "ReadProductsOfCategory(category:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/FirebaseClient.swift"
-            timestampString = "522270282.192156"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "ReadFirebaseProductsSection()"
             landmarkType = "7">
             <Locations>
@@ -506,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "522270377.982281"
+            timestampString = "522356732.747623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "ResetProductArrayIndexAfterCategoryChange()"
             landmarkType = "7">
          </BreakpointContent>

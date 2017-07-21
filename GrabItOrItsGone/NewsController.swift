@@ -23,6 +23,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Setup Views
         SetUpViews()
+        print("product array count: \(productsArray.count)")
         
         //Init facade
         firebaseClient = FirebaseClient()
@@ -47,15 +48,15 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: - Tableview Setup
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDel.newsArray.count
+        return newsArray.count
     }
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String.NewsTableViewCell_Identifier) as! NewsTableViewCell
-        if appDel.newsArray.count > 0 {
-            let title = appDel.newsArray[indexPath.row].title != nil ? appDel.newsArray[indexPath.row].title! : ""
-            let message = appDel.newsArray[indexPath.row].message != nil ? appDel.newsArray[indexPath.row].message! : ""
-            let date = appDel.newsArray[indexPath.row].date != nil ? appDel.newsArray[indexPath.row].date! : ""
+        if newsArray.count > 0 {
+            let title = newsArray[indexPath.row].title != nil ? newsArray[indexPath.row].title! : ""
+            let message = newsArray[indexPath.row].message != nil ? newsArray[indexPath.row].message! : ""
+            let date = newsArray[indexPath.row].date != nil ? newsArray[indexPath.row].date! : ""
             cell.ConfigureCell(title: title, message: message , date: date)
         }
         return cell

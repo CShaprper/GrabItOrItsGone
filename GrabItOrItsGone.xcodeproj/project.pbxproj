@@ -15,6 +15,7 @@
 		CF037A941F1CD78B00BEAE44 /* eValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF037A931F1CD78B00BEAE44 /* eValidationType.swift */; };
 		CF037A971F1CF83C00BEAE44 /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF037A961F1CF83C00BEAE44 /* CategoriesController.swift */; };
 		CF037A991F1CFA6F00BEAE44 /* CategoriesControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF037A981F1CFA6F00BEAE44 /* CategoriesControllerTests.swift */; };
+		CF09494B1F22418300B2BD41 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09494A1F22418300B2BD41 /* TableViewController.swift */; };
 		CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D62291EFD4B4F0051706A /* AppDelegate.swift */; };
 		CF3D622C1EFD4B4F0051706A /* LogInSignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D622B1EFD4B4F0051706A /* LogInSignUpController.swift */; };
 		CF3D622F1EFD4B4F0051706A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3D622D1EFD4B4F0051706A /* Main.storyboard */; };
@@ -64,8 +65,6 @@
 		CFB599A91F1A16B200C0CCF9 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599A81F1A16B200C0CCF9 /* FavoritesController.swift */; };
 		CFB599AB1F1A1FEF00C0CCF9 /* FavoritesControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599AA1F1A1FEF00C0CCF9 /* FavoritesControllerTest.swift */; };
 		CFB599AD1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599AC1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift */; };
-		CFB599AF1F1A309A00C0CCF9 /* FavoritesFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599AE1F1A309A00C0CCF9 /* FavoritesFacade.swift */; };
-		CFB599B11F1A33BF00C0CCF9 /* FavoritesFacadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B01F1A33BF00C0CCF9 /* FavoritesFacadeTests.swift */; };
 		CFB599B31F1A474800C0CCF9 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */; };
 		CFB599B51F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */; };
 		CFB599B71F1A55B600C0CCF9 /* LocalisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */; };
@@ -121,6 +120,7 @@
 		CF037A931F1CD78B00BEAE44 /* eValidationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eValidationType.swift; sourceTree = "<group>"; };
 		CF037A961F1CF83C00BEAE44 /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		CF037A981F1CFA6F00BEAE44 /* CategoriesControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesControllerTests.swift; sourceTree = "<group>"; };
+		CF09494A1F22418300B2BD41 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		CF3D62261EFD4B4F0051706A /* GrabItOrItsGone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabItOrItsGone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF3D62291EFD4B4F0051706A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF3D622B1EFD4B4F0051706A /* LogInSignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInSignUpController.swift; sourceTree = "<group>"; };
@@ -180,8 +180,6 @@
 		CFB599A81F1A16B200C0CCF9 /* FavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		CFB599AA1F1A1FEF00C0CCF9 /* FavoritesControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesControllerTest.swift; sourceTree = "<group>"; };
 		CFB599AC1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
-		CFB599AE1F1A309A00C0CCF9 /* FavoritesFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesFacade.swift; sourceTree = "<group>"; };
-		CFB599B01F1A33BF00C0CCF9 /* FavoritesFacadeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesFacadeTests.swift; sourceTree = "<group>"; };
 		CFB599B21F1A474800C0CCF9 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
 		CFB599B41F1A478900C0CCF9 /* FavoritesDetailControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailControllerTests.swift; sourceTree = "<group>"; };
 		CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalisationTests.swift; sourceTree = "<group>"; };
@@ -319,6 +317,7 @@
 				CFE2882C1F1D365C00810209 /* PurchasesController.swift */,
 				CFE2882E1F1D3A1D00810209 /* BasketController.swift */,
 				CFFA99681F1E230A0089D89C /* AdminAddProductController.swift */,
+				CF09494A1F22418300B2BD41 /* TableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -384,7 +383,6 @@
 				CF477BA01F0FEE2F00DA1EE1 /* Info.plist */,
 				CFAE1D511F12804700165E9D /* UserInputValidationTests.swift */,
 				CFF1E85F1F18CCF700E1653C /* LoninSignUpFacadeTests.swift */,
-				CFB599B01F1A33BF00C0CCF9 /* FavoritesFacadeTests.swift */,
 				CFB599B61F1A55B600C0CCF9 /* LocalisationTests.swift */,
 				CF477BB71F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift */,
 				CF477BB91F0FF0C300DA1EE1 /* MainControllerTests.swift */,
@@ -434,7 +432,6 @@
 				CFB2328C1F07C28D00346879 /* LoginSignUpFacade.swift */,
 				CFACAD031F175D5D0066D666 /* AddressFacade.swift */,
 				CF96D7761F17DBE3003B5C2B /* MainControllerFacade.swift */,
-				CFB599AE1F1A309A00C0CCF9 /* FavoritesFacade.swift */,
 			);
 			name = Facade;
 			sourceTree = "<group>";
@@ -793,7 +790,6 @@
 				CFB232AB1F0804B300346879 /* EmailValidationService.swift in Sources */,
 				CFE2882D1F1D365C00810209 /* PurchasesController.swift in Sources */,
 				CFB599AD1F1A2ED200C0CCF9 /* FavoritesTableViewCell.swift in Sources */,
-				CFB599AF1F1A309A00C0CCF9 /* FavoritesFacade.swift in Sources */,
 				CF4A3C5F1F16A73600F3345D /* Address+CoreDataClass.swift in Sources */,
 				CF3D62631EFD4EBC0051706A /* NotificatioName_extension.swift in Sources */,
 				CF3D62841EFD77050051706A /* LocalizationStringsUIView_extension.swift in Sources */,
@@ -809,6 +805,7 @@
 				CF4B647C1EFE523F00C2FBD3 /* DesignableUIEffectView.swift in Sources */,
 				CF3E97031F01698F001C1C9B /* ProductCardModel.swift in Sources */,
 				CF3D622C1EFD4B4F0051706A /* LogInSignUpController.swift in Sources */,
+				CF09494B1F22418300B2BD41 /* TableViewController.swift in Sources */,
 				CF034FF81F08FF8000D8F03D /* IValidateable.swift in Sources */,
 				CF3D622A1EFD4B4F0051706A /* AppDelegate.swift in Sources */,
 				CFF1E8671F19191D00E1653C /* SegmentedControlValidationService.swift in Sources */,
@@ -842,7 +839,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFB599B11F1A33BF00C0CCF9 /* FavoritesFacadeTests.swift in Sources */,
 				CFF1E8601F18CCF700E1653C /* LoninSignUpFacadeTests.swift in Sources */,
 				CFAE1D521F12804700165E9D /* UserInputValidationTests.swift in Sources */,
 				CF477BB81F0FF08800DA1EE1 /* LogInSignUpControllerTests.swift in Sources */,

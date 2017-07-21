@@ -38,6 +38,7 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
         ConfigureFacade()
         SetUpViews()
         AddNotificationListeners()
+        print("product array count: \(productsArray.count)")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -16,16 +16,16 @@ import GoogleToolboxForMac
 import UserNotifications
 import OAuthSwift
 
+var imageCache:[TempProductCard]!
+var productsArray:[ProductCard]!
+var favoritesArray:[ProductCard]!
+var newsArray:[News]!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     var style:eUIStyles?
     var window: UIWindow?
-    var imageCache:[TempProductCard]!
-    var productsArray:[ProductCard]!
-    var favoritesArray:[ProductCard]!
-    var newsArray:[News]!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         imageCache = []
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         }
         return true
     }
-   
+    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL!, sourceApplication: sourceApplication, annotation: annotation)
         GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
@@ -86,7 +86,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     /// Firebase project's Sender ID.
     /// You can send this token to your application server to send notifications to this device.
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-        //Messaging.messaging().apnsToken = fcmToken
+        let token:[String:AnyObject] = [Messaging.messaging().fcmToken!:Messaging.messaging().fcmToken as AnyObject]
+        print(token)
+            let ref = Database.database().reference()
+            ref.child("fcmToken").child(Messaging.messaging().fcmToken!).setValue(token)
     }
     
     //Register for Notifications via Device Token

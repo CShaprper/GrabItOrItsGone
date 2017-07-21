@@ -41,6 +41,8 @@ class YourAccountController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("product array count: \(productsArray.count)")
+        
         //Setup Controller Views
         SetUpViews ()
     }

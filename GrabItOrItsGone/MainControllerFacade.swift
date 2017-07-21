@@ -15,15 +15,7 @@ class MainControllerFacade: IFirebaseWebService {
     private var audioplayer:AVAudioPlayer!
     private var presentingController:MainController! 
     var firebaseClient:FirebaseClient!
-    let appDel = UIApplication.shared.delegate as! AppDelegate
-    var productsArray:[ProductCard]{
-        get {
-            return appDel.productsArray
-        }
-        set {
-            appDel.productsArray = newValue
-        }
-    }
+    let appDel = UIApplication.shared.delegate as! AppDelegate 
     
     //Constructor
     init(presentingController: MainController) {

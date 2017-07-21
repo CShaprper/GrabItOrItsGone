@@ -2,7 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "shopping-cart-349544_960_720~universal@1x.png",
       "scale" : "1x"
     },
     {
@@ -19,5 +18,8 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }

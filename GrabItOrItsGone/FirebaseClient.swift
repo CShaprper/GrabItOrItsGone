@@ -225,9 +225,13 @@ class FirebaseClient: IFirebaseWebService {
              }*/
         }
     }
+    func LogInAsGuest() -> Void{
+        let token:[String:AnyObject] = [Messaging.messaging().fcmToken!:Messaging.messaging().fcmToken as AnyObject]
+        print(token)
+        ref.child("fcmToken").child(Messaging.messaging().fcmToken!).setValue(token)       
+    }
     func LogoutAuthenticableUser() {
         self.isCalled = false
-        self.FirebaseRequestStarted()
         let auth = Auth.auth()
         GIDSignIn.sharedInstance().signOut()
         FBSDKLoginManager().logOut()
@@ -290,7 +294,7 @@ class FirebaseClient: IFirebaseWebService {
                 news.message = dict["message"] as? String != nil ? dict["message"] as? String : ""
                 print(news.title ?? "*****")
                 print(news.message ?? "*****")
-                self.appDel.newsArray.append(news)
+                newsArray.append(news)
                 
                 self.FirebaseRequestFinished()
             }
@@ -311,10 +315,10 @@ class FirebaseClient: IFirebaseWebService {
                     print(dict)
                     var product = ProductCard()
                     product = self.SetProductCardValues(dict: dict, product: product)
-                    self.appDel.favoritesArray.append(product)
+                    favoritesArray.append(product)
                     self.FirebaseRequestFinished()
                     if let imgURL = product.ImageURL{
-                        self.DownloadImages(url: imgURL, product: product, array:  self.appDel.favoritesArray)
+                        self.DownloadImages(url: imgURL, product: product, array:  favoritesArray)
                     }
                 }
             })
@@ -352,7 +356,7 @@ class FirebaseClient: IFirebaseWebService {
                     }
                     if dict.index(forKey: eProductCategory.Clothes.rawValue) != nil {
                         print(cat.key)
-                        if UserDefaults.standard.bool(forKey: eProductCategory.Clothes.rawValue) && cat.key == eProductCategory.Jewelry.rawValue {
+                        if UserDefaults.standard.bool(forKey: eProductCategory.Clothes.rawValue) && cat.key == eProductCategory.Clothes.rawValue {
                             self.ReadProductsOfCategory(category: cat)
                         }
                     }
@@ -367,28 +371,28 @@ class FirebaseClient: IFirebaseWebService {
                 var product = ProductCard()
                 product = self.SetProductCardValues(dict: dic, product: product)
                 if self.RefreshProductInAppDelArray(product: product) == false{
-                    self.appDel.productsArray.append(product)
+                    productsArray.append(product)
                 }
                 self.FirebaseRequestFinished()
                 if let imgURL = product.ImageURL{
-                    self.DownloadImages(url: imgURL, product: product, array:  self.appDel.productsArray)
+                    self.DownloadImages(url: imgURL, product: product, array:  productsArray)
                 }
             }
         }
     }
     private func RefreshProductInAppDelArray(product: ProductCard) -> Bool{
-        if let index = self.appDel.productsArray.index(where: {$0.ID == product.ID}){
+        if let index = productsArray.index(where: {$0.ID == product.ID}){
             //Update array
-            self.appDel.productsArray[index].ID = product.ID
-            self.appDel.productsArray[index].ImageURL = product.ImageURL
-            self.appDel.productsArray[index].NewPrice = product.NewPrice
-            self.appDel.productsArray[index].OriginalPrice = product.OriginalPrice
-            self.appDel.productsArray[index].ProdcutImage = product.ProdcutImage
-            self.appDel.productsArray[index].ProductCategory = product.ProductCategory
-            self.appDel.productsArray[index].Productinformation = product.Productinformation
-            self.appDel.productsArray[index].Subtitle = product.Subtitle
-            self.appDel.productsArray[index].Title = product.Title
-            self.appDel.productsArray[index].AddedToFavorites = product.AddedToFavorites
+            productsArray[index].ID = product.ID
+            productsArray[index].ImageURL = product.ImageURL
+            productsArray[index].NewPrice = product.NewPrice
+            productsArray[index].OriginalPrice = product.OriginalPrice
+            productsArray[index].ProdcutImage = product.ProdcutImage
+            productsArray[index].ProductCategory = product.ProductCategory
+            productsArray[index].Productinformation = product.Productinformation
+            productsArray[index].Subtitle = product.Subtitle
+            productsArray[index].Title = product.Title
+            productsArray[index].AddedToFavorites = product.AddedToFavorites
             return true
         }
         return false
@@ -414,11 +418,11 @@ class FirebaseClient: IFirebaseWebService {
         return product
     }
     private func DownloadImages(url: String, product: ProductCard, array: [ProductCard]){
-        if let index = appDel.imageCache.index(where: { $0.ImageURL == url }) {
+        if let index = imageCache.index(where: { $0.ImageURL == url }) {
             for prod in array{
-                if prod.ImageURL == appDel.imageCache[index].ImageURL!{
+                if prod.ImageURL == imageCache[index].ImageURL!{
                     print("ProdcutImage set from ImageCache!")
-                    prod.ProdcutImage = appDel.imageCache[index].Image!
+                    prod.ProdcutImage = imageCache[index].Image!
                     break
                 }
             }
@@ -445,7 +449,7 @@ class FirebaseClient: IFirebaseWebService {
                     var tempProd = TempProductCard()
                     tempProd.Image = downloadImage
                     tempProd.ImageURL = urlString
-                    self.appDel.imageCache.append(tempProd)
+                    imageCache.append(tempProd)
                     print("Added Image to imageChache!")
                     for prod in array{
                         if prod.ImageURL == urlString{
@@ -528,17 +532,20 @@ class FirebaseClient: IFirebaseWebService {
             guard let uid = user?.uid else{
                 return
             }
+            let token:[String:AnyObject] = [Messaging.messaging().fcmToken!:Messaging.messaging().fcmToken as AnyObject]
+            print(token)
             let usersReference = self.ref.child("users").child(uid)
             let values = (["name": user!.displayName, "email": user!.email])
             usersReference.updateChildValues(values as Any as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
                 if err != nil{
-                    self.FirebaseRequestStarted()
+                    self.FirebaseRequestFinished()
                     print(err!.localizedDescription)
                     return
                 } else {
                     self.FirebaseRequestFinished()
                     print("Succesfully saved user to Firebase")
                     self.SetUserDefualtsLoggedInKeysToFalse()
+                    self.ref.child("fcmToken").child(Messaging.messaging().fcmToken!).setValue(token)
                 }
             })
         }

@@ -201,6 +201,8 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     func btn_Guest_Pressed(sender: DesignableUIButton){
         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
         UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isAdmin.rawValue)
+        let fbClient = FirebaseClient()
+        fbClient.LogInAsGuest()
         self.performSegue(withIdentifier: .SegueToMainController_Identifier, sender: nil)
     }
     func btn_PasswordForgotten_Pressed(sender:UIButton) -> Void {

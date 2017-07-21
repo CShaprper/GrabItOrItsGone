@@ -719,32 +719,62 @@
                                             <constraint firstAttribute="width" secondItem="uDs-KR-W7l" secondAttribute="height" multiplier="121:103" id="uG5-UU-KUg"/>
                                         </constraints>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lte-ea-j0D" userLabel="Menu container">
+                                        <rect key="frame" x="0.0" y="420" width="320" height="60"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="TxN-9q-501" userLabel="Menu Stack">
+                                                <rect key="frame" x="20" y="10" width="280" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49c-Dv-ko6" userLabel="Product Information">
+                                                        <rect key="frame" x="0.0" y="0.0" width="36" height="40"/>
+                                                        <state key="normal" image="icon-info"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23W-UV-5lI" userLabel="News">
+                                                        <rect key="frame" x="61" y="0.0" width="36" height="40"/>
+                                                        <state key="normal" image="icon-news"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-5E-Ob6" userLabel="Favorites">
+                                                        <rect key="frame" x="122" y="0.0" width="36" height="40"/>
+                                                        <state key="normal" image="icon-star"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htF-4X-R0d" userLabel="Cart">
+                                                        <rect key="frame" x="183" y="0.0" width="36" height="40"/>
+                                                        <state key="normal" image="Basket-icon"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i49-Yc-cDv" userLabel="Menu">
+                                                        <rect key="frame" x="244" y="0.0" width="36" height="40"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" image="icon-menu"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="TxN-9q-501" secondAttribute="trailing" constant="20" id="7ru-G5-PYb"/>
+                                            <constraint firstItem="TxN-9q-501" firstAttribute="leading" secondItem="Lte-ea-j0D" secondAttribute="leading" constant="20" id="Vdo-dO-ko8"/>
+                                            <constraint firstItem="TxN-9q-501" firstAttribute="top" secondItem="Lte-ea-j0D" secondAttribute="top" constant="10" id="bif-Pm-Qbl"/>
+                                            <constraint firstAttribute="height" constant="60" id="tz9-Ry-Q6p"/>
+                                            <constraint firstAttribute="bottom" secondItem="TxN-9q-501" secondAttribute="bottom" constant="10" id="zOn-lx-QpM"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="uwF-tW-WQD" firstAttribute="top" secondItem="s1y-sa-vtg" secondAttribute="top" id="6c5-y4-VRk"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lte-ea-j0D" secondAttribute="bottom" id="GIG-At-dWV"/>
                                     <constraint firstItem="uwF-tW-WQD" firstAttribute="leading" secondItem="s1y-sa-vtg" secondAttribute="leading" id="XBN-vz-mjK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lte-ea-j0D" secondAttribute="trailing" id="ZyG-te-K6u"/>
                                     <constraint firstAttribute="bottom" secondItem="uwF-tW-WQD" secondAttribute="bottom" id="dsV-Co-bs2"/>
                                     <constraint firstItem="JOh-uq-b4u" firstAttribute="centerY" secondItem="s1y-sa-vtg" secondAttribute="centerY" id="jSV-Dp-8RP"/>
                                     <constraint firstItem="uDs-KR-W7l" firstAttribute="centerX" secondItem="s1y-sa-vtg" secondAttribute="centerX" id="mYS-rY-gIp"/>
+                                    <constraint firstItem="Lte-ea-j0D" firstAttribute="leading" secondItem="s1y-sa-vtg" secondAttribute="leading" id="sL3-lX-UL7"/>
                                     <constraint firstAttribute="trailing" secondItem="uwF-tW-WQD" secondAttribute="trailing" id="uol-hp-0Vy"/>
                                     <constraint firstAttribute="bottom" secondItem="uDs-KR-W7l" secondAttribute="bottom" constant="10" id="vWE-EU-Ce2"/>
                                     <constraint firstItem="JOh-uq-b4u" firstAttribute="centerX" secondItem="s1y-sa-vtg" secondAttribute="centerX" id="ztN-Uf-pZ4"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49c-Dv-ko6">
-                                <rect key="frame" x="16" y="410" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="RnG-8A-Zj6"/>
-                                    <constraint firstAttribute="height" constant="60" id="aAD-Qz-zeE"/>
-                                </constraints>
-                                <state key="normal" image="Information-icon"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i49-Yc-cDv" userLabel="btn Menu">
-                                <rect key="frame" x="259" y="420" width="50" height="50"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="Hamburger-icon"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -756,15 +786,11 @@
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="centerX" secondItem="COe-OI-qCU" secondAttribute="centerX" id="NWX-rU-DH7"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" multiplier="0.9" id="PYD-uK-u7S"/>
                             <constraint firstItem="uDs-KR-W7l" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" multiplier="0.5" id="UNo-80-fk2"/>
-                            <constraint firstItem="95y-c7-MD9" firstAttribute="top" secondItem="i49-Yc-cDv" secondAttribute="bottom" constant="10" id="UYb-Kh-TOV"/>
                             <constraint firstItem="JOh-uq-b4u" firstAttribute="height" secondItem="COe-OI-qCU" secondAttribute="height" multiplier="0.6" id="cZf-kK-6ya"/>
-                            <constraint firstItem="49c-Dv-ko6" firstAttribute="leading" secondItem="COe-OI-qCU" secondAttribute="leadingMargin" id="dS7-ta-sLM"/>
-                            <constraint firstItem="95y-c7-MD9" firstAttribute="top" secondItem="49c-Dv-ko6" secondAttribute="bottom" constant="10" id="dgQ-Xr-SML"/>
                             <constraint firstItem="q72-Rn-AI6" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" id="epK-Xm-Oqk"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="centerX" secondItem="COe-OI-qCU" secondAttribute="centerX" id="gWV-Vn-iZw"/>
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" id="i11-T5-IxJ"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="height" secondItem="COe-OI-qCU" secondAttribute="height" multiplier="0.7" id="m3G-Wn-BNO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="i49-Yc-cDv" secondAttribute="trailing" constant="-5" id="nLA-3S-KsQ"/>
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="centerY" secondItem="COe-OI-qCU" secondAttribute="centerY" id="vbo-Sb-Ohc"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="centerY" secondItem="COe-OI-qCU" secondAttribute="centerY" id="z8C-pM-PUh"/>
                         </constraints>
@@ -787,11 +813,14 @@
                         <outlet property="SoundSwitch" destination="Ltj-W9-c2G" id="4ox-MP-06n"/>
                         <outlet property="TopBackGroundView" destination="s1y-sa-vtg" id="Wcu-ja-faH"/>
                         <outlet property="btn_AdminAddProduct" destination="QT2-Vr-BWD" id="PIA-8y-8YM"/>
+                        <outlet property="btn_Favorites" destination="qmP-5E-Ob6" id="ePk-Ey-22w"/>
                         <outlet property="btn_Menu" destination="i49-Yc-cDv" id="Ub6-Qp-OMM"/>
                         <outlet property="btn_MenuAccount" destination="BE7-O4-E3l" id="TgU-SE-K6i"/>
                         <outlet property="btn_MenuGutscheine" destination="lxS-Dd-mTW" id="uby-MC-KcX"/>
                         <outlet property="btn_MenuNews" destination="3As-cC-ph3" id="bbA-n1-RCE"/>
+                        <outlet property="btn_News" destination="23W-UV-5lI" id="jJ4-qs-RX6"/>
                         <outlet property="btn_ProductInformation" destination="49c-Dv-ko6" id="oYH-u9-Ex2"/>
+                        <outlet property="btn_ShoppingCart" destination="htF-4X-R0d" id="7BZ-0z-fOy"/>
                         <outlet property="btn_Warenkorb" destination="SFt-Vw-Jds" id="mnm-ve-kmQ"/>
                         <outlet property="lbl_NewPrice" destination="fOz-4i-O20" id="God-HK-tXR"/>
                         <outlet property="lbl_OldPrice" destination="6jt-Dm-y9Z" id="0Xy-ft-PcP"/>
@@ -801,6 +830,7 @@
                         <segue destination="ZD6-Gp-VvF" kind="show" identifier="SegueToNewsController" id="J6b-ET-wor"/>
                         <segue destination="fuk-OA-2Bq" kind="show" identifier="SegueToBasketController" id="lge-Vh-cHE"/>
                         <segue destination="7vL-23-DU6" kind="show" identifier="SegueToAdminAddProductController" id="92H-3W-gVO"/>
+                        <segue destination="pvB-EL-yeT" kind="show" identifier="SegueToFavoritesControllerFromMain" id="vHM-cj-YMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCc-xT-hvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2315,9 +2345,7 @@
         <image name="Excalmation" width="25" height="50"/>
         <image name="Filter-icon" width="60" height="60"/>
         <image name="Google-icon" width="100" height="100"/>
-        <image name="Hamburger-icon" width="50" height="50"/>
         <image name="Image-placeholder" width="300" height="300"/>
-        <image name="Information-icon" width="60" height="60"/>
         <image name="LogInSignUpBG" width="414" height="736"/>
         <image name="Login-icon" width="50" height="50"/>
         <image name="MenuBG" width="213" height="379"/>
@@ -2326,8 +2354,15 @@
         <image name="Star" width="150" height="150"/>
         <image name="addressbook-icon" width="60" height="60"/>
         <image name="facebook-icon" width="100" height="100"/>
+        <image name="icon-info" width="60" height="60"/>
+        <image name="icon-menu" width="60" height="60"/>
+        <image name="icon-news" width="60" height="60"/>
+        <image name="icon-star" width="60" height="60"/>
         <image name="key-icon" width="50" height="50"/>
         <image name="user-icon" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vHM-cj-YMw"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

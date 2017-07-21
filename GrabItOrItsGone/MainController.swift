@@ -18,30 +18,36 @@ class MainController: UIViewController, IFirebaseWebService{
     //MARK: - Outlets
     @IBOutlet var MainBackgroundImage: UIImageView!
     @IBOutlet var CardView: DesignableUIView!
-    @IBOutlet var CardBackgrounImageView: UIImageView!
-    @IBOutlet var ProductImageView: UIImageView!
-    @IBOutlet var lbl_ProductTitle: UILabel!
-    @IBOutlet var lbl_ProductSubtitle: UILabel!
-    @IBOutlet var btn_Menu: DesignableUIButton!
     @IBOutlet var TopBackGroundView: UIView!
     @IBOutlet var MenuBackgroundContainer: UIView!
     @IBOutlet var FavoritesStarImage: UIImageView!
+    //Menu Buttons
     @IBOutlet var btn_MenuNews: UIButton!
     @IBOutlet var btn_Warenkorb: UIButton!
     @IBOutlet var btn_MenuGutscheine: UIButton!
     @IBOutlet var btn_MenuAccount: UIButton!
     @IBOutlet var btn_ProductInformation: UIButton!
+    @IBOutlet var btn_News: UIButton!
+    @IBOutlet var btn_ShoppingCart: UIButton!    
+    @IBOutlet var btn_Favorites: UIButton!
+    @IBOutlet var SoundSwitch: UISwitch!
+    @IBOutlet var SoundImage: UIImageView!
+    @IBOutlet var SoundStack: UIStackView!
+    @IBOutlet var btn_AdminAddProduct: UIButton!
+    @IBOutlet var btn_Menu: DesignableUIButton!
+    //Product Information sheet
     @IBOutlet var ProductInformationSheet: UIView!
     @IBOutlet var ProductInformationTextView: UITextView!
+    //Product Card
     @IBOutlet var lbl_OldPrice: UILabel!
     @IBOutlet var OldPriceBlurryView: UIVisualEffectView!
     @IBOutlet var OldPriceBlurryViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var lbl_NewPrice: UILabel!
     @IBOutlet var NewPriceBlurryView: UIVisualEffectView!
-    @IBOutlet var SoundSwitch: UISwitch!
-    @IBOutlet var SoundImage: UIImageView!
-    @IBOutlet var SoundStack: UIStackView!
-    @IBOutlet var btn_AdminAddProduct: UIButton!
+    @IBOutlet var CardBackgrounImageView: UIImageView!
+    @IBOutlet var ProductImageView: UIImageView!
+    @IBOutlet var lbl_ProductTitle: UILabel!
+    @IBOutlet var lbl_ProductSubtitle: UILabel!
     
     //MARK: Members
     let style = UIStyleHelper()
@@ -70,6 +76,7 @@ class MainController: UIViewController, IFirebaseWebService{
         SetSoundSwitchValue()
         //Reset products array to index 0 otherwise index out of range exception on swipe
         ResetProductArrayIndexAfterCategoryChange()
+        //For some reason product array.count is 0 when returning from YourAccountController second level
         ReloadArrayDataWhenCountIsZero()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -136,6 +143,9 @@ class MainController: UIViewController, IFirebaseWebService{
         if isMenuOut{  HideMenu(closure: PerformSegueToNewsConroller )
         } else { PerformSegueToNewsConroller() }
     }
+    func btn_Favorites_Pressed(sender: UIButton) -> Void{
+        performSegue(withIdentifier: String.SegueToFavoritesControllerFromMain_Itendifier, sender: nil)
+    }
     @IBAction func CardPanRecocnizerAction(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
         let point = sender.translation(in: view)
@@ -184,7 +194,7 @@ class MainController: UIViewController, IFirebaseWebService{
                     //Move downways if drag reached swipe limit bottom
                     SwipeCardOffBottom(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
                     DispatchQueue.main.async {
-                        self.facade.SaveProductToFavorites(product: self.facade.productsArray[self.currentImageIndex])
+                        self.facade.SaveProductToFavorites(product: productsArray[self.currentImageIndex])
                     }
                     return
                 }
@@ -205,14 +215,14 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     func FirebaseRequestFinished() {
         print("Prodcut data with images received from Firebase")
-        if facade.productsArray.count > 0{
-            ProductImageView.image =  facade.productsArray[0].ProdcutImage != nil ? facade.productsArray[0].ProdcutImage! : #imageLiteral(resourceName: "Image-placeholder")
+        if productsArray.count > 0{
+            ProductImageView.image =  productsArray[0].ProdcutImage != nil ? productsArray[0].ProdcutImage! : #imageLiteral(resourceName: "Image-placeholder")
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
-            lbl_ProductTitle.text = facade.productsArray[0].Title!
-            lbl_ProductSubtitle.text = facade.productsArray[0].Subtitle!
-            lbl_OldPrice.text = FormatToCurrency(digit: facade.productsArray[0].OriginalPrice!)
-            lbl_NewPrice.text = FormatToCurrency(digit: facade.productsArray[0].NewPrice!)
+            lbl_ProductTitle.text = productsArray[0].Title!
+            lbl_ProductSubtitle.text = productsArray[0].Subtitle!
+            lbl_OldPrice.text = FormatToCurrency(digit: productsArray[0].OriginalPrice!)
+            lbl_NewPrice.text = FormatToCurrency(digit:productsArray[0].NewPrice!)
         }
     }
     func FirebaseRequestStarted() {
@@ -276,38 +286,38 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     var currentImageIndex:Int = 0
     private func SetNewCardProdcutAfterSwipe(card: UIView){
-        print(appDel.productsArray.count)
-        if appDel.productsArray.count > 0{
+        print(productsArray.count)
+        if productsArray.count > 0{
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
-            currentImageIndex = currentImageIndex == appDel.productsArray.count - 1 ? 0 : currentImageIndex + 1
-            ProductImageView.image = appDel.productsArray[currentImageIndex].ProdcutImage
-            lbl_ProductTitle.text = appDel.productsArray[currentImageIndex].Title!
-            lbl_ProductSubtitle.text = appDel.productsArray[currentImageIndex].Subtitle!
-            ProductInformationTextView.text = appDel.productsArray[currentImageIndex].Productinformation!
+            currentImageIndex = currentImageIndex == productsArray.count - 1 ? 0 : currentImageIndex + 1
+            ProductImageView.image = productsArray[currentImageIndex].ProdcutImage
+            lbl_ProductTitle.text = productsArray[currentImageIndex].Title!
+            lbl_ProductSubtitle.text = productsArray[currentImageIndex].Subtitle!
+            ProductInformationTextView.text = productsArray[currentImageIndex].Productinformation!
             
-            lbl_OldPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].OriginalPrice!)
-            lbl_NewPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].NewPrice!)
+            lbl_OldPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].OriginalPrice!)
+            lbl_NewPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].NewPrice!)
         }
     }
     private func ReloadArrayDataWhenCountIsZero(){
-        if appDel.productsArray.count == 0{
+        if productsArray.count == 0{
             facade.firebaseClient.ReadFirebaseProductsSection()
         }
     }
     private func ResetProductArrayIndexAfterCategoryChange(){
-        if appDel.productsArray.count > 0 && UserDefaults.standard.bool(forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue){
+        if productsArray.count > 0 && UserDefaults.standard.bool(forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue){
             UserDefaults.standard.set(false, forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue)
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
             currentImageIndex = 0
-            ProductImageView.image = appDel.productsArray[currentImageIndex].ProdcutImage
-            lbl_ProductTitle.text = appDel.productsArray[currentImageIndex].Title!
-            lbl_ProductSubtitle.text = appDel.productsArray[currentImageIndex].Subtitle!
-            ProductInformationTextView.text = appDel.productsArray[currentImageIndex].Productinformation!
+            ProductImageView.image = productsArray[currentImageIndex].ProdcutImage
+            lbl_ProductTitle.text = productsArray[currentImageIndex].Title!
+            lbl_ProductSubtitle.text = productsArray[currentImageIndex].Subtitle!
+            ProductInformationTextView.text = productsArray[currentImageIndex].Productinformation!
             
-            lbl_OldPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].OriginalPrice!)
-            lbl_NewPrice.text = FormatToCurrency(digit: appDel.productsArray[currentImageIndex].NewPrice!)
+            lbl_OldPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].OriginalPrice!)
+            lbl_NewPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].NewPrice!)
         }
     }
     private func ResetCardAfterSwipeOff(card: UIView){
@@ -377,7 +387,6 @@ class MainController: UIViewController, IFirebaseWebService{
         } else {
             btn_AdminAddProduct.alpha = 0
         }
-        btn_AdminAddProduct.addTarget(self, action: #selector(btn_AdminAddProduct_Pressed), for: .touchUpInside)
         
         //Wire targets
         btn_Menu.addTarget(self, action: #selector(btn_Menu_Pressed), for: .touchUpInside)
@@ -386,6 +395,10 @@ class MainController: UIViewController, IFirebaseWebService{
         btn_MenuNews.addTarget(self, action: #selector(btn_MenuNews_Pressed), for: .touchUpInside)
         btn_Warenkorb.addTarget(self, action: #selector(btn_Warenkorb_Pressed), for: .touchUpInside)
         SoundSwitch.addTarget(self, action: #selector(SoundSwitch_Changed), for: .valueChanged)
+        btn_Favorites.addTarget(self, action: #selector(btn_Favorites_Pressed), for: .touchUpInside)
+        btn_News.addTarget(self, action: #selector(btn_MenuNews_Pressed), for: .touchUpInside)
+        btn_AdminAddProduct.addTarget(self, action: #selector(btn_AdminAddProduct_Pressed), for: .touchUpInside)
+        btn_ShoppingCart.addTarget(self, action: #selector(btn_Warenkorb_Pressed), for: .touchUpInside)
         
         
         //Transform UIControls to initial position

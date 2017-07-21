@@ -16,18 +16,18 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //MARK:- Members
     let appDel = UIApplication.shared.delegate as! AppDelegate
-    var facade:FavoritesFacade!
+    var firebaseClient:FirebaseClient!
     var selectedProduct:ProductCard!
     
     //MARK:- Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        facade = FavoritesFacade()
-        facade.firebaseClient.delegate = self
-        self.navigationItem.title = .ManageFavoritesController_TitleString
-        appDel.productsArray = []
-        facade.ReadFirebaseFavoritesSection()
+        firebaseClient = FirebaseClient()
+        firebaseClient.delegate = self
+        self.navigationItem.title = .ManageFavoritesController_TitleString       
+        firebaseClient.ReadFirebaseFavoritesSection()
+        print("product array count: \(productsArray.count)")
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -40,17 +40,17 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return facade.favoritesArray.count
+        return favoritesArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String.FavoritesTableViewCell_Identifier, for: indexPath) as! FavoritesTableViewCell
-        if facade.favoritesArray.count > 0{
-            cell.ConfigureCell(product: facade.favoritesArray[indexPath.row])
+        if favoritesArray.count > 0{
+            cell.ConfigureCell(product: favoritesArray[indexPath.row])
         }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedProduct = facade.favoritesArray[indexPath.row]
+        selectedProduct = favoritesArray[indexPath.row]
         performSegue(withIdentifier: String.SegueToFavoritesDetailController_Identifier, sender: nil)
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -58,8 +58,8 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            facade.DeleteFavoriteWithID(idToDelete: facade.favoritesArray[indexPath.row].ID!)
-            facade.favoritesArray.remove(at: indexPath.row)
+            firebaseClient.DeleteProductFromFirebaseFavorites(idToDelete: favoritesArray[indexPath.row].ID!)
+            favoritesArray.remove(at: indexPath.row)
         }
     }
     

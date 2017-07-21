@@ -24,6 +24,7 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate, UIGestu
     
     //MARK:- Members
     var selectedProduct:ProductCard!
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,7 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate, UIGestu
         if let productinformation = selectedProduct.Productinformation {
             ProductInformation.text = productinformation
         }
+        print("product array count: \(productsArray.count)")
     }
     
     func ConfigureViews(){

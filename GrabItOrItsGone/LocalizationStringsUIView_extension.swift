@@ -23,6 +23,7 @@ extension String{
     static let SegueToPurchaseController_Identifier = "SegueToPurchaseController"
     static let SegueToBasketController_Identifier = "SegueToBasketController"
     static let SegueToAdminAddProductController_Identifier = "SegueToAdminAddProductController"
+    static let SegueToFavoritesControllerFromMain_Itendifier = "SegueToFavoritesControllerFromMain"
 } 
 
 //Localization Strings extension
