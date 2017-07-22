@@ -32,6 +32,7 @@ class NewsController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = String.NewsController_TitleString
+        newsArray = []
         firebaseClient.ReadFirebaseNewsSection()
     }
     override func didReceiveMemoryWarning() {

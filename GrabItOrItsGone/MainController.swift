@@ -350,6 +350,7 @@ class MainController: UIViewController, IFirebaseWebService{
         
         //Main Backgroundimage
         MainBackgroundImage.image = UIImage(named: "NatureBG")
+        FavoritesStarImage.alpha = 0
         
         //Card view
         CardView.center = view.center
@@ -402,7 +403,7 @@ class MainController: UIViewController, IFirebaseWebService{
         
         
         //Transform UIControls to initial position
-        FavoritesStarImage.transform = CGAffineTransform(translationX: 0, y: FavoritesStarImage.frame.size.height * 0.4)
+        // FavoritesStarImage.transform = CGAffineTransform(translationX: 0, y: FavoritesStarImage.frame.size.height * 0.4)
         btn_MenuNews.transform = CGAffineTransform(translationX: btn_MenuNews.frame.size.width + 100, y: 0)
         btn_Warenkorb.transform = CGAffineTransform(translationX: btn_Warenkorb.frame.size.width + 100, y: 0)
         btn_MenuGutscheine.transform = CGAffineTransform(translationX: btn_MenuGutscheine.frame.size.width + 100, y: 0)

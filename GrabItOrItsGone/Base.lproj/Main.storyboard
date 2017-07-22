@@ -713,66 +713,63 @@
                                             <outletCollection property="gestureRecognizers" destination="XVM-S5-U7D" appends="YES" id="qKb-Gx-VUR"/>
                                         </connections>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="uDs-KR-W7l">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="uDs-KR-W7l">
                                         <rect key="frame" x="80.5" y="334" width="160" height="136"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="uDs-KR-W7l" secondAttribute="height" multiplier="121:103" id="uG5-UU-KUg"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lte-ea-j0D" userLabel="Menu container">
-                                        <rect key="frame" x="0.0" y="420" width="320" height="60"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="TxN-9q-501" userLabel="Menu Stack">
-                                                <rect key="frame" x="20" y="10" width="280" height="40"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49c-Dv-ko6" userLabel="Product Information">
-                                                        <rect key="frame" x="0.0" y="0.0" width="36" height="40"/>
-                                                        <state key="normal" image="icon-info"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23W-UV-5lI" userLabel="News">
-                                                        <rect key="frame" x="61" y="0.0" width="36" height="40"/>
-                                                        <state key="normal" image="icon-news"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-5E-Ob6" userLabel="Favorites">
-                                                        <rect key="frame" x="122" y="0.0" width="36" height="40"/>
-                                                        <state key="normal" image="icon-star"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htF-4X-R0d" userLabel="Cart">
-                                                        <rect key="frame" x="183" y="0.0" width="36" height="40"/>
-                                                        <state key="normal" image="Basket-icon"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i49-Yc-cDv" userLabel="Menu">
-                                                        <rect key="frame" x="244" y="0.0" width="36" height="40"/>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" image="icon-menu"/>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="TxN-9q-501" secondAttribute="trailing" constant="20" id="7ru-G5-PYb"/>
-                                            <constraint firstItem="TxN-9q-501" firstAttribute="leading" secondItem="Lte-ea-j0D" secondAttribute="leading" constant="20" id="Vdo-dO-ko8"/>
-                                            <constraint firstItem="TxN-9q-501" firstAttribute="top" secondItem="Lte-ea-j0D" secondAttribute="top" constant="10" id="bif-Pm-Qbl"/>
-                                            <constraint firstAttribute="height" constant="60" id="tz9-Ry-Q6p"/>
-                                            <constraint firstAttribute="bottom" secondItem="TxN-9q-501" secondAttribute="bottom" constant="10" id="zOn-lx-QpM"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="uwF-tW-WQD" firstAttribute="top" secondItem="s1y-sa-vtg" secondAttribute="top" id="6c5-y4-VRk"/>
-                                    <constraint firstAttribute="bottom" secondItem="Lte-ea-j0D" secondAttribute="bottom" id="GIG-At-dWV"/>
                                     <constraint firstItem="uwF-tW-WQD" firstAttribute="leading" secondItem="s1y-sa-vtg" secondAttribute="leading" id="XBN-vz-mjK"/>
-                                    <constraint firstAttribute="trailing" secondItem="Lte-ea-j0D" secondAttribute="trailing" id="ZyG-te-K6u"/>
                                     <constraint firstAttribute="bottom" secondItem="uwF-tW-WQD" secondAttribute="bottom" id="dsV-Co-bs2"/>
                                     <constraint firstItem="JOh-uq-b4u" firstAttribute="centerY" secondItem="s1y-sa-vtg" secondAttribute="centerY" id="jSV-Dp-8RP"/>
                                     <constraint firstItem="uDs-KR-W7l" firstAttribute="centerX" secondItem="s1y-sa-vtg" secondAttribute="centerX" id="mYS-rY-gIp"/>
-                                    <constraint firstItem="Lte-ea-j0D" firstAttribute="leading" secondItem="s1y-sa-vtg" secondAttribute="leading" id="sL3-lX-UL7"/>
                                     <constraint firstAttribute="trailing" secondItem="uwF-tW-WQD" secondAttribute="trailing" id="uol-hp-0Vy"/>
                                     <constraint firstAttribute="bottom" secondItem="uDs-KR-W7l" secondAttribute="bottom" constant="10" id="vWE-EU-Ce2"/>
                                     <constraint firstItem="JOh-uq-b4u" firstAttribute="centerX" secondItem="s1y-sa-vtg" secondAttribute="centerX" id="ztN-Uf-pZ4"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lte-ea-j0D" userLabel="Menu container">
+                                <rect key="frame" x="0.0" y="410" width="320" height="70"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TxN-9q-501" userLabel="Menu Stack">
+                                        <rect key="frame" x="20" y="15" width="280" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49c-Dv-ko6" userLabel="Product Information">
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="40"/>
+                                                <state key="normal" image="icon-info"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23W-UV-5lI" userLabel="News">
+                                                <rect key="frame" x="64" y="0.0" width="44.5" height="40"/>
+                                                <state key="normal" image="icon-news"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-5E-Ob6" userLabel="Favorites">
+                                                <rect key="frame" x="128.5" y="0.0" width="44" height="40"/>
+                                                <state key="normal" image="icon-star"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htF-4X-R0d" userLabel="Cart">
+                                                <rect key="frame" x="192.5" y="0.0" width="44.5" height="40"/>
+                                                <state key="normal" image="Basket-icon"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i49-Yc-cDv" userLabel="Menu">
+                                                <rect key="frame" x="257" y="0.0" width="23" height="40"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" image="icon-menu"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="TxN-9q-501" secondAttribute="trailing" constant="20" id="7ru-G5-PYb"/>
+                                    <constraint firstAttribute="height" constant="70" id="KAw-sg-ITJ"/>
+                                    <constraint firstItem="TxN-9q-501" firstAttribute="leading" secondItem="Lte-ea-j0D" secondAttribute="leading" constant="20" id="Vdo-dO-ko8"/>
+                                    <constraint firstItem="TxN-9q-501" firstAttribute="top" secondItem="Lte-ea-j0D" secondAttribute="top" constant="15" id="bif-Pm-Qbl"/>
+                                    <constraint firstAttribute="bottom" secondItem="TxN-9q-501" secondAttribute="bottom" constant="15" id="zOn-lx-QpM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -782,6 +779,7 @@
                             <constraint firstItem="q72-Rn-AI6" firstAttribute="centerX" secondItem="COe-OI-qCU" secondAttribute="centerX" id="3Wy-dl-ARj"/>
                             <constraint firstItem="JOh-uq-b4u" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" multiplier="0.9" id="4X5-3w-Y11"/>
                             <constraint firstItem="q72-Rn-AI6" firstAttribute="centerY" secondItem="COe-OI-qCU" secondAttribute="centerY" id="9Wn-H8-4Cm"/>
+                            <constraint firstItem="95y-c7-MD9" firstAttribute="top" secondItem="Lte-ea-j0D" secondAttribute="bottom" id="Cdu-vZ-da8"/>
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="height" secondItem="COe-OI-qCU" secondAttribute="height" id="HHD-r3-rk5"/>
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="centerX" secondItem="COe-OI-qCU" secondAttribute="centerX" id="NWX-rU-DH7"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" multiplier="0.9" id="PYD-uK-u7S"/>
@@ -790,8 +788,10 @@
                             <constraint firstItem="q72-Rn-AI6" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" id="epK-Xm-Oqk"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="centerX" secondItem="COe-OI-qCU" secondAttribute="centerX" id="gWV-Vn-iZw"/>
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="width" secondItem="COe-OI-qCU" secondAttribute="width" id="i11-T5-IxJ"/>
+                            <constraint firstItem="Lte-ea-j0D" firstAttribute="leading" secondItem="COe-OI-qCU" secondAttribute="leading" id="jRo-7g-tEh"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="height" secondItem="COe-OI-qCU" secondAttribute="height" multiplier="0.7" id="m3G-Wn-BNO"/>
                             <constraint firstItem="s1y-sa-vtg" firstAttribute="centerY" secondItem="COe-OI-qCU" secondAttribute="centerY" id="vbo-Sb-Ohc"/>
+                            <constraint firstAttribute="trailing" secondItem="Lte-ea-j0D" secondAttribute="trailing" id="xTl-cW-phw"/>
                             <constraint firstItem="ihu-PI-29C" firstAttribute="centerY" secondItem="COe-OI-qCU" secondAttribute="centerY" id="z8C-pM-PUh"/>
                         </constraints>
                     </view>

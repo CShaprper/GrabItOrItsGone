@@ -26,8 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     var style:eUIStyles?
     var window: UIWindow?
+    var badgeCount:Int!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UIApplication.shared.applicationIconBadgeNumber = 0
         imageCache = []
         productsArray = []
         favoritesArray = []
@@ -36,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         FirebaseApp.configure()
         // Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true
+        Messaging.messaging().delegate = self
         
         // Use Facebook SDK for Login with facebook
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -48,9 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         //Device Token for Push
         // iOS 10 support
+        let notificationCenter = UNUserNotificationCenter.current()
         if #available(iOS 10, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
-            application.registerForRemoteNotifications()
+            // notificationCenter.delegate = self
+            notificationCenter.requestAuthorization(options: [.badge, .alert, .sound], completionHandler: { (granted, error) in
+                if error != nil{ print(error!.localizedDescription); return }
+                if granted { application.registerForRemoteNotifications() }
+                else { application.unregisterForRemoteNotifications() //todo: remove token from firebase
+                }
+            })
         }
             // iOS 7 support
         else {
@@ -94,14 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     //Register for Notifications via Device Token
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print("APNs device token: \(deviceTokenString)")
-        //Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.sandbox)
         Messaging.messaging().subscribe(toTopic: "/topics/news")
-        
-        // Persist it in your backend in case it's new
-        UserDefaults.standard.set(deviceTokenString, forKey: "PushDeviceTokenString")
     }
     
     // Called when APNs failed to register the device for push notifications
@@ -113,8 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         // Let FCM know about the message for analytics etc.
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        // handle your message
-        
+        UIApplication.shared.applicationIconBadgeNumber += 1
         
         // Print notification payload data
         // If you are receiving a notification message while your app is in the background,
@@ -135,6 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         // Print notification payload data
         print("Push notification received: \(userInfo)")
         completionHandler(UIBackgroundFetchResult.newData)
+        UIApplication.shared.applicationIconBadgeNumber += 1
     }
     
     

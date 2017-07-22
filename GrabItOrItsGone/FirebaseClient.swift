@@ -228,7 +228,7 @@ class FirebaseClient: IFirebaseWebService {
     func LogInAsGuest() -> Void{
         let token:[String:AnyObject] = [Messaging.messaging().fcmToken!:Messaging.messaging().fcmToken as AnyObject]
         print(token)
-        ref.child("fcmToken").child(Messaging.messaging().fcmToken!).setValue(token)       
+        ref.child("fcmToken").child(Messaging.messaging().fcmToken!).setValue(token)
     }
     func LogoutAuthenticableUser() {
         self.isCalled = false
@@ -270,10 +270,10 @@ class FirebaseClient: IFirebaseWebService {
         }
     }
     private func SetCategorysToTrueOnFirstLogin(){
-            UserDefaults.standard.set(true, forKey: eProductCategory.Electronic.rawValue)
-            UserDefaults.standard.set(true, forKey: eProductCategory.Clothes.rawValue)
-            UserDefaults.standard.set(true, forKey: eProductCategory.Jewelry.rawValue)
-            UserDefaults.standard.set(true, forKey: eProductCategory.Cosmetics.rawValue)
+        UserDefaults.standard.set(true, forKey: eProductCategory.Electronic.rawValue)
+        UserDefaults.standard.set(true, forKey: eProductCategory.Clothes.rawValue)
+        UserDefaults.standard.set(true, forKey: eProductCategory.Jewelry.rawValue)
+        UserDefaults.standard.set(true, forKey: eProductCategory.Cosmetics.rawValue)
     }
     private func SetUserDefualtsLoggedInKeysToFalse(){
         UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
@@ -292,20 +292,32 @@ class FirebaseClient: IFirebaseWebService {
                 news.date = dict["date"] as? String != nil ? self.FormatStringToDate(strDate: (dict["date"] as? String)!) : ""
                 news.title = dict["title"] as? String != nil ? dict["title"] as? String : ""
                 news.message = dict["message"] as? String != nil ? dict["message"] as? String : ""
-                print(news.title ?? "*****")
-                print(news.message ?? "*****")
-                newsArray.append(news)
-                
+                self.RefreshNewsArray(news: news)
                 self.FirebaseRequestFinished()
             }
         })
+    }
+    private func RefreshNewsArray(news: News){
+        if newsArray.contains(news){
+            //Update array todo: überarbeiten
+            if let index = newsArray.index(of: news){
+                newsArray[index].date = news.date != nil ? news.date! : ""
+                newsArray[index].message = news.message != nil ? news.message! : ""
+                newsArray[index].title  = news.title != nil ? news.title! : ""
+                return
+            }
+        } else {
+            newsArray.append(news)
+        }
     }
     private func FormatStringToDate(strDate: String) -> String{
         //Format Date
         let formatter = DateFormatter()
         formatter.locale = Locale.current
-        formatter.dateFormat = "d.MMMM.yyyy"
+        formatter.dateFormat = "dd.MM.yyyy"
         let date = formatter.date(from: strDate)
+        formatter.dateFormat = "eee dd. MMMM yyyy"
+        print(formatter.string(from: date!))
         return formatter.string(from: date!)
     }
     func ReadFirebaseFavoritesSection(){
@@ -315,7 +327,7 @@ class FirebaseClient: IFirebaseWebService {
                     print(dict)
                     var product = ProductCard()
                     product = self.SetProductCardValues(dict: dict, product: product)
-                    favoritesArray.append(product)
+                   self.RefreshFavoritesArray(product: product)
                     self.FirebaseRequestFinished()
                     if let imgURL = product.ImageURL{
                         self.DownloadImages(url: imgURL, product: product, array:  favoritesArray)
@@ -324,6 +336,24 @@ class FirebaseClient: IFirebaseWebService {
             })
         }
     }
+    private func RefreshFavoritesArray(product: ProductCard){
+        if let index = favoritesArray.index(where: {$0.ID == product.ID}){
+            //Update array
+            favoritesArray[index].ID = product.ID
+            favoritesArray[index].ImageURL = product.ImageURL
+            favoritesArray[index].NewPrice = product.NewPrice
+            favoritesArray[index].OriginalPrice = product.OriginalPrice
+            favoritesArray[index].ProdcutImage = product.ProdcutImage
+            favoritesArray[index].ProductCategory = product.ProductCategory
+            favoritesArray[index].Productinformation = product.Productinformation
+            favoritesArray[index].Subtitle = product.Subtitle
+            favoritesArray[index].Title = product.Title
+            favoritesArray[index].AddedToFavorites = product.AddedToFavorites
+            return
+        }
+        favoritesArray.append(product)
+    }
+    
     func ReadFirebaseProductsSection() -> Void{
         ref.child("products").observe(.value, with: { (snapshot) in
             if snapshot.value is NSNull{
@@ -370,9 +400,7 @@ class FirebaseClient: IFirebaseWebService {
             if let dic = p.value as? [String: AnyObject]{
                 var product = ProductCard()
                 product = self.SetProductCardValues(dict: dic, product: product)
-                if self.RefreshProductInAppDelArray(product: product) == false{
-                    productsArray.append(product)
-                }
+                self.RefreshProductsArray(product: product)
                 self.FirebaseRequestFinished()
                 if let imgURL = product.ImageURL{
                     self.DownloadImages(url: imgURL, product: product, array:  productsArray)
@@ -380,7 +408,7 @@ class FirebaseClient: IFirebaseWebService {
             }
         }
     }
-    private func RefreshProductInAppDelArray(product: ProductCard) -> Bool{
+    private func RefreshProductsArray(product: ProductCard){
         if let index = productsArray.index(where: {$0.ID == product.ID}){
             //Update array
             productsArray[index].ID = product.ID
@@ -393,9 +421,9 @@ class FirebaseClient: IFirebaseWebService {
             productsArray[index].Subtitle = product.Subtitle
             productsArray[index].Title = product.Title
             productsArray[index].AddedToFavorites = product.AddedToFavorites
-            return true
+            return
         }
-        return false
+        productsArray.append(product)
     }
     private func SetProductCardValues(dict: [String:AnyObject], product: ProductCard) -> ProductCard{
         let id:String = dict["id"] as? String != nil ? (dict["id"] as? String)! : ""
@@ -429,13 +457,6 @@ class FirebaseClient: IFirebaseWebService {
         } else {
             loadImageUsingCacheWithURLString(urlString: url, array: array)
         }
-        /*if let data2 = NSData(contentsOf: URL(string: url)!){
-         for prod in array{
-         if prod.ImageURL == url{
-         prod.ProdcutImage = UIImage(data: data2 as Data)
-         }
-         }
-         }*/
     }
     func loadImageUsingCacheWithURLString(urlString: String, array: [ProductCard]) -> Void {
         let url = URL(string: urlString)!
@@ -472,7 +493,7 @@ class FirebaseClient: IFirebaseWebService {
     }
     
     //MARK: - Firebase save functions
-    func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {       
+    func SaveProductToFirebaseFavorites(product: ProductCard) -> Void {
         if let uid = Auth.auth().currentUser?.uid{
             let userRef = ref.child("favorites").child(uid)
             let key = userRef.child(product.ID!).key
