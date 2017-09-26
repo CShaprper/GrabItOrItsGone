@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         // Override status bar style
-        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = .default
         
         //Device Token for Push
         // iOS 10 support
@@ -57,7 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             notificationCenter.requestAuthorization(options: [.badge, .alert, .sound], completionHandler: { (granted, error) in
                 if error != nil{ print(error!.localizedDescription); return }
                 if granted { application.registerForRemoteNotifications() }
-                else { application.unregisterForRemoteNotifications() //todo: remove token from firebase
+                else {
+                    application.unregisterForRemoteNotifications()
+                    //todo: remove token from firebase
                 }
             })
         }

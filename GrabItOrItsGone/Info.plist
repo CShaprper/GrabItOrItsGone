@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de_DE</string>
 	<key>CFBundleDisplayName</key>
-	<string>90&apos;s or it&apos;s Gone</string>
+	<string>90's or it's Gone</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -67,6 +67,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Grab It Backend möchte Zugriff auf Deine Fotos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SonsieOne-Regular.ttf</string>
@@ -97,7 +99,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Grab It Backend möchte Zugriff auf Deine Fotos</string>
 </dict>
 </plist>

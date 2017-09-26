@@ -20,7 +20,6 @@ class MainController: UIViewController, IFirebaseWebService{
     @IBOutlet var CardView: DesignableUIView!
     @IBOutlet var TopBackGroundView: UIView!
     @IBOutlet var MenuBackgroundContainer: UIView!
-    @IBOutlet var FavoritesStarImage: UIImageView!
     //Menu Buttons
     @IBOutlet var btn_MenuNews: UIButton!
     @IBOutlet var btn_Warenkorb: UIButton!
@@ -28,7 +27,7 @@ class MainController: UIViewController, IFirebaseWebService{
     @IBOutlet var btn_MenuAccount: UIButton!
     @IBOutlet var btn_ProductInformation: UIButton!
     @IBOutlet var btn_News: UIButton!
-    @IBOutlet var btn_ShoppingCart: UIButton!    
+    @IBOutlet var btn_ShoppingCart: UIButton!
     @IBOutlet var btn_Favorites: UIButton!
     @IBOutlet var SoundSwitch: UISwitch!
     @IBOutlet var SoundImage: UIImageView!
@@ -48,6 +47,16 @@ class MainController: UIViewController, IFirebaseWebService{
     @IBOutlet var ProductImageView: UIImageView!
     @IBOutlet var lbl_ProductTitle: UILabel!
     @IBOutlet var lbl_ProductSubtitle: UILabel!
+    //NopeLabel
+    @IBOutlet var NopeLabelContainer: UIView!
+    @IBOutlet var lbl_Nope: UILabel!
+    //BuyLabel
+    @IBOutlet var BuyLabelContainer: UIView!
+    @IBOutlet var lbl_buy: UILabel!
+    //VavoritesLabel
+    @IBOutlet var FavoritesLabelContainer: UIView!
+    @IBOutlet var lbl_Favorites: UILabel!
+    
     
     //MARK: Members
     let style = UIStyleHelper()
@@ -71,7 +80,7 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = .blackTranslucent
+        self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isOpaque  = false
         SetSoundSwitchValue()
         //Reset products array to index 0 otherwise index out of range exception on swipe
@@ -84,7 +93,6 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
@@ -146,27 +154,74 @@ class MainController: UIViewController, IFirebaseWebService{
     func btn_Favorites_Pressed(sender: UIButton) -> Void{
         performSegue(withIdentifier: String.SegueToFavoritesControllerFromMain_Itendifier, sender: nil)
     }
+    var direction:String = ""
     @IBAction func CardPanRecocnizerAction(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
         let point = sender.translation(in: view)
         let xFromCenter = card.center.x - view.center.x
         let yFromCenter = card.center.y - view.center.y
-        let scaleX = min((view.frame.size.width * 0.25) / abs(xFromCenter), 1)
-        let scaleY = min((view.frame.size.width * 0.25) / abs(yFromCenter), 1)
         let swipeLimitLeft = view.frame.width * 0.4 // left border when the card gets animated off
         let swipeLimitRight = view.frame.width * 0.6 // right border when the card gets animated off
         let swipeLimitTop = view.frame.height * 0.5 // top border when the card gets animated off
         let swipeLimitBottom = view.frame.height * 0.65 // top border when the card gets animated off
         let ySpin:CGFloat = yFromCenter < 0 ? -200 : 200 // gives the card a spin in y direction
         let xSpin:CGFloat = xFromCenter < 0 ? -200 : 200 // gives the card a spin in x direction
+        let xPercentFromCenter = xFromCenter / (view.frame.width * 0.5)
+        let yPercentFromCenter = yFromCenter / (view.frame.height * 0.3)
+        let velocity:CGPoint = sender.velocity(in: view)
         
-        FavoritesStarImage.alpha =  card.center.y < swipeLimitBottom ? 0 : 1
+    
+        print("xpercentfromCenter: \(xPercentFromCenter)")
+        print("ypercentfromCenter: \(yPercentFromCenter)")
+        print("Velocity X: \(velocity.x)")
+        print("Velocity Y: \(velocity.y)")
+        print("Current direction: \(direction)")
+        if abs(velocity.y) > abs(velocity.x) {
+            direction = "y"
+        } else if abs(velocity.y) < abs(velocity.x) {
+            direction = "x"
+        }
         
-        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y) //
+        
+        if direction == "" || direction == "y" {
+            
+            direction = "y"
+            card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+            
+            
+            view.bringSubview(toFront: FavoritesLabelContainer)
+            FavoritesLabelContainer.alpha = yPercentFromCenter
+            BuyLabelContainer.alpha = 0
+            NopeLabelContainer.alpha = 0
+            
+            
+        } else if direction == "" || direction == "x" {
+            
+            direction = "x"
+            card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+            
+            
+            if xPercentFromCenter > 0 {
+                
+                view.bringSubview(toFront: BuyLabelContainer)
+                BuyLabelContainer.alpha = abs(xPercentFromCenter)
+                FavoritesLabelContainer.alpha = 0
+                
+            }
+            if xPercentFromCenter < 0 {
+                
+                view.bringSubview(toFront: NopeLabelContainer)
+                NopeLabelContainer.alpha = abs(xPercentFromCenter)
+                FavoritesLabelContainer.alpha = 0
+                
+            }
+            
+        }
+        
         //Rotate card while drag
         let degree:Double = Double(xFromCenter / ((view.frame.size.width * 0.5) / 40))
-        card.transform = CGAffineTransform(rotationAngle: degree.degreesToRadians).scaledBy(x: scaleX, y: scaleX)
-        card.transform = CGAffineTransform(rotationAngle: degree.degreesToRadians).scaledBy(x: scaleY, y: scaleY)
+        card.transform = CGAffineTransform(rotationAngle: -degree.degreesToRadians)
+        card.transform = CGAffineTransform(rotationAngle: -degree.degreesToRadians)
         
         //Animate card after drag ended
         if sender.state == UIGestureRecognizerState.ended{
@@ -181,7 +236,8 @@ class MainController: UIViewController, IFirebaseWebService{
                 return
             } else if card.center.y < swipeLimitTop{
                 //Move off the top side if drag reached swipeLimitTop
-                SwipeCardOffTop(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
+                //SwipeCardOffTop(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
+                self.ResetCardAfterSwipeOff(card: card)
                 return
             } else if card.center.y > swipeLimitBottom {
                 if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
@@ -321,10 +377,13 @@ class MainController: UIViewController, IFirebaseWebService{
         }
     }
     private func ResetCardAfterSwipeOff(card: UIView){
+        direction = ""
+        NopeLabelContainer.alpha = 0
+        BuyLabelContainer.alpha = 0
+        FavoritesLabelContainer.alpha = 0
         card.alpha = 0
         card.center = self.view.center
         card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians)
-        self.FavoritesStarImage.alpha = 0
         card.Arise(duration: 0.7, delay: 0, options: [.allowUserInteraction], toAlpha: 1)
     }
     func SegueToLogInController(notification: Notification) -> Void {
@@ -342,24 +401,46 @@ class MainController: UIViewController, IFirebaseWebService{
         formatter.numberStyle = .currency
         return formatter.string(from: digit as NSNumber)!
     }
-    private func SetupMainControllerViews(){
+    private func SetupMainControllerViews() -> Void {
+        
         //Hide back button to show custom Button
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "log out", style: UIBarButtonItemStyle.plain, target: self, action:#selector(LogOutBarButtonItemPressed))
+        newBackButton.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItem = newBackButton
         
         //Main Backgroundimage
-        MainBackgroundImage.image = UIImage(named: "NatureBG")
-        FavoritesStarImage.alpha = 0
+        //MainBackgroundImage.image = UIImage(named: "NatureBG")
+        
+        //NopeLabel
+        NopeLabelContainer.transform = CGAffineTransform(rotationAngle: Double(30).degreesToRadians)
+        NopeLabelContainer.layer.borderWidth = 3
+        NopeLabelContainer.layer.borderColor = UIColor.red.cgColor
+        NopeLabelContainer.layer.cornerRadius = 5
+        NopeLabelContainer.alpha = 0
+        
+        //BuyLabel
+        BuyLabelContainer.transform = CGAffineTransform(rotationAngle: Double(-30).degreesToRadians)
+        BuyLabelContainer.layer.borderWidth = 3
+        BuyLabelContainer.layer.borderColor = UIColor.green.cgColor
+        BuyLabelContainer.layer.cornerRadius = 5
+        BuyLabelContainer.alpha = 0
+        
+        //FavoritesLabelContainer
+        FavoritesLabelContainer.layer.borderWidth = 3
+        FavoritesLabelContainer.layer.borderColor = UIColor.yellow.cgColor
+        FavoritesLabelContainer.layer.cornerRadius = 5
+        FavoritesLabelContainer.alpha = 0
         
         //Card view
         CardView.center = view.center
         CardView.layer.cornerRadius = 20
         CardView.clipsToBounds = true
-        CardBackgrounImageView.backgroundColor = UIColor.black
+        CardView.layer.borderColor = UIColor.lightGray.cgColor
+        CardView.layer.borderWidth = 2
+        CardBackgrounImageView.backgroundColor = UIColor.white
         
         //Imageview of CardView
-        MainBackgroundImage.image = #imageLiteral(resourceName: "NatureBG")
         ProductImageView.image = #imageLiteral(resourceName: "Image-placeholder")
         ProductImageView.layer.cornerRadius = 20
         ProductImageView.clipsToBounds = true
