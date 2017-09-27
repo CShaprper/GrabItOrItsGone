@@ -65,6 +65,9 @@ class MainController: UIViewController, IFirebaseWebService{
     var isProductInformationSheetVisible:Bool = false
     let productCard:ProductCard = ProductCard()
     var facade:MainControllerFacade!
+    var isFavoritesVisible:Bool = false
+    var isBuyVisible:Bool = false
+    var isNopeVisible:Bool = false
     
     
     //MARK: - ViewController functions
@@ -183,38 +186,29 @@ class MainController: UIViewController, IFirebaseWebService{
         }
         
         
-        if direction == "" || direction == "y" {
+        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+        
+        if xPercentFromCenter > 0 && !isFavoritesVisible && (direction == "" || direction == "x"){
             
-            direction = "y"
-            card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+            view.bringSubview(toFront: BuyLabelContainer)
+            BuyLabelContainer.alpha = abs(xPercentFromCenter)
+            isBuyVisible = true
+            FavoritesLabelContainer.alpha = 0
             
+        } else if xPercentFromCenter < 0 && !isFavoritesVisible && (direction == "" || direction == "x"){
+            
+            view.bringSubview(toFront: NopeLabelContainer)
+            NopeLabelContainer.alpha = abs(xPercentFromCenter)
+            isNopeVisible = true
+            FavoritesLabelContainer.alpha = 0
+            
+        } else if yPercentFromCenter > 0 && !isNopeVisible && !isBuyVisible && (direction == "" || direction == "y") {
             
             view.bringSubview(toFront: FavoritesLabelContainer)
             FavoritesLabelContainer.alpha = yPercentFromCenter
+            isFavoritesVisible = true
             BuyLabelContainer.alpha = 0
             NopeLabelContainer.alpha = 0
-            
-            
-        } else if direction == "" || direction == "x" {
-            
-            direction = "x"
-            card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-            
-            
-            if xPercentFromCenter > 0 {
-                
-                view.bringSubview(toFront: BuyLabelContainer)
-                BuyLabelContainer.alpha = abs(xPercentFromCenter)
-                FavoritesLabelContainer.alpha = 0
-                
-            }
-            if xPercentFromCenter < 0 {
-                
-                view.bringSubview(toFront: NopeLabelContainer)
-                NopeLabelContainer.alpha = abs(xPercentFromCenter)
-                FavoritesLabelContainer.alpha = 0
-                
-            }
             
         }
         
@@ -259,6 +253,26 @@ class MainController: UIViewController, IFirebaseWebService{
                 self.ResetCardAfterSwipeOff(card: card)
             }
         }
+    }
+    
+    @objc func CardView_Tapped(sender: UITapGestureRecognizer) -> Void {
+        
+        if !isProductInformationSheetVisible{
+            if isMenuOut{ HideMenu(closure: {}) }
+            ShowInformationSheet()
+        }
+        else {  HideInformationSheet() }
+        
+    }
+    
+    @objc func ProductInfo_Tapped(sender: UITapGestureRecognizer) -> Void {
+        
+        if !isProductInformationSheetVisible{
+            if isMenuOut{ HideMenu(closure: {}) }
+            ShowInformationSheet()
+        }
+        else {  HideInformationSheet() }
+        
     }
     
     
@@ -378,6 +392,9 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     private func ResetCardAfterSwipeOff(card: UIView){
         direction = ""
+        isNopeVisible = false
+        isFavoritesVisible = false
+        isBuyVisible = false
         NopeLabelContainer.alpha = 0
         BuyLabelContainer.alpha = 0
         FavoritesLabelContainer.alpha = 0
@@ -495,6 +512,13 @@ class MainController: UIViewController, IFirebaseWebService{
         facade.CheckForSoundSetting()
         facade.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(SegueToLogInController), name: NSNotification.Name.SegueToLogInController, object: nil)
+        
+        //TapRecognizer
+        let cardTapRegognizer = UITapGestureRecognizer(target: self, action: #selector(CardView_Tapped))
+        CardView.addGestureRecognizer(cardTapRegognizer)
+        
+        let productInfoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProductInfo_Tapped))
+        ProductInformationSheet.addGestureRecognizer(productInfoTapRecognizer)
     }
     private func ShowInformationSheet(){
         isProductInformationSheetVisible = true

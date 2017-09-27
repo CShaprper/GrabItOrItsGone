@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "525520376.525726"
+            timestampString = "528142998.728526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "FirebaseRequestFinished()"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,75 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "525460224.845616"
+            timestampString = "528142998.728926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "btn_Menu_Pressed(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "525460224.845616"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "btn_Menu_Pressed(sender:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GrabItOrItsGone.MainController.btn_Menu_Pressed (sender : GrabItOrItsGone.DesignableUIButton) -&gt; ()"
-                  moduleName = "GrabItOrItsGone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/MainController.swift"
-                  timestampString = "522166755.246685"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GrabItOrItsGone.MainController.(btn_Menu_Pressed (sender : GrabItOrItsGone.DesignableUIButton) -&gt; ()).(closure #1)"
-                  moduleName = "GrabItOrItsGone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petersypek/Desktop/90s%20or%20its%20Gone/GrabItOrItsGone/MainController.swift"
-                  timestampString = "522166755.248577"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "0">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "525520376.525726"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "CardPanRecocnizerAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GrabItOrItsGone/MainController.swift"
-            timestampString = "525520376.525726"
+            timestampString = "528142998.729274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "ResetProductArrayIndexAfterCategoryChange()"
             landmarkType = "7">
          </BreakpointContent>
