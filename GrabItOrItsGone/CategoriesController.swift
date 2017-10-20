@@ -42,25 +42,25 @@ class CategoriesController: UIViewController {
     }
     
     //MARK: - Wired actions
-    func Category_Changed(sender: UISwitch) -> Void{
+    @objc func Category_Changed(sender: UISwitch) -> Void{
         if sender.isOn { UserDefaults.standard.set(true, forKey: eProductCategory.Electronic.rawValue) }
         else { UserDefaults.standard.set(false, forKey: eProductCategory.Electronic.rawValue)
            productsArray = [] // Reset products array
             UserDefaults.standard.set(true, forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue) }
     }
-    func Clothes_Changed(sender: UISwitch) -> Void{
+    @objc func Clothes_Changed(sender: UISwitch) -> Void{
         if sender.isOn { UserDefaults.standard.set(true, forKey: eProductCategory.Clothes.rawValue)  }
         else { UserDefaults.standard.set(false, forKey: eProductCategory.Clothes.rawValue)
             productsArray = [] // Reset products array
             UserDefaults.standard.set(true, forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue) }
     }
-    func Jewelry_Changed(sender: UISwitch) -> Void{
+    @objc func Jewelry_Changed(sender: UISwitch) -> Void{
         if sender.isOn { UserDefaults.standard.set(true, forKey: eProductCategory.Jewelry.rawValue)  }
         else { UserDefaults.standard.set(false, forKey: eProductCategory.Jewelry.rawValue)
             productsArray = [] // Reset products array
             UserDefaults.standard.set(true, forKey: eUserDefaultKeys.hasUncheckedCategory.rawValue) }
     }
-    func Cosmetics_Changed(sender: UISwitch) -> Void{
+    @objc func Cosmetics_Changed(sender: UISwitch) -> Void{
         if sender.isOn { UserDefaults.standard.set(true, forKey: eProductCategory.Cosmetics.rawValue) }
         else { UserDefaults.standard.set(false, forKey: eProductCategory.Cosmetics.rawValue)
             productsArray = [] // Reset products array

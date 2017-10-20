@@ -112,22 +112,22 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         self.view.endEditing(true)
         return true
     }
-    func txt_Login_Email_TextChanged(sender: DesignableTextField) -> Void {
+    @objc func txt_Login_Email_TextChanged(sender: DesignableTextField) -> Void {
         ValidationFactory.alertMessageDelegate = nil
         sender.RightImageVisibility = ValidationFactory.Validate(type: .email, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
     }
-    func txt_Login_Password_TextChanged(sender: DesignableTextField) -> Void{
+    @objc func txt_Login_Password_TextChanged(sender: DesignableTextField) -> Void{
         ValidationFactory.alertMessageDelegate = nil
         sender.RightImageVisibility = ValidationFactory.Validate(type: .password, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
     }
-    func txt_Register_Email_TextChanged(sender: DesignableTextField) -> Void {
+    @objc func txt_Register_Email_TextChanged(sender: DesignableTextField) -> Void {
         ValidationFactory.alertMessageDelegate = nil
         sender.RightImageVisibility = ValidationFactory.Validate(type: .email, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .email)
     }
-    func txt_Register_Password_TextChanged(sender:DesignableTextField) -> Void {
+    @objc func txt_Register_Password_TextChanged(sender:DesignableTextField) -> Void {
         ValidationFactory.alertMessageDelegate = nil
         sender.RightImageVisibility = ValidationFactory.Validate(type: .password, validationString: sender.text!)
         ConfigureDesignableTextfieldDuringInput(sender: sender, validationType: .password)
@@ -157,7 +157,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     
     //MARK:- Wired Actions
-    func btn_Login_Pressed(sender: UIButton) -> Void {
+    @objc func btn_Login_Pressed(sender: UIButton) -> Void {
         view.addSubview(LoginPopUp)
         LoginPopUp.frame.size.height = 0.5 * view.frame.size.height
         LoginPopUp.frame.size.width = 0.9 * view.frame.size.width
@@ -166,12 +166,12 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         LoginPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
         PopUpBlurrScreenView.Arise(duration: 0.5, delay: 0, options: [.curveEaseOut], toAlpha: 1)
     }
-    func PopUpBlurrScreenView_Touched(sender: UITapGestureRecognizer) -> Void {
+    @objc func PopUpBlurrScreenView_Touched(sender: UITapGestureRecognizer) -> Void {
         LoginPopUp.removeFromSuperview()
         RegisterPopUp.removeFromSuperview()
         PopUpBlurrScreenView.alpha = 0
     }
-    func btn_SignUp_Pressed(sender: DesignableUIButton) -> Void {
+    @objc func btn_SignUp_Pressed(sender: DesignableUIButton) -> Void {
         view.addSubview(RegisterPopUp)
         RegisterPopUp.frame.size.height = 0.5 * view.frame.size.height
         RegisterPopUp.frame.size.width = 0.9 * view.frame.size.width
@@ -180,7 +180,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
         RegisterPopUp.HangingEffectBounce(duration: 0.7, delay: 0, spring: 0.25)
         PopUpBlurrScreenView.Arise(duration: 0.5, delay: 0, options: [.curveEaseOut], toAlpha: 1)
     }
-    func btn_SignUp_PopUp_Pressed(sender: DesignableUIButton) -> Void {
+    @objc func btn_SignUp_PopUp_Pressed(sender: DesignableUIButton) -> Void {
         ValidationFactory.alertMessageDelegate = self
         var isValid:Bool = false
         isValid = ValidationFactory.Validate(type: .email, validationString: txt_Register_Email.text)
@@ -189,7 +189,7 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
           facade.firebaseClient.CreateNewAutenticableUser(email: txt_Register_Email.text!, password: txt_Register_Password.text!)
         }
     }
-    func btn_LogIn_PopUp_Pressed(sender: DesignableUIButton) -> Void {
+    @objc func btn_LogIn_PopUp_Pressed(sender: DesignableUIButton) -> Void {
         ValidationFactory.alertMessageDelegate = self
         var isValid:Bool = false
         isValid = ValidationFactory.Validate(type: .email, validationString: txt_Login_Email.text)
@@ -198,50 +198,32 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
             facade.firebaseClient.LoginAuthenticableUser(email: txt_Login_Email.text!, password: txt_Login_Password.text!)
         } 
     }
-    func btn_Guest_Pressed(sender: DesignableUIButton){
+    @objc func btn_Guest_Pressed(sender: DesignableUIButton){
         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue)
         UserDefaults.standard.set(false, forKey: eUserDefaultKeys.isAdmin.rawValue)
         let fbClient = FirebaseClient()
         fbClient.LogInAsGuest()
         self.performSegue(withIdentifier: .SegueToMainController_Identifier, sender: nil)
     }
-    func btn_PasswordForgotten_Pressed(sender:UIButton) -> Void {
+    @objc func btn_PasswordForgotten_Pressed(sender:UIButton) -> Void {
         facade.ResetUserPassword(email: txt_Login_Email.text!)
     }
-    func btn_FacebookLogin_Pressed(sender: UIButton) -> Void {
+    @objc func btn_FacebookLogin_Pressed(sender: UIButton) -> Void {
         facade.LoginFirebaseUserWithFacebook(controller:self)
     }
-    func btn_CustomGoogleLogin_Pressed(sender: DesignableUIButton) -> Void {
+    @objc func btn_CustomGoogleLogin_Pressed(sender: DesignableUIButton) -> Void {
         UserDefaults.standard.set(true, forKey: eUserDefaultKeys.isLoggedInWithGoogle.rawValue)
         GIDSignIn.sharedInstance().signIn()
     }
-    func btn_CustomInstagramLogin_Pressed(sender: UIButton) -> Void{
+    @objc func btn_CustomInstagramLogin_Pressed(sender: UIButton) -> Void{
         view.addSubview(instagramLoginWebView!)
         handle()
         //facade.LoginFirebaseUserWithInstagram(controller: self)
     }
-    /* func doOAuthInstagram(){
-     let oauthswift = OAuth2Swift(consumerKey:"d9b8a7748ca744aca7894f0044d09545", consumerSecret:"4c37f561b15f4f7596b6970e4d6e6ff3", authorizeUrl:   "https://api.instagram.com/oauth/authorize",responseType: "token")
-     oauthswift.authorize(deviceToken: <#T##String#>, success: <#T##OAuthSwift.TokenRenewedHandler##OAuthSwift.TokenRenewedHandler##(OAuthSwiftCredential) -> Void#>, failure: <#T##OAuthSwiftHTTPRequest.FailureHandler##OAuthSwiftHTTPRequest.FailureHandler##(OAuthSwiftError) -> Void#>)
-     oauthswift.authorize(withCallbackURL: "https://localhost:8080/instagram-callback", scope: "public_content", state: "INSTAGRAM", success: { (credential, response, parameters) in
-     print(parameters["name"] ?? "")
-     print("Instagram oauth_token:\(credential.oauthToken)")
-     print(parameters)
-     }) { (error) in
-     
-     }
-     }*/
     
     
     func handle() {
-        view.tag = 1 // Make sure our view and thus webview is loaded.
-        let INSTAGRAM_AUTHURL = "https://api.instagram.com/oauth/authorize/"
-        let INSTAGRAM_CLIENT_ID = "d9b8a7748ca744aca7894f0044d09545"
-        let INSTAGRAM_REDIRECT_URI = "https://localhost:8080/instagram-callback"
-        let INSTAGRAM_SCOPE = "public_content"
-        //let INSTAGRAM_CLIENT_SECRET = "&client_secret=4c37f561b15f4f7596b6970e4d6e6ff3"
-        let authURL = String(format: "%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@", arguments:[INSTAGRAM_AUTHURL,INSTAGRAM_CLIENT_ID,INSTAGRAM_REDIRECT_URI, INSTAGRAM_SCOPE ])
-        instagramLoginWebView!.loadRequest(URLRequest.init(url: URL.init(string: authURL)!))
+
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
@@ -262,20 +244,20 @@ class LogInSignUpController: UIViewController, UITextFieldDelegate, GIDSignInUID
     
     
     //MARK:- Wired actions from Notifications
-    func SegueToMainController(notification: Notification) -> Void{
+    @objc func SegueToMainController(notification: Notification) -> Void{
         txt_Register_Email.text = String()
         txt_Login_Email.text = String()
         txt_Login_Password.text = String()
         txt_Register_Password.text = String()
         performSegue(withIdentifier: .SegueToMainController_Identifier, sender: nil)
     }
-    func KeyboardWillShow(notification: Notification) -> Void{
+    @objc func KeyboardWillShow(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
             LoginPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
         }
     }
-    func KeyboardWillHide(notification: Notification) -> Void{
+    @objc func KeyboardWillHide(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             RegisterPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
             LoginPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)

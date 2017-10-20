@@ -81,14 +81,14 @@ class FavoritesDetailController: UIViewController, UIScrollViewDelegate, UIGestu
             ContentScrollView.contentOffset.x = 0
         }
     }
-    func Image_Pinch(sender: UIPinchGestureRecognizer) -> Void{
+    @objc func Image_Pinch(sender: UIPinchGestureRecognizer) -> Void{
         view.bringSubview(toFront: ProductImage)
         ProductImage.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
         if sender.state == .ended {
             ProductImage.transform = .identity
         }
     }
-    func Image_Drag(sender: UIPanGestureRecognizer) -> Void{
+    @objc func Image_Drag(sender: UIPanGestureRecognizer) -> Void{
       /*  let translation = sender.translation(in: sender.view)
         let myview = sender.view!
         myview.transform = CGAffineTransform(translationX: myview.center.x + translation.x, y: myview.center.y + translation.y)

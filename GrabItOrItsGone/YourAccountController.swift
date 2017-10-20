@@ -83,17 +83,17 @@ class YourAccountController: UIViewController {
         PurchasesContainer.addGestureRecognizer(gesture4)
     }
     
-    func ManageAdressContainer_Touched(sender: UITapGestureRecognizer) -> Void {
+    @objc func ManageAdressContainer_Touched(sender: UITapGestureRecognizer) -> Void {
         self.performSegue(withIdentifier: .SegueToAddressController_Identifier, sender: nil)
     }
     
-    func ManageFavoritesContainer_Touched(sender: UITapGestureRecognizer) -> Void{
+    @objc func ManageFavoritesContainer_Touched(sender: UITapGestureRecognizer) -> Void{
         self.performSegue(withIdentifier: .SegueToFavoritesController_Identifier, sender: nil)
     }
-    func FilterCategoriesContainer_Touched(sender: UITapGestureRecognizer) -> Void {
+    @objc func FilterCategoriesContainer_Touched(sender: UITapGestureRecognizer) -> Void {
           self.performSegue(withIdentifier: String.SegueToCategoriesController_Identifier, sender: nil)
     }
-    func PurchaseContainer_Touched(sender: UITapGestureRecognizer) -> Void{
+    @objc func PurchaseContainer_Touched(sender: UITapGestureRecognizer) -> Void{
         self.performSegue(withIdentifier: String.SegueToPurchaseController_Identifier, sender: nil)
     }
 }

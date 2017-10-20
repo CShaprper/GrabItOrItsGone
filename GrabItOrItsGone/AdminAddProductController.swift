@@ -81,7 +81,7 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IFirebas
         self.present(imgPicker, animated: true, completion:  nil)
     }
     
-    func btn_Save_Pressed(sender: UIButton) -> Void{
+    @objc func btn_Save_Pressed(sender: UIButton) -> Void{
         product!.ID = UUID().uuidString
         firebaseClient!.SaveNewProdcutAsAdmin(product: product!, productImage: ProductImage.image!)
     }
@@ -106,19 +106,19 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IFirebas
         self.view.endEditing(true)
         return true
     }
-    func txt_NewPrice_Changed(sender: UITextField) -> Void{
+    @objc func txt_NewPrice_Changed(sender: UITextField) -> Void{
         product!.NewPrice = Double(sender.text!)
     }
-    func txt_OldPrice_Changed(sender: UITextField) -> Void{
+    @objc func txt_OldPrice_Changed(sender: UITextField) -> Void{
         product!.OriginalPrice = Double(sender.text!)
     }
-    func txt_ProductTitle_Changed(sender: UITextField) -> Void{
+    @objc func txt_ProductTitle_Changed(sender: UITextField) -> Void{
         product!.Title = sender.text!
     }
-    func txt_productSubtitle_Changed(sender: UITextField) -> Void{
+    @objc func txt_productSubtitle_Changed(sender: UITextField) -> Void{
         product!.Subtitle = sender.text!
     }
-    func txt_ProductCategory_Changed(sender: UITextField) -> Void{
+    @objc func txt_ProductCategory_Changed(sender: UITextField) -> Void{
         product!.ProductCategory = sender.text!
     }
     
@@ -128,12 +128,12 @@ class AdminAddProductController: UIViewController, UITextFieldDelegate, IFirebas
     }
     
     //MARK: - Actions from Notification listeners
-    func KeyboardWillShow(notification: Notification) -> Void{
+    @objc func KeyboardWillShow(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             ContentContainer.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
         }
     }
-    func KeyboardWillHide(notification: Notification) -> Void{
+    @objc func KeyboardWillHide(notification: Notification) -> Void{
         ContentContainer.transform = .identity
     }
 }

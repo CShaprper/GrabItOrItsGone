@@ -47,12 +47,12 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     //MARK: - Actions from Notification listeners
-    func KeyboardWillShow(notification: Notification) -> Void{
+    @objc func KeyboardWillShow(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             AddAddressPopUp.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height * 0.33)
         }
     }
-    func KeyboardWillHide(notification: Notification) -> Void{
+    @objc func KeyboardWillHide(notification: Notification) -> Void{
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             AddAddressPopUp.transform = CGAffineTransform(translationX: 0, y: keyboardSize.height * 0.33)
         }
@@ -60,25 +60,25 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     //MARK: - Wired actions
-    func BlurryViewTouched(sender: UITapGestureRecognizer)->Void{
+    @objc func BlurryViewTouched(sender: UITapGestureRecognizer)->Void{
         HideBlurrView()
         HideAddAddressPopUp()
     }
-    func AddressTypeSegmentedControl_Switched(sender: UISegmentedControl) -> Void {
+    @objc func AddressTypeSegmentedControl_Switched(sender: UISegmentedControl) -> Void {
         if sender.selectedSegmentIndex == 0{
             facade.address.isDeliveryAddress = true
         } else {
             facade.address.isDeliveryAddress = false
         }
     }
-    func btn_SaveAddress_Pressed(sender: DesignableUIButton) -> Void {
+    @objc func btn_SaveAddress_Pressed(sender: DesignableUIButton) -> Void {
         if facade.ValidateUserInput(segmentedControl: AddressTypeSegmentedControl) {
             facade.SaveAddress()
             HideAddAddressPopUp()
             AddressTableView.reloadData()
         }
     }
-    func btn_AddAddress_Pressed(sender: UIButton) -> Void {
+    @objc func btn_AddAddress_Pressed(sender: UIButton) -> Void {
         ShowAddAddressPopUp()
     }
     
@@ -99,22 +99,22 @@ class AdressController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.view.endEditing(true)
         return true
     }
-    func txt_Firstname_TextChanged(sender: UITextField) -> Void {
+    @objc func txt_Firstname_TextChanged(sender: UITextField) -> Void {
         facade.address.firstname = sender.text!
     }
-    func txt_Lastname_TextChanged(sender: UITextField) -> Void {
+    @objc func txt_Lastname_TextChanged(sender: UITextField) -> Void {
         facade.address.lastname = sender.text!
     }
-    func txt_Address_TextChanged(sender: UITextField) -> Void {
+    @objc func txt_Address_TextChanged(sender: UITextField) -> Void {
         facade.address.streetname = sender.text!
     }
-    func txt_Housenumber_TextChanged(sender: UITextField) -> Void {
+    @objc func txt_Housenumber_TextChanged(sender: UITextField) -> Void {
         facade.address.houseneumber = sender.text!
     }
-    func txt_Zipcode_TextChanged(sender: UITextField) -> Void {
+    @objc func txt_Zipcode_TextChanged(sender: UITextField) -> Void {
         facade.address.zipnumber = sender.text!
     }
-    func txt_City_TextChanged(sender: UITextField) -> Void {
+    @objc func txt_City_TextChanged(sender: UITextField) -> Void {
         facade.address.city = sender.text!
     }
     

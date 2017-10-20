@@ -285,7 +285,7 @@ class FirebaseClient: IFirebaseWebService {
     
     //MARK: - Firebase read functions
     func ReadFirebaseNewsSection() -> Void{
-        ref.child("news").observe(.childAdded, with: { (snapshot) in
+        ref.child("news").queryLimited(toLast: 10).observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String:AnyObject]{
                 print(dict)
                 let news = News()

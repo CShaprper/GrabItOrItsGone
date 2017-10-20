@@ -34,9 +34,12 @@ class MainController: UIViewController, IFirebaseWebService{
     @IBOutlet var SoundStack: UIStackView!
     @IBOutlet var btn_AdminAddProduct: UIButton!
     @IBOutlet var btn_Menu: DesignableUIButton!
+    
     //Product Information sheet
     @IBOutlet var ProductInformationSheet: UIView!
     @IBOutlet var ProductInformationTextView: UITextView!
+    @IBOutlet var NewPriceInfoSheet: UILabel!
+    
     //Product Card
     @IBOutlet var lbl_OldPrice: UILabel!
     @IBOutlet var OldPriceBlurryView: UIVisualEffectView!
@@ -47,15 +50,27 @@ class MainController: UIViewController, IFirebaseWebService{
     @IBOutlet var ProductImageView: UIImageView!
     @IBOutlet var lbl_ProductTitle: UILabel!
     @IBOutlet var lbl_ProductSubtitle: UILabel!
+    
     //NopeLabel
     @IBOutlet var NopeLabelContainer: UIView!
     @IBOutlet var lbl_Nope: UILabel!
+    @IBOutlet var Nope2LabelContainer: UIView!
+    
     //BuyLabel
     @IBOutlet var BuyLabelContainer: UIView!
     @IBOutlet var lbl_buy: UILabel!
-    //VavoritesLabel
+    @IBOutlet var Buy2LabelContainer: UIView!
+    
+    //FavoritesLabel
     @IBOutlet var FavoritesLabelContainer: UIView!
     @IBOutlet var lbl_Favorites: UILabel!
+    
+    //Nope Favorites Buy Buttons
+    @IBOutlet var btn_Nope: UIButton!
+    @IBOutlet var btn_RoundFavorites: UIButton!
+    @IBOutlet var btn_Buy: UIButton!
+    
+    
     
     
     //MARK: Members
@@ -101,7 +116,7 @@ class MainController: UIViewController, IFirebaseWebService{
     
     
     //MARK: - Wired Actions
-    func SoundSwitch_Changed(sender: UISwitch) -> Void {
+    @objc func SoundSwitch_Changed(sender: UISwitch) -> Void {
         if sender.isOn {
             UserDefaults.standard.set(true, forKey: eUserDefaultKeys.SoundsOn.rawValue)
             SoundImage.image =  #imageLiteral(resourceName: "SoundOn-icon")
@@ -110,17 +125,17 @@ class MainController: UIViewController, IFirebaseWebService{
             SoundImage.image =   #imageLiteral(resourceName: "SoundOff-icon")
         }
     }
-    func btn_AdminAddProduct_Pressed(sender: UIButton) -> Void{
+    @objc func btn_AdminAddProduct_Pressed(sender: UIButton) -> Void{
         performSegue(withIdentifier: String.SegueToAdminAddProductController_Identifier, sender: nil)
     }
-    func LogOutBarButtonItemPressed(sender: UIBarButtonItem) -> Void{
+    @objc func LogOutBarButtonItemPressed(sender: UIBarButtonItem) -> Void{
         let loginService = facade.GetUserLoggedInService()
         if loginService == .guest || loginService == .facebook  || loginService == .google || loginService == .instagram {
             SegueToLogInController(notification: Notification(name: NSNotification.Name.SegueToLogInController))
         }
         facade.LogoutFirebaseUser()
     }
-    func btn_Menu_Pressed(sender: DesignableUIButton) -> Void {
+    @objc func btn_Menu_Pressed(sender: DesignableUIButton) -> Void {
         if isMenuOut {
             HideMenu(closure: {})
             return
@@ -130,10 +145,10 @@ class MainController: UIViewController, IFirebaseWebService{
         }
         ShowMenu(closure: {})
     }
-    func btn_Warenkorb_Pressed(sender: UIButton) -> Void{
+    @objc func btn_Warenkorb_Pressed(sender: UIButton) -> Void{
         performSegue(withIdentifier: String.SegueToBasketController_Identifier, sender: nil)
     }
-    func btn_MenuAccount_Pressed(sender: UIButton) -> Void {
+    @objc func btn_MenuAccount_Pressed(sender: UIButton) -> Void {
         if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
             let title = String.NoRegisteredUserAlert_TitleString
             let message = String.NoRegisteredUserAlert_MessageString
@@ -143,20 +158,31 @@ class MainController: UIViewController, IFirebaseWebService{
         if isMenuOut {  HideMenu(closure: PerformSegueToYourAccountController ) }
         else { PerformSegueToYourAccountController() }
     }
-    func btn_ProductInformation_Pressed(sender: UIButton) -> Void {
+    @objc func btn_ProductInformation_Pressed(sender: UIButton) -> Void {
+        
         if !isProductInformationSheetVisible{
+            
             if isMenuOut{ HideMenu(closure: {}) }
             ShowInformationSheet()
+            
         }
         else {  HideInformationSheet() }
+        
     }
-    func btn_MenuNews_Pressed(sender: UIButton) -> Void {
+    
+    @objc func btn_MenuNews_Pressed(sender: UIButton) -> Void {
+        
         if isMenuOut{  HideMenu(closure: PerformSegueToNewsConroller )
         } else { PerformSegueToNewsConroller() }
+        
     }
-    func btn_Favorites_Pressed(sender: UIButton) -> Void{
+    
+    @objc func btn_Favorites_Pressed(sender: UIButton) -> Void{
+        
         performSegue(withIdentifier: String.SegueToFavoritesControllerFromMain_Itendifier, sender: nil)
+        
     }
+    
     var direction:String = ""
     @IBAction func CardPanRecocnizerAction(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
@@ -202,7 +228,7 @@ class MainController: UIViewController, IFirebaseWebService{
             isNopeVisible = true
             FavoritesLabelContainer.alpha = 0
             
-        } else if yPercentFromCenter > 0 && !isNopeVisible && !isBuyVisible && (direction == "" || direction == "y") {
+        } else if yPercentFromCenter > 0.2 && !isNopeVisible && !isBuyVisible && (direction == "" || direction == "y") {
             
             view.bringSubview(toFront: FavoritesLabelContainer)
             FavoritesLabelContainer.alpha = yPercentFromCenter
@@ -243,7 +269,7 @@ class MainController: UIViewController, IFirebaseWebService{
                 } else {
                     //Move downways if drag reached swipe limit bottom
                     SwipeCardOffBottom(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
-                    DispatchQueue.main.async {
+                    OperationQueue.main.addOperation {
                         self.facade.SaveProductToFavorites(product: productsArray[self.currentImageIndex])
                     }
                     return
@@ -253,6 +279,116 @@ class MainController: UIViewController, IFirebaseWebService{
                 self.ResetCardAfterSwipeOff(card: card)
             }
         }
+    }
+    
+    //MARK: Info Sheet pan
+    @objc func InfoSheet_Pan(sender: UIPanGestureRecognizer) -> Void {
+        let card = sender.view!
+        let point = sender.translation(in: view)
+        let xFromCenter = card.center.x - view.center.x
+        let yFromCenter = card.center.y - view.center.y
+        let swipeLimitLeft = view.frame.width * 0.4 // left border when the card gets animated off
+        let swipeLimitRight = view.frame.width * 0.6 // right border when the card gets animated off
+        let swipeLimitTop = view.frame.height * 0.5 // top border when the card gets animated off
+        let swipeLimitBottom = view.frame.height * 0.65 // top border when the card gets animated off
+        let ySpin:CGFloat = yFromCenter < 0 ? -200 : 200 // gives the card a spin in y direction
+        let xSpin:CGFloat = xFromCenter < 0 ? -200 : 200 // gives the card a spin in x direction
+        let xPercentFromCenter = xFromCenter / (view.frame.width * 0.5)
+        let yPercentFromCenter = yFromCenter / (view.frame.height * 0.3)
+        let velocity:CGPoint = sender.velocity(in: view)
+        
+        
+        print("xpercentfromCenter: \(xPercentFromCenter)")
+        print("ypercentfromCenter: \(yPercentFromCenter)")
+        print("Velocity X: \(velocity.x)")
+        print("Velocity Y: \(velocity.y)")
+        print("Current direction: \(direction)")
+        if abs(velocity.y) > abs(velocity.x) {
+            direction = "y"
+        } else if abs(velocity.y) < abs(velocity.x) {
+            direction = "x"
+        }
+        
+        
+        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+        
+        if xPercentFromCenter > 0 && !isFavoritesVisible && (direction == "" || direction == "x"){
+            
+            view.bringSubview(toFront: Buy2LabelContainer)
+            Buy2LabelContainer.alpha = abs(xPercentFromCenter)
+            isBuyVisible = true
+            FavoritesLabelContainer.alpha = 0
+            
+        } else if xPercentFromCenter < 0 && !isFavoritesVisible && (direction == "" || direction == "x"){
+            
+            view.bringSubview(toFront: Nope2LabelContainer)
+            Nope2LabelContainer.alpha = abs(xPercentFromCenter)
+            isNopeVisible = true
+            FavoritesLabelContainer.alpha = 0
+            
+        } else if yPercentFromCenter > 0.2 && !isNopeVisible && !isBuyVisible && (direction == "" || direction == "y") {
+            
+            view.bringSubview(toFront: FavoritesLabelContainer)
+            FavoritesLabelContainer.alpha = yPercentFromCenter
+            isFavoritesVisible = true
+            Buy2LabelContainer.alpha = 0
+            Nope2LabelContainer.alpha = 0
+            
+        }
+        
+        //Rotate card while drag
+        let degree:Double = Double(xFromCenter / ((view.frame.size.width * 0.5) / 40))
+        card.transform = CGAffineTransform(rotationAngle: -degree.degreesToRadians)
+        card.transform = CGAffineTransform(rotationAngle: -degree.degreesToRadians)
+        
+        //Animate card after drag ended
+        if sender.state == UIGestureRecognizerState.ended{
+            let swipeDuration = 0.3
+            // Move off to the left side if drag reached swipeLimitLeft
+            if card.center.x < swipeLimitLeft{
+                SwipeCardOffLeft(swipeDuration: swipeDuration, card: card, ySpin: ySpin)
+                return
+            } else if card.center.x > swipeLimitRight{
+                
+                //Move off to the right side if drag reached swipeLimitRight
+                SwipeCardOffRight(swipeDuration: swipeDuration, card: card, ySpin: ySpin)
+                
+                return
+                
+            } else if card.center.y < swipeLimitTop{
+                
+                //Move off the top side if drag reached swipeLimitTop
+                //SwipeCardOffTop(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
+                self.ResetCardAfterSwipeOff(card: card)
+                return
+                
+            } else if card.center.y > swipeLimitBottom {
+                
+                if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isLoggedInAsGuest.rawValue){
+                    let title = String.NoRegisteredUserAlert_TitleString
+                    let message = String.NoRegisteredUserAlert_MessageString
+                    AlertFromFirebaseService(title: title, message: message)
+                    
+                    ResetCardAfterSwipeOff(card: card)
+                    
+                    return
+                    
+                } else {
+                    
+                    //Move downways if drag reached swipe limit bottom
+                    SwipeCardOffBottom(swipeDuration: swipeDuration, card: card, xSpin: xSpin)
+                   OperationQueue.main.addOperation {
+                        self.facade.SaveProductToFavorites(product: productsArray[self.currentImageIndex])
+                    }
+                    
+                    return
+                }
+            } else {
+                // Reset card if no drag limit reached
+                self.ResetCardAfterSwipeOff(card: card)
+            }
+        }
+        
     }
     
     @objc func CardView_Tapped(sender: UITapGestureRecognizer) -> Void {
@@ -275,6 +411,28 @@ class MainController: UIViewController, IFirebaseWebService{
         
     }
     
+    //MARK: Nope Buy Favorites Button Targets
+    @objc func btn_Buy_Pressed(sender: UIButton) -> Void {
+        
+        SwipeCardOffRight(swipeDuration: 0.3, card: CardView, ySpin: -50)
+        
+    }
+    
+    @objc func btn_Nope_Pressed(sender: UIButton) -> Void {
+        
+        SwipeCardOffLeft(swipeDuration: 0.3, card: CardView, ySpin: -50)
+        
+    }
+    
+    @objc func btn_RoundFavorites_Pressed(sender: UIButton) -> Void {
+        
+        SwipeCardOffBottom(swipeDuration: 0.3, card: CardView, xSpin: -50)
+        OperationQueue.main.addOperation {
+            self.facade.SaveProductToFavorites(product: productsArray[self.currentImageIndex])
+        }
+        
+    }
+    
     
     
     //MARK: - IFirebaseWebservice Implementation
@@ -293,6 +451,7 @@ class MainController: UIViewController, IFirebaseWebService{
             lbl_ProductSubtitle.text = productsArray[0].Subtitle!
             lbl_OldPrice.text = FormatToCurrency(digit: productsArray[0].OriginalPrice!)
             lbl_NewPrice.text = FormatToCurrency(digit:productsArray[0].NewPrice!)
+            NewPriceInfoSheet.text = FormatToCurrency(digit: productsArray[0].NewPrice!)
         }
     }
     func FirebaseRequestStarted() {
@@ -368,6 +527,7 @@ class MainController: UIViewController, IFirebaseWebService{
             
             lbl_OldPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].OriginalPrice!)
             lbl_NewPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].NewPrice!)
+            NewPriceInfoSheet.text = FormatToCurrency(digit: productsArray[currentImageIndex].NewPrice!)
         }
     }
     private func ReloadArrayDataWhenCountIsZero(){
@@ -388,13 +548,17 @@ class MainController: UIViewController, IFirebaseWebService{
             
             lbl_OldPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].OriginalPrice!)
             lbl_NewPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].NewPrice!)
+            NewPriceInfoSheet.text = FormatToCurrency(digit: productsArray[currentImageIndex].NewPrice!)
         }
     }
     private func ResetCardAfterSwipeOff(card: UIView){
+        
         direction = ""
         isNopeVisible = false
         isFavoritesVisible = false
         isBuyVisible = false
+        Nope2LabelContainer.alpha = 0
+        Buy2LabelContainer.alpha = 0
         NopeLabelContainer.alpha = 0
         BuyLabelContainer.alpha = 0
         FavoritesLabelContainer.alpha = 0
@@ -402,8 +566,12 @@ class MainController: UIViewController, IFirebaseWebService{
         card.center = self.view.center
         card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians)
         card.Arise(duration: 0.7, delay: 0, options: [.allowUserInteraction], toAlpha: 1)
+        
+        if isProductInformationSheetVisible { HideInformationSheet() }
+        
     }
-    func SegueToLogInController(notification: Notification) -> Void {
+    
+    @objc func SegueToLogInController(notification: Notification) -> Void {
         navigationController?.popViewController(animated: true)
     }
     func PerformSegueToYourAccountController() -> Void {
@@ -418,6 +586,8 @@ class MainController: UIViewController, IFirebaseWebService{
         formatter.numberStyle = .currency
         return formatter.string(from: digit as NSNumber)!
     }
+    
+    //MARK: VC Setup
     private func SetupMainControllerViews() -> Void {
         
         //Hide back button to show custom Button
@@ -442,6 +612,21 @@ class MainController: UIViewController, IFirebaseWebService{
         BuyLabelContainer.layer.borderColor = UIColor.green.cgColor
         BuyLabelContainer.layer.cornerRadius = 5
         BuyLabelContainer.alpha = 0
+        
+        
+        //Nope2Label
+        Nope2LabelContainer.transform = CGAffineTransform(rotationAngle: Double(30).degreesToRadians)
+        Nope2LabelContainer.layer.borderWidth = 3
+        Nope2LabelContainer.layer.borderColor = UIColor.red.cgColor
+        Nope2LabelContainer.layer.cornerRadius = 5
+        Nope2LabelContainer.alpha = 0
+        
+        //Buy2Label
+        Buy2LabelContainer.transform = CGAffineTransform(rotationAngle: Double(-30).degreesToRadians)
+        Buy2LabelContainer.layer.borderWidth = 3
+        Buy2LabelContainer.layer.borderColor = UIColor.green.cgColor
+        Buy2LabelContainer.layer.cornerRadius = 5
+        Buy2LabelContainer.alpha = 0
         
         //FavoritesLabelContainer
         FavoritesLabelContainer.layer.borderWidth = 3
@@ -477,9 +662,13 @@ class MainController: UIViewController, IFirebaseWebService{
         NewPriceBlurryView.layer.cornerRadius = 10
         NewPriceBlurryView.clipsToBounds = true
         NewPriceBlurryView.alpha = 0
+        
+        //Product Info Sheet
         ProductInformationSheet.alpha = 0
         ProductInformationSheet.transform = CGAffineTransform(translationX: 0, y: (ProductInformationSheet.frame.size.height + 100))
         ProductInformationSheet.layer.cornerRadius = 20
+        ProductInformationSheet.layer.borderColor = UIColor.lightGray.cgColor
+        ProductInformationSheet.layer.borderWidth = 2
         
         if UserDefaults.standard.bool(forKey: eUserDefaultKeys.isAdmin.rawValue){
             btn_AdminAddProduct.alpha = 1
@@ -519,12 +708,21 @@ class MainController: UIViewController, IFirebaseWebService{
         
         let productInfoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProductInfo_Tapped))
         ProductInformationSheet.addGestureRecognizer(productInfoTapRecognizer)
+        
+        //PanRecognizer
+        let infoSheetPanRecognizer = UIPanGestureRecognizer(target: self, action: #selector(InfoSheet_Pan))
+        ProductInformationSheet.addGestureRecognizer(infoSheetPanRecognizer)
+        
+        //Nope Buy Favorites Buttons
+        btn_Buy.addTarget(self, action: #selector(btn_Buy_Pressed), for: .touchUpInside)
+        btn_Nope.addTarget(self, action: #selector(btn_Nope_Pressed), for: .touchUpInside)
+        btn_RoundFavorites.addTarget(self, action: #selector(btn_RoundFavorites_Pressed), for: .touchUpInside)
     }
     private func ShowInformationSheet(){
         isProductInformationSheetVisible = true
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
-            self.TopBackGroundView.transform = CGAffineTransform(translationX: 0, y: -self.TopBackGroundView.frame.size.height * 0.7).scaledBy(x: 0.7, y: 0.7)
+            self.TopBackGroundView.transform = CGAffineTransform(translationX: 0, y: -self.TopBackGroundView.frame.size.height ).scaledBy(x: 0.7, y: 0.7)
             self.ProductInformationSheet.alpha = 1
             self.TopBackGroundView.alpha = 1
         }, completion: nil)
