@@ -16,38 +16,6 @@ target 'GrabItOrItsGone' do
   pod 'GoogleToolboxForMac'
   pod 'FBSDKLoginKit'
   pod 'GoogleSignIn'
-  pod 'OAuthSwift', '~> 1.1.0'
-
-  target 'GrabItOrItsGoneTests' do
-   inherit! :search_paths
-    # Pods for testing pod 'Firebase/Core'
- pod 'Firebase/Messaging'
- pod 'Firebase/Database'
- pod 'Firebase/Auth'
- pod 'Firebase/Storage'
- pod 'GTMSessionFetcher'
- pod 'FirebaseInstanceID'
- pod 'GoogleToolboxForMac'
- pod 'FBSDKLoginKit'
- pod 'GoogleSignIn'
- pod 'OAuthSwift', '~> 1.1.0'
-
-  end
-
-  target 'GrabItOrItsGoneUITests' do
- inherit! :search_paths
-    # Pods for testingpod 'Firebase/Core'
- pod 'Firebase/Messaging'
- pod 'Firebase/Database'
- pod 'Firebase/Auth'
- pod 'Firebase/Storage'
- pod 'GTMSessionFetcher'
- pod 'FirebaseInstanceID'
- pod 'GoogleToolboxForMac'
- pod 'FBSDKLoginKit'
- pod 'GoogleSignIn'
- pod 'OAuthSwift', '~> 1.1.0'
-
- end
-  
+  pod 'OAuthSwift'
+ 
 end

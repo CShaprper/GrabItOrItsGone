@@ -5,146 +5,130 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - FBSDKCoreKit (4.24.0):
+  - FBSDKCoreKit (4.27.1):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.24.0):
+  - FBSDKLoginKit (4.27.1):
     - FBSDKCoreKit
-  - Firebase/Auth (4.0.3):
+  - Firebase/Auth (4.4.0):
     - Firebase/Core
-    - FirebaseAuth (= 4.0.0)
-  - Firebase/Core (4.0.3):
-    - FirebaseAnalytics (= 4.0.2)
-    - FirebaseCore (= 4.0.3)
-  - Firebase/Database (4.0.3):
+    - FirebaseAuth (= 4.3.0)
+  - Firebase/Core (4.4.0):
+    - FirebaseAnalytics (= 4.0.4)
+    - FirebaseCore (= 4.0.9)
+  - Firebase/Database (4.4.0):
     - Firebase/Core
-    - FirebaseDatabase (= 4.0.0)
-  - Firebase/Messaging (4.0.3):
+    - FirebaseDatabase (= 4.1.1)
+  - Firebase/Messaging (4.4.0):
     - Firebase/Core
-    - FirebaseMessaging (= 2.0.0)
-  - Firebase/Storage (4.0.3):
+    - FirebaseMessaging (= 2.0.5)
+  - Firebase/Storage (4.4.0):
     - Firebase/Core
-    - FirebaseStorage (= 2.0.0)
-  - FirebaseAnalytics (4.0.2):
+    - FirebaseStorage (= 2.0.2)
+  - FirebaseAnalytics (4.0.4):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseAuth (4.0.0):
+    - nanopb (~> 0.3)
+  - FirebaseAuth (4.3.0):
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.3):
+  - FirebaseCore (4.0.9):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseDatabase (4.0.0):
+    - nanopb (~> 0.3)
+  - FirebaseDatabase (4.1.1):
     - FirebaseAnalytics (~> 4.0)
-  - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
-  - FirebaseMessaging (2.0.0):
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (2.0.5)
+  - FirebaseMessaging (2.0.5):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - Protobuf (~> 3.1)
-  - FirebaseStorage (2.0.0):
+  - FirebaseStorage (2.0.2):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleSignIn (4.0.2):
+  - GoogleSignIn (4.1.1):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac (2.1.1):
-    - GoogleToolboxForMac/AddressBook (= 2.1.1)
-    - GoogleToolboxForMac/Core (= 2.1.1)
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/GeometryUtils (= 2.1.1)
-    - GoogleToolboxForMac/iPhone (= 2.1.1)
-    - GoogleToolboxForMac/KVO (= 2.1.1)
-    - GoogleToolboxForMac/Logger (= 2.1.1)
-    - GoogleToolboxForMac/NSData+zlib (= 2.1.1)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (= 2.1.1)
-    - GoogleToolboxForMac/NSFileHandle+UniqueName (= 2.1.1)
-    - GoogleToolboxForMac/NSScanner+JSON (= 2.1.1)
-    - GoogleToolboxForMac/NSString+HTML (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-    - GoogleToolboxForMac/NSString+XML (= 2.1.1)
-    - GoogleToolboxForMac/NSThread+Blocks (= 2.1.1)
-    - GoogleToolboxForMac/Regex (= 2.1.1)
-    - GoogleToolboxForMac/RoundedRectPath (= 2.1.1)
-    - GoogleToolboxForMac/StackTrace (= 2.1.1)
-    - GoogleToolboxForMac/StringEncoding (= 2.1.1)
-    - GoogleToolboxForMac/SystemVersion (= 2.1.1)
-    - GoogleToolboxForMac/UIFont+LineHeight (= 2.1.1)
-    - GoogleToolboxForMac/UnitTesting (= 2.1.1)
-    - GoogleToolboxForMac/UnitTestingAppLib (= 2.1.1)
-    - GoogleToolboxForMac/URLBuilder (= 2.1.1)
-  - GoogleToolboxForMac/AddressBook (2.1.1):
-    - GoogleToolboxForMac/Core (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Core (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/DebugUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/GeometryUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/iPhone (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/KVO (2.1.1):
-    - GoogleToolboxForMac/Core (= 2.1.1)
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-  - GoogleToolboxForMac/Logger (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSFileHandle+UniqueName (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSScanner+JSON (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSString+HTML (2.1.1):
-    - GoogleToolboxForMac/Core (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GoogleToolboxForMac/NSString+XML (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSThread+Blocks (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Regex (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/RoundedRectPath (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/StackTrace (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/StringEncoding (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/SystemVersion (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/UIFont+LineHeight (2.1.1)
-  - GoogleToolboxForMac/UnitTesting (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/Regex (= 2.1.1)
-    - GoogleToolboxForMac/SystemVersion (= 2.1.1)
-  - GoogleToolboxForMac/UnitTestingAppLib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/UnitTesting (= 2.1.1)
-  - GoogleToolboxForMac/URLBuilder (2.1.1):
-    - GoogleToolboxForMac/Core (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GTMOAuth2 (1.1.4):
+  - GoogleToolboxForMac (2.1.3):
+    - GoogleToolboxForMac/Core (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/GeometryUtils (= 2.1.3)
+    - GoogleToolboxForMac/KVO (= 2.1.3)
+    - GoogleToolboxForMac/Logger (= 2.1.3)
+    - GoogleToolboxForMac/NSData+zlib (= 2.1.3)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (= 2.1.3)
+    - GoogleToolboxForMac/NSFileHandle+UniqueName (= 2.1.3)
+    - GoogleToolboxForMac/NSScanner+JSON (= 2.1.3)
+    - GoogleToolboxForMac/NSString+HTML (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+    - GoogleToolboxForMac/NSString+XML (= 2.1.3)
+    - GoogleToolboxForMac/NSThread+Blocks (= 2.1.3)
+    - GoogleToolboxForMac/Regex (= 2.1.3)
+    - GoogleToolboxForMac/StringEncoding (= 2.1.3)
+    - GoogleToolboxForMac/SystemVersion (= 2.1.3)
+    - GoogleToolboxForMac/URLBuilder (= 2.1.3)
+  - GoogleToolboxForMac/Core (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/GeometryUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/KVO (2.1.3):
+    - GoogleToolboxForMac/Core (= 2.1.3)
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+  - GoogleToolboxForMac/Logger (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSFileHandle+UniqueName (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSScanner+JSON (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSString+HTML (2.1.3):
+    - GoogleToolboxForMac/Core (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GoogleToolboxForMac/NSString+XML (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSThread+Blocks (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Regex (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/StringEncoding (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/SystemVersion (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/URLBuilder (2.1.3):
+    - GoogleToolboxForMac/Core (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GTMOAuth2 (1.1.5):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.10):
-    - GTMSessionFetcher/Full (= 1.1.10)
-  - GTMSessionFetcher/Core (1.1.10)
-  - GTMSessionFetcher/Full (1.1.10):
-    - GTMSessionFetcher/Core (= 1.1.10)
-  - OAuthSwift (1.1.2)
-  - Protobuf (3.3.0)
+  - GTMSessionFetcher (1.1.12):
+    - GTMSessionFetcher/Full (= 1.1.12)
+  - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Full (1.1.12):
+    - GTMSessionFetcher/Core (= 1.1.12)
+  - leveldb-library (1.18.3)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
+  - OAuthSwift (1.2.0)
+  - Protobuf (3.4.0)
 
 DEPENDENCIES:
   - FBSDKLoginKit
@@ -157,27 +141,29 @@ DEPENDENCIES:
   - GoogleSignIn
   - GoogleToolboxForMac
   - GTMSessionFetcher
-  - OAuthSwift (~> 1.1.0)
+  - OAuthSwift
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
-  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
-  Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
-  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
-  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
-  FirebaseCore: c709067051de07bdaffdc4e735cd7299a23c463a
-  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
-  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
-  FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
-  FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
-  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
-  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
-  OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
-  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
+  FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
+  FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
+  Firebase: 3e92884a63e8f76d107c43a67d2ab9071e1eda10
+  FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
+  FirebaseAuth: e0087d479709b20b9613b804704a928d6eafb052
+  FirebaseCore: ebe73f64302705e693b1de9919a76edbdd17a19d
+  FirebaseDatabase: 2e6e8e110b93b9a6e7aac71774c769a363035cb1
+  FirebaseInstanceID: f2b688c66b972f30d7fa9f5f9f91455454a03b47
+  FirebaseMessaging: e25dc87045e76dfe9e920a5741dc3fe7e3ef2268
+  FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
+  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
+  Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
 
-PODFILE CHECKSUM: a7fe22b21b7f5a434ab631e783a55d3c92936db8
+PODFILE CHECKSUM: 0fe3e396e4ebbb91a397e591e37627b4e7bc753e
 
 COCOAPODS: 1.2.0

@@ -16,11 +16,12 @@ extension Double {
 
 class MainController: UIViewController, IFirebaseWebService{
     //MARK: - Outlets
+    //MARK: Main
     @IBOutlet var MainBackgroundImage: UIImageView!
     @IBOutlet var CardView: DesignableUIView!
     @IBOutlet var TopBackGroundView: UIView!
     @IBOutlet var MenuBackgroundContainer: UIView!
-    //Menu Buttons
+    //MARK: Menu Buttons
     @IBOutlet var btn_MenuNews: UIButton!
     @IBOutlet var btn_Warenkorb: UIButton!
     @IBOutlet var btn_MenuGutscheine: UIButton!
@@ -35,41 +36,59 @@ class MainController: UIViewController, IFirebaseWebService{
     @IBOutlet var btn_AdminAddProduct: UIButton!
     @IBOutlet var btn_Menu: DesignableUIButton!
     
-    //Product Information sheet
+    //MARK: Product Information sheet
     @IBOutlet var ProductInformationSheet: UIView!
     @IBOutlet var ProductInformationTextView: UITextView!
     @IBOutlet var NewPriceInfoSheet: UILabel!
     
-    //Product Card
+    //MARK: Product Card
     @IBOutlet var lbl_OldPrice: UILabel!
     @IBOutlet var OldPriceBlurryView: UIVisualEffectView!
     @IBOutlet var OldPriceBlurryViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var lbl_NewPrice: UILabel!
     @IBOutlet var NewPriceBlurryView: UIVisualEffectView!
     @IBOutlet var CardBackgrounImageView: UIImageView!
-    @IBOutlet var ProductImageView: UIImageView!
-    @IBOutlet var lbl_ProductTitle: UILabel!
-    @IBOutlet var lbl_ProductSubtitle: UILabel!
+    @IBOutlet var ProductImageView: UIImageView! 
     
-    //NopeLabel
+    //MARK: NopeLabel
     @IBOutlet var NopeLabelContainer: UIView!
     @IBOutlet var lbl_Nope: UILabel!
     @IBOutlet var Nope2LabelContainer: UIView!
     
-    //BuyLabel
+    //MARK: BuyLabel
     @IBOutlet var BuyLabelContainer: UIView!
     @IBOutlet var lbl_buy: UILabel!
     @IBOutlet var Buy2LabelContainer: UIView!
     
-    //FavoritesLabel
+    //MARK: FavoritesLabel
     @IBOutlet var FavoritesLabelContainer: UIView!
     @IBOutlet var lbl_Favorites: UILabel!
     
-    //Nope Favorites Buy Buttons
+    //MARK: Nope Favorites Buy Buttons
     @IBOutlet var btn_Nope: UIButton!
     @IBOutlet var btn_RoundFavorites: UIButton!
     @IBOutlet var btn_Buy: UIButton!
     
+    //MARK: Timer
+    @IBOutlet var TimerStack: UIStackView!
+    @IBOutlet var Sec1: UIView!
+    @IBOutlet var Sec2: UIView!
+    @IBOutlet var Sec3: UIView!
+    @IBOutlet var Sec4: UIView!
+    @IBOutlet var Sec5: UIView!
+    @IBOutlet var Sec6: UIView!
+    @IBOutlet var Sec7: UIView!
+    @IBOutlet var Sec8: UIView!
+    @IBOutlet var Sec9: UIView!
+    @IBOutlet var Sec10: UIView!
+    @IBOutlet var Sec11: UIView!
+    @IBOutlet var Sec12: UIView!
+    @IBOutlet var Sec13: UIView!
+    @IBOutlet var Sec14: UIView!
+    @IBOutlet var Sec15: UIView!
+    @IBOutlet var Sec16: UIView!
+    @IBOutlet var Sec17: UIView!
+    @IBOutlet var Sec18: UIView!
     
     
     
@@ -83,18 +102,25 @@ class MainController: UIViewController, IFirebaseWebService{
     var isFavoritesVisible:Bool = false
     var isBuyVisible:Bool = false
     var isNopeVisible:Bool = false
+    var timerSeconds = 90
+    var timer = Timer()
     
     
     //MARK: - ViewController functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setup Views
         SetupMainControllerViews()
         self.facade.firebaseClient.ReadFirebaseProductsSection()
+        
+        ResetTimerView()
+       
+      
     }
     override func viewDidAppear(_ animated: Bool) {
         style.AddToViewsForStyling(views: [MainBackgroundImage])
-        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,6 +138,317 @@ class MainController: UIViewController, IFirebaseWebService{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    @objc func timerCounter() -> Void {
+        OperationQueue.main.addOperation {
+            
+            self.timerSeconds -= 1
+            
+            if self.timerSeconds == 0 {
+                self.timerSeconds = 90
+                self.SwipeCardOffLeft(swipeDuration: 0.3, card: self.CardView, ySpin: 200)
+            }
+        }
+        
+        switch timerSeconds {
+            
+        case 90:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec1.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(180)
+                self.view.bringSubview(toFront: self.Sec1)
+                self.Sec1.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 85:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec2.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(170)
+                self.view.bringSubview(toFront: self.Sec2)
+                self.Sec2.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 80:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec3.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(160)
+                self.view.bringSubview(toFront: self.Sec3)
+                self.Sec3.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 75:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec4.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(150)
+                self.view.bringSubview(toFront: self.Sec4)
+                self.Sec4.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 70:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec5.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(140)
+                self.view.bringSubview(toFront: self.Sec5)
+                self.Sec5.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 65:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec6.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(130)
+                self.view.bringSubview(toFront: self.Sec6)
+                self.Sec6.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 60:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec7.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(120)
+                self.view.bringSubview(toFront: self.Sec7)
+                self.Sec7.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 55:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec8.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(110)
+                self.view.bringSubview(toFront: self.Sec8)
+                self.Sec8.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 50:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec9.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(100)
+                self.view.bringSubview(toFront: self.Sec9)
+                self.Sec9.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 45:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec10.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(90)
+                self.view.bringSubview(toFront: self.Sec10)
+                self.Sec10.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 40:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec11.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(80)
+                self.view.bringSubview(toFront: self.Sec11)
+                self.Sec11.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 35:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec12.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [ .curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(70)
+                self.view.bringSubview(toFront: self.Sec12)
+                self.Sec12.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 30:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec13.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(60)
+                self.view.bringSubview(toFront: self.Sec13)
+                self.Sec13.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 25:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec14.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(50)
+                self.view.bringSubview(toFront: self.Sec14)
+                self.Sec14.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 20:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec15.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(40)
+                self.view.bringSubview(toFront: self.Sec15)
+                self.Sec15.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 15:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec16.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(30)
+                self.view.bringSubview(toFront: self.Sec16)
+                self.Sec16.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 10:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec17.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(20)
+                self.view.bringSubview(toFront: self.Sec17)
+                self.Sec17.transform = .identity
+            }, completion: nil)
+            break
+            
+        case 5:
+            UIView.animate(withDuration: 1, animations: {
+                self.Sec18.alpha = 1
+            })
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+                UIView.setAnimationRepeatCount(10)
+                self.view.bringSubview(toFront: self.Sec18)
+                self.Sec18.transform = .identity
+            }, completion: nil)
+            break
+            
+        default:
+            break
+            
+        }
+    }
+    
+    //MARK: Timer View
+    func ResetTimerView() {
+        Sec1.alpha = 0
+        Sec1.layer.cornerRadius = 5
+        Sec1.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec1.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec2.alpha = 0
+        Sec2.layer.cornerRadius = 5
+        Sec2.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec2.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec3.alpha = 0
+        Sec3.layer.cornerRadius = 5
+        Sec3.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec3.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec4.alpha = 0
+        Sec4.layer.cornerRadius = 5
+        Sec4.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec4.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec5.alpha = 0
+        Sec5.layer.cornerRadius = 5
+        Sec5.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec5.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec6.alpha = 0
+        Sec6.layer.cornerRadius = 5
+        Sec6.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec6.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec7.alpha = 0
+        Sec7.layer.cornerRadius = 5
+        Sec7.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec7.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec8.alpha = 0
+        Sec8.layer.cornerRadius = 5
+        Sec8.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec8.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec9.alpha = 0
+        Sec9.layer.cornerRadius = 5
+        Sec9.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec9.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec10.alpha = 0
+        Sec10.layer.cornerRadius = 5
+        Sec10.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec10.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec11.alpha = 0
+        Sec11.layer.cornerRadius = 5
+        Sec11.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec11.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec12.alpha = 0
+        Sec12.layer.cornerRadius = 5
+        Sec12.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec12.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec13.alpha = 0
+        Sec13.layer.cornerRadius = 5
+        Sec13.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec13.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec14.alpha = 0
+        Sec14.layer.cornerRadius = 5
+        Sec14.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec14.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec15.alpha = 0
+        Sec15.layer.cornerRadius = 5
+        Sec15.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec15.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec16.alpha = 0
+        Sec16.layer.cornerRadius = 5
+        Sec16.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec16.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec17.alpha = 0
+        Sec17.layer.cornerRadius = 5
+        Sec17.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec17.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        
+        Sec18.alpha = 0
+        Sec18.layer.cornerRadius = 5
+        Sec18.setAnchorPoint(anchorPoint: CGPoint(x: 0.5, y: 0.5))
+        Sec18.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+    }
+    
     
     
     
@@ -316,6 +653,7 @@ class MainController: UIViewController, IFirebaseWebService{
             
             view.bringSubview(toFront: Buy2LabelContainer)
             Buy2LabelContainer.alpha = abs(xPercentFromCenter)
+            Buy2LabelContainer.backgroundColor = UIColor.white
             isBuyVisible = true
             FavoritesLabelContainer.alpha = 0
             
@@ -323,6 +661,7 @@ class MainController: UIViewController, IFirebaseWebService{
             
             view.bringSubview(toFront: Nope2LabelContainer)
             Nope2LabelContainer.alpha = abs(xPercentFromCenter)
+            Nope2LabelContainer.backgroundColor = UIColor.white
             isNopeVisible = true
             FavoritesLabelContainer.alpha = 0
             
@@ -447,8 +786,6 @@ class MainController: UIViewController, IFirebaseWebService{
             ProductImageView.image =  productsArray[0].ProdcutImage != nil ? productsArray[0].ProdcutImage! : #imageLiteral(resourceName: "Image-placeholder")
             OldPriceBlurryView.alpha = 1
             NewPriceBlurryView.alpha = 1
-            lbl_ProductTitle.text = productsArray[0].Title!
-            lbl_ProductSubtitle.text = productsArray[0].Subtitle!
             lbl_OldPrice.text = FormatToCurrency(digit: productsArray[0].OriginalPrice!)
             lbl_NewPrice.text = FormatToCurrency(digit:productsArray[0].NewPrice!)
             NewPriceInfoSheet.text = FormatToCurrency(digit: productsArray[0].NewPrice!)
@@ -470,7 +807,8 @@ class MainController: UIViewController, IFirebaseWebService{
         }
     }
     private func SwipeCardOffLeft(swipeDuration: TimeInterval, card: UIView, ySpin: CGFloat){
-        facade.PlaySwooshSound()
+        NopeLabelContainer.alpha = 1
+        SoundPlayer.PlaySound(filename: "swoosh", filetype: "wav")
         UIView.animate(withDuration: swipeDuration, animations: {
             card.center.x = card.center.x - self.view.frame.size.width
             card.center.y = card.center.y + ySpin
@@ -481,7 +819,8 @@ class MainController: UIViewController, IFirebaseWebService{
         })
     }
     private func SwipeCardOffRight(swipeDuration: TimeInterval, card: UIView, ySpin: CGFloat){
-        facade.PlaySwooshSound()
+        BuyLabelContainer.alpha = 1
+        SoundPlayer.PlaySound(filename: "swoosh", filetype: "wav")
         UIView.animate(withDuration: swipeDuration, animations: {
             card.center.x = card.center.x + self.view.frame.size.width
             card.center.y = card.center.y + ySpin
@@ -492,7 +831,7 @@ class MainController: UIViewController, IFirebaseWebService{
         })
     }
     private func SwipeCardOffTop(swipeDuration: TimeInterval, card: UIView, xSpin: CGFloat){
-        facade.PlaySwooshSound()
+        SoundPlayer.PlaySound(filename: "swoosh", filetype: "wav")
         UIView.animate(withDuration: swipeDuration, animations: {
             card.center.y = card.center.y - self.view.frame.size.height
             card.center.x = card.center.x + xSpin
@@ -503,12 +842,14 @@ class MainController: UIViewController, IFirebaseWebService{
         })
     }
     private func SwipeCardOffBottom(swipeDuration: TimeInterval, card: UIView, xSpin: CGFloat){
-        facade.PlayYeahSound()
+        BuyLabelContainer.alpha = 1
+        SoundPlayer.PlaySound(filename: "yeah", filetype: "m4a")
         UIView.animate(withDuration: swipeDuration, animations: {
             card.center.y = card.center.y + self.view.frame.size.height
             card.center.x = card.center.x + xSpin
         }, completion: { (true) in
             //Card arise in Center for new view
+            card.alpha = 0
             self.ResetCardAfterSwipeOff(card: card)
             self.SetNewCardProdcutAfterSwipe(card: card)
         })
@@ -521,8 +862,6 @@ class MainController: UIViewController, IFirebaseWebService{
             NewPriceBlurryView.alpha = 1
             currentImageIndex = currentImageIndex == productsArray.count - 1 ? 0 : currentImageIndex + 1
             ProductImageView.image = productsArray[currentImageIndex].ProdcutImage
-            lbl_ProductTitle.text = productsArray[currentImageIndex].Title!
-            lbl_ProductSubtitle.text = productsArray[currentImageIndex].Subtitle!
             ProductInformationTextView.text = productsArray[currentImageIndex].Productinformation!
             
             lbl_OldPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].OriginalPrice!)
@@ -542,8 +881,6 @@ class MainController: UIViewController, IFirebaseWebService{
             NewPriceBlurryView.alpha = 1
             currentImageIndex = 0
             ProductImageView.image = productsArray[currentImageIndex].ProdcutImage
-            lbl_ProductTitle.text = productsArray[currentImageIndex].Title!
-            lbl_ProductSubtitle.text = productsArray[currentImageIndex].Subtitle!
             ProductInformationTextView.text = productsArray[currentImageIndex].Productinformation!
             
             lbl_OldPrice.text = FormatToCurrency(digit: productsArray[currentImageIndex].OriginalPrice!)
@@ -553,6 +890,7 @@ class MainController: UIViewController, IFirebaseWebService{
     }
     private func ResetCardAfterSwipeOff(card: UIView){
         
+        ResetTimerView()
         direction = ""
         isNopeVisible = false
         isFavoritesVisible = false
@@ -562,6 +900,7 @@ class MainController: UIViewController, IFirebaseWebService{
         NopeLabelContainer.alpha = 0
         BuyLabelContainer.alpha = 0
         FavoritesLabelContainer.alpha = 0
+        timerSeconds = 90
         card.alpha = 0
         card.center = self.view.center
         card.transform = CGAffineTransform(rotationAngle: Double(0).degreesToRadians)
@@ -616,6 +955,7 @@ class MainController: UIViewController, IFirebaseWebService{
         
         //Nope2Label
         Nope2LabelContainer.transform = CGAffineTransform(rotationAngle: Double(30).degreesToRadians)
+        Nope2LabelContainer.backgroundColor = UIColor.white
         Nope2LabelContainer.layer.borderWidth = 3
         Nope2LabelContainer.layer.borderColor = UIColor.red.cgColor
         Nope2LabelContainer.layer.cornerRadius = 5
@@ -623,6 +963,7 @@ class MainController: UIViewController, IFirebaseWebService{
         
         //Buy2Label
         Buy2LabelContainer.transform = CGAffineTransform(rotationAngle: Double(-30).degreesToRadians)
+        Buy2LabelContainer.backgroundColor = UIColor.white
         Buy2LabelContainer.layer.borderWidth = 3
         Buy2LabelContainer.layer.borderColor = UIColor.green.cgColor
         Buy2LabelContainer.layer.cornerRadius = 5
@@ -630,6 +971,7 @@ class MainController: UIViewController, IFirebaseWebService{
         
         //FavoritesLabelContainer
         FavoritesLabelContainer.layer.borderWidth = 3
+        FavoritesLabelContainer.backgroundColor = UIColor.white
         FavoritesLabelContainer.layer.borderColor = UIColor.yellow.cgColor
         FavoritesLabelContainer.layer.cornerRadius = 5
         FavoritesLabelContainer.alpha = 0
@@ -653,8 +995,6 @@ class MainController: UIViewController, IFirebaseWebService{
         OldPriceBlurryView.clipsToBounds = true
         OldPriceBlurryView.transform = CGAffineTransform(rotationAngle: Double(-35).degreesToRadians)
         OldPriceBlurryView.alpha = 0
-        lbl_ProductTitle.text = ""
-        lbl_ProductSubtitle.text = ""
         lbl_OldPrice.text = ""
         lbl_NewPrice.text = ""
         

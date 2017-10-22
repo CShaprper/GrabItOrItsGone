@@ -56,7 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             // notificationCenter.delegate = self
             notificationCenter.requestAuthorization(options: [.badge, .alert, .sound], completionHandler: { (granted, error) in
                 if error != nil{ print(error!.localizedDescription); return }
-                if granted { application.registerForRemoteNotifications() }
+                if granted {
+                    DispatchQueue.main.async {
+                        application.registerForRemoteNotifications()
+                    }                    
+                }
                 else {
                     application.unregisterForRemoteNotifications()
                     //todo: remove token from firebase

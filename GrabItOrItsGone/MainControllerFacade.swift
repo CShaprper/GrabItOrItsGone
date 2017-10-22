@@ -12,7 +12,7 @@ import AVFoundation
 class MainControllerFacade: IFirebaseWebService {
     //MARK:-Members
     var delegate: IFirebaseWebService?
-    private var audioplayer:AVAudioPlayer!
+    //private var audioplayer:AVAudioPlayer!
     private var presentingController:MainController! 
     var firebaseClient:FirebaseClient!
     let appDel = UIApplication.shared.delegate as! AppDelegate 
@@ -22,30 +22,7 @@ class MainControllerFacade: IFirebaseWebService {
         self.presentingController = presentingController
         firebaseClient = FirebaseClient()
         firebaseClient.delegate = self
-    }
-    
-    //MARK: - Audioplayer
-    private func PrepareAudioPlayer(filename:String, filetype:String) -> Void {
-            if let path = Bundle.main.path(forResource: filename, ofType: filetype){
-                let url = URL(fileURLWithPath: path)
-                audioplayer = try? AVAudioPlayer(contentsOf: url, fileTypeHint: nil)
-                audioplayer.prepareToPlay()
-            }
-    }
-    private func AudioPlayerPlaySound(){
-        let sound = UserDefaults.standard.bool(forKey: eUserDefaultKeys.SoundsOn.rawValue)
-          if sound {
-        audioplayer.play()
-        }
-    }
-        func PlaySwooshSound() -> Void {
-        PrepareAudioPlayer(filename: "swoosh", filetype: "wav")
-        AudioPlayerPlaySound()
-    }
-    func PlayYeahSound() -> Void {
-        PrepareAudioPlayer(filename: "yeah", filetype: "m4a")
-        AudioPlayerPlaySound()
-    }
+    } 
     
     
     func LogoutFirebaseUser(){
